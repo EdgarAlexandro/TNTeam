@@ -1,0 +1,1531 @@
+fileFormatVersion: 2
+guid: abac8c7cf45124f6fbc2085e86f36133
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_0
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 8062
+        width: 347
+        height: 791
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a5ab8bca587bb4564970fb8dcae6bb5d
+      internalID: 849851679
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_1
+      rect:
+        serializedVersion: 2
+        x: 807
+        y: 8075
+        width: 707
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 902f181ae2eb34367be90fae55d2ba8f
+      internalID: -1108356771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_2
+      rect:
+        serializedVersion: 2
+        x: 1752
+        y: 8079
+        width: 685
+        height: 756
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9f9ce1defca44ea9b68bc0181a6ee12
+      internalID: 1757300456
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_3
+      rect:
+        serializedVersion: 2
+        x: 2675
+        y: 8062
+        width: 351
+        height: 791
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed775eb466cfb4f479b5e75abf64d6af
+      internalID: -1075171664
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_4
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 7157
+        width: 690
+        height: 751
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8cff08341ea0456a821756ef8c719a1
+      internalID: -278668021
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_5
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 7148
+        width: 685
+        height: 773
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 196b878db759840d0929d5e246a3cfe7
+      internalID: -4548222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_6
+      rect:
+        serializedVersion: 2
+        x: 1646
+        y: 7157
+        width: 686
+        height: 751
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 10b6dcdd7a8e94fc586652d380e508e4
+      internalID: 785533939
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_7
+      rect:
+        serializedVersion: 2
+        x: 2442
+        y: 7148
+        width: 685
+        height: 773
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 92216983770234f17b3965fafb6c0dc5
+      internalID: 401881942
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_8
+      rect:
+        serializedVersion: 2
+        x: 3237
+        y: 7148
+        width: 704
+        height: 769
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ed5fde3df490346bb823d3c9c78eae2d
+      internalID: 1092640282
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_9
+      rect:
+        serializedVersion: 2
+        x: 4046
+        y: 7139
+        width: 708
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 22aae89db66514cab917b856e8678d5f
+      internalID: -485886400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_10
+      rect:
+        serializedVersion: 2
+        x: 4859
+        y: 7148
+        width: 704
+        height: 769
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2e0b8e4104f6446ecbfc760ba0785c19
+      internalID: 1022503676
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_11
+      rect:
+        serializedVersion: 2
+        x: 5668
+        y: 7139
+        width: 703
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 962feb3c86e6142f5b64212d152c27ca
+      internalID: -1561989651
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_12
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 6133
+        width: 351
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: abab39d2fbce64a63a238f7d12615dba
+      internalID: -444704285
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_13
+      rect:
+        serializedVersion: 2
+        x: 1002
+        y: 6133
+        width: 354
+        height: 804
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 35aa07535b47f4598ab4499b462b2398
+      internalID: 390366318
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_14
+      rect:
+        serializedVersion: 2
+        x: 1809
+        y: 6137
+        width: 351
+        height: 795
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d02eb132dc234cc48eead3206108a43
+      internalID: 7004966
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_15
+      rect:
+        serializedVersion: 2
+        x: 2618
+        y: 6133
+        width: 351
+        height: 804
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa5976a4ed84c48a8b009623cda7e750
+      internalID: 373059768
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_16
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 6133
+        width: 352
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8aa99702bc14445438478b7603fa1172
+      internalID: 1982785060
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_17
+      rect:
+        serializedVersion: 2
+        x: 4231
+        y: 6133
+        width: 351
+        height: 804
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 209943487e6c24740be6cbc173a22913
+      internalID: -1705389214
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_18
+      rect:
+        serializedVersion: 2
+        x: 5040
+        y: 6137
+        width: 347
+        height: 795
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 55998cff4f1fc405bb294bc6546bed12
+      internalID: 1488345175
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_19
+      rect:
+        serializedVersion: 2
+        x: 5844
+        y: 6133
+        width: 352
+        height: 804
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b2b77e49eccf342c4b859b589ced4a87
+      internalID: -364526260
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_20
+      rect:
+        serializedVersion: 2
+        x: 33
+        y: 5104
+        width: 690
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93fab5e81b3de45f38e5ce299aef68b8
+      internalID: 542317234
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_21
+      rect:
+        serializedVersion: 2
+        x: 851
+        y: 5082
+        width: 690
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 96a19488da5c7406e881dfe6806bedaf
+      internalID: 1531575702
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_22
+      rect:
+        serializedVersion: 2
+        x: 1668
+        y: 5104
+        width: 690
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a527fbd7bf77245d6b2432ae76c6f966
+      internalID: -818908192
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_23
+      rect:
+        serializedVersion: 2
+        x: 2486
+        y: 5082
+        width: 685
+        height: 774
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 17400af1bd01a4fc38182760cca74992
+      internalID: -1237267195
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_24
+      rect:
+        serializedVersion: 2
+        x: 3303
+        y: 5104
+        width: 686
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16de2e49a8f1848b0a1ae254f22edc85
+      internalID: 738945392
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_25
+      rect:
+        serializedVersion: 2
+        x: 4099
+        y: 5100
+        width: 703
+        height: 760
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 61f8da07d42cd4498a69ed4d6b7b6078
+      internalID: -1734570331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_26
+      rect:
+        serializedVersion: 2
+        x: 4886
+        y: 5091
+        width: 703
+        height: 778
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bb39315a7d11349458df45b1f73d610d
+      internalID: -140016682
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_27
+      rect:
+        serializedVersion: 2
+        x: 5673
+        y: 5100
+        width: 703
+        height: 760
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5cf38fc76afc142148ecc54074bb4af4
+      internalID: -426289356
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_28
+      rect:
+        serializedVersion: 2
+        x: 6459
+        y: 5091
+        width: 704
+        height: 778
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b5a26b6310f444a384b3cdae1f56f9f
+      internalID: -1617981782
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_29
+      rect:
+        serializedVersion: 2
+        x: 7246
+        y: 5100
+        width: 703
+        height: 760
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a57c9e2d7dd64414198e5d875362272c
+      internalID: 1749102437
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_30
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 4028
+        width: 356
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b06ca93f6095e4eabbf3ffd43ef26897
+      internalID: -403381483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_31
+      rect:
+        serializedVersion: 2
+        x: 1018
+        y: 4028
+        width: 360
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2d27d05a347bf4f21a44c124c99346e5
+      internalID: -955153672
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_32
+      rect:
+        serializedVersion: 2
+        x: 1822
+        y: 4032
+        width: 356
+        height: 789
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 71ed5213ba8bf40719440b25a23a7cac
+      internalID: 1251165943
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_33
+      rect:
+        serializedVersion: 2
+        x: 2618
+        y: 4028
+        width: 360
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a87c7a8401404d1d825abd1afc8ffa2
+      internalID: 1618334975
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_34
+      rect:
+        serializedVersion: 2
+        x: 3422
+        y: 4032
+        width: 356
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a0c159f846c6b427faa06a8c2fa8cf05
+      internalID: 1792624767
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_35
+      rect:
+        serializedVersion: 2
+        x: 4222
+        y: 4028
+        width: 356
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e91aad899d13849eb8a0a11048c2e01b
+      internalID: 947730172
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_36
+      rect:
+        serializedVersion: 2
+        x: 5022
+        y: 4028
+        width: 360
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a2bd10c718e6c4254825513c243edbf3
+      internalID: -1039358811
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_37
+      rect:
+        serializedVersion: 2
+        x: 5822
+        y: 4032
+        width: 356
+        height: 789
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: eaa640d7b944944e0ad08debc33cd809
+      internalID: 1142891913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_38
+      rect:
+        serializedVersion: 2
+        x: 6622
+        y: 4028
+        width: 360
+        height: 799
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bea2ad7ad174d412286e00d8ac7bd053
+      internalID: -366403230
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_39
+      rect:
+        serializedVersion: 2
+        x: 7422
+        y: 4032
+        width: 356
+        height: 787
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6d2a20aaa7bb8444d9d30673f462fe28
+      internalID: 1873664762
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_40
+      rect:
+        serializedVersion: 2
+        x: 130
+        y: 2942
+        width: 703
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 53a7660c5b6744ec796fb8ff292f22a2
+      internalID: 977888469
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_41
+      rect:
+        serializedVersion: 2
+        x: 881
+        y: 2942
+        width: 704
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1bd819795824440059d8ce286f14e20b
+      internalID: -617914913
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_42
+      rect:
+        serializedVersion: 2
+        x: 1633
+        y: 2942
+        width: 897
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1f99a4c0866844b719aa93de3f55e926
+      internalID: 2136514611
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_43
+      rect:
+        serializedVersion: 2
+        x: 2578
+        y: 2942
+        width: 747
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9ad6b64e77dda4367b1b364d1677e039
+      internalID: -403386360
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_44
+      rect:
+        serializedVersion: 2
+        x: 3374
+        y: 2942
+        width: 703
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f865af3c20b541c99d863c5487dc927
+      internalID: -1182580657
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_45
+      rect:
+        serializedVersion: 2
+        x: 4125
+        y: 2942
+        width: 704
+        height: 765
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a5b01d29484a4c42af1323382d3b830
+      internalID: 1216789977
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_46
+      rect:
+        serializedVersion: 2
+        x: 4877
+        y: 2916
+        width: 703
+        height: 817
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d03d2a3d305b4bf494274b458889bbd
+      internalID: 1636445972
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_47
+      rect:
+        serializedVersion: 2
+        x: 90
+        y: 1953
+        width: 690
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6de0eb16965064f9fbf833cec69451c8
+      internalID: 328088200
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_48
+      rect:
+        serializedVersion: 2
+        x: 824
+        y: 1953
+        width: 690
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6710a257fe43049cea63c145c59660bd
+      internalID: 577963659
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_49
+      rect:
+        serializedVersion: 2
+        x: 1558
+        y: 1953
+        width: 888
+        height: 752
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8b0686953628149ca84b221ef395dbf0
+      internalID: 1187083470
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_50
+      rect:
+        serializedVersion: 2
+        x: 2490
+        y: 1945
+        width: 857
+        height: 769
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c19f30fe6545448b9a027c762511c524
+      internalID: -429340851
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_51
+      rect:
+        serializedVersion: 2
+        x: 3396
+        y: 1870
+        width: 685
+        height: 918
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e1e52a7ddfeca4041b28a1004266b83c
+      internalID: -1012008558
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_52
+      rect:
+        serializedVersion: 2
+        x: 4125
+        y: 1883
+        width: 690
+        height: 888
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2cf642cd69f014018bc3a50e99365cd2
+      internalID: -4230259
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_53
+      rect:
+        serializedVersion: 2
+        x: 4864
+        y: 1870
+        width: 685
+        height: 918
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 63d4760e6832e4b5ea6e3b9daf1f0d33
+      internalID: -385611772
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_54
+      rect:
+        serializedVersion: 2
+        x: 284
+        y: 815
+        width: 351
+        height: 954
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e07cc12082111417fbba6de410e1fa93
+      internalID: -1012724252
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_55
+      rect:
+        serializedVersion: 2
+        x: 890
+        y: 894
+        width: 545
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0ea1e87d204bd46aeb0aa2a5940bb446
+      internalID: 1884128573
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_56
+      rect:
+        serializedVersion: 2
+        x: 1695
+        y: 903
+        width: 597
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1961e10264767425686be2ad17c59416
+      internalID: 146156532
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_57
+      rect:
+        serializedVersion: 2
+        x: 2547
+        y: 903
+        width: 528
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0d00e7e5d13384f429f18ba1c17aa50b
+      internalID: 467756131
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_58
+      rect:
+        serializedVersion: 2
+        x: 3330
+        y: 903
+        width: 619
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: cbb0f168173fd4737899b3a87fb13219
+      internalID: -1562824783
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_59
+      rect:
+        serializedVersion: 2
+        x: 4209
+        y: 815
+        width: 351
+        height: 954
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 80e77ae2d0512412d853ecbe4039e389
+      internalID: 1206693176
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_60
+      rect:
+        serializedVersion: 2
+        x: 4815
+        y: 894
+        width: 549
+        height: 796
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 682fa6ed7f3d84070ac491686531e985
+      internalID: 1294015703
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_61
+      rect:
+        serializedVersion: 2
+        x: 5620
+        y: 903
+        width: 593
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5a4f896a80156410184c7c7a073989d9
+      internalID: -2013921100
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_62
+      rect:
+        serializedVersion: 2
+        x: 6473
+        y: 903
+        width: 527
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2f4cbd2becac14eabafbb4d2ab18e6ef
+      internalID: 24231849
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Reina de corazones sprite sheet_63
+      rect:
+        serializedVersion: 2
+        x: 7255
+        y: 903
+        width: 620
+        height: 782
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c800d5d73d11a481fb0778547dce91f5
+      internalID: -536542117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Reina de corazones sprite sheet_0: 849851679
+      Reina de corazones sprite sheet_1: -1108356771
+      Reina de corazones sprite sheet_10: 1022503676
+      Reina de corazones sprite sheet_11: -1561989651
+      Reina de corazones sprite sheet_12: -444704285
+      Reina de corazones sprite sheet_13: 390366318
+      Reina de corazones sprite sheet_14: 7004966
+      Reina de corazones sprite sheet_15: 373059768
+      Reina de corazones sprite sheet_16: 1982785060
+      Reina de corazones sprite sheet_17: -1705389214
+      Reina de corazones sprite sheet_18: 1488345175
+      Reina de corazones sprite sheet_19: -364526260
+      Reina de corazones sprite sheet_2: 1757300456
+      Reina de corazones sprite sheet_20: 542317234
+      Reina de corazones sprite sheet_21: 1531575702
+      Reina de corazones sprite sheet_22: -818908192
+      Reina de corazones sprite sheet_23: -1237267195
+      Reina de corazones sprite sheet_24: 738945392
+      Reina de corazones sprite sheet_25: -1734570331
+      Reina de corazones sprite sheet_26: -140016682
+      Reina de corazones sprite sheet_27: -426289356
+      Reina de corazones sprite sheet_28: -1617981782
+      Reina de corazones sprite sheet_29: 1749102437
+      Reina de corazones sprite sheet_3: -1075171664
+      Reina de corazones sprite sheet_30: -403381483
+      Reina de corazones sprite sheet_31: -955153672
+      Reina de corazones sprite sheet_32: 1251165943
+      Reina de corazones sprite sheet_33: 1618334975
+      Reina de corazones sprite sheet_34: 1792624767
+      Reina de corazones sprite sheet_35: 947730172
+      Reina de corazones sprite sheet_36: -1039358811
+      Reina de corazones sprite sheet_37: 1142891913
+      Reina de corazones sprite sheet_38: -366403230
+      Reina de corazones sprite sheet_39: 1873664762
+      Reina de corazones sprite sheet_4: -278668021
+      Reina de corazones sprite sheet_40: 977888469
+      Reina de corazones sprite sheet_41: -617914913
+      Reina de corazones sprite sheet_42: 2136514611
+      Reina de corazones sprite sheet_43: -403386360
+      Reina de corazones sprite sheet_44: -1182580657
+      Reina de corazones sprite sheet_45: 1216789977
+      Reina de corazones sprite sheet_46: 1636445972
+      Reina de corazones sprite sheet_47: 328088200
+      Reina de corazones sprite sheet_48: 577963659
+      Reina de corazones sprite sheet_49: 1187083470
+      Reina de corazones sprite sheet_5: -4548222
+      Reina de corazones sprite sheet_50: -429340851
+      Reina de corazones sprite sheet_51: -1012008558
+      Reina de corazones sprite sheet_52: -4230259
+      Reina de corazones sprite sheet_53: -385611772
+      Reina de corazones sprite sheet_54: -1012724252
+      Reina de corazones sprite sheet_55: 1884128573
+      Reina de corazones sprite sheet_56: 146156532
+      Reina de corazones sprite sheet_57: 467756131
+      Reina de corazones sprite sheet_58: -1562824783
+      Reina de corazones sprite sheet_59: 1206693176
+      Reina de corazones sprite sheet_6: 785533939
+      Reina de corazones sprite sheet_60: 1294015703
+      Reina de corazones sprite sheet_61: -2013921100
+      Reina de corazones sprite sheet_62: 24231849
+      Reina de corazones sprite sheet_63: -536542117
+      Reina de corazones sprite sheet_7: 401881942
+      Reina de corazones sprite sheet_8: 1092640282
+      Reina de corazones sprite sheet_9: -485886400
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

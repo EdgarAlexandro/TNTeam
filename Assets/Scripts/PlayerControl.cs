@@ -20,55 +20,57 @@ public class PlayerControl : MonoBehaviour
 
     void Update()
     {
-        float yInput = Input.GetAxis("Vertical");
-        rig.velocity = new Vector2(yInput * moveSpeed, rig.velocity.x);
-        switch (yInput)
-        {
-            case var _ when yInput < 0:
-                UpdateAnimation(PlayerAnimation.walkDown);
-                break;
-
-            case var _ when yInput > 0:
-                UpdateAnimation(PlayerAnimation.walkUp);
-                break;
-
-            default:
-                animatorController.SetBool("isWalkingDown", false);
-                animatorController.SetBool("isWalkingUp", false);
-                break;
-        }
-    }
-
-    private void FixedUpdate()
-    {
         float xInput = Input.GetAxis("Horizontal");
-        rig.velocity = new Vector2(xInput * moveSpeed, rig.velocity.y);
-        if(xInput != 0)
-        {
-            UpdateAnimation(PlayerAnimation.walkSides);
-            switch (xInput)
-            {
-                case var _ when xInput < 0:
-                    transform.localScale = new Vector3(0.15f, 0.15f);
-                    break;
+        float yInput = Input.GetAxis("Vertical");
 
-                case var _ when xInput > 0:
-                    transform.localScale = new Vector3(-0.15f, 0.15f);
-                    break;
+        // Actualiza la velocidad del Rigidbody2D
+        rig.velocity = new Vector2(xInput * moveSpeed, yInput * moveSpeed);
+
+        // Calcula la dirección predominante (horizontal o vertical)
+        if (Mathf.Abs(xInput) > Mathf.Abs(yInput))
+        {
+            // Movimiento horizontal
+            if (xInput > 0)
+            {
+                UpdateAnimation(PlayerAnimation.walkRight);
+            }
+            else if (xInput < 0)
+            {
+                UpdateAnimation(PlayerAnimation.walkLeft);
             }
         }
         else
         {
-            animatorController.SetBool("isWalkingSides", false);
+            // Movimiento vertical
+            if (yInput > 0)
+            {
+                UpdateAnimation(PlayerAnimation.walkUp);
+            }
+            else if (yInput < 0)
+            {
+                UpdateAnimation(PlayerAnimation.walkDown);
+            }
+            else
+            {
+                animatorController.SetBool("isWalkingDown", false);
+                animatorController.SetBool("isWalkingUp", false);
+                animatorController.SetBool("isWalkingRight", false);
+                animatorController.SetBool("isWalkingLeft", false);
+            }
         }
-
     }
+
     public enum PlayerAnimation
     {
-        walkDown, walkUp, walkSides
+        walkDown, walkUp, walkRight, walkLeft
     }
+
     void UpdateAnimation(PlayerAnimation nameAnimation)
     {
+        animatorController.SetBool("isWalkingDown", false);
+        animatorController.SetBool("isWalkingUp", false);
+        animatorController.SetBool("isWalkingRight", false);
+        animatorController.SetBool("isWalkingLeft", false);
         switch (nameAnimation)
         {
             case PlayerAnimation.walkDown:
@@ -77,8 +79,11 @@ public class PlayerControl : MonoBehaviour
             case PlayerAnimation.walkUp:
                 animatorController.SetBool("isWalkingUp", true);
                 break;
-            case PlayerAnimation.walkSides:
-                animatorController.SetBool("isWalkingSides", true);
+            case PlayerAnimation.walkRight:
+                animatorController.SetBool("isWalkingRight", true);
+                break;
+            case PlayerAnimation.walkLeft:
+                animatorController.SetBool("isWalkingLeft", true);
                 break;
         }
     }

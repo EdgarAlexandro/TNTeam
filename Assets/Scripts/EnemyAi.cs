@@ -10,37 +10,69 @@ public class EnemyAi : MonoBehaviour
     private float speed = 2.0f;
     private float minDistance = 5.0f;
     private float thrust = 2.0f;
-    // Start is called before the first frame update
+    private Animator animatorController;
+
     void Start()
     {
-        //target = GameObject.Find("Player").transform;
+        target = GameObject.FindWithTag("Player").transform;
+        animatorController = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         range = Vector2.Distance(transform.position, target.position);
- ;
         if (range < minDistance)
         {
             if (!targetCollision)
             {
-                transform.LookAt(target.position);
+                Vector3 moveDirection = (target.position - transform.position).normalized;
+                float horizontal = moveDirection.x;
+                float vertical = moveDirection.y;
+                if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
+                {
+                    if (horizontal > 0)
+                    {
+                        UpdateAnimation(EnemyAnimation.idle);
+                        UpdateAnimation(EnemyAnimation.walkRight);
+                    }
+                    else if (horizontal < 0)
+                    {
+                        UpdateAnimation(EnemyAnimation.idle);
+                        UpdateAnimation(EnemyAnimation.walkLeft);
+                    }
+                }
+                else
+                {
+                    if (vertical > 0)
+                    {
+                        UpdateAnimation(EnemyAnimation.idle);
+                        UpdateAnimation(EnemyAnimation.walkUp);
+                    }
+                    else if (vertical < 0)
+                    {
+                        UpdateAnimation(EnemyAnimation.idle);
+                        UpdateAnimation(EnemyAnimation.walkDown);
+                    }
+                }
 
+                transform.LookAt(target.position);
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
             }
         }
+        else
+        {
+            UpdateAnimation(EnemyAnimation.idle);
+        }
         transform.rotation = Quaternion.identity;
-
-
     }
-private void OnCollisionEnter2D(Collision2D collision)
+
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-          Vector3 contactPoint = collision.contacts[0].point;
-           Vector3 center = collision.collider.bounds.center;
+            Vector3 contactPoint = collision.contacts[0].point;
+            Vector3 center = collision.collider.bounds.center;
 
             targetCollision = true;
 
@@ -56,11 +88,38 @@ private void OnCollisionEnter2D(Collision2D collision)
             Invoke("FalseCollision", 0.25f);
         }
     }
-   
+
     void FalseCollision()
     {
         targetCollision = false;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
-
+    public enum EnemyAnimation
+    {
+        idle, walkDown, walkUp, walkRight, walkLeft
+    }
+    void UpdateAnimation(EnemyAnimation nameAnimation)
+    {
+        switch (nameAnimation)
+        {
+            case EnemyAnimation.idle:
+                animatorController.SetBool("isWalkingDown", false);
+                animatorController.SetBool("isWalkingUp", false);
+                animatorController.SetBool("isWalkingRight", false);
+                animatorController.SetBool("isWalkingLeft", false);
+                break;
+            case EnemyAnimation.walkDown:
+                animatorController.SetBool("isWalkingDown", true);
+                break;
+            case EnemyAnimation.walkUp:
+                animatorController.SetBool("isWalkingUp", true);
+                break;
+            case EnemyAnimation.walkRight:
+                animatorController.SetBool("isWalkingRight", true);
+                break;
+            case EnemyAnimation.walkLeft:
+                animatorController.SetBool("isWalkingLeft", true);
+                break;
+        }
+    }
 }

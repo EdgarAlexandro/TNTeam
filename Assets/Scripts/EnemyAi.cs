@@ -16,6 +16,7 @@ public class EnemyAi : MonoBehaviour
     {
         target = GameObject.FindWithTag("Player").transform;
         animatorController = GetComponent<Animator>();
+        Collider myCollider = GetComponent<Collider>();
     }
 
     void Update()
@@ -67,12 +68,14 @@ public class EnemyAi : MonoBehaviour
         transform.rotation = Quaternion.identity;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
-            Vector3 contactPoint = collision.contacts[0].point;
-            Vector3 center = collision.collider.bounds.center;
+            Vector3 triggerPosition = transform.position;
+            Vector3 contactPoint = triggerPosition;
+            //Vector3 contactPoint = other.contacts[0].point;
+            Vector3 center = other.GetComponent<Collider2D>().bounds.center;
 
             targetCollision = true;
 

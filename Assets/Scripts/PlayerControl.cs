@@ -11,11 +11,13 @@ public class PlayerControl : MonoBehaviour
 {
     public float moveSpeed;
     public Rigidbody2D rig;
+    public VectorValue startingPosition;
     Animator animatorController;
 
     void Start()
     {
         animatorController = GetComponent<Animator>();
+        transform.position = startingPosition.initialValue;
     }
 
     void Update()

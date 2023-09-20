@@ -16,25 +16,6 @@ public class PlayerHealth : MonoBehaviour
         healthBar.SetMaxHealth(maxHealth);
     }
 
-
-    /*
-    void onTriggerEnter(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Enemy"))
-        {
-            TakeDamage(5);
-            Debug.Log("Ok");
-        }
-    }
-    */
-
-    // Update is called once per frame
-    
-    //void Update()
-    //{
-        
-    //}
-
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;

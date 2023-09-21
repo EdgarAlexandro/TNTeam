@@ -22,7 +22,8 @@ public class OrbeControl : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-                reduccion = true;
+            reduccion = true;
+            collision.gameObject.GetComponent<ChargeMagic>().chargeMagicValue(25);
         }
     }
 }

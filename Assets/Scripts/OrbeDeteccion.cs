@@ -7,7 +7,6 @@ public class OrbeDeteccion : MonoBehaviour
     public Rigidbody2D rig;
     private Transform jugador;
     public float velocidadMovimiento = 0.1f;
-    
 
     void Start()
     {
@@ -28,7 +27,6 @@ public class OrbeDeteccion : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             jugador = other.transform;
-
         }
     }
 

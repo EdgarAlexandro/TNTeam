@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 4540491840027801039}
   - component: {fileID: 4540491840027801035}
   - component: {fileID: 4370652209139149157}
+  - component: {fileID: 1975975558751802508}
   m_Layer: 0
   m_Name: Reina Corazones
   m_TagString: Player
@@ -172,6 +173,20 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 7.1496496, y: 8.040927}
   m_EdgeRadius: 0
+--- !u!114 &1975975558751802508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4540491840027801038}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d3fdad78a92742ccbb99bd257199b2e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dagger: {fileID: -272608048825203402, guid: 89644111d88bd41f9939010435ee528d, type: 3}
+  speed: 15
 --- !u!1 &8831500557369643855
 GameObject:
   m_ObjectHideFlags: 0

@@ -6,6 +6,7 @@ public class CajaRotaSpawn : MonoBehaviour
 {
     public List<GameObject> objectsPrefabs = new List<GameObject>();
     public Transform spawnPoint;
+    public GameObject joker;
 
     void Start()
     {
@@ -31,5 +32,10 @@ public class CajaRotaSpawn : MonoBehaviour
             GameObject selectedPrefab = objectsPrefabs[Random.Range(0, objectsPrefabs.Count)];
             Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
         }
+    }
+
+    public void SpawnJoker()
+    {
+        Instantiate(joker, spawnPoint.position, Quaternion.identity);
     }
 }

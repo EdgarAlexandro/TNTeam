@@ -11,5 +11,13 @@ public class Espada : MonoBehaviour
             other.GetComponent<CajaRotaSpawn>().SpawnObject();
             Destroy(other.gameObject);
         }
+
+        if (other.gameObject.tag == "Enemy" && this.GetComponentInParent<Animator>().GetBool("isAttacking"))
+        {
+            other.gameObject.TryGetComponent<EnemyAi>(out EnemyAi enemyComponent);
+            enemyComponent.TakeDamage(1);
+        }
+
+
     }
 }

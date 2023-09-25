@@ -10,6 +10,8 @@ public class EnemyAi : MonoBehaviour
     private float speed = 2.0f;
     private float minDistance = 5.0f;
     private float thrust = 2.0f;
+    public int health;
+    public int maxHealth;
     private Animator animatorController;
 
     void Start()
@@ -17,6 +19,7 @@ public class EnemyAi : MonoBehaviour
         target = GameObject.FindWithTag("Player").transform;
         animatorController = GetComponent<Animator>();
         Collider myCollider = GetComponent<Collider>();
+        health = maxHealth;
     }
 
     void Update()
@@ -71,7 +74,7 @@ public class EnemyAi : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {
+        {           
             Vector3 triggerPosition = transform.position;
             Vector3 contactPoint = triggerPosition;
             //Vector3 contactPoint = other.contacts[0].point;
@@ -89,8 +92,32 @@ public class EnemyAi : MonoBehaviour
             if (top) GetComponent<Rigidbody2D>().AddForce(transform.right * thrust, ForceMode2D.Impulse);
             if (bottom) GetComponent<Rigidbody2D>().AddForce(-transform.right * thrust, ForceMode2D.Impulse);
             Invoke("FalseCollision", 0.25f);
+            
         }
     }
+
+    /*
+    private void EnemyRecoil(Collision2D other)
+    {
+        Vector3 triggerPosition = transform.position;
+        Vector3 contactPoint = triggerPosition;
+        //Vector3 contactPoint = other.contacts[0].point;
+        Vector3 center = other.gameObject.GetComponent<Collider2D>().bounds.center;
+
+        targetCollision = true;
+
+        bool right = contactPoint.x > center.x;
+        bool left = contactPoint.x < center.x;
+        bool top = contactPoint.y > center.y;
+        bool bottom = contactPoint.y < center.y;
+
+        if (right) GetComponent<Rigidbody2D>().AddForce(transform.right * thrust, ForceMode2D.Impulse);
+        if (left) GetComponent<Rigidbody2D>().AddForce(-transform.right * thrust, ForceMode2D.Impulse);
+        if (top) GetComponent<Rigidbody2D>().AddForce(transform.right * thrust, ForceMode2D.Impulse);
+        if (bottom) GetComponent<Rigidbody2D>().AddForce(-transform.right * thrust, ForceMode2D.Impulse);
+        Invoke("FalseCollision", 0.25f);
+    }
+    */
 
     void FalseCollision()
     {
@@ -123,6 +150,16 @@ public class EnemyAi : MonoBehaviour
             case EnemyAnimation.walkLeft:
                 animatorController.SetBool("isWalkingLeft", true);
                 break;
+        }
+    }
+
+    public void TakeDamage(int damageAmount)
+    {
+        health -= damageAmount;
+
+        if (health <= 0)
+        {
+            Destroy(gameObject);
         }
     }
 }

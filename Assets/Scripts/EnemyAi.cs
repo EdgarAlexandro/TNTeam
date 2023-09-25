@@ -102,8 +102,10 @@ public class EnemyAi : MonoBehaviour
 
     public IEnumerator Freeze(){
         speed = 0.0f;
+        animatorController.enabled = false;
         Debug.Log("AI Frozen");
         yield return new WaitForSeconds(6);
+        animatorController.enabled = true;
         speed = 2.0f;
         Debug.Log("AI Moving");
     }

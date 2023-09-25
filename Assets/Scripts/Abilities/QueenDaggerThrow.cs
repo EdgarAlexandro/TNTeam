@@ -48,14 +48,8 @@ public class QueenDaggerThrow : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.R)){
-            StartCoroutine(ThrowDagger());
+            Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
+            daggerInstance.velocity = projDirection * speed;
         }
-    }
-
-    IEnumerator ThrowDagger(){ //async? void?
-        Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
-        daggerInstance.velocity = projDirection * speed;
-        yield return new WaitForSeconds (3);
-        Destroy(daggerInstance.gameObject);
     }
 }

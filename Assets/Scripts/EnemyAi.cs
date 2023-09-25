@@ -7,7 +7,7 @@ public class EnemyAi : MonoBehaviour
     private float range;
     public Transform target;
     private bool targetCollision = false;
-    private float speed = 2.0f;
+    public float speed = 2.0f;
     private float minDistance = 5.0f;
     private float thrust = 2.0f;
     private Animator animatorController;
@@ -98,5 +98,13 @@ public class EnemyAi : MonoBehaviour
             if (moveDirection.y > 0) animatorController.SetBool("isWalkingUp", true);
             else if (moveDirection.y < 0) animatorController.SetBool("isWalkingDown", true);
         }
+    }
+
+    public IEnumerator Freeze(){
+        speed = 0.0f;
+        Debug.Log("AI Frozen");
+        yield return new WaitForSeconds(6);
+        speed = 2.0f;
+        Debug.Log("AI Moving");
     }
 }

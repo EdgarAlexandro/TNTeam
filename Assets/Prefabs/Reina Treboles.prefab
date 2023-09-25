@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 3553230007553245766}
   - component: {fileID: 7022308608813251040}
   - component: {fileID: 7713980026341536519}
+  - component: {fileID: 7489726087886223066}
   m_Layer: 0
   m_Name: Reina Treboles
   m_TagString: Player
@@ -175,6 +176,7 @@ MonoBehaviour:
   moveSpeed: 3
   rig: {fileID: 3553230007553245762}
   startingPosition: {fileID: 0}
+  isAttacking: 0
 --- !u!114 &7022308608813251040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,6 +207,19 @@ MonoBehaviour:
   maxMagic: 100
   currentMagic: 0
   magicBar: {fileID: 0}
+--- !u!114 &7489726087886223066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3553230007553245767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe19dcfb603be49a2adc42e6d00baeec, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  field: {fileID: 6122055740493801695, guid: b023612cd2d1e4cfda9ae962bd93f7f2, type: 3}
 --- !u!1 &4661373092954559345
 GameObject:
   m_ObjectHideFlags: 0

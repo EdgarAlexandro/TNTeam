@@ -12,4 +12,8 @@ public class HeartDagger : MonoBehaviour
             //this.velocity = projDirection * speed;
         }
     }
+    
+    private void OnBecameInvisible(){
+        Destroy(gameObject);
+    }
 }

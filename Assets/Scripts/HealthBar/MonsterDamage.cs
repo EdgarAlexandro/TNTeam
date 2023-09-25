@@ -6,23 +6,22 @@ public class MonsterDamage : MonoBehaviour
 {
     public int damage;
     public PlayerHealth playerHealth;
+    public bool isHittingShield = false;
 
-    private void OnCollisionEnter2D(Collision2D other)
+    
+
+    private void applyDamage()
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (!isHittingShield)
         {
             playerHealth.TakeDamage(damage);
         }
     }
-    // Start is called before the first frame update
-    void Start()
+    private void OnCollisionEnter2D(Collision2D other)
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        if (other.gameObject.CompareTag("Player"))
+        {
+            Invoke("applyDamage", 0.0f);
+        }
     }
 }

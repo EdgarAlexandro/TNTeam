@@ -14,6 +14,7 @@ public class PlayerControl : MonoBehaviour
     public VectorValue startingPosition;
     Animator animatorController;
     private bool isAttacking = false;
+    private bool isDefending = false;
 
     void Start()
     {
@@ -64,13 +65,25 @@ public class PlayerControl : MonoBehaviour
                 animatorController.SetBool("isWalkingLeft", false);
             }
         }
-        if (!isAttacking)
+        if (!isAttacking && !isDefending)
         {
             if (Input.GetKeyDown(KeyCode.Mouse0))
             {
                 isAttacking = true;
                 animatorController.SetBool("isAttacking", true);
             }
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q))
+        {
+            isDefending = true;
+            animatorController.SetBool("isDefending", true);
+        }
+
+        if (Input.GetKeyUp(KeyCode.Q))
+        {
+            isDefending = false;
+            animatorController.SetBool("isDefending", false);
         }
     }
 

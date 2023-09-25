@@ -1,0 +1,343 @@
+fileFormatVersion: 2
+guid: 2e0b64d0ed52941d3b16ece505f2183e
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Joker sprite sheet_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 1159
+        height: 873
+      alignment: 9
+      pivot: {x: 0.2656134, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9b01326953a1d456982c6676b12015b6
+      internalID: -1761330978
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_1
+      rect:
+        serializedVersion: 2
+        x: 1159
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.33976072, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 313c311d460894de895c8c9d9d5d18e5
+      internalID: 363406202
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_2
+      rect:
+        serializedVersion: 2
+        x: 2318
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.39619344, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b088c11b61b9e4be2b21b8d55f07ee30
+      internalID: -61132162
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_3
+      rect:
+        serializedVersion: 2
+        x: 3477
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.4377161, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9db39d67667c4d25b70f4a6d7c404ce
+      internalID: 267858016
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_4
+      rect:
+        serializedVersion: 2
+        x: 4636
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.49703443, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0242d6193c71247ceaba0fb9bb29193a
+      internalID: -1295723218
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_5
+      rect:
+        serializedVersion: 2
+        x: 5795
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.5504202, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c940477fa5edf49b28ac353b6344c60f
+      internalID: 1513512634
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_6
+      rect:
+        serializedVersion: 2
+        x: 6954
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.5949084, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 326b9345a22a848778d42d7a10a82df9
+      internalID: 1676252215
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_7
+      rect:
+        serializedVersion: 2
+        x: 8113
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.63939655, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16dfcecab61664e2a87c0d90a0784f9f
+      internalID: 593182974
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_8
+      rect:
+        serializedVersion: 2
+        x: 9272
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.68685174, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f253b31e85e4c4725a25be6f1a3cff04
+      internalID: -657755597
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Joker sprite sheet_9
+      rect:
+        serializedVersion: 2
+        x: 10431
+        y: 0
+        width: 1159.4
+        height: 873
+      alignment: 9
+      pivot: {x: 0.72837377, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d7ec6bdba0e714615b55ead0b8bc8bce
+      internalID: -663251695
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Joker sprite sheet_0: -1761330978
+      Joker sprite sheet_1: 363406202
+      Joker sprite sheet_2: -61132162
+      Joker sprite sheet_3: 267858016
+      Joker sprite sheet_4: -1295723218
+      Joker sprite sheet_5: 1513512634
+      Joker sprite sheet_6: 1676252215
+      Joker sprite sheet_7: 593182974
+      Joker sprite sheet_8: -657755597
+      Joker sprite sheet_9: -663251695
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

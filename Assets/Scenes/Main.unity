@@ -190,6 +190,14 @@ PrefabInstance:
       propertyPath: startingPosition
       value: 
       objectReference: {fileID: 11400000, guid: bbf06df8e5c89774daf1ea1c403cf0a0, type: 2}
+    - target: {fileID: 4603882707478070985, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+      propertyPath: healthBar
+      value: 
+      objectReference: {fileID: 829346525}
+    - target: {fileID: 8730277262352017053, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+      propertyPath: magicBar
+      value: 
+      objectReference: {fileID: 145182893}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
 --- !u!1 &65720308
@@ -5288,10 +5296,14 @@ PrefabInstance:
     - target: {fileID: 485309630, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
       propertyPath: playerHealth
       value: 
-      objectReference: {fileID: 1216047880}
+      objectReference: {fileID: 1216047890}
     - target: {fileID: 7552174801492835913, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
       propertyPath: m_Name
       value: Nahual
+      objectReference: {fileID: 0}
+    - target: {fileID: 7552174801492835913, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7552174801492835915, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
       propertyPath: m_RootOrder
@@ -8677,41 +8689,17 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1216047872 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4540491840027801038, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+--- !u!114 &1216047890 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4603882707478070985, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
   m_PrefabInstance: {fileID: 26756379}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1216047880
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216047872}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af5b1c8a6881e0649a267639f1fb53ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  currentHealth: 0
-  healthBar: {fileID: 829346525}
---- !u!114 &1216047888
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1216047872}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2bd2307fbd8b047acbe07873612b01, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxMagic: 100
-  currentMagic: 0
-  magicBar: {fileID: 145182893}
 --- !u!1 &1368846309
 GameObject:
   m_ObjectHideFlags: 0

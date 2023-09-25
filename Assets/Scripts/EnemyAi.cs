@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemyAi : MonoBehaviour
 {
     private float range;
+    private Rigidbody2D rb;
     public Transform target;
     private bool targetCollision = false;
     private float speed = 2.0f;
@@ -18,11 +19,8 @@ public class EnemyAi : MonoBehaviour
     {
         target = GameObject.FindWithTag("Player").transform;
         animatorController = GetComponent<Animator>();
-<<<<<<< HEAD
-        //Collider myCollider = GetComponent<Collider>();
-        //health = maxHealth;
-=======
->>>>>>> bbfc374b32726e6f8990891ab7b0e5ee677fa225
+        Collider myCollider = GetComponent<Collider>();
+        health = maxHealth;
     }
 
     void Update()
@@ -108,7 +106,7 @@ public class EnemyAi : MonoBehaviour
         }
     }
 
-    public void TakeDamage(int damageAmount)
+    public void OnHit(int damageAmount, Vector2 knockbackDirection, float knockbackAmount)
     {
         health -= damageAmount;
 
@@ -116,5 +114,19 @@ public class EnemyAi : MonoBehaviour
         {
             Destroy(gameObject);
         }
+        else
+        {
+            rb = GetComponent<Rigidbody2D>();
+            rb.velocity = Vector2.zero; 
+            rb.AddForce(knockbackDirection * knockbackAmount, ForceMode2D.Impulse);
+            StartCoroutine(StopMovementAfterKnockback());
+
+        }
+    }
+
+    private IEnumerator StopMovementAfterKnockback()
+    {
+        yield return new WaitForSeconds(0.2f);
+        rb.velocity = Vector2.zero;
     }
 }

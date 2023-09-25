@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   target: {fileID: 0}
   health: 0
-  maxHealth: 1
+  maxHealth: 3
 --- !u!95 &3709041624128039971
 Animator:
   serializedVersion: 5
@@ -308,6 +308,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   damage: 1
   playerHealth: {fileID: 0}
+  isHittingShield: 0
 --- !u!58 &485309637
 CircleCollider2D:
   m_ObjectHideFlags: 0

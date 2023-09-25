@@ -16,45 +16,23 @@ public class EnemyAi : MonoBehaviour
     {
         target = GameObject.FindWithTag("Player").transform;
         animatorController = GetComponent<Animator>();
-        Collider myCollider = GetComponent<Collider>();
     }
 
     void Update()
     {
+        if (target == null)
+        {
+            UpdateAnimation(Vector3.zero);
+            return;
+        }
         range = Vector2.Distance(transform.position, target.position);
         if (range < minDistance)
         {
             if (!targetCollision)
             {
                 Vector3 moveDirection = (target.position - transform.position).normalized;
-                float horizontal = moveDirection.x;
-                float vertical = moveDirection.y;
-                if (Mathf.Abs(horizontal) > Mathf.Abs(vertical))
-                {
-                    if (horizontal > 0)
-                    {
-                        UpdateAnimation(EnemyAnimation.idle);
-                        UpdateAnimation(EnemyAnimation.walkRight);
-                    }
-                    else if (horizontal < 0)
-                    {
-                        UpdateAnimation(EnemyAnimation.idle);
-                        UpdateAnimation(EnemyAnimation.walkLeft);
-                    }
-                }
-                else
-                {
-                    if (vertical > 0)
-                    {
-                        UpdateAnimation(EnemyAnimation.idle);
-                        UpdateAnimation(EnemyAnimation.walkUp);
-                    }
-                    else if (vertical < 0)
-                    {
-                        UpdateAnimation(EnemyAnimation.idle);
-                        UpdateAnimation(EnemyAnimation.walkDown);
-                    }
-                }
+
+                UpdateAnimation(moveDirection);
 
                 transform.LookAt(target.position);
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
@@ -63,7 +41,7 @@ public class EnemyAi : MonoBehaviour
         }
         else
         {
-            UpdateAnimation(EnemyAnimation.idle);
+            UpdateAnimation(Vector3.zero);
         }
         transform.rotation = Quaternion.identity;
     }
@@ -84,10 +62,16 @@ public class EnemyAi : MonoBehaviour
             bool top = contactPoint.y > center.y;
             bool bottom = contactPoint.y < center.y;
 
-            if (right) GetComponent<Rigidbody2D>().AddForce(transform.right * thrust, ForceMode2D.Impulse);
-            if (left) GetComponent<Rigidbody2D>().AddForce(-transform.right * thrust, ForceMode2D.Impulse);
-            if (top) GetComponent<Rigidbody2D>().AddForce(transform.right * thrust, ForceMode2D.Impulse);
-            if (bottom) GetComponent<Rigidbody2D>().AddForce(-transform.right * thrust, ForceMode2D.Impulse);
+            Vector2 thrustDirection = Vector2.zero;
+
+            if (right) thrustDirection += Vector2.right;
+            if (left) thrustDirection += Vector2.left;
+            if (top) thrustDirection += Vector2.up;
+            if (bottom) thrustDirection += Vector2.down;
+
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            GetComponent<Rigidbody2D>().AddForce(thrustDirection.normalized * thrust, ForceMode2D.Impulse);
+
             Invoke("FalseCollision", 0.25f);
         }
     }
@@ -97,32 +81,22 @@ public class EnemyAi : MonoBehaviour
         targetCollision = false;
         GetComponent<Rigidbody2D>().velocity = Vector3.zero;
     }
-    public enum EnemyAnimation
+
+    void UpdateAnimation(Vector3 moveDirection)
     {
-        idle, walkDown, walkUp, walkRight, walkLeft
-    }
-    void UpdateAnimation(EnemyAnimation nameAnimation)
-    {
-        switch (nameAnimation)
+        animatorController.SetBool("isWalkingDown", false);
+        animatorController.SetBool("isWalkingUp", false);
+        animatorController.SetBool("isWalkingRight", false);
+        animatorController.SetBool("isWalkingLeft", false);
+        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y))
         {
-            case EnemyAnimation.idle:
-                animatorController.SetBool("isWalkingDown", false);
-                animatorController.SetBool("isWalkingUp", false);
-                animatorController.SetBool("isWalkingRight", false);
-                animatorController.SetBool("isWalkingLeft", false);
-                break;
-            case EnemyAnimation.walkDown:
-                animatorController.SetBool("isWalkingDown", true);
-                break;
-            case EnemyAnimation.walkUp:
-                animatorController.SetBool("isWalkingUp", true);
-                break;
-            case EnemyAnimation.walkRight:
-                animatorController.SetBool("isWalkingRight", true);
-                break;
-            case EnemyAnimation.walkLeft:
-                animatorController.SetBool("isWalkingLeft", true);
-                break;
+            if (moveDirection.x > 0) animatorController.SetBool("isWalkingRight", true);
+            else if (moveDirection.x < 0) animatorController.SetBool("isWalkingLeft", true);
+        }
+        else
+        {
+            if (moveDirection.y > 0) animatorController.SetBool("isWalkingUp", true);
+            else if (moveDirection.y < 0) animatorController.SetBool("isWalkingDown", true);
         }
     }
 }

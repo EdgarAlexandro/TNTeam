@@ -13,7 +13,7 @@ public class PlayerControl : MonoBehaviour
     public Rigidbody2D rig;
     public VectorValue startingPosition;
     Animator animatorController;
-    private bool isAttacking = false;
+    public bool isAttacking = false;
     private bool isDefending = false;
 
     void Start()

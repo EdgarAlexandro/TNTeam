@@ -8,7 +8,7 @@ public class EnemyAi : MonoBehaviour
     private Rigidbody2D rb;
     public Transform target;
     private bool targetCollision = false;
-    private float speed = 2.0f;
+    public float speed = 2.0f;
     private float minDistance = 5.0f;
     private float thrust = 2.0f;
     public int health;
@@ -133,5 +133,17 @@ public class EnemyAi : MonoBehaviour
         yield return new WaitForSeconds(0.2f);
         rb.velocity = Vector2.zero;
         sprite.color = new Color(255, 255, 255, 255);
+    }
+
+    public IEnumerator Freeze()
+    {
+        speed = 0.0f;
+        animatorController.enabled = false;
+        Debug.Log("AI Frozen");
+        yield return new WaitForSeconds(6);
+        animatorController.enabled = true;
+        speed = 2.0f;
+        Debug.Log("AI Moving");
+
     }
 }

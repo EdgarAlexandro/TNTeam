@@ -4,10 +4,9 @@ using UnityEngine;
 
 public class Espada : MonoBehaviour
 {
-<<<<<<< HEAD
     public int damage = 1;
     public float knockback = 5f;
-=======
+
     float probabilidadFuncionA;
     float randomValue;
 
@@ -15,7 +14,6 @@ public class Espada : MonoBehaviour
     {
         probabilidadFuncionA = 0.8f;
     }
->>>>>>> 261fb9b61f6ce3f46c80e8fbbe484f46d2ba2b76
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -35,8 +33,15 @@ public class Espada : MonoBehaviour
 
         if (other.gameObject.tag == "Enemy" && this.GetComponentInParent<Animator>().GetBool("isAttacking"))
         {
+            Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
             other.gameObject.TryGetComponent<EnemyAi>(out EnemyAi enemyComponent);
-            enemyComponent.OnHit(damage, transform.right, knockback);
+            enemyComponent.OnHit(damage, knockbackDirection, knockback);
+        }
+
+        if (other.gameObject.tag == "Spawner" && this.GetComponentInParent<Animator>().GetBool("isAttacking"))
+        {
+            other.gameObject.TryGetComponent<SpawnerScript>(out SpawnerScript spawnerComponent);
+            spawnerComponent.OnHit(damage);
         }
     }
 }

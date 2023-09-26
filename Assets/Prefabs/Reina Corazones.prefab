@@ -246,7 +246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 3
   rig: {fileID: 4540491840027801035}
-  startingPosition: {fileID: 0}
+  startingPosition: {fileID: 11400000, guid: bbf06df8e5c89774daf1ea1c403cf0a0, type: 2}
 --- !u!114 &1975975558751802508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -274,8 +274,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 20
-  currentHealth: 0
-  healthBar: {fileID: 0}
+  currentHealth: -2
+  healthBar: {fileID: 8190688439637351427, guid: 7e8350c43da6bb645b382cb4fa44c134, type: 3}
 --- !u!114 &8730277262352017053
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,7 +290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMagic: 100
   currentMagic: 0
-  magicBar: {fileID: 0}
+  magicBar: {fileID: 4545141937478397561, guid: f788df31196e8464eb725da165fc9394, type: 3}
 --- !u!1 &8831500557369643855
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,3 +362,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f039fdcf7a34e60b60cd230748d5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  knockback: 10

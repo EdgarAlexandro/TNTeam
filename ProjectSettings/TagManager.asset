@@ -8,6 +8,7 @@ TagManager:
   - Orbe
   - Object
   - Enemy
+  - Spawner
   layers:
   - Default
   - TransparentFX

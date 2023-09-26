@@ -20,6 +20,7 @@ public class PlayerControl : MonoBehaviour
     {
         animatorController = GetComponent<Animator>();
         transform.position = startingPosition.initialValue;
+        // Spawn the prefab at the specified position and rotation
     }
 
     void Update()

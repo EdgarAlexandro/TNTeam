@@ -14,6 +14,7 @@ public class EnemyAi : MonoBehaviour
     public int health;
     public int maxHealth;
     private Animator animatorController;
+    private SpriteRenderer sprite;
 
     void Start()
     {
@@ -21,6 +22,7 @@ public class EnemyAi : MonoBehaviour
         animatorController = GetComponent<Animator>();
         Collider myCollider = GetComponent<Collider>();
         health = maxHealth;
+        sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
@@ -54,7 +56,7 @@ public class EnemyAi : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Player"))
-        {           
+        {
             Vector3 triggerPosition = transform.position;
             Vector3 contactPoint = triggerPosition;
             //Vector3 contactPoint = other.contacts[0].point;
@@ -78,7 +80,7 @@ public class EnemyAi : MonoBehaviour
             GetComponent<Rigidbody2D>().AddForce(thrustDirection.normalized * thrust, ForceMode2D.Impulse);
 
             Invoke("FalseCollision", 0.25f);
-            
+
         }
     }
 
@@ -117,16 +119,19 @@ public class EnemyAi : MonoBehaviour
         else
         {
             rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero; 
+            rb.velocity = Vector2.zero;
             rb.AddForce(knockbackDirection * knockbackAmount, ForceMode2D.Impulse);
+            sprite.color = new Color(255, 0, 0, 255);
             StartCoroutine(StopMovementAfterKnockback());
 
         }
     }
 
+
     private IEnumerator StopMovementAfterKnockback()
     {
         yield return new WaitForSeconds(0.2f);
         rb.velocity = Vector2.zero;
+        sprite.color = new Color(255, 255, 255, 255);
     }
 }

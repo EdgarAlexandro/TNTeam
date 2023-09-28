@@ -87,7 +87,7 @@ GameObject:
   - component: {fileID: 4540491840027801039}
   - component: {fileID: 1975975558751802508}
   - component: {fileID: 4603882707478070985}
-  - component: {fileID: 8730277262352017053}
+  - component: {fileID: 1959357119}
   m_Layer: 0
   m_Name: Reina Corazones
   m_TagString: Player
@@ -247,6 +247,7 @@ MonoBehaviour:
   moveSpeed: 3
   rig: {fileID: 4540491840027801035}
   startingPosition: {fileID: 11400000, guid: bbf06df8e5c89774daf1ea1c403cf0a0, type: 2}
+  isAttacking: 0
 --- !u!114 &1975975558751802508
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -276,7 +277,7 @@ MonoBehaviour:
   maxHealth: 20
   currentHealth: -2
   healthBar: {fileID: 8190688439637351427, guid: 7e8350c43da6bb645b382cb4fa44c134, type: 3}
---- !u!114 &8730277262352017053
+--- !u!114 &1959357119
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -285,12 +286,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 4540491840027801038}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: df2bd2307fbd8b047acbe07873612b01, type: 3}
+  m_Script: {fileID: 11500000, guid: 140f831464c0b904e8ba7c82744ecaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxKeys: 10
+  currentKeys: 0
+  barradellave: {fileID: 0}
   maxMagic: 100
   currentMagic: 0
-  magicBar: {fileID: 4545141937478397561, guid: f788df31196e8464eb725da165fc9394, type: 3}
+  magicBar: {fileID: 0}
 --- !u!1 &8831500557369643855
 GameObject:
   m_ObjectHideFlags: 0

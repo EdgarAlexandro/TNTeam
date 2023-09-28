@@ -26,7 +26,7 @@ public class ObjectController : MonoBehaviour
             reduccion = true;
             if (this.CompareTag("Orbe"))
             {
-                collision.gameObject.GetComponent<ChargeMagic>().chargeMagicValue(25);
+                collision.gameObject.GetComponent<UIController>().chargeMagicValue(25);
             }
             else if (this.CompareTag("Llave"))
             {

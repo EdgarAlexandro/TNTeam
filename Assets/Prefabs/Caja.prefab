@@ -124,5 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d9a809e73668448679d14b9f0daf7e78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectsPrefabs: []
+  objectsPrefabs:
+  - {fileID: 3497544176364357381, guid: d321309feaec54c71a2e7c22a95f9c58, type: 3}
+  - {fileID: 7752539849509853401, guid: 6ef104fc49416403f9cde97f3f2481dd, type: 3}
   spawnPoint: {fileID: 0}
+  joker: {fileID: 5683834370789232956, guid: aec395562e4b845cc8a4bc7d52136192, type: 3}

@@ -11,6 +11,7 @@ public class AbrirPuertas : MonoBehaviour
             if (collision.gameObject.GetComponent<UIController>().currentKeys >= (1))
             {
                 Destroy(gameObject);
+                collision.gameObject.GetComponent<UIController>().increaseKeyCount(-1);
             }
         }
     }

@@ -98,10 +98,10 @@ GameObject:
   - component: {fileID: 8209187921433272974}
   - component: {fileID: 8209187921433273009}
   - component: {fileID: 3497544176141842634}
-  - component: {fileID: 3497544176141842637}
+  - component: {fileID: 6509392526076694184}
   m_Layer: 0
   m_Name: Sprite
-  m_TagString: Untagged
+  m_TagString: Orbe
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -359,7 +359,7 @@ PolygonCollider2D:
       - {x: 0.24, y: -3.3899999}
       - {x: 0.44, y: -3.36}
       - {x: 0.59999996, y: -3.33}
---- !u!114 &3497544176141842637
+--- !u!114 &6509392526076694184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -368,7 +368,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8209187921433273008}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ee6bbecac3f944ed822b8f5a479875d, type: 3}
+  m_Script: {fileID: 11500000, guid: c5354ae1c8e021b4b987dff1743f0991, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   cambio: 0.01

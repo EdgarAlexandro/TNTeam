@@ -11,10 +11,12 @@ public class CajaRotaSpawn : MonoBehaviour
     void Start()
     {
         spawnPoint = gameObject.transform;
-        GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Object");
+        
         GameObject[] orbsWithTag = GameObject.FindGameObjectsWithTag("Orbe");
+        GameObject[] keysWithTag = GameObject.FindGameObjectsWithTag("Llave");
+       
 
-        foreach (GameObject obj in objectsWithTag)
+        foreach (GameObject obj in keysWithTag)
         {
             objectsPrefabs.Add(obj);
         }

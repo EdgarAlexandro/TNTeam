@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class OrbeDeteccion : MonoBehaviour
+public class ObjectDeteccion : MonoBehaviour
 {
     public Rigidbody2D rig;
     private Transform jugador;

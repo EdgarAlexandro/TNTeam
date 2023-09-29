@@ -37,6 +37,6 @@ public class ButtonController : MonoBehaviour
     public void OnQuitButtonClicked()
     {
         // Quit the application (works in standalone builds)
-        Application.Quit();
+        SceneManager.LoadScene("StartMenu");
     }
 }

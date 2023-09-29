@@ -17,7 +17,7 @@ public class CajaRotaSpawn : MonoBehaviour
     {
         if (objectsPrefabs.Count > 0 && spawnPoint != null)
         {
-            GameObject selectedPrefab = objectsPrefabs[Random.Range(0, objectsPrefabs.Count)];
+            GameObject selectedPrefab = objectsPrefabs[0];
             Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
         }
     }

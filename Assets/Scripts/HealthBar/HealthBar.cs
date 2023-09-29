@@ -5,6 +5,23 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
+
+    /*
+    public static HealthBar Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+    */
     public Slider slider;
 
     public void SetMaxHealth(int health)

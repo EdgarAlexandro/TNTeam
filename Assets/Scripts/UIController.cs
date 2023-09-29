@@ -7,6 +7,7 @@ public class UIController : MonoBehaviour
     public int maxKeys;
     public int currentKeys;
     public Barradellave barradellave;
+    public AbrirPuertas abrirPuertas;
     public int maxMagic;
     public int currentMagic;
     public MagicBar magicBar;
@@ -39,6 +40,7 @@ public class UIController : MonoBehaviour
             currentKeys += value;
             barradellave.SetKeys(currentKeys);
             barradellave.UpdateText(currentKeys);
+            abrirPuertas.OpenDoor(currentKeys);
         }
        
     }

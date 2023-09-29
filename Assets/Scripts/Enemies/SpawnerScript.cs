@@ -12,6 +12,8 @@ public class SpawnerScript : MonoBehaviour
     public int spawnHealth;
     public int spawnMaxHealth;
     private SpriteRenderer sprite;
+    public Transform spawnPoint;
+    public List<GameObject> objectsPrefabs = new List<GameObject>();
 
     public void SpawnEnemy()
     {
@@ -20,7 +22,9 @@ public class SpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < spawnPoints.Length; i++)
+        spawnPoint = gameObject.transform;
+
+        for (int i = 0; i < spawnPoints.Length; i++)
         {
             Instantiate(enemyPrefab, spawnPoints[i].transform.position, Quaternion.identity);
         }
@@ -49,11 +53,22 @@ public class SpawnerScript : MonoBehaviour
         if (spawnHealth <= 0)
         {
             Destroy(gameObject);
+            GameObject selectedPrefab = objectsPrefabs[0];
+            Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
         }
         else
         {
             sprite.color = new Color(255, 0, 0, 255);
             StartCoroutine(ReturnToNormalColor());
+        }
+    }
+
+    public void SpawnKey()
+    {
+        if (objectsPrefabs.Count > 0 && spawnPoint != null)
+        {
+            GameObject selectedPrefab = objectsPrefabs[Random.Range(0, objectsPrefabs.Count)];
+            Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
         }
     }
 

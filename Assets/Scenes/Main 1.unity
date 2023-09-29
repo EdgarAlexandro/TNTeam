@@ -5722,6 +5722,14 @@ PrefabInstance:
       propertyPath: barradellave
       value: 
       objectReference: {fileID: 769477739}
+    - target: {fileID: 1975975558751802508, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+      propertyPath: neededMagic
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1975975558751802508, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+      propertyPath: uiController
+      value: 
+      objectReference: {fileID: 1959357111}
     - target: {fileID: 4540491840027801034, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -9796,6 +9804,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: af5b1c8a6881e0649a267639f1fb53ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1959357111 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1959357119, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+  m_PrefabInstance: {fileID: 947132037}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 140f831464c0b904e8ba7c82744ecaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1421746297669292885

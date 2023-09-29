@@ -33,6 +33,17 @@ public class UIController : MonoBehaviour
         magicBar.UpdateText(currentMagic);
     }
 
+    public void loseMagicValue(int value)
+    {
+        if (currentMagic > 0)
+        {
+            currentMagic -= value;
+        }
+        magicBar.SetMagic(currentMagic);
+        magicBar.UpdateText(currentMagic);
+
+    }
+
     public void increaseKeyCount(int value)
     {
         if (currentKeys < maxKeys)

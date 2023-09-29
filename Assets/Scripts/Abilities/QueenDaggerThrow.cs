@@ -6,7 +6,9 @@ public class QueenDaggerThrow : MonoBehaviour
 {
     public Rigidbody2D dagger;
     public float speed = 3;
+    public int neededMagic = 3;
     private Vector2 projDirection = Vector2.down;
+    public UIController uiController;
 
     // Start is called before the first frame update
     void Start()
@@ -48,8 +50,12 @@ public class QueenDaggerThrow : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.R)){
-            Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
-            daggerInstance.velocity = projDirection * speed;
+            if (uiController.currentMagic >= neededMagic)
+            {
+                Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
+                daggerInstance.velocity = projDirection * speed;
+                uiController.loseMagicValue(neededMagic);
+            }
         }
     }
 }

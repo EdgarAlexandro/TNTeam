@@ -9,6 +9,7 @@ TagManager:
   - Object
   - Enemy
   - Spawner
+  - Special
   layers:
   - Default
   - TransparentFX

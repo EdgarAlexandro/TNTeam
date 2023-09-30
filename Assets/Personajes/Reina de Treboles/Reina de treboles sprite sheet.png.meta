@@ -1,0 +1,1311 @@
+fileFormatVersion: 2
+guid: 0ac33d82828c544589bedfe41c7e45dd
+TextureImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 12
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMasterTextureLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 1
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Server
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_TA1"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 8638.223
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49349153, y: 0.45076185}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: aa6af94ea65444fa290bdf342901aa72
+      internalID: 564014816
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A2"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 8638.223
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49349153, y: 0.45945144}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f1a23b52301e84b48bf5cb8b5bf68841
+      internalID: -1972257027
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A3"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 8638
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49349153, y: 0.45365867}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e2ee73fb00944c45b93a656afdac5f2
+      internalID: 1438495592
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A4"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 8638
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49349126, y: 0.46235624}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e8d23bc43b0f4f8bb06a48198b84760
+      internalID: 2069092090
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A9"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 8638
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.48861, y: 0.45366934}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e72eb9b55ca3444c193f2e774ca707d2
+      internalID: 788210586
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W12"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 8658
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49186435, y: 0.43339843}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9275e899375b64ac79eb4ee94e868392
+      internalID: 472114561
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A10"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 7559.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49349153, y: 0.44497046}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba0cb1f37f687486fb4935f0565aac43
+      internalID: -1175467394
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A11"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 7559
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49186435, y: 0.44498155}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0b0e22d7f7ae74152994b1c9b85df211
+      internalID: -222298602
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A12"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 7559.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.50883734, y: 0.45280808}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3512ddf9bc62749d0a9aff878886353f
+      internalID: 1756197748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A13"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 7559.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.50883734, y: 0.45280808}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b85b1547109404899a20c2f11aab7bb5
+      internalID: -391766222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A14"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 7559.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5132557, y: 0.45280808}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 64daf66b5c46f444a9d162459b78ab5d
+      internalID: -1722883608
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W13"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 7559.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.50680953, y: 0.4461869}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91f60e4b1fcf24c828f5f9614b849250
+      internalID: -624211878
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_TA2"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6477
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49349153, y: 0.45077267}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dca62951b70e245e19936d0604370511
+      internalID: -1571294593
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D6"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 6477
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.4951186, y: 0.45366845}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7aa569d09786b4104908dae5363814e1
+      internalID: -2073811499
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D7"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 6480
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49349153, y: 0.45077312}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a8eed5eedefe44c7fbcc0b22d0c08c35
+      internalID: -976326559
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D8"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 6480
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.4918641, y: 0.45077312}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f5db467c27ed94752958d9919857e3f1
+      internalID: -1423297094
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D9"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 6474
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49349126, y: 0.45077267}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 52ab63a6f414942cca48e64be695c62b
+      internalID: -221669924
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W14"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 6480
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.508472, y: 0.43963987}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ba398f36ddd1a43d59a393d258fcbb80
+      internalID: -535833514
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D10"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 5401
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49142295, y: 0.44810247}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8f03eb2a3f01c47fd9a8f8e2e7e86c89
+      internalID: -279511628
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D1"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 5401
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49313828, y: 0.44504982}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 85792ec0f653c4d24bc52d0392aa833a
+      internalID: -403320006
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D2"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 5401.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.4948535, y: 0.45114532}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65889905a356247f2847306a18d9c876
+      internalID: -2027295201
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D3"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 5401
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49313816, y: 0.45115516}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: acdc6a9ce887c48709cfce43f1965a34
+      internalID: 1761259331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D4"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 5401.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49216413, y: 0.44699815}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b88bf2180b63d42de970b1da1875798f
+      internalID: -1879300792
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W15"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 5401.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5058736, y: 0.43379736}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c4121904fb20f4e768357543cbed715a
+      internalID: -960414415
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D5"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 4322.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49142295, y: 0.4450383}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bad289fd5ee154e54ba70a37e8c54e82
+      internalID: 193232112
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_TA3"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 4322.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.4418394, y: 0.42832884}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7814eff0d437c4e2ca97ad52ae4fbb72
+      internalID: -1188214048
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D11"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 4322.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49313816, y: 0.4450383}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25357df89f4624ee6bb7fb20063be701
+      internalID: -149161619
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D12"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 4322.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.48970747, y: 0.441985}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: bdadc1bed251e4f8b90401b5fddc6ac0
+      internalID: -534095614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D13"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 4322
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49313816, y: 0.43894404}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7e510ae0ed7bb46288704e92a603fa46
+      internalID: 783706751
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W16"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 4322.222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5101508, y: 0.43298838}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3b48d739585444645a6873dd6136ceaa
+      internalID: 1976210581
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D14"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 3243
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.48976895, y: 0.43627456}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 09d943ee701c140999ea0dde188bedca
+      internalID: -737547957
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D15"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 3243.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.49147427, y: 0.43626145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b7325e88380904b9192ac72ab6f63a65
+      internalID: -932765678
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D16"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 3243.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5068207, y: 0.43626145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8d137ae951eab4d8880b8c20cf0c0110
+      internalID: -2021105295
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D17"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 3243.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5085767, y: 0.43587798}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9116fb2dfa53e4995905d58597c73643
+      internalID: -1861966478
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D18"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 3243.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5068613, y: 0.4389317}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2a5576759c555436096b7323dd19e841
+      internalID: 1395846342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A6"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 3243
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49656832, y: 0.44199693}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 6b10a9c8e65af4e36aa529afc8928d30
+      internalID: 146104242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D19"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 2164
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.5033848, y: 0.43674994}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9e8ce798d2774438da5c4a5170e9c9c5
+      internalID: 77594550
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_D20"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 2164
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.5067695, y: 0.43072623}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a20ad346a948648b9b2733f89966c592
+      internalID: -669032844
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_TA4"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 2164.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.4881527, y: 0.4397495}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 00aa6a8315fd149239d4bb9f148516d0
+      internalID: 2122558711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W5"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 2164
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.4932296, y: 0.43674994}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ec09f073bc1be45a6ad833644948cb1c
+      internalID: -1987726681
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W6"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 2164.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.4932296, y: 0.43673715}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: ff7213f9c2ea2494b991315697dec3f7
+      internalID: -1361724079
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A7"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 2164
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49153662, y: 0.4397619}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 40f72f5f604954d5d97e8ab7454265d6
+      internalID: 1769243903
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W7"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 1085
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.50846213, y: 0.43373752}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 91077a749c77345cdaf23db4da60dd50
+      internalID: 939760976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W8"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 1085.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.50846195, y: 0.4337241}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0a2de7883669e42ff85c309f31b433b8
+      internalID: 2069584987
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W1"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 1085.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.4932301, y: 0.4367367}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1368e03b4694e4391aa5752d2b2e62c8
+      internalID: 603831846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W2"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 1085.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.4932296, y: 0.4367367}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a3eaf9fdff86a490c891bf6f7766c5b8
+      internalID: 387898262
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W3"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 1085.2222
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.5050769, y: 0.4337241}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: efd933144518e4e8594bc5850bce3d5c
+      internalID: -909945565
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A8"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 1085
+        width: 1922
+        height: 1064
+      alignment: 9
+      pivot: {x: 0.4932291, y: 0.43969542}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 753e76308ccd546a4bd11311521657ac
+      internalID: 1568641010
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W4"
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 6.222168
+        width: 1922
+        height: 1079.7778
+      alignment: 9
+      pivot: {x: 0.50846213, y: 0.43071198}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 617afb0cacd0d43758c3ef334d1f9ccf
+      internalID: -8730343
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W9"
+      rect:
+        serializedVersion: 2
+        x: 1922
+        y: 6
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49153763, y: 0.4277145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 179d26fb50246487e8f5046e81d0967f
+      internalID: -916940474
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W10"
+      rect:
+        serializedVersion: 2
+        x: 3844
+        y: 6
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49153763, y: 0.4277145}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 93b22f5dd78174f39b236a7f8c1f587a
+      internalID: 2018622405
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A5"
+      rect:
+        serializedVersion: 2
+        x: 5766
+        y: 6
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.49153712, y: 0.430726}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7521e8b587d0141768c9ca8251a56ead
+      internalID: -1784343256
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_W11"
+      rect:
+        serializedVersion: 2
+        x: 7688
+        y: 6
+        width: 1922
+        height: 1080
+      alignment: 9
+      pivot: {x: 0.48476726, y: 0.430726}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 9bc73585788aa42beadcf1102437d5a2
+      internalID: -604930810
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: "Reina de tre\u0301boles sprite sheet_A1"
+      rect:
+        serializedVersion: 2
+        x: 9610
+        y: 6
+        width: 1922
+        height: 1042
+      alignment: 9
+      pivot: {x: 0.49254826, y: 0.4528012}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e065a7c10adfb49759a04c5aa6ffc2f1
+      internalID: 785448677
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      "Reina de tre\u0301boles sprite sheet_A1": 785448677
+      "Reina de tre\u0301boles sprite sheet_A10": -1175467394
+      "Reina de tre\u0301boles sprite sheet_A11": -222298602
+      "Reina de tre\u0301boles sprite sheet_A12": 1756197748
+      "Reina de tre\u0301boles sprite sheet_A13": -391766222
+      "Reina de tre\u0301boles sprite sheet_A14": -1722883608
+      "Reina de tre\u0301boles sprite sheet_A2": -1972257027
+      "Reina de tre\u0301boles sprite sheet_A3": 1438495592
+      "Reina de tre\u0301boles sprite sheet_A4": 2069092090
+      "Reina de tre\u0301boles sprite sheet_A5": -1784343256
+      "Reina de tre\u0301boles sprite sheet_A6": 146104242
+      "Reina de tre\u0301boles sprite sheet_A7": 1769243903
+      "Reina de tre\u0301boles sprite sheet_A8": 1568641010
+      "Reina de tre\u0301boles sprite sheet_A9": 788210586
+      "Reina de tre\u0301boles sprite sheet_D1": -403320006
+      "Reina de tre\u0301boles sprite sheet_D10": -279511628
+      "Reina de tre\u0301boles sprite sheet_D11": -149161619
+      "Reina de tre\u0301boles sprite sheet_D12": -534095614
+      "Reina de tre\u0301boles sprite sheet_D13": 783706751
+      "Reina de tre\u0301boles sprite sheet_D14": -737547957
+      "Reina de tre\u0301boles sprite sheet_D15": -932765678
+      "Reina de tre\u0301boles sprite sheet_D16": -2021105295
+      "Reina de tre\u0301boles sprite sheet_D17": -1861966478
+      "Reina de tre\u0301boles sprite sheet_D18": 1395846342
+      "Reina de tre\u0301boles sprite sheet_D19": 77594550
+      "Reina de tre\u0301boles sprite sheet_D2": -2027295201
+      "Reina de tre\u0301boles sprite sheet_D20": -669032844
+      "Reina de tre\u0301boles sprite sheet_D3": 1761259331
+      "Reina de tre\u0301boles sprite sheet_D4": -1879300792
+      "Reina de tre\u0301boles sprite sheet_D5": 193232112
+      "Reina de tre\u0301boles sprite sheet_D6": -2073811499
+      "Reina de tre\u0301boles sprite sheet_D7": -976326559
+      "Reina de tre\u0301boles sprite sheet_D8": -1423297094
+      "Reina de tre\u0301boles sprite sheet_D9": -221669924
+      "Reina de tre\u0301boles sprite sheet_TA1": -1571294593
+      "Reina de tre\u0301boles sprite sheet_TA2": -1188214048
+      "Reina de tre\u0301boles sprite sheet_TA3": 2122558711
+      "Reina de tre\u0301boles sprite sheet_TA4": 603831846
+      "Reina de tre\u0301boles sprite sheet_W1": 387898262
+      "Reina de tre\u0301boles sprite sheet_W10": 2018622405
+      "Reina de tre\u0301boles sprite sheet_W11": -604930810
+      "Reina de tre\u0301boles sprite sheet_W12": 472114561
+      "Reina de tre\u0301boles sprite sheet_W13": -624211878
+      "Reina de tre\u0301boles sprite sheet_W14": -535833514
+      "Reina de tre\u0301boles sprite sheet_W15": -960414415
+      "Reina de tre\u0301boles sprite sheet_W16": 1976210581
+      "Reina de tre\u0301boles sprite sheet_W2": -909945565
+      "Reina de tre\u0301boles sprite sheet_W3": -8730343
+      "Reina de tre\u0301boles sprite sheet_W4": -1987726681
+      "Reina de tre\u0301boles sprite sheet_W5": -1361724079
+      "Reina de tre\u0301boles sprite sheet_W6": 939760976
+      "Reina de tre\u0301boles sprite sheet_W7": 939760976
+      "Reina de tre\u0301boles sprite sheet_W8": 2069584987
+      "Reina de tre\u0301boles sprite sheet_W9": -916940474
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

@@ -10,9 +10,10 @@ public class DropData
     public string sceneName;
     public string tag;
 
-    //
+    // Override Equals method
     public override bool Equals(object obj)
     {
+        //Check if obj is null or if it is a different type than DropData
         if (obj == null || !(obj is DropData))
         {
             return false;
@@ -20,9 +21,11 @@ public class DropData
 
         DropData other = (DropData)obj;
 
+        // Equality logic
         return position == other.position && sceneName == other.sceneName && tag == other.tag;
     }
 
+    // Create hash code
     public override int GetHashCode()
     {
         return position.GetHashCode() ^ sceneName.GetHashCode();
@@ -50,17 +53,6 @@ public class DropManager : MonoBehaviour
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    void Update()
-    {
-        Debug.Log(dropPositions.Count);
     }
 
     // Add drop position to the drop positions list

@@ -11,6 +11,11 @@ public class ButtonController : MonoBehaviour
     private DestructionManager dm;
     private DropManager drm;
 
+    [SerializeField] Slider musicSlider;
+    [SerializeField] Slider sfxSlider;
+    [SerializeField] AudioSource backgroundMusic;
+    [SerializeField] AudioSource buttonClickSound;
+
     void Start()
     {
         pm = PersistenceManager.Instance;
@@ -45,7 +50,12 @@ public class ButtonController : MonoBehaviour
 
     public void OnQuitButtonClicked()
     {
-        // Quit the application 
-        Application.Quit();
+        // Return to start menu
+        SceneManager.LoadScene("StartMenu");
+        pm.CurrentHealth = 20;
+        pm.CurrentMagic = 0;
+        pm.CurrentKeys = 0;
+        dm.RemoveFromDestroyed();
+        drm.RemoveAllDropPositions();
     }
 }

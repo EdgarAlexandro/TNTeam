@@ -2,9 +2,16 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
+public class SpawnableObject
+{
+    public GameObject prefab;
+    public float probability;
+}
+
 public class CajaRotaSpawn : MonoBehaviour
 {
-    public List<GameObject> objectsPrefabs = new List<GameObject>();
+    public List<SpawnableObject> objectsPrefabs = new();
     public Transform spawnPoint;
     public GameObject joker;
 
@@ -17,8 +24,21 @@ public class CajaRotaSpawn : MonoBehaviour
     {
         if (objectsPrefabs.Count > 0 && spawnPoint != null)
         {
-            GameObject selectedPrefab = objectsPrefabs[0];
-            Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+            float totalProbability = 0f;
+            foreach (SpawnableObject spawnableObject in objectsPrefabs)
+            {
+                totalProbability += spawnableObject.probability;
+            }
+            float randomValue = Random.Range(0f, totalProbability);
+            foreach (SpawnableObject spawnableObject in objectsPrefabs)
+            {
+                if (randomValue <= spawnableObject.probability)
+                {
+                    Instantiate(spawnableObject.prefab, spawnPoint.position, Quaternion.identity);
+                    break; 
+                }
+                randomValue -= spawnableObject.probability;
+            }
         }
     }
 

@@ -1,0 +1,104 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+
+
+public class InventoryController : MonoBehaviour
+{
+    public Inventory inventory;
+    public ItemData bomba, PC, PR, PM;
+    public int indexItemSeleccionado = 0;
+    public Image imagenCanvas;
+    public Sprite empty;
+
+    private void Update()
+    {
+        float xInput = Input.GetAxis("Horizontal");
+        float yInput = Input.GetAxis("Vertical");
+        if (indexItemSeleccionado >= inventory.items.Count) indexItemSeleccionado = 0;
+        if (inventory.items.Count == 0)
+        {
+            imagenCanvas.sprite = empty;
+        }
+        else
+        {
+            imagenCanvas.sprite = inventory.items[indexItemSeleccionado].itemImage;
+        }
+        if (Input.GetKeyDown(KeyCode.Plus))
+        {
+            indexItemSeleccionado++;
+        }
+
+        if (Input.GetKeyDown(KeyCode.U) && inventory.items.Count > 0)
+        {
+            /* Vector2 projDirection = Vector2.down;
+            Vector3 offset = new(0f, 2.5f, 1.8f);
+            if (Mathf.Abs(xInput) > Mathf.Abs(yInput))
+            {
+                if (xInput > 0)
+                {
+                    offset = new(2.5f, 0f, 1.8f);
+                    projDirection = Vector2.right;
+                }
+                else if (xInput < 0)
+                {
+                    offset = new(-2.5f, 0f, 1.8f);
+                    projDirection = Vector2.left;
+                }
+            }
+            else
+            {
+                if (yInput > 0)
+                {
+                    offset = new(0f, 2.5f, 1.8f);
+                    projDirection = Vector2.up;
+                }
+                else if (yInput < 0)
+                {
+                    offset = new(0f, -2.5f, 1.8f);
+                    projDirection = Vector2.down;
+                }
+            }
+            */
+            Vector3 offset = new(1.5f, 1.5f, 1.5f);
+            offset += gameObject.transform.position;
+            inventory.DropItem(indexItemSeleccionado, offset);
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && inventory.items.Count > 0)
+        {
+
+            switch (inventory.items[indexItemSeleccionado].itemName)
+            {
+                case "Pocion Curacion":
+                    if ((GetComponent<PlayerHealth>().currentHealth + (int)(GetComponent<PlayerHealth>().maxHealth * .25f)) <= GetComponent<PlayerHealth>().maxHealth)
+                    {
+                        GetComponent<PlayerHealth>().currentHealth += (int)(GetComponent<PlayerHealth>().maxHealth * .25f);
+                        GetComponent<PlayerHealth>().healthBar.SetHealth(GetComponent<PlayerHealth>().currentHealth);
+                        inventory.UseItem(indexItemSeleccionado);
+                    }
+                    break;
+
+                case "Pocion Magia":
+                    if ((GetComponent<UIController>().currentMagic + (int)(GetComponent<UIController>().maxMagic * .25f)) <= GetComponent<UIController>().maxMagic)
+                    {
+                        GetComponent<UIController>().currentMagic += (int)(GetComponent<UIController>().maxMagic * .3f);
+                        GetComponent<UIController>().magicBar.SetMagic(GetComponent<UIController>().currentMagic);
+                        GetComponent<UIController>().magicBar.UpdateText(GetComponent<UIController>().currentMagic);
+                        inventory.UseItem(indexItemSeleccionado);
+                    }
+                    break;
+                case "Bomba":
+                    Vector3 offset = new(1.5f, 1.5f, 1.5f);
+                    offset += gameObject.transform.position;
+                    Instantiate(inventory.items[indexItemSeleccionado].prefabs[1], offset, Quaternion.identity);
+                    inventory.UseItem(indexItemSeleccionado);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+}

@@ -24,17 +24,15 @@ public class ObjectDeteccion : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player"))
+        if ((other.CompareTag("Player") && this.CompareTag("Orbe")) || (other.CompareTag("Player") && other.GetComponent<InventoryController>().inventory.items.Count < other.GetComponent<InventoryController>().inventory.maxItems))
         {
             jugador = other.transform;
+            Invoke("stopFollowing", 0.4f);
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void stopFollowing()
     {
-        if (other.CompareTag("Player"))
-        {
-            jugador = null;
-        }
+        jugador = null;
     }
 }

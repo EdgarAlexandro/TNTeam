@@ -9,6 +9,11 @@ TagManager:
   - Llave
   - Enemy
   - Spawner
+  - Special
+  - Bomba
+  - Pocion Curacion
+  - Pocion Magia
+  - Pocion Revivir
   layers:
   - Default
   - TransparentFX

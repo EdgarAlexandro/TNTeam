@@ -9,6 +9,8 @@ TagManager:
   - Llave
   - Enemy
   - Spawner
+  - Special
+  - Joker
   layers:
   - Default
   - TransparentFX

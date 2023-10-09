@@ -22,18 +22,27 @@ public class SpawnerScript : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        spawnPoint = gameObject.transform;
+        string spawnerIdentifier = gameObject.name;
 
-        for (int i = 0; i < spawnPoints.Length; i++)
+        if (DestructionManager.Instance.IsDestroyed(spawnerIdentifier))
         {
-            Instantiate(enemyPrefab, spawnPoints[i].transform.position, Quaternion.identity);
+            Destroy(gameObject);
         }
+        else
+        {
+            spawnPoint = gameObject.transform;
 
-        timer = Time.time + 7.0f;
-        spawnHealth = spawnMaxHealth;
-        sprite = GetComponent<SpriteRenderer>();
+            for (int i = 0; i < spawnPoints.Length; i++)
+            {
+                Instantiate(enemyPrefab, spawnPoints[i].transform.position, Quaternion.identity);
+            }
+
+            timer = Time.time + 7.0f;
+            spawnHealth = spawnMaxHealth;
+            sprite = GetComponent<SpriteRenderer>();
+        }
+        
     }
-
 
     // Update is called once per frame
     void Update()
@@ -52,6 +61,8 @@ public class SpawnerScript : MonoBehaviour
 
         if (spawnHealth <= 0)
         {
+            string spawnerIdentifier = gameObject.name;
+            DestructionManager.Instance.MarkAsDestroyed(spawnerIdentifier);
             Destroy(gameObject);
             GameObject selectedPrefab = objectsPrefabs[0];
             Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);

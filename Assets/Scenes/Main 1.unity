@@ -156,9 +156,6 @@ MonoBehaviour:
   - {fileID: 3497544176364357381, guid: d321309feaec54c71a2e7c22a95f9c58, type: 3}
   - {fileID: 7752539849509853401, guid: 6ef104fc49416403f9cde97f3f2481dd, type: 3}
   - {fileID: 5683834370789232956, guid: aec395562e4b845cc8a4bc7d52136192, type: 3}
-  orbPrefab: {fileID: 3497544176364357381, guid: d321309feaec54c71a2e7c22a95f9c58, type: 3}
-  keyPrefab: {fileID: 7752539849509853401, guid: 6ef104fc49416403f9cde97f3f2481dd, type: 3}
-  jokerPrefab: {fileID: 5683834370789232956, guid: aec395562e4b845cc8a4bc7d52136192, type: 3}
 --- !u!4 &22153392
 Transform:
   m_ObjectHideFlags: 0
@@ -5464,7 +5461,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7552174801492835913, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7552174801492835915, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
       propertyPath: m_RootOrder

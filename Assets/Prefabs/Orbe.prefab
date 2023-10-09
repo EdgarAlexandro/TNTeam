@@ -65,6 +65,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   rig: {fileID: 3497544176364357497}
   velocidadMovimiento: 80
+  orbPrefab: {fileID: 3497544176364357381}
+  keyPrefab: {fileID: 7752539849509853401, guid: 6ef104fc49416403f9cde97f3f2481dd, type: 3}
 --- !u!50 &3497544176364357497
 Rigidbody2D:
   serializedVersion: 4

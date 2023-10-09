@@ -14,6 +14,7 @@ TagManager:
   - Pocion Curacion
   - Pocion Magia
   - Pocion Revivir
+  - Joker
   layers:
   - Default
   - TransparentFX

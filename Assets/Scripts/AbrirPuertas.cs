@@ -4,47 +4,41 @@ using UnityEngine;
 
 public class AbrirPuertas : MonoBehaviour
 {
-
     public int neededKeys;
     //public GameObject sceneTransitionPrefab;
     private SpriteRenderer sprite;
-
+    private PersistenceManager pm;
+    
 
     void Start()
     {
+        pm = PersistenceManager.Instance;
         sprite = GetComponent<SpriteRenderer>();
-    }
-
-    public void OpenDoor(int keyAmount)
-    {
-        if(keyAmount == neededKeys)
+        // If player has the amount of needed keys, perform logic for this case
+        if(pm.CurrentKeys == neededKeys)
         {
-            // Instantiate the scene transition prefab
-            //Instantiate(sceneTransitionPrefab, transform.position, Quaternion.identity);
-
-            // Disable the collider of the door
-            GetComponent<Collider2D>().enabled = false;
-
-            //Set color of door to black to indicate that its open
-            sprite.color = new Color(0, 0, 0, 255);
+            OnNeededKeysCollected();
         }
+
     }
-    
 
-
-
-    /*
-    private void OnTriggerEnter2D(Collider2D collision)
+    void Update()
     {
-        if (collision.CompareTag("Player"))
+        // If player has the amount of needed keys, perform logic for this case
+        if (pm.CurrentKeys == neededKeys)
         {
-            if (collision.gameObject.GetComponent<UIController>().currentKeys >= (1))
-            {
-                Destroy(gameObject);
-                collision.gameObject.GetComponent<UIController>().increaseKeyCount(-1);
-            }
+            OnNeededKeysCollected();
         }
+
     }
-    */
+    // Logic when amount of needed keys collected
+    void OnNeededKeysCollected()
+    {
+        // Disable the collider of the door
+        GetComponent<Collider2D>().enabled = false;
+
+        //Set color of door to black to indicate that its open
+        sprite.color = new Color(0, 0, 0, 255);
+    }
 
 }

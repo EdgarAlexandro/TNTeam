@@ -11,7 +11,12 @@ public class InventoryController : MonoBehaviour
     public int indexItemSeleccionado = 0;
     public Image imagenCanvas;
     public Sprite empty;
+    private PersistenceManager pm;
 
+    private void Start()
+    {
+        pm = PersistenceManager.Instance;
+    }
     private void Update()
     {
         float xInput = Input.GetAxis("Horizontal");
@@ -72,20 +77,20 @@ public class InventoryController : MonoBehaviour
             switch (inventory.items[indexItemSeleccionado].itemName)
             {
                 case "Pocion Curacion":
-                    if ((GetComponent<PlayerHealth>().currentHealth + (int)(GetComponent<PlayerHealth>().maxHealth * .25f)) <= GetComponent<PlayerHealth>().maxHealth)
+                    if ((pm.CurrentHealth + pm.MaxHealth * .25f) <= pm.MaxHealth)
                     {
-                        GetComponent<PlayerHealth>().currentHealth += (int)(GetComponent<PlayerHealth>().maxHealth * .25f);
-                        GetComponent<PlayerHealth>().healthBar.SetHealth(GetComponent<PlayerHealth>().currentHealth);
+                        pm.CurrentHealth += (int)(pm.MaxHealth * .25f);
+                        GetComponent<PlayerHealth>().healthBar.SetHealth(pm.CurrentHealth);
                         inventory.UseItem(indexItemSeleccionado);
                     }
                     break;
 
                 case "Pocion Magia":
-                    if ((GetComponent<UIController>().currentMagic + (int)(GetComponent<UIController>().maxMagic * .25f)) <= GetComponent<UIController>().maxMagic)
+                    if ((pm.CurrentMagic + pm.MaxMagic * .25f) <= pm.MaxMagic)
                     {
-                        GetComponent<UIController>().currentMagic += (int)(GetComponent<UIController>().maxMagic * .3f);
-                        GetComponent<UIController>().magicBar.SetMagic(GetComponent<UIController>().currentMagic);
-                        GetComponent<UIController>().magicBar.UpdateText(GetComponent<UIController>().currentMagic);
+                        pm.CurrentMagic += (int)(pm.MaxMagic * .3f);
+                        GetComponent<UIController>().magicBar.SetMagic(pm.CurrentMagic);
+                        GetComponent<UIController>().magicBar.UpdateText(pm.CurrentMagic);
                         inventory.UseItem(indexItemSeleccionado);
                     }
                     break;

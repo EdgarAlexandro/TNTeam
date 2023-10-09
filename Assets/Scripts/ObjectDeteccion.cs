@@ -37,24 +37,19 @@ public class ObjectDeteccion : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        // Checks if the object that entered the trigger is a player
-        if (other.CompareTag("Player"))
+        if ((other.CompareTag("Player") && this.CompareTag("Orbe")) || (other.CompareTag("Player") && other.GetComponent<InventoryController>().inventory.items.Count < other.GetComponent<InventoryController>().inventory.maxItems))
         {
             // Sets the variable as the object that entered the trigger's transform
             jugador = other.transform;
+            Invoke("stopFollowing", 0.4f);
             // Remove the objects position from the drop position list located in the drop manager
             drm.RemoveDropPosition(objectPosition, currentSceneName, tag);
         }
     }
 
-    void OnTriggerExit2D(Collider2D other)
+    void stopFollowing()
     {
-        // Checks if the object that entered the trigger is a player
-        if (other.CompareTag("Player"))
-        {
-            // Sets the variable as null
-            jugador = null;
-        }
+        jugador = null;
     }
 
 }

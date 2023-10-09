@@ -12,6 +12,7 @@ public class HeartDagger : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
         if (other.CompareTag("Caja"))
         {
+            string boxIdentifier = other.gameObject.name;
             List<string> availableScenes = JokerSpawn.Instance.availableScenes;
             if (availableScenes.Contains(currentSceneName))
             {
@@ -34,7 +35,7 @@ public class HeartDagger : MonoBehaviour
             {
                 other.GetComponent<CajaRotaSpawn>().SpawnObject();
             }
-
+            DestructionManager.Instance.MarkAsDestroyed(boxIdentifier);
             Destroy(other.gameObject);
             //this.velocity = projDirection * speed;
         }

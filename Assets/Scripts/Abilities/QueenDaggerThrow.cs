@@ -6,7 +6,7 @@ public class QueenDaggerThrow : MonoBehaviour
 {
     public Rigidbody2D dagger;
     public float speed = 3;
-    public int neededMagic = 3;
+    public int neededMagic = 10;
     private Vector2 projDirection = Vector2.down;
     public UIController uiController;
 
@@ -50,7 +50,7 @@ public class QueenDaggerThrow : MonoBehaviour
         }
 
         if (Input.GetKeyDown(KeyCode.R)){
-            if (uiController.currentMagic >= neededMagic)
+            if (PersistenceManager.Instance.CurrentMagic >= neededMagic)
             {
                 Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
                 daggerInstance.velocity = projDirection * speed;

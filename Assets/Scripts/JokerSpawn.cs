@@ -10,8 +10,8 @@ public class JokerSpawn : MonoBehaviour
 
     public List<string> availableScenes = new List<string>();
     public List<string> allScenePaths = new List<string>();
+    
     // Start is called before the first frame update
-
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -30,23 +30,7 @@ public class JokerSpawn : MonoBehaviour
     {
         // Randomly select available scenes
 
-        // Add scene names to the availableScenes list based on your selection criteria
-        // For example:
-        // availableScenes.Add("Scene1");
-        // availableScenes.Add("Scene2");
-
         int numberOfScenesToEnable = 3;
-
-        /*
-        for (int i = 0; i < numberOfScenesToEnable; i++)
-        {
-            int randomSceneIndex = Random.Range(0, SceneManager.sceneCountInBuildSettings);
-            string sceneName = SceneUtility.GetScenePathByBuildIndex(randomSceneIndex);
-            availableScenes.Add(sceneName);
-            string sceneNameFromPath = System.IO.Path.GetFileNameWithoutExtension(sceneName);
-            Debug.Log("Available scene " + sceneNameFromPath);
-        }
-        */
 
         int totalScenes = SceneManager.sceneCountInBuildSettings;
 
@@ -75,8 +59,6 @@ public class JokerSpawn : MonoBehaviour
 
             Debug.Log("Available scene " + sceneName);
         }
-
-        //Debug.Log(string.Join(", ", availableScenes));
     }
 
     public void RemoveScene(string sceneName)

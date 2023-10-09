@@ -7,24 +7,14 @@ public class PersistenceManager : MonoBehaviour
     private static PersistenceManager instance;
     public static PersistenceManager Instance { get { return instance; } }
 
-    //dpublic HealthBar healthBar;
-    public HealthBar healthBarPrefab;
-    public Canvas canvasPrefab;
-    private HealthBar healthBar;
+    public int CurrentHealth;
+    public int MaxHealth;
+    public int MaxMagic;
+    public int CurrentMagic;
+    public int MaxKeys;
+    public int CurrentKeys;
 
-
-    // Add variables for any other elements you want to persist here
-
-    void Start()
-    {
-        Canvas canvas = Instantiate(canvasPrefab);
-        canvas.renderMode = RenderMode.WorldSpace;
-        healthBar = Instantiate(healthBarPrefab);
-        healthBar.transform.SetParent(canvas.transform);
-    }
-
-    
-
+    // Singleton
     private void Awake()
     {
         if (instance != null && instance != this)
@@ -38,15 +28,4 @@ public class PersistenceManager : MonoBehaviour
             DontDestroyOnLoad(this.gameObject);
         }
     }
-
-    /*
-    public void AlterHealthBar()
-    {
-        //HealthBar healthBar = Instantiate(healthBarPrefab, parentTransform);
-        //return healthBar;
-        //canvas.transform.SetParent(parentTransform);
-        //int currentHealth = PlayerHealth.Instance.currentHealth;
-        healthBar.SetHealth(currentHealth);
-    }
-    */
 }

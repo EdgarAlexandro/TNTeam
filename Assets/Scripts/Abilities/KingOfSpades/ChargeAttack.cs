@@ -22,6 +22,19 @@ public class ChargeAttack : MonoBehaviour
             float timeDifference = released - pressed;
             Debug.Log("Time between press and release: " + timeDifference + " seconds");
             keyPressed = false;
+            /*
+            if (timeDifference > 2)
+            {
+                hacer dano 100
+            }
+            else if (timeDifference > 4)
+            {
+                hacer dano 150
+            }
+            else if (timeDifference > 6)
+            {
+                hacer dano 200
+            }*/
         }
     }
 }

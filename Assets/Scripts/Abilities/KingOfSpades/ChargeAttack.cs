@@ -6,8 +6,18 @@ public class ChargeAttack : MonoBehaviour
 {
     private float pressed;
     private float released;
-    bool keyPressed;
+    Animator animatorController;
+    public bool keyPressed;
+    public int chargeDmg = 1;
+
+    public bool isChargeAttacking = false;
+    //bool isAttacking = false;
     // Update is called once per frame
+
+    void Start()
+    {
+        animatorController = GetComponent<Animator>();
+    }
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Mouse0) && !keyPressed)
@@ -20,21 +30,31 @@ public class ChargeAttack : MonoBehaviour
         {
             released = Time.time;
             float timeDifference = released - pressed;
-            Debug.Log("Time between press and release: " + timeDifference + " seconds");
             keyPressed = false;
-            /*
-            if (timeDifference > 2)
+            Debug.Log("Time between press and release: " + timeDifference + " seconds");
+            GetComponent<PlayerControl>().isAttacking = true;
+            animatorController.SetBool("isAttacking", true);
+            //isChargeAttacking = true;
+
+            
+            if (timeDifference > 6f)
             {
-                hacer dano 100
+                isChargeAttacking = true;
+                chargeDmg = 6;
+                //hacer dano 100
             }
-            else if (timeDifference > 4)
+            else if (timeDifference > 4f)
             {
-                hacer dano 150
+                isChargeAttacking = true;
+                chargeDmg = 4;
+                //hacer dano 150
             }
-            else if (timeDifference > 6)
+            else if (timeDifference > 2f)
             {
-                hacer dano 200
-            }*/
+                isChargeAttacking = true;
+                chargeDmg = 2;
+                //hacer dano 200
+            }
         }
     }
 }

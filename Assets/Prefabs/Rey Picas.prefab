@@ -142,6 +142,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 49f039fdcf7a34e60b60cd230748d5af, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 1
+  knockback: 5
 --- !u!1 &8371471303355500783
 GameObject:
   m_ObjectHideFlags: 0
@@ -158,6 +160,7 @@ GameObject:
   - component: {fileID: 8371471303355500782}
   - component: {fileID: 4465166623131066403}
   - component: {fileID: 1057821071967176720}
+  - component: {fileID: 100074162588072859}
   m_Layer: 0
   m_Name: Rey Picas
   m_TagString: Player
@@ -317,6 +320,7 @@ MonoBehaviour:
   moveSpeed: 3
   rig: {fileID: 8371471303355500778}
   startingPosition: {fileID: 0}
+  isAttacking: 0
 --- !u!114 &4465166623131066403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -329,8 +333,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5b1c8a6881e0649a267639f1fb53ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHealth: 20
-  currentHealth: 0
   healthBar: {fileID: 0}
 --- !u!114 &1057821071967176720
 MonoBehaviour:
@@ -347,3 +349,15 @@ MonoBehaviour:
   maxMagic: 100
   currentMagic: 0
   magicBar: {fileID: 0}
+--- !u!114 &100074162588072859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8371471303355500783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6ddd5e78674404d8d98e61afa1af96ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

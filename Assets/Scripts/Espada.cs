@@ -62,8 +62,20 @@ public class Espada : MonoBehaviour
         {
             Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
             other.gameObject.TryGetComponent<EnemyAi>(out EnemyAi enemyComponent);
-            // Deals damage to the enemy and applys a knockback to it
-            enemyComponent.OnHit(damage, knockbackDirection, knockback);
+
+            if (transform.parent.TryGetComponent<ChargeAttack>(out ChargeAttack chargeA)){
+                if (chargeA.isChargeAttacking){
+                    enemyComponent.OnHit(chargeA.chargeDmg, knockbackDirection, knockback * 2);
+                    //Debug.Log("Damage dealt: " + chargeA.chargeDmg.ToString());
+                    //Debug.Log(chargeA.msg);
+                }
+            } 
+            else
+            {
+                // Deals damage to the enemy and applys a knockback to it
+                enemyComponent.OnHit(damage, knockbackDirection, knockback);
+            }
+            
         }
 
         // Check if the object the sword hit is a spawner

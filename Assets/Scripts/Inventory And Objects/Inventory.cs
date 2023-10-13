@@ -6,11 +6,19 @@ using UnityEngine;
 public class Inventory : ScriptableObject
 {
     public int maxItems = 10;
+    public int maxCards = 6;
     public List<ItemData> items = new();
+    public List<CardData> cards = new();
 
     public bool AddItem(ItemData itemToAdd)
     {
         items.Add(itemToAdd);
+        return true;
+    }
+
+    public bool AddCard(CardData cardToAdd)
+    {
+        cards.Add(cardToAdd);
         return true;
     }
 
@@ -25,5 +33,10 @@ public class Inventory : ScriptableObject
     {
         items.RemoveAt(indexOfItem);
         return true;
+    }
+
+    public void RemoveAllItems()
+    {
+        items.Clear();
     }
 }

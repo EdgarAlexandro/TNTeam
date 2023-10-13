@@ -9,13 +9,14 @@ public class InventoryController : MonoBehaviour
     public Inventory inventory;
     public ItemData bomba, PC, PR, PM;
     public int indexItemSeleccionado = 0;
-    public Image imagenCanvas;
+    private GameObject imagenCanvas;
     public Sprite empty;
     private PersistenceManager pm;
 
     private void Start()
     {
         pm = PersistenceManager.Instance;
+        imagenCanvas = GameObject.Find("ItemImageSpace");
     }
     private void Update()
     {
@@ -24,11 +25,11 @@ public class InventoryController : MonoBehaviour
         if (indexItemSeleccionado >= inventory.items.Count) indexItemSeleccionado = 0;
         if (inventory.items.Count == 0)
         {
-            imagenCanvas.sprite = empty;
+            imagenCanvas.GetComponent<Image>().sprite = empty;
         }
         else
         {
-            imagenCanvas.sprite = inventory.items[indexItemSeleccionado].itemImage;
+            imagenCanvas.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
         }
         if (Input.GetKeyDown(KeyCode.Plus))
         {

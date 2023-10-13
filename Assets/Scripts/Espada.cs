@@ -2,8 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class Espada : MonoBehaviour
+public class Espada : MonoBehaviourPunCallbacks
 {
     public int damage = 1;
     public float knockback = 5f;
@@ -23,7 +25,7 @@ public class Espada : MonoBehaviour
         string currentSceneName = SceneManager.GetActiveScene().name;
       
         // Check if the object the sword hit is a box
-        if (other.CompareTag("Caja") && this.GetComponentInParent<Animator>().GetBool("isAttacking"))
+        if (other.CompareTag("Caja") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && photonView.IsMine)
         {
             List<string> availableScenes = jk.availableScenes;
             string boxIdentifier = other.gameObject.name;
@@ -54,7 +56,16 @@ public class Espada : MonoBehaviour
 
             // Marks the box as destroyed
             dm.MarkAsDestroyed(boxIdentifier);
-            Destroy(other.gameObject);
+            //PhotonNetwork.Destroy(other.gameObject);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.Destroy(other.gameObject);
+            }
+            else
+            {
+                other.GetComponent<CajaRotaSpawn>().photonView.RPC("DestroyBox", RpcTarget.MasterClient);
+            }
+            
         }
 
         // Check if the object the sword hit is an enemy
@@ -62,24 +73,24 @@ public class Espada : MonoBehaviour
         {
             Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
             other.gameObject.TryGetComponent<EnemyAi>(out EnemyAi enemyComponent);
-
-            if (transform.parent.TryGetComponent<ChargeAttack>(out ChargeAttack chargeA)){
-                if (chargeA.isChargeAttacking){
+            if (transform.parent.TryGetComponent<ChargeAttack>(out ChargeAttack chargeA))
+            {
+                if (chargeA.isChargeAttacking)
+                {
                     enemyComponent.OnHit(chargeA.chargeDmg, knockbackDirection, knockback * 2);
                     //Debug.Log("Damage dealt: " + chargeA.chargeDmg.ToString());
                     //Debug.Log(chargeA.msg);
                 }
-            } 
+            }
             else
             {
                 // Deals damage to the enemy and applys a knockback to it
                 enemyComponent.OnHit(damage, knockbackDirection, knockback);
             }
-            
         }
 
         // Check if the object the sword hit is a spawner
-        if (other.gameObject.tag == "Spawner" && this.GetComponentInParent<Animator>().GetBool("isAttacking"))
+        if (other.gameObject.tag == "Spawner" && this.GetComponentInParent<Animator>().GetBool("isAttacking") && photonView.IsMine)
         {
             other.gameObject.TryGetComponent<SpawnerScript>(out SpawnerScript spawnerComponent);
             // Deals damage to the spawner

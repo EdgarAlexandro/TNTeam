@@ -1,12 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class EnemyAi : MonoBehaviour
+public class EnemyAi : MonoBehaviourPunCallbacks
 {
-    private float range;
     private Rigidbody2D rb;
-    public Transform target;
+    public GameObject[] targets;
+    public GameObject currentTarget;
     private bool targetCollision = false;
     public float speed = 2.0f;
     private float minDistance = 5.0f;
@@ -18,30 +20,33 @@ public class EnemyAi : MonoBehaviour
 
     void Start()
     {
-        target = GameObject.FindWithTag("Player").transform;
+        targets = GameObject.FindGameObjectsWithTag("Player");
         animatorController = GetComponent<Animator>();
-        Collider myCollider = GetComponent<Collider>();
         health = maxHealth;
         sprite = GetComponent<SpriteRenderer>();
     }
 
     void Update()
     {
-        if (target == null)
+        if (Vector2.Distance(transform.position, targets[0].transform.position) < minDistance) currentTarget = targets[0];
+        else if ((!PhotonNetwork.OfflineMode)&&(Vector2.Distance(transform.position, targets[1].transform.position) < minDistance)) currentTarget = targets[1];
+        else currentTarget = null;
+
+        if (currentTarget == null)
         {
             UpdateAnimation(Vector3.zero);
+            targets = GameObject.FindGameObjectsWithTag("Player");
             return;
         }
-        range = Vector2.Distance(transform.position, target.position);
-        if (range < minDistance)
+        if (currentTarget != null)
         {
             if (!targetCollision)
             {
-                Vector3 moveDirection = (target.position - transform.position).normalized;
+                Vector3 moveDirection = (currentTarget.transform.position - transform.position).normalized;
 
                 UpdateAnimation(moveDirection);
 
-                transform.LookAt(target.position);
+                transform.LookAt(currentTarget.transform.position);
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
             }
@@ -59,7 +64,6 @@ public class EnemyAi : MonoBehaviour
         {
             Vector3 triggerPosition = transform.position;
             Vector3 contactPoint = triggerPosition;
-            //Vector3 contactPoint = other.contacts[0].point;
             Vector3 center = other.gameObject.GetComponent<Collider2D>().bounds.center;
 
             targetCollision = true;

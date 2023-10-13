@@ -10,6 +10,14 @@ public class MonsterDamage : MonoBehaviour
     public float knockback;
     private IEnumerator coroutine;
 
+    public void Update()
+    {
+        if (GetComponent<EnemyAi>().currentTarget != null)
+        {
+            playerHealth = GetComponent<EnemyAi>().currentTarget.GetComponent<PlayerHealth>();
+        }
+    }
+
     private IEnumerator applyDamage()
     {
         yield return new WaitForSeconds(0.0f);

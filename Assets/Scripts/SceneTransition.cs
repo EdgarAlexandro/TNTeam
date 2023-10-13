@@ -2,7 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class SceneTransition : MonoBehaviour
+using Photon.Pun;
+using Photon.Realtime;
+
+public class SceneTransition : MonoBehaviourPun
 {
     public string sceneToLoad;
     public Vector2 playerPosition;
@@ -13,7 +16,8 @@ public class SceneTransition : MonoBehaviour
         if(other.gameObject.CompareTag("Player"))
         {
             playerStorage.initialValue = playerPosition;
-            SceneManager.LoadScene(sceneToLoad);
+            NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
+            //SceneManager.LoadScene(sceneToLoad);
         }
     }
 }

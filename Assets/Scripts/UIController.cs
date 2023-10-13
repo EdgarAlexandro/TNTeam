@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class UIController : MonoBehaviour
-{   
+{
     //public AbrirPuertas abrirPuertas;
     public Barradellave keyBar;
     public MagicBar magicBar;
@@ -12,6 +12,8 @@ public class UIController : MonoBehaviour
     void Start()
     {
         pm = PersistenceManager.Instance;
+        //OJO
+        keyBar = GameObject.Find("Contador de Llave").GetComponent<Barradellave>();
         keyBar.SetMaxKeys(pm.MaxKeys);
         keyBar.SetKeys(pm.CurrentKeys);
         keyBar.UpdateText(pm.CurrentKeys);
@@ -25,7 +27,7 @@ public class UIController : MonoBehaviour
         if (pm.CurrentMagic < pm.MaxMagic && pm.CurrentMagic + value < pm.MaxMagic)
         {
             pm.CurrentMagic += value;
-        } 
+        }
         else
         {
             pm.CurrentMagic = pm.MaxMagic;
@@ -53,6 +55,6 @@ public class UIController : MonoBehaviour
             keyBar.SetKeys(pm.CurrentKeys);
             keyBar.UpdateText(pm.CurrentKeys);
         }
-       
+
     }
 }

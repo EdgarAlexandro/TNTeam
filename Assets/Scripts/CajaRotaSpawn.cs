@@ -1,37 +1,38 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
 [System.Serializable]
 public class SpawnableObject
 {
     public GameObject prefab;
     public float probability;
+    public string itemName;
 }
 
-public class CajaRotaSpawn : MonoBehaviour
+public class CajaRotaSpawn : MonoBehaviourPunCallbacks
 {
     public List<SpawnableObject> objectsPrefabs = new();
     public Transform spawnPoint;
     public GameObject joker;
-    private DestructionManager dm;
 
     void Start()
     {
-        dm = DestructionManager.Instance;
         spawnPoint = gameObject.transform;
-        string boxIdentifier = gameObject.name;
+    }
 
-        // Check if box is supposed to be destroyed
-        if (dm.IsDestroyed(boxIdentifier))
-        {
-            Destroy(gameObject);
-        }
+    [PunRPC]
+    public void DestroyBox()
+    {
+        PhotonNetwork.Destroy(this.gameObject);
     }
 
     // Spawn an object from the list of prefabs
     public void SpawnObject()
     {
+        //photonView.RPC("spawnObjectPhoton", RpcTarget.All);
         if (objectsPrefabs.Count > 0 && spawnPoint != null)
         {
             float totalProbability = 0f;
@@ -44,8 +45,8 @@ public class CajaRotaSpawn : MonoBehaviour
             {
                 if (randomValue <= spawnableObject.probability)
                 {
-                    Instantiate(spawnableObject.prefab, spawnPoint.position, Quaternion.identity);
-                    break; 
+                    PhotonNetwork.Instantiate(spawnableObject.itemName, spawnPoint.position, Quaternion.identity);
+                    break;
                 }
                 randomValue -= spawnableObject.probability;
             }

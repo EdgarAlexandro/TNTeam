@@ -29,10 +29,10 @@ public class MenuInicial : MonoBehaviour
 
     public void ChangeVolume()
     {
-        // Ajustar el volumen de la música de fondo según el musicSlider
+        // Ajustar el volumen de la m?sica de fondo seg?n el musicSlider
         backgroundMusic.volume = musicSlider.value;
 
-        // Ajustar el volumen del sonido del botón según el sfxSlider
+        // Ajustar el volumen del sonido del bot?n seg?n el sfxSlider
         buttonClickSound.volume = sfxSlider.value;
 
         Save();
@@ -43,7 +43,7 @@ public class MenuInicial : MonoBehaviour
         musicSlider.value = PlayerPrefs.GetFloat("musicVolume", 1f);
         sfxSlider.value = PlayerPrefs.GetFloat("sfxVolume", 1f);
 
-        // Asegúrate de que los valores iniciales de los AudioSource coincidan con los valores de los deslizadores.
+        // Aseg?rate de que los valores iniciales de los AudioSource coincidan con los valores de los deslizadores.
         backgroundMusic.volume = musicSlider.value;
         buttonClickSound.volume = sfxSlider.value;
     }
@@ -52,15 +52,6 @@ public class MenuInicial : MonoBehaviour
     {
         PlayerPrefs.SetFloat("musicVolume", musicSlider.value);
         PlayerPrefs.SetFloat("sfxVolume", sfxSlider.value);
-    }
-
-    public void NewGame()
-    {
-        SceneManager.LoadScene(14);
-    }
-    public void ContinueGame()
-    {
-        SceneManager.LoadScene(8);
     }
 
     public void Exit()

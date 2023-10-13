@@ -46,3 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CurrentHealth: 20
   MaxHealth: 20
+  MaxMagic: 100
+  CurrentMagic: 0
+  MaxKeys: 2
+  CurrentKeys: 0

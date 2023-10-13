@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class JokerCards : MonoBehaviour
 {
+    public GameObject cardMenu; 
     private Vector2 objectPosition;
     private string currentSceneName;
     private DropManager drm;
@@ -18,6 +19,15 @@ public class JokerCards : MonoBehaviour
         tag = gameObject.tag;
 
         // When the object appears, add its position to the drop position list located in the drop manager
-        drm.AddDropPosition(objectPosition, currentSceneName, tag);
+        //drm.AddDropPosition(objectPosition, currentSceneName, tag);
+    }
+
+    void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.tag == "Player")
+        {
+            Debug.Log(gameObject.name);
+            cardMenu.SetActive(true);
+        }
     }
 }

@@ -30,7 +30,7 @@ public class InventoryController : MonoBehaviour
         {
             imagenCanvas.sprite = inventory.items[indexItemSeleccionado].itemImage;
         }
-        if (Input.GetKeyDown(KeyCode.Plus))
+        if (Input.GetKeyDown(KeyCode.O))
         {
             indexItemSeleccionado++;
         }
@@ -71,7 +71,7 @@ public class InventoryController : MonoBehaviour
             inventory.DropItem(indexItemSeleccionado, offset);
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && inventory.items.Count > 0)
+        if (Input.GetKeyDown(KeyCode.P) && inventory.items.Count > 0)
         {
 
             switch (inventory.items[indexItemSeleccionado].itemName)

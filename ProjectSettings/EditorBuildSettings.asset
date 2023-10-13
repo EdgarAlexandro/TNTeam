@@ -47,7 +47,4 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Parte Norte.unity
     guid: 74ce4ab7c48873e4797d070c6133b012
-  - enabled: 1
-    path: Assets/Scenes/CutsceneIntro.unity
-    guid: 60a418c889ab93549b854c1ea4e4fa58
   m_configObjects: {}

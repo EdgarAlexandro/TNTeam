@@ -10,6 +10,7 @@ public class ButtonController : MonoBehaviour
     private PersistenceManager pm;
     private DestructionManager dm;
     private DropManager drm;
+    public Inventory inventory;
 
     [SerializeField] Slider musicSlider;
     [SerializeField] Slider sfxSlider;
@@ -57,5 +58,6 @@ public class ButtonController : MonoBehaviour
         pm.CurrentKeys = 0;
         dm.RemoveFromDestroyed();
         drm.RemoveAllDropPositions();
+
     }
 }

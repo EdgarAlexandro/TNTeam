@@ -54,11 +54,7 @@ public class MenuInicial : MonoBehaviour
         PlayerPrefs.SetFloat("sfxVolume", sfxSlider.value);
     }
 
-    public void NewGame()
-    {
-        SceneManager.LoadScene(14);
-    }
-    public void ContinueGame()
+    public void Play()
     {
         SceneManager.LoadScene(8);
     }

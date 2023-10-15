@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb766eb706e5f4334b3d1d27700f3e67, type: 3}
+  m_Name: Pocion Revivir
+  m_EditorClassIdentifier: 
+  itemName: Pocion Revivir
+  prefabs:
+  - {fileID: 3549237752626050809, guid: 560ab70ddf7494a368696681b13d11c6, type: 3}
+  description: Revive
+  itemImage: {fileID: 21300000, guid: 9301f9cf59e5a4290811d63e667d3dc5, type: 3}

@@ -1,48 +1,58 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class SpawnerScript : MonoBehaviour
+public class SpawnerScript : MonoBehaviourPun
 {
-    public GameObject enemyPrefab;
-    private GameObject instantiatedPrefab;
+    public string enemyPrefabString;
+    public string keyPrefabString;
     public GameObject[] spawnPoints;
     private float timer;
-    private int spawnIndex = 0;
+    //private int spawnIndex = 0;
     public int spawnHealth;
     public int spawnMaxHealth;
     private SpriteRenderer sprite;
     public Transform spawnPoint;
-    public List<GameObject> objectsPrefabs = new List<GameObject>();
 
     public void SpawnEnemy()
     {
-        Instantiate(enemyPrefab, spawnPoints[spawnIndex % 3].transform.position, Quaternion.identity);
+        //PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[spawnIndex % 3].transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[Random.Range(0, 1)].transform.position, Quaternion.identity);
+    }
+    [PunRPC]
+    public void DestroySpawner()
+    {
+        PhotonNetwork.Destroy(gameObject);
     }
     // Start is called before the first frame update
     void Start()
     {
         spawnPoint = gameObject.transform;
-
+        /*
         for (int i = 0; i < spawnPoints.Length; i++)
         {
-            Instantiate(enemyPrefab, spawnPoints[i].transform.position, Quaternion.identity);
-        }
+            PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[i].transform.position, Quaternion.identity);
+        }*/
 
-        timer = Time.time + 7.0f;
+        //timer = Time.time + 7.0f;
         spawnHealth = spawnMaxHealth;
         sprite = GetComponent<SpriteRenderer>();
-    }
 
+    }
 
     // Update is called once per frame
     void Update()
     {
-        if(timer < Time.time)
+        if (PhotonNetwork.IsMasterClient)
         {
-            SpawnEnemy();
-            timer = Time.time + 4.0f;
-            spawnIndex++;
+            if (timer < Time.time)
+            {
+                timer = Time.time + 10.0f;
+                SpawnEnemy();
+                //spawnIndex++;
+            }
         }
     }
 
@@ -52,9 +62,12 @@ public class SpawnerScript : MonoBehaviour
 
         if (spawnHealth <= 0)
         {
-            Destroy(gameObject);
-            GameObject selectedPrefab = objectsPrefabs[0];
-            Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+            string spawnerIdentifier = gameObject.name;
+            DestructionManager.Instance.MarkAsDestroyed(spawnerIdentifier);
+            //PhotonNetwork.Destroy(gameObject);
+
+            SpawnKey();
+
         }
         else
         {
@@ -65,11 +78,9 @@ public class SpawnerScript : MonoBehaviour
 
     public void SpawnKey()
     {
-        if (objectsPrefabs.Count > 0 && spawnPoint != null)
-        {
-            GameObject selectedPrefab = objectsPrefabs[Random.Range(0, objectsPrefabs.Count)];
-            Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
-        }
+
+        PhotonNetwork.Instantiate(keyPrefabString, spawnPoint.position, Quaternion.identity);
+        photonView.RPC("DestroySpawner", RpcTarget.All);
     }
 
     private IEnumerator ReturnToNormalColor()

@@ -4,55 +4,58 @@ using UnityEngine;
 
 public class UIController : MonoBehaviour
 {
-    public int maxKeys;
-    public int currentKeys;
-    public Barradellave barradellave;
-    public AbrirPuertas abrirPuertas;
-    public int maxMagic;
-    public int currentMagic;
+    //public AbrirPuertas abrirPuertas;
+    public Barradellave keyBar;
     public MagicBar magicBar;
+    private PersistenceManager pm;
 
     void Start()
     {
-        barradellave.SetMaxKeys(maxKeys);
-        barradellave.UpdateText(currentKeys);
-        magicBar.SetMaxMagic(maxMagic);
-        magicBar.UpdateText(currentMagic);
+        pm = PersistenceManager.Instance;
+        //OJO
+        keyBar = GameObject.Find("Contador de Llave").GetComponent<Barradellave>();
+        magicBar = GameObject.Find("MagicBar").GetComponent<MagicBar>();
+        keyBar.SetMaxKeys(pm.MaxKeys);
+        keyBar.SetKeys(pm.CurrentKeys);
+        keyBar.UpdateText(pm.CurrentKeys);
+        magicBar.SetMaxMagic(pm.MaxMagic);
+        magicBar.SetMagic(pm.CurrentMagic);
+        magicBar.UpdateText(pm.CurrentMagic);
     }
+
     public void chargeMagicValue(int value)
     {
-        if (currentMagic < maxMagic)
+        if (pm.CurrentMagic < pm.MaxMagic && pm.CurrentMagic + value < pm.MaxMagic)
         {
-            currentMagic += value;
-        } 
+            pm.CurrentMagic += value;
+        }
         else
         {
-            currentMagic = maxMagic;
+            pm.CurrentMagic = pm.MaxMagic;
         }
-        magicBar.SetMagic(currentMagic);
-        magicBar.UpdateText(currentMagic);
+        magicBar.SetMagic(pm.CurrentMagic);
+        magicBar.UpdateText(pm.CurrentMagic);
     }
 
     public void loseMagicValue(int value)
     {
-        if (currentMagic > 0)
+        if (pm.CurrentMagic > 0)
         {
-            currentMagic -= value;
+            pm.CurrentMagic -= value;
         }
-        magicBar.SetMagic(currentMagic);
-        magicBar.UpdateText(currentMagic);
+        magicBar.SetMagic(pm.CurrentMagic);
+        magicBar.UpdateText(pm.CurrentMagic);
 
     }
 
     public void increaseKeyCount(int value)
     {
-        if (currentKeys < maxKeys)
+        if (pm.CurrentKeys < pm.MaxKeys)
         {
-            currentKeys += value;
-            barradellave.SetKeys(currentKeys);
-            barradellave.UpdateText(currentKeys);
-            abrirPuertas.OpenDoor(currentKeys);
+            pm.CurrentKeys += value;
+            keyBar.SetKeys(pm.CurrentKeys);
+            keyBar.UpdateText(pm.CurrentKeys);
         }
-       
+
     }
 }

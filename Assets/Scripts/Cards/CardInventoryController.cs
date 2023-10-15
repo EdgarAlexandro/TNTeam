@@ -1,0 +1,69 @@
+/* Function: Control the inventory, manage its display and player interaction 
+   Author: Daniel Degollado Rodríguez A008325555
+   Modification date: 14/10/2023 */
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.UI;
+public class CardInventoryController : MonoBehaviour
+{
+    public Inventory inventory;
+    public GameObject inventoryView;
+    public List<Button> cardDisplayButtons;
+    private List<CardData> inventoryCards;
+    private bool isCardInventoryActive;
+
+    // Start is called before the first frame update
+    void Start(){
+        isCardInventoryActive = false;
+        inventoryCards = new List<CardData>();
+        CardDisplay();
+    }
+
+    // Update is called once per frame
+    void Update(){
+        if (Input.GetKeyDown(KeyCode.C)){
+            if (!isCardInventoryActive){
+                isCardInventoryActive = true;
+                inventoryView.SetActive(true);
+            }
+            else{
+                inventoryView.SetActive(false);
+                isCardInventoryActive = false;
+            } 
+        }
+    }
+
+    // Display the selected cards inside the inventory
+    public void CardDisplay(){
+        // Clear the list used to display the cards so they dont appear duplicated in the inventory
+        inventoryCards.Clear();
+        foreach (CardData card in inventory.cards){
+            inventoryCards.Add(card);
+        }
+
+        for (int i = 0; i < inventoryCards.Count; i++){
+            // Change the image of the card to the front one
+            inventoryCards[i].prefabs[0].GetComponent<CardBehaviour>().SetCardFrontSprite();
+            // Get the prefab of the card
+            GameObject cardPrefab = inventoryCards[i].prefabs[0].gameObject;
+            // Instantiate the prefab
+            GameObject cardInstance = Instantiate(cardPrefab, cardDisplayButtons[i].transform.position, Quaternion.identity);
+            // Adjust the size of the card to the one of the button it's displayed on
+            RectTransform cardRectTransform = cardInstance.GetComponent<RectTransform>();
+            RectTransform buttonRectTransform = cardDisplayButtons[i].GetComponent<RectTransform>();
+            cardRectTransform.sizeDelta = buttonRectTransform.sizeDelta;
+            // Adjust the position of the card to the one ot the button it's displayed on
+            cardInstance.transform.SetParent(cardDisplayButtons[i].transform);
+            cardInstance.transform.localPosition = Vector3.zero;
+        }
+    }
+
+    // Add the selected card to the inventory
+    public void AddCardToInventory(CardData selectedCardData){
+        // Check if the inventory hasn't reached it's limit
+        if (inventory.cards.Count < inventory.maxCards){
+            inventory.AddCard(selectedCardData);
+        }
+    }
+}

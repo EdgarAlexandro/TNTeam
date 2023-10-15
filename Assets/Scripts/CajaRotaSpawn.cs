@@ -1,10 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
 
-public class CajaRotaSpawn : MonoBehaviour
+[System.Serializable]
+public class SpawnableObject
 {
-    public List<GameObject> objectsPrefabs = new List<GameObject>();
+    public GameObject prefab;
+    public float probability;
+    public string itemName;
+}
+
+public class CajaRotaSpawn : MonoBehaviourPunCallbacks
+{
+    public List<SpawnableObject> objectsPrefabs = new();
     public Transform spawnPoint;
     public GameObject joker;
 
@@ -13,15 +23,37 @@ public class CajaRotaSpawn : MonoBehaviour
         spawnPoint = gameObject.transform;
     }
 
+    [PunRPC]
+    public void DestroyBox()
+    {
+        PhotonNetwork.Destroy(this.gameObject);
+    }
+
+    // Spawn an object from the list of prefabs
     public void SpawnObject()
     {
+        //photonView.RPC("spawnObjectPhoton", RpcTarget.All);
         if (objectsPrefabs.Count > 0 && spawnPoint != null)
         {
-            GameObject selectedPrefab = objectsPrefabs[0];
-            Instantiate(selectedPrefab, spawnPoint.position, Quaternion.identity);
+            float totalProbability = 0f;
+            foreach (SpawnableObject spawnableObject in objectsPrefabs)
+            {
+                totalProbability += spawnableObject.probability;
+            }
+            float randomValue = Random.Range(0f, totalProbability);
+            foreach (SpawnableObject spawnableObject in objectsPrefabs)
+            {
+                if (randomValue <= spawnableObject.probability)
+                {
+                    PhotonNetwork.Instantiate(spawnableObject.itemName, spawnPoint.position, Quaternion.identity);
+                    break;
+                }
+                randomValue -= spawnableObject.probability;
+            }
         }
     }
 
+    // Spawn Joker character
     public void SpawnJoker()
     {
         Instantiate(joker, spawnPoint.position, Quaternion.identity);

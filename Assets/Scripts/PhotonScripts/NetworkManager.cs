@@ -37,11 +37,11 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     IEnumerator Reconnect(bool modeOffline)
     {
         PhotonNetwork.Disconnect();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         if (!modeOffline) PhotonNetwork.ConnectUsingSettings();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         PhotonNetwork.OfflineMode = modeOffline;
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.05f);
         if (modeOffline) CreateRoom("testRoom");
     }
     #endregion

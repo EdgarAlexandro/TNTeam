@@ -249,7 +249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   id: 0
-  moveSpeed: 10
+  moveSpeed: 3
   isAttacking: 0
   rig: {fileID: 4540491840027801035}
   startingPosition: {fileID: 11400000, guid: bbf06df8e5c89774daf1ea1c403cf0a0, type: 2}
@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dagger: {fileID: -272608048825203402, guid: 89644111d88bd41f9939010435ee528d, type: 3}
-  speed: 15
+  speed: 3
   neededMagic: 10
   uiController: {fileID: 1959357119}
 --- !u!114 &4603882707478070985
@@ -281,7 +281,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af5b1c8a6881e0649a267639f1fb53ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBar: {fileID: 8190688439637351427, guid: 7e8350c43da6bb645b382cb4fa44c134, type: 3}
+  healthBar: {fileID: 0}
 --- !u!114 &1959357119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -308,7 +308,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84f9df580108b41b0931922c00bc638d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inventory: {fileID: 11400000, guid: 952707f2fa006424990ecdc0d4215afc, type: 2}
+  inventory: {fileID: 11400000, guid: 3e79f0f982e5442feb5686dbe15fa108, type: 2}
   bomba: {fileID: 11400000, guid: d35c2321cc3434a1e99198a71eb6d4b8, type: 2}
   PC: {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
   PR: {fileID: 11400000, guid: 711c477d0cce34ef5a3dcda589193a4f, type: 2}

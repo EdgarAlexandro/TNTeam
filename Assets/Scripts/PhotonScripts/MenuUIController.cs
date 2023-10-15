@@ -49,7 +49,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks
     }
     #endregion
 
-    
+
 
     public override void OnConnectedToMaster()
     {
@@ -61,16 +61,22 @@ public class MenuUIController : MonoBehaviourPunCallbacks
 
     public void JoinRoom(TMP_InputField _roomName)
     {
-        NetworkManager.instance.JoinRoom(_roomName.text);
-        photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        if (PhotonNetwork.IsConnected)
+        {
+            NetworkManager.instance.JoinRoom(_roomName.text);
+            photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        }
     }
 
     public void CreateRoom(TMP_InputField _roomName)
     {
-        lobbyWindow.SetActive(true);
-        createRoomWindow.SetActive(false);
-        NetworkManager.instance.CreateRoom(_roomName.text);
-        photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        if (PhotonNetwork.IsConnected)
+        {
+            lobbyWindow.SetActive(true);
+            createRoomWindow.SetActive(false);
+            NetworkManager.instance.CreateRoom(_roomName.text);
+            photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        }
     }
 
     public override void OnJoinedRoom()
@@ -176,7 +182,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         {
             photonView.RPC("endCharacterSelection", RpcTarget.AllBuffered);
         }
-        
+
     }
 
     public void characterSelect(string character)
@@ -194,13 +200,6 @@ public class MenuUIController : MonoBehaviourPunCallbacks
 
     public void StartGame()
     {
-        if (PhotonNetwork.OfflineMode)
-        {
-            SceneManager.LoadScene("Main 1");
-        }
-        else
-        {
-            NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "Main 1");
-        }
+        NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "Main 1");
     }
 }

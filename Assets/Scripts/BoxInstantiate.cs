@@ -13,17 +13,19 @@ public class BoxInstantiate : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        dm = DestructionManager.Instance;
-        spawnPoint = gameObject.transform;
-        string boxIdentifier = gameObject.name;
-
-        // Check if box is supposed to be destroyed
-        if (!dm.IsDestroyed(boxIdentifier))
+        if (PhotonNetwork.IsMasterClient)
         {
-            //caja = PhotonNetwork.Instantiate(cajaGameObjString, spawnPoint.position, Quaternion.identity);
-            caja = PhotonNetwork.InstantiateRoomObject(cajaGameObjString, spawnPoint.position, Quaternion.identity);
-            caja.name = boxIdentifier;
-            
+            dm = DestructionManager.Instance;
+            spawnPoint = gameObject.transform;
+            string boxIdentifier = gameObject.name;
+
+            // Check if box is supposed to be destroyed
+            if (!dm.IsDestroyed(boxIdentifier))
+            {
+                //caja = PhotonNetwork.Instantiate(cajaGameObjString, spawnPoint.position, Quaternion.identity);
+                caja = PhotonNetwork.InstantiateRoomObject(cajaGameObjString, spawnPoint.position, Quaternion.identity);
+                caja.name = boxIdentifier;
+            }
         }
     }
 }

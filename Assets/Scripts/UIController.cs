@@ -14,6 +14,7 @@ public class UIController : MonoBehaviour
         pm = PersistenceManager.Instance;
         //OJO
         keyBar = GameObject.Find("Contador de Llave").GetComponent<Barradellave>();
+        magicBar = GameObject.Find("MagicBar").GetComponent<MagicBar>();
         keyBar.SetMaxKeys(pm.MaxKeys);
         keyBar.SetKeys(pm.CurrentKeys);
         keyBar.UpdateText(pm.CurrentKeys);

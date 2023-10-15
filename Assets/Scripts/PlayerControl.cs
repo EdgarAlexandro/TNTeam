@@ -33,7 +33,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     void Start()
     {
         animatorController = GetComponent<Animator>();
-        transform.position = startingPosition.initialValue;
+        //transform.position = startingPosition.initialValue;
     }
 
     void Update()

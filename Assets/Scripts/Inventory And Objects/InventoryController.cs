@@ -23,14 +23,18 @@ public class InventoryController : MonoBehaviour
         float xInput = Input.GetAxis("Horizontal");
         float yInput = Input.GetAxis("Vertical");
         if (indexItemSeleccionado >= inventory.items.Count) indexItemSeleccionado = 0;
-        if (inventory.items.Count == 0)
+        if (imagenCanvas != null)
         {
-            imagenCanvas.GetComponent<Image>().sprite = empty;
+            if (inventory.items.Count == 0)
+            {
+                imagenCanvas.GetComponent<Image>().sprite = empty;
+            }
+            else
+            {
+                imagenCanvas.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
+            }
         }
-        else
-        {
-            imagenCanvas.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
-        }
+
         if (Input.GetKeyDown(KeyCode.Plus))
         {
             indexItemSeleccionado++;

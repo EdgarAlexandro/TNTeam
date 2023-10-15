@@ -13,16 +13,19 @@ public class SpawnerInstantiate : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        dm = DestructionManager.Instance;
-        spawnPoint = gameObject.transform;
-        string spawnerIdentifier = gameObject.name;
-
-        // Check if spawner is supposed to be destroyed
-        if (!dm.IsDestroyed(spawnerIdentifier))
+        if (PhotonNetwork.IsMasterClient)
         {
-            spawner = PhotonNetwork.InstantiateRoomObject(spawnerGameObjString, spawnPoint.position, Quaternion.identity);
-            spawner.name = spawnerIdentifier;
+            dm = DestructionManager.Instance;
+            spawnPoint = gameObject.transform;
+            string spawnerIdentifier = gameObject.name;
 
+            // Check if spawner is supposed to be destroyed
+            if (!dm.IsDestroyed(spawnerIdentifier))
+            {
+                spawner = PhotonNetwork.InstantiateRoomObject(spawnerGameObjString, spawnPoint.position, Quaternion.identity);
+                spawner.name = spawnerIdentifier;
+
+            }
         }
     }
 }

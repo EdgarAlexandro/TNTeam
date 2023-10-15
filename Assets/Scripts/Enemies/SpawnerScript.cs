@@ -16,7 +16,6 @@ public class SpawnerScript : MonoBehaviourPun
     private SpriteRenderer sprite;
     public Transform spawnPoint;
 
-    [PunRPC]
     public void SpawnEnemy()
     {
         //PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[spawnIndex % 3].transform.position, Quaternion.identity);
@@ -40,16 +39,20 @@ public class SpawnerScript : MonoBehaviourPun
         //timer = Time.time + 7.0f;
         spawnHealth = spawnMaxHealth;
         sprite = GetComponent<SpriteRenderer>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timer < Time.time)
+        if (PhotonNetwork.IsMasterClient)
         {
-            //photonView.RPC("SpawnEnemy", RpcTarget.All);
-            timer = Time.time + 10.0f;
-            //spawnIndex++;
+            if (timer < Time.time)
+            {
+                timer = Time.time + 10.0f;
+                SpawnEnemy();
+                //spawnIndex++;
+            }
         }
     }
 
@@ -62,9 +65,9 @@ public class SpawnerScript : MonoBehaviourPun
             string spawnerIdentifier = gameObject.name;
             DestructionManager.Instance.MarkAsDestroyed(spawnerIdentifier);
             //PhotonNetwork.Destroy(gameObject);
-            
-            photonView.RPC("SpawnKey", RpcTarget.All);
-            
+
+            SpawnKey();
+
         }
         else
         {
@@ -73,7 +76,6 @@ public class SpawnerScript : MonoBehaviourPun
         }
     }
 
-    [PunRPC]
     public void SpawnKey()
     {
 

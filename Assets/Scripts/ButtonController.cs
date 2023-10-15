@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
+using Photon.Realtime;
 
 public class ButtonController : MonoBehaviour
 {
@@ -52,7 +54,11 @@ public class ButtonController : MonoBehaviour
     public void OnQuitButtonClicked()
     {
         // Return to start menu
-        SceneManager.LoadScene("StartMenu");
+        
+        Destroy(NetworkManager.instance.gameObject);
+        PhotonNetwork.LeaveRoom();
+        NetworkManager.instance.LoadScene("StartMenu");
+        //NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "StartMenu");
         pm.CurrentHealth = 20;
         pm.CurrentMagic = 0;
         pm.CurrentKeys = 0;

@@ -39,6 +39,7 @@ public class CardMenu : MonoBehaviour
             totalProbability += cardInfo.probability;
         }
         */
+        cardInventoryController = GameObject.Find("CardInventoryController").GetComponent<CardInventoryController>();
         for (int i = 0; i < 3; i++){
             float randomValue = Random.Range(0f, totalProbability);
             List<CardInfo> cardInfoListShuffled = Shuffle(cardInfoList);
@@ -82,12 +83,12 @@ public class CardMenu : MonoBehaviour
             // Instancia prefab ubicado en el scriptable object
             GameObject cardInstance = Instantiate(cards[i].prefabs[0], cardDisplay[i].transform.position, Quaternion.identity);
             
-            // Modifica tamaño de imagen
+            // Modifica tama?o de imagen
             RectTransform cardRectTransform = cardInstance.GetComponent<RectTransform>();
             RectTransform buttonRectTransform = cardDisplay[i].GetComponent<RectTransform>();
             cardRectTransform.sizeDelta = buttonRectTransform.sizeDelta;
             
-            // Define padre  y posición local
+            // Define padre  y posici?n local
             cardInstance.transform.SetParent(cardDisplay[i].transform);
             //cards[i].SetParent(cardDisplay[i].transform);
             cardInstance.transform.localPosition = Vector3.zero;

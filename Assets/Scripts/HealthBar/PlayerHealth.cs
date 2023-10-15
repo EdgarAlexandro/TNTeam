@@ -16,6 +16,7 @@ public class PlayerHealth : MonoBehaviour
     void Start()
     {
         pm = PersistenceManager.Instance;
+        healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
         healthBar.SetMaxHealth(pm.MaxHealth);
         healthBar.SetHealth(pm.CurrentHealth);
         sprite = GetComponent<SpriteRenderer>();

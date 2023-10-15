@@ -20,7 +20,6 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
     void Start()
     {
-        targets = GameObject.FindGameObjectsWithTag("Player");
         animatorController = GetComponent<Animator>();
         health = maxHealth;
         sprite = GetComponent<SpriteRenderer>();
@@ -28,17 +27,18 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (Vector2.Distance(transform.position, targets[0].transform.position) < minDistance) currentTarget = targets[0];
-        else if ((!PhotonNetwork.OfflineMode)&&(Vector2.Distance(transform.position, targets[1].transform.position) < minDistance)) currentTarget = targets[1];
+        targets = GameObject.FindGameObjectsWithTag("Player");
+
+        if ((targets.Length >= 1)&&(Vector2.Distance(transform.position, targets[0].transform.position) < minDistance)) currentTarget = targets[0];
+        else if ((!PhotonNetwork.OfflineMode) && (Vector2.Distance(transform.position, targets[1].transform.position) < minDistance)) currentTarget = targets[1];
         else currentTarget = null;
+
 
         if (currentTarget == null)
         {
             UpdateAnimation(Vector3.zero);
-            targets = GameObject.FindGameObjectsWithTag("Player");
-            return;
         }
-        if (currentTarget != null)
+        else
         {
             if (!targetCollision)
             {
@@ -50,10 +50,6 @@ public class EnemyAi : MonoBehaviourPunCallbacks
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
                 transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
             }
-        }
-        else
-        {
-            UpdateAnimation(Vector3.zero);
         }
         transform.rotation = Quaternion.identity;
     }

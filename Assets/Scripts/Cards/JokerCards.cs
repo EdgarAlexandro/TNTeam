@@ -1,3 +1,6 @@
+/* Function: Activate the card menu when the player interacts with the Joker
+   Author: Daniel Degollado Rodríguez A008325555
+   Modification date: 14/10/2023 */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,8 +14,7 @@ public class JokerCards : MonoBehaviour
     private DropManager drm;
 
     // Start is called before the first frame update
-    void Start()
-    {
+    void Start(){
         drm = DropManager.Instance;
         objectPosition = transform.position;
         currentSceneName = SceneManager.GetActiveScene().name;
@@ -22,11 +24,10 @@ public class JokerCards : MonoBehaviour
         //drm.AddDropPosition(objectPosition, currentSceneName, tag);
     }
 
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.tag == "Player")
-        {
-            Debug.Log(gameObject.name);
+    void OnTriggerEnter2D(Collider2D other){
+        // If a player enters the Joker's trigger.
+        if (other.gameObject.tag == "Player"){
+            // Activate the card menu.
             cardMenu.SetActive(true);
         }
     }

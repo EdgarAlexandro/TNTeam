@@ -1,29 +1,31 @@
+/* Function: control the behaviour of the players spawn
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class SpawnController : MonoBehaviourPunCallbacks
 {
     //Instancia (singleton)
-    public static SpawnController instance;
+    public static SpawnController instance = null;
 
-    public Transform[] spawnPositions;
-    public PlayerControl[] players;
+    public Transform[] spawnPositions = null;
+    public PlayerControl[] players = null;
 
-    [SerializeField] private int playerInGame;  
+    [SerializeField] private int playerInGame = 0;
 
     private void Awake()
     {
         instance = this;
         if (!GameController.instance.hasPlayersSpawned)
         {
+            //If player is in offline mode, just spawns 1 character
             if (PhotonNetwork.OfflineMode)
             {
-                GameObject playerobj;
-                playerobj = PhotonNetwork.Instantiate(MenuUIController.instance.p1, spawnPositions[0].position, Quaternion.identity);
-
+                PhotonNetwork.Instantiate(MenuUIController.instance.p1, spawnPositions[0].position, Quaternion.identity);
             }
             else
             {
@@ -32,11 +34,12 @@ public class SpawnController : MonoBehaviourPunCallbacks
             }
             GameController.instance.hasPlayersSpawned = true;
         }
-        
+
     }
 
+    //Remote procedure call to spawn all characters
     [PunRPC]
-    void InGame()
+    public void InGame()
     {
         playerInGame++;
         if (playerInGame == PhotonNetwork.PlayerList.Length)
@@ -45,7 +48,8 @@ public class SpawnController : MonoBehaviourPunCallbacks
         }
     }
 
-    void SpawnPlayers()
+    //Spawn characters that players selected
+    public void SpawnPlayers()
     {
         GameObject playerobj;
         if (PhotonNetwork.IsMasterClient)
@@ -56,19 +60,12 @@ public class SpawnController : MonoBehaviourPunCallbacks
         {
             playerobj = PhotonNetwork.Instantiate(MenuUIController.instance.p2, spawnPositions[0].position, Quaternion.identity);
         }
-        
-
-        //forma larga
-        //playerobj.GetComponent<PlayerControl>().photonview.RPC("Init", RpcTarget.All, PhotonNetwork.LocalPlayer);
-
-        //uso de variable para facil lectura
         PlayerControl playscript = playerobj.GetComponent<PlayerControl>();
         playscript.photonView.RPC("Init", RpcTarget.All, PhotonNetwork.LocalPlayer);
-
-
     }
 
-    void GoBackToMenu()
+    //Used in win or lose scene to go back to main menu
+    public void GoBackToMenu()
     {
         Destroy(NetworkManager.instance.gameObject);
         PhotonNetwork.LeaveRoom();

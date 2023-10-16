@@ -1,3 +1,7 @@
+/* Function: control the behaviour of photon unity network
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +10,7 @@ using Photon.Pun;
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
     #region SingletonPattern
-    public static NetworkManager instance;
+    public static NetworkManager instance = null;
 
     private void Awake()
     {
@@ -24,16 +28,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     #endregion
 
     #region ConnectionToServer
+    //Multiplayer button in main menu
     public void MultiplayerMode()
     {
         StartCoroutine(Reconnect(false));
     }
 
+    //Solo button in main menu
     public void SoloMode()
     {
         StartCoroutine(Reconnect(true));
     }
-    
+
+    //Allows the player to switch between solo and multiplayer using photon offline mode
     IEnumerator Reconnect(bool modeOffline)
     {
         PhotonNetwork.Disconnect();
@@ -52,6 +59,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.CreateRoom(_name);
     }
 
+    //DELETE (purely informational)
     public override void OnCreatedRoom()
     {
         //base.OnCreatedRoom();
@@ -65,6 +73,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         PhotonNetwork.JoinRoom(_name);
     }
 
+    // Remote Procedure Call to change the scene for all players connected in room
     [PunRPC]
     public void LoadScene(string _nameScene)
     {

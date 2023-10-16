@@ -1,3 +1,7 @@
+/* Function: creates a scriptableObject-derived where each item data is stored
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,9 +9,9 @@ using UnityEngine;
 [CreateAssetMenu]
 public class ItemData : ScriptableObject
 {
-    public string itemName;
-    public GameObject[] prefabs;
     [TextArea]
-    public string description;
-    public Sprite itemImage;
+    public string description = null;
+    public string itemName = null;
+    public string[] prefabs = null;
+    public Sprite itemImage = null;
 }

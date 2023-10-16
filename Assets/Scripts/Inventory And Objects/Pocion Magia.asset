@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb766eb706e5f4334b3d1d27700f3e67, type: 3}
   m_Name: Pocion Magia
   m_EditorClassIdentifier: 
+  description: Magic
   itemName: Pocion Magia
   prefabs:
-  - {fileID: 3396226566060721071, guid: 90e9774bdf5a9476ba5e2e210fcc2c66, type: 3}
-  description: Magic
+  - Pocion Magia
   itemImage: {fileID: 21300000, guid: 8fc711c1e4d1c4b308b98049c8b2254a, type: 3}

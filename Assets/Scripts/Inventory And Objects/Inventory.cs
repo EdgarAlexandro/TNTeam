@@ -1,7 +1,13 @@
+/* Function: creates a scriptableObject-derived to act as an inventory for each character
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
+//ScriptableObject-derived
 [CreateAssetMenu]
 public class Inventory : ScriptableObject
 {
@@ -24,7 +30,7 @@ public class Inventory : ScriptableObject
 
     public bool DropItem(int indexItemToDrop, Vector3 position)
     {
-        Instantiate(items[indexItemToDrop].prefabs[0], position, Quaternion.identity);
+        PhotonNetwork.Instantiate(items[indexItemToDrop].prefabs[0], position, Quaternion.identity);
         items.RemoveAt(indexItemToDrop);
         return false;
     }

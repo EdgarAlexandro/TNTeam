@@ -138,8 +138,8 @@ MonoBehaviour:
   - prefab: {fileID: 4826872885244557423, guid: a1c63c2aaa0794a449781e3a957a4eb6, type: 3}
     probability: 0.4
     itemName: Bomba
+  joker: Joker
   spawnPoint: {fileID: 0}
-  joker: {fileID: 5683834370789232956, guid: aec395562e4b845cc8a4bc7d52136192, type: 3}
 --- !u!114 &2282421377811446174
 MonoBehaviour:
   m_ObjectHideFlags: 0

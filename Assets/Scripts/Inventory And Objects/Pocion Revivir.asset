@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb766eb706e5f4334b3d1d27700f3e67, type: 3}
   m_Name: Pocion Revivir
   m_EditorClassIdentifier: 
+  description: Revive
   itemName: Pocion Revivir
   prefabs:
-  - {fileID: 3549237752626050809, guid: 560ab70ddf7494a368696681b13d11c6, type: 3}
-  description: Revive
+  - Pocion Revivir
   itemImage: {fileID: 21300000, guid: 9301f9cf59e5a4290811d63e667d3dc5, type: 3}

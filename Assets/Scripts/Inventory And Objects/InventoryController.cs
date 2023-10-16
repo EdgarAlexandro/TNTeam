@@ -1,28 +1,36 @@
+/* Function: controls the behaviour of the inventory and allows player to manage it
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Photon.Pun;
 
-
-public class InventoryController : MonoBehaviour
+public class InventoryController : MonoBehaviourPunCallbacks
 {
-    public Inventory inventory;
-    public ItemData bomba, PC, PR, PM;
+    public Inventory inventory = null;
+    public ItemData bomba = null;
+    public ItemData PC = null;
+    public ItemData PR = null;
+    public ItemData PM = null;
     public int indexItemSeleccionado = 0;
-    private GameObject imagenCanvas;
-    public Sprite empty;
-    private PersistenceManager pm;
+    private GameObject imagenCanvas = null;
+    public Sprite empty = null;
+    private PersistenceManager pm = null;
 
     private void Start()
     {
         pm = PersistenceManager.Instance;
         imagenCanvas = GameObject.Find("ItemImageSpace");
     }
+
     private void Update()
     {
-        float xInput = Input.GetAxis("Horizontal");
-        float yInput = Input.GetAxis("Vertical");
+        // Keeps index in range
         if (indexItemSeleccionado >= inventory.items.Count) indexItemSeleccionado = 0;
+        // Changes the canvas item image
         if (imagenCanvas != null)
         {
             if (inventory.items.Count == 0)
@@ -35,12 +43,14 @@ public class InventoryController : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.Plus))
+        // Change selected item
+        if (Input.GetKeyDown(KeyCode.Plus) && photonView.IsMine)
         {
             indexItemSeleccionado++;
         }
 
-        if (Input.GetKeyDown(KeyCode.U) && inventory.items.Count > 0)
+        // Drop item
+        if (Input.GetKeyDown(KeyCode.U) && inventory.items.Count > 0 && photonView.IsMine)
         {
             /* Vector2 projDirection = Vector2.down;
             Vector3 offset = new(0f, 2.5f, 1.8f);
@@ -76,9 +86,9 @@ public class InventoryController : MonoBehaviour
             inventory.DropItem(indexItemSeleccionado, offset);
         }
 
-        if (Input.GetKeyDown(KeyCode.I) && inventory.items.Count > 0)
+        // Use item
+        if (Input.GetKeyDown(KeyCode.I) && inventory.items.Count > 0 && photonView.IsMine)
         {
-
             switch (inventory.items[indexItemSeleccionado].itemName)
             {
                 case "Pocion Curacion":
@@ -102,7 +112,7 @@ public class InventoryController : MonoBehaviour
                 case "Bomba":
                     Vector3 offset = new(1.5f, 1.5f, 1.5f);
                     offset += gameObject.transform.position;
-                    Instantiate(inventory.items[indexItemSeleccionado].prefabs[1], offset, Quaternion.identity);
+                    PhotonNetwork.Instantiate(inventory.items[indexItemSeleccionado].prefabs[1], offset, Quaternion.identity);
                     inventory.UseItem(indexItemSeleccionado);
                     break;
 

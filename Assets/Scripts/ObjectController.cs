@@ -1,3 +1,7 @@
+/* Function: controls the behaviour of the available objects (sprite)
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,6 +13,7 @@ public class ObjectController : MonoBehaviour
 
     void FixedUpdate()
     {
+        // If the player has touched the object´s sprite
         if (reduccion)
         {
             transform.localScale = new Vector3(transform.localScale.x - cambio, transform.localScale.y - cambio, transform.localScale.z - cambio);
@@ -19,8 +24,11 @@ public class ObjectController : MonoBehaviour
             }
         }
     }
+
+    // Checks if the player has touched the object´s sprite and acts according to the object/item
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Limited objects and unlimited orbs
         if ((collision.CompareTag("Player") && this.CompareTag("Orbe")) || (collision.CompareTag("Player") && collision.GetComponent<InventoryController>().inventory.items.Count < collision.GetComponent<InventoryController>().inventory.maxItems))
         {
             reduccion = true;
@@ -48,7 +56,6 @@ public class ObjectController : MonoBehaviour
             {
                 collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PR);
             }
-
         }
     }
 }

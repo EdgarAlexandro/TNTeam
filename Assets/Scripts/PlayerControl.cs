@@ -1,7 +1,6 @@
-//
-//PlayerControl.cs
-//Script para controlar el movimiento y animaciones del personaje
-//
+/* Function: controls the animations, shield, attack and movement of the player/character
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
 
 using System.Collections;
 using System.Collections.Generic;
@@ -12,18 +11,18 @@ using Photon.Realtime;
 public class PlayerControl : MonoBehaviourPunCallbacks
 {
     [HideInInspector]
-    public int id;
+    public int id = 0;
 
     [Header("Info")]
-    public float moveSpeed;
+    public float moveSpeed = 0.0f;
     public bool isAttacking = false;
     private bool isDefending = false;
 
     [Header("Components")]
-    public Rigidbody2D rig;
-    public VectorValue startingPosition;
-    Animator animatorController;
-    public Player photonPlayer;
+    public Rigidbody2D rig = null;
+    public VectorValue startingPosition = null;
+    Animator animatorController = null;
+    public Player photonPlayer = null;
 
     void Awake()
     {
@@ -38,41 +37,29 @@ public class PlayerControl : MonoBehaviourPunCallbacks
 
     void Update()
     {
-        if (photonView.IsMine) // Verifica si es el jugador local
+        // If the player owns this character (multiplayer)
+        if (photonView.IsMine)
         {
             float xInput = Input.GetAxis("Horizontal");
             float yInput = Input.GetAxis("Vertical");
-
-            // Actualiza la velocidad del Rigidbody2D
             rig.velocity = new Vector2(xInput * moveSpeed, yInput * moveSpeed);
+
+            // Stop movement if attacking
             if (isAttacking)
             {
                 rig.velocity = new Vector2(0, 0);
             }
-            // Calcula la dirección predominante (horizontal o vertical)
+
+            // Calculate the predominant direction (horizontal or vertical)
             if (Mathf.Abs(xInput) > Mathf.Abs(yInput))
             {
-                // Movimiento horizontal
-                if (xInput > 0)
-                {
-                    UpdateAnimation(PlayerAnimation.walkRight);
-                }
-                else if (xInput < 0)
-                {
-                    UpdateAnimation(PlayerAnimation.walkLeft);
-                }
+                if (xInput > 0) UpdateAnimation(PlayerAnimation.walkRight);
+                else if (xInput < 0) UpdateAnimation(PlayerAnimation.walkLeft);
             }
             else
             {
-                // Movimiento vertical
-                if (yInput > 0)
-                {
-                    UpdateAnimation(PlayerAnimation.walkUp);
-                }
-                else if (yInput < 0)
-                {
-                    UpdateAnimation(PlayerAnimation.walkDown);
-                }
+                if (yInput > 0) UpdateAnimation(PlayerAnimation.walkUp);
+                else if (yInput < 0) UpdateAnimation(PlayerAnimation.walkDown);
                 else
                 {
                     animatorController.SetBool("isWalkingDown", false);
@@ -81,6 +68,8 @@ public class PlayerControl : MonoBehaviourPunCallbacks
                     animatorController.SetBool("isWalkingLeft", false);
                 }
             }
+
+            //Attack
             if (!isAttacking && !isDefending)
             {
                 if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -90,12 +79,14 @@ public class PlayerControl : MonoBehaviourPunCallbacks
                 }
             }
 
+            // Use shield (hold)
             if (Input.GetKeyDown(KeyCode.Q))
             {
                 isDefending = true;
                 animatorController.SetBool("isDefending", true);
             }
 
+            // Stop using shield
             if (Input.GetKeyUp(KeyCode.Q))
             {
                 isDefending = false;
@@ -104,6 +95,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
         }
     }
 
+    // Remote Procedure Call to initialize players
     [PunRPC]
     public void Init(Player player)
     {
@@ -115,17 +107,20 @@ public class PlayerControl : MonoBehaviourPunCallbacks
             rig.isKinematic = true;
     }
 
-    void EndAttackAnimation()
+    // Stop attack (used by animator)
+    public void EndAttackAnimation()
     {
         animatorController.SetBool("isAttacking", false);
         isAttacking = false;
     }
 
+    // List of possible movement animations
     public enum PlayerAnimation
     {
         walkDown, walkUp, walkRight, walkLeft
     }
 
+    // Changes the movement animation
     void UpdateAnimation(PlayerAnimation nameAnimation)
     {
         animatorController.SetBool("isWalkingDown", false);

@@ -1,18 +1,21 @@
+/* Function: controls the behaviour of the object/item the player´s weapon hits
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 14/10/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class Espada : MonoBehaviourPunCallbacks
 {
     public int damage = 1;
-    public float knockback = 5f;
-    float probabilidadFuncionA;
-    float randomValue;
-    private DestructionManager dm;
-    private JokerSpawn jk;
+    public float knockback = 5.0f;
+    float probabilidadFuncionA = 0.0f;
+    float randomValue = 0.0f;
+    private DestructionManager dm = null;
+    private JokerSpawn jk = null;
 
     void Start()
     {
@@ -23,19 +26,19 @@ public class Espada : MonoBehaviourPunCallbacks
     private void OnTriggerEnter2D(Collider2D other)
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
-      
+
         // Check if the object the sword hit is a box
-        if (other.CompareTag("Caja") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && photonView.IsMine)
+        if (other.CompareTag("Caja") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
             List<string> availableScenes = jk.availableScenes;
             string boxIdentifier = other.gameObject.name;
-         
+
             // Check if the current scene was selected as one of the scenes available for Joker spawning
-            if(availableScenes.Contains(currentSceneName))
-            { 
+            if (availableScenes.Contains(currentSceneName))
+            {
                 probabilidadFuncionA = 0.8f;
                 randomValue = Mathf.Round(Random.Range(0f, 1f) * 10f) / 10f;
-               
+
                 // If the random value is less than the defined probability value, it spawns an object
                 if (randomValue < probabilidadFuncionA)
                 {
@@ -65,11 +68,11 @@ public class Espada : MonoBehaviourPunCallbacks
             {
                 other.GetComponent<CajaRotaSpawn>().photonView.RPC("DestroyBox", RpcTarget.MasterClient);
             }
-            
+
         }
 
         // Check if the object the sword hit is an enemy
-        if (other.gameObject.tag == "Enemy" && this.GetComponentInParent<Animator>().GetBool("isAttacking"))
+        if (other.gameObject.tag == "Enemy" && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
             Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
             other.gameObject.TryGetComponent<EnemyAi>(out EnemyAi enemyComponent);
@@ -78,8 +81,6 @@ public class Espada : MonoBehaviourPunCallbacks
                 if (chargeA.isChargeAttacking)
                 {
                     enemyComponent.OnHit(chargeA.chargeDmg, knockbackDirection, knockback * 2);
-                    //Debug.Log("Damage dealt: " + chargeA.chargeDmg.ToString());
-                    //Debug.Log(chargeA.msg);
                 }
             }
             else
@@ -90,7 +91,7 @@ public class Espada : MonoBehaviourPunCallbacks
         }
 
         // Check if the object the sword hit is a spawner
-        if (other.gameObject.tag == "Spawner" && this.GetComponentInParent<Animator>().GetBool("isAttacking") && photonView.IsMine)
+        if (other.gameObject.tag == "Spawner" && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
             other.gameObject.TryGetComponent<SpawnerScript>(out SpawnerScript spawnerComponent);
             // Deals damage to the spawner

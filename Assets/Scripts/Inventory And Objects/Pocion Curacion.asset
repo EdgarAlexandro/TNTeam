@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb766eb706e5f4334b3d1d27700f3e67, type: 3}
   m_Name: Pocion Curacion
   m_EditorClassIdentifier: 
+  description: Cure
   itemName: Pocion Curacion
   prefabs:
-  - {fileID: 8674983860893968699, guid: d3adf373b849043ef9409d5b87c9aab3, type: 3}
-  description: Cure
+  - Pocion Curacion
   itemImage: {fileID: 21300000, guid: 128fc137bf8f9481a89e6a18f302116c, type: 3}

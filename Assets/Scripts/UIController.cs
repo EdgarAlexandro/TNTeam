@@ -99,20 +99,52 @@ public class UIController : MonoBehaviourPunCallbacks
         }
     }
 
+    [PunRPC]
+    public void DeathHandler()
+    {
+        // Freeze player position and disable movement controls
+        Rigidbody2D rb = GetComponent<Rigidbody2D>();
+        rb.velocity = Vector2.zero;
+        rb.constraints = RigidbodyConstraints2D.FreezeAll;
+        GetComponent<Collider2D>().enabled = false;
+
+        // Change sprite color to gray
+        sprite.color = Color.gray;
+
+        if (GameController.AlivePlayers > 0)
+        {
+            GameController.AlivePlayers--;
+        }  
+    }
+
     public void TakeDamage(int damage, string player)
     {
         pm.CurrentHealth -= damage;
         healthBar.SetHealth(pm.CurrentHealth);
         if (pm.CurrentHealth <= 0)
         {
-            //Destroy(gameObject);
-            Debug.Log(player + " Died :(");
-            //SceneManager.LoadScene("LoseScene");
+            if (PhotonNetwork.OfflineMode)
+            {
+                Destroy(gameObject);
+            }else
+            {
+                PlayerDied();               
+                Debug.Log(GameController.AlivePlayers);
+                if (GameController.AlivePlayers == 0)
+                {
+                    NetworkManager.instance.LoadScene("LoseScene");
+                }
+            }
         }
         else
         {
             StartCoroutine(AlternateColors(player));
         }
+    }
+
+    public void PlayerDied()
+    {
+        photonView.RPC("DeathHandler", RpcTarget.AllBuffered);
     }
 
     [PunRPC]

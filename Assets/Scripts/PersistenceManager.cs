@@ -13,6 +13,7 @@ public class PersistenceManager : MonoBehaviour
     public int CurrentMagic;
     public int MaxKeys;
     public int CurrentKeys;
+    public int LeverCounter;
 
     // Singleton
     private void Awake()

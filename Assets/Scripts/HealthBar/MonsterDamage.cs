@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class MonsterDamage : MonoBehaviour
+public class MonsterDamage : MonoBehaviourPunCallbacks
 {
     public int damage;
-    public PlayerHealth playerHealth;
+    public UIController playerUI;
     public bool isHittingShield = false;
     public float knockback;
     private IEnumerator coroutine;
@@ -14,16 +15,16 @@ public class MonsterDamage : MonoBehaviour
     {
         if (GetComponent<EnemyAi>().currentTarget != null)
         {
-            playerHealth = GetComponent<EnemyAi>().currentTarget.GetComponent<PlayerHealth>();
+            playerUI = GetComponent<EnemyAi>().currentTarget.GetComponent<UIController>();
         }
     }
 
-    private IEnumerator applyDamage()
+    private IEnumerator applyDamage(string tarjetTakingDamage)
     {
         yield return new WaitForSeconds(0.0f);
         if (!isHittingShield)
         {
-            playerHealth.TakeDamage(damage);
+            playerUI.TakeDamage(damage, tarjetTakingDamage);
 
         }
         
@@ -31,10 +32,10 @@ public class MonsterDamage : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine)
         {
             //Invoke("applyDamage", 0.0f);
-            coroutine = applyDamage();
+            coroutine = applyDamage(other.gameObject.name);
             StartCoroutine(coroutine);
         }
     }

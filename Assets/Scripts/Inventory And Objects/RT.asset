@@ -13,4 +13,12 @@ MonoBehaviour:
   m_Name: RT
   m_EditorClassIdentifier: 
   maxItems: 10
-  items: []
+  maxCards: 6
+  items:
+  - {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
+  - {fileID: 11400000, guid: 711c477d0cce34ef5a3dcda589193a4f, type: 2}
+  - {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
+  - {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
+  - {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
+  - {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
+  cards: []

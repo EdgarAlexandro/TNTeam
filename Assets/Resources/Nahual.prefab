@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   damage: 1
-  playerHealth: {fileID: 0}
+  playerUI: {fileID: 0}
   isHittingShield: 0
   knockback: 10
 --- !u!114 &485309634
@@ -193,6 +193,7 @@ MonoBehaviour:
   speed: 2
   health: 0
   maxHealth: 1
+  orbePrefab: {fileID: 3497544176364357381, guid: d321309feaec54c71a2e7c22a95f9c58, type: 3}
 --- !u!114 &6655708649705253883
 MonoBehaviour:
   m_ObjectHideFlags: 0

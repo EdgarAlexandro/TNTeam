@@ -16,14 +16,18 @@ public class InventoryController : MonoBehaviourPunCallbacks
     public ItemData PR = null;
     public ItemData PM = null;
     public int indexItemSeleccionado = 0;
-    private GameObject imagenCanvas = null;
+    private GameObject imagenCanvasDetras = null;
+    private GameObject imagenCanvasCentro = null;
+    private GameObject imagenCanvasDelante = null;
     public Sprite empty = null;
     private PersistenceManager pm = null;
 
     private void Start()
     {
         pm = PersistenceManager.Instance;
-        imagenCanvas = GameObject.Find("ItemImageSpace");
+        imagenCanvasDetras = GameObject.Find("ItemImageSpaceBack");
+        imagenCanvasCentro = GameObject.Find("ItemImageSpaceCenter");
+        imagenCanvasDelante = GameObject.Find("ItemImageSpaceFront");
     }
 
     private void Update()
@@ -31,15 +35,41 @@ public class InventoryController : MonoBehaviourPunCallbacks
         // Keeps index in range
         if (indexItemSeleccionado >= inventory.items.Count) indexItemSeleccionado = 0;
         // Changes the canvas item image
-        if (imagenCanvas != null)
+        if (imagenCanvasCentro != null && imagenCanvasDelante != null && imagenCanvasDetras != null && photonView.IsMine)
         {
+            int indexDelante = indexItemSeleccionado + 1;
+            if (indexDelante > inventory.items.Count - 1) indexDelante = 0;
+            int indexDetras = indexItemSeleccionado - 1;
+            if (indexDetras < 0) indexDetras = inventory.items.Count - 1;
             if (inventory.items.Count == 0)
             {
-                imagenCanvas.GetComponent<Image>().sprite = empty;
+                imagenCanvasDetras.SetActive(false);
+                imagenCanvasCentro.GetComponent<Image>().sprite = empty;
+                imagenCanvasDelante.SetActive(false);
             }
-            else
+            if (inventory.items.Count == 1)
             {
-                imagenCanvas.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
+                imagenCanvasDetras.SetActive(false);
+                imagenCanvasCentro.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
+                imagenCanvasDelante.SetActive(false);
+            }
+            if (inventory.items.Count == 2)
+            {
+                imagenCanvasDetras.GetComponent<Image>().sprite = inventory.items[indexDetras].itemImage;
+                imagenCanvasCentro.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
+
+                imagenCanvasDetras.GetComponentInParent<HorizontalLayoutGroup>().spacing = -20;
+                imagenCanvasDetras.SetActive(true);
+                imagenCanvasDelante.SetActive(false);
+            }
+            if (inventory.items.Count >= 3)
+            {
+                imagenCanvasDetras.GetComponent<Image>().sprite = inventory.items[indexDetras].itemImage;
+                imagenCanvasCentro.GetComponent<Image>().sprite = inventory.items[indexItemSeleccionado].itemImage;
+                imagenCanvasDelante.GetComponent<Image>().sprite = inventory.items[indexDelante].itemImage;
+                imagenCanvasDelante.GetComponentInParent<HorizontalLayoutGroup>().spacing = -80;
+                imagenCanvasDetras.SetActive(true);
+                imagenCanvasDelante.SetActive(true);
             }
         }
 
@@ -95,7 +125,7 @@ public class InventoryController : MonoBehaviourPunCallbacks
                     if ((pm.CurrentHealth + pm.MaxHealth * .25f) <= pm.MaxHealth)
                     {
                         pm.CurrentHealth += (int)(pm.MaxHealth * .25f);
-                        GetComponent<PlayerHealth>().healthBar.SetHealth(pm.CurrentHealth);
+                        GetComponent<UIController>().healthBar.SetHealth(pm.CurrentHealth);
                         inventory.UseItem(indexItemSeleccionado);
                     }
                     break;
@@ -109,6 +139,7 @@ public class InventoryController : MonoBehaviourPunCallbacks
                         inventory.UseItem(indexItemSeleccionado);
                     }
                     break;
+
                 case "Bomba":
                     Vector3 offset = new(1.5f, 1.5f, 1.5f);
                     offset += gameObject.transform.position;

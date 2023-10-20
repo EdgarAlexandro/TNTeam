@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 // DropData class that contains the drop's position, the scene it belongs to and it's tag
 [System.Serializable]
@@ -32,7 +33,7 @@ public class DropData
     }
 }
 
-public class DropManager : MonoBehaviour
+public class DropManager : MonoBehaviourPunCallbacks
 {
     private static DropManager instance;
     public static DropManager Instance { get { return instance; } }
@@ -83,7 +84,7 @@ public class DropManager : MonoBehaviour
             List<DropData> savedDropPositions = GetSavedPositions(currentScene, tag);
             foreach (DropData data in savedDropPositions)
             {
-                Instantiate(objectsPrefabs[i], data.position, Quaternion.identity);
+                PhotonNetwork.Instantiate(objectsPrefabs[i].name, data.position, Quaternion.identity);
             }
         }
     }
@@ -107,4 +108,12 @@ public class DropManager : MonoBehaviour
     {
         dropPositions.Clear();
     }
+
+    // Check if the dropped element exists
+    public bool IsDropped(Vector2 dropPosition, string sceneName, string tag)
+    {
+        DropData dataToCheck = new DropData { position = dropPosition, sceneName = sceneName, tag = tag };
+        return dropPositions.Contains(dataToCheck);
+    }
+
 }

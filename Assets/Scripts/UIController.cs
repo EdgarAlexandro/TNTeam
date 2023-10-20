@@ -1,40 +1,75 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class UIController : MonoBehaviour
+public class UIController : MonoBehaviourPunCallbacks
 {
     //public AbrirPuertas abrirPuertas;
+    public HealthBar healthBar;
+    private SpriteRenderer sprite;
     public Barradellave keyBar;
     public MagicBar magicBar;
     private PersistenceManager pm;
+    public GameObject playerCanvas = null;
+    public GameObject canvasGeneral = null;
 
     void Start()
     {
         pm = PersistenceManager.Instance;
-        //OJO
-        keyBar = GameObject.Find("Contador de Llave").GetComponent<Barradellave>();
-        magicBar = GameObject.Find("MagicBar").GetComponent<MagicBar>();
-        keyBar.SetMaxKeys(pm.MaxKeys);
-        keyBar.SetKeys(pm.CurrentKeys);
-        keyBar.UpdateText(pm.CurrentKeys);
-        magicBar.SetMaxMagic(pm.MaxMagic);
-        magicBar.SetMagic(pm.CurrentMagic);
-        magicBar.UpdateText(pm.CurrentMagic);
+
+        if (photonView.IsMine)
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                playerCanvas = GameObject.Find("Canvas Player 1");
+            }
+            else
+            {
+                playerCanvas = GameObject.Find("Canvas Player 2");
+            }
+            playerCanvas.SetActive(true);
+            canvasGeneral = GameObject.Find("Canvas general");
+            //Llaves
+            //keyBar = GameObject.Find("Contador de Llave").GetComponent<Barradellave>();
+            keyBar = canvasGeneral.GetComponentInChildren<Barradellave>();
+            keyBar.SetMaxKeys(pm.MaxKeys);
+            keyBar.SetKeys(pm.CurrentKeys);
+            keyBar.UpdateText(pm.CurrentKeys);
+
+            //Magia
+            //magicBar = GameObject.Find("MagicBar").GetComponent<MagicBar>();
+            magicBar = playerCanvas.GetComponentInChildren<MagicBar>();
+            magicBar.SetMaxMagic(pm.MaxMagic);
+            magicBar.SetMagic(pm.CurrentMagic);
+            magicBar.UpdateText(pm.CurrentMagic);
+
+            //Salud
+            //healthBar = GameObject.Find("HealthBar").GetComponent<HealthBar>();
+            healthBar = playerCanvas.GetComponentInChildren<HealthBar>();
+            healthBar.SetMaxHealth(pm.MaxHealth);
+            healthBar.SetHealth(pm.CurrentHealth);
+
+            sprite = GetComponent<SpriteRenderer>();
+        }
+
     }
 
     public void chargeMagicValue(int value)
     {
-        if (pm.CurrentMagic < pm.MaxMagic && pm.CurrentMagic + value < pm.MaxMagic)
+        if (photonView.IsMine)
         {
-            pm.CurrentMagic += value;
+            if (pm.CurrentMagic < pm.MaxMagic && pm.CurrentMagic + value < pm.MaxMagic)
+            {
+                pm.CurrentMagic += value;
+            }
+            else
+            {
+                pm.CurrentMagic = pm.MaxMagic;
+            }
+            magicBar.SetMagic(pm.CurrentMagic);
+            magicBar.UpdateText(pm.CurrentMagic);
         }
-        else
-        {
-            pm.CurrentMagic = pm.MaxMagic;
-        }
-        magicBar.SetMagic(pm.CurrentMagic);
-        magicBar.UpdateText(pm.CurrentMagic);
     }
 
     public void loseMagicValue(int value)
@@ -48,14 +83,56 @@ public class UIController : MonoBehaviour
 
     }
 
-    public void increaseKeyCount(int value)
+    [PunRPC]
+    public void IncreaseKeyCount(int value)
     {
-        if (pm.CurrentKeys < pm.MaxKeys)
+        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+        foreach (GameObject p in players)
         {
-            pm.CurrentKeys += value;
-            keyBar.SetKeys(pm.CurrentKeys);
-            keyBar.UpdateText(pm.CurrentKeys);
+            UIController uiPlayer = p.GetComponent<UIController>();
+            if (p.GetComponent<PhotonView>().IsMine && uiPlayer.pm.CurrentKeys < uiPlayer.pm.MaxKeys)
+            {
+                uiPlayer.pm.CurrentKeys += value;
+                uiPlayer.keyBar.SetKeys(uiPlayer.pm.CurrentKeys);
+                uiPlayer.keyBar.UpdateText(uiPlayer.pm.CurrentKeys);
+            }
         }
+    }
 
+    public void TakeDamage(int damage, string player)
+    {
+        pm.CurrentHealth -= damage;
+        healthBar.SetHealth(pm.CurrentHealth);
+        if (pm.CurrentHealth <= 0)
+        {
+            //Destroy(gameObject);
+            Debug.Log(player + " Died :(");
+            //SceneManager.LoadScene("LoseScene");
+        }
+        else
+        {
+            StartCoroutine(AlternateColors(player));
+        }
+    }
+
+    [PunRPC]
+    public void ChangeColor(string player)
+    {
+        GameObject playerGO = GameObject.Find(player);
+        playerGO.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+    }
+
+    [PunRPC]
+    public void ReturnColor(string player)
+    {
+        GameObject playerGO = GameObject.Find(player);
+        playerGO.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+    }
+
+    public IEnumerator AlternateColors(string player)
+    {
+        photonView.RPC("ChangeColor", RpcTarget.All, player);
+        yield return new WaitForSeconds(0.2f);
+        photonView.RPC("ReturnColor", RpcTarget.All, player);
     }
 }

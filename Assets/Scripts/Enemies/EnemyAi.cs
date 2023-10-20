@@ -21,6 +21,18 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     private Rigidbody2D rigidBod;
 
     NavMeshAgent agent;
+    public GameObject orbePrefab = null;
+
+
+    // Remote Procedure that destroys the enemy for all players
+    [PunRPC]
+    public void DestroyEnemy()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+    }
 
     void Start()
 
@@ -69,7 +81,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine)
         {
 
             agent.SetDestination(transform.position);
@@ -133,7 +145,8 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
         if (health <= 0)
         {
-            Destroy(gameObject);
+            photonView.RPC("DestroyEnemy", RpcTarget.All);
+            PhotonNetwork.Instantiate(orbePrefab.name, gameObject.transform.position, Quaternion.identity);
         }
         else
         {

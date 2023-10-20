@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 4540491840027801032}
   - component: {fileID: 4540491840027801039}
   - component: {fileID: 1975975558751802508}
-  - component: {fileID: 4603882707478070985}
   - component: {fileID: 1959357119}
   - component: {fileID: 7511894998340736065}
   - component: {fileID: -9054364080939982011}
@@ -269,19 +268,6 @@ MonoBehaviour:
   speed: 3
   neededMagic: 10
   uiController: {fileID: 1959357119}
---- !u!114 &4603882707478070985
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4540491840027801038}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5b1c8a6881e0649a267639f1fb53ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
 --- !u!114 &1959357119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -294,8 +280,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140f831464c0b904e8ba7c82744ecaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   keyBar: {fileID: 0}
   magicBar: {fileID: 0}
+  playerCanvas: {fileID: 0}
+  canvasGeneral: {fileID: 0}
 --- !u!114 &7511894998340736065
 MonoBehaviour:
   m_ObjectHideFlags: 0

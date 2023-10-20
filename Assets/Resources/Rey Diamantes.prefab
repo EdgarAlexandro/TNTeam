@@ -15,7 +15,6 @@ GameObject:
   - component: {fileID: 637370894801376167}
   - component: {fileID: 637370894801376160}
   - component: {fileID: 8763654029918847034}
-  - component: {fileID: 594249579775320230}
   - component: {fileID: 6686784741801488576}
   - component: {fileID: 8902924034415464152}
   - component: {fileID: 3566386310602570150}
@@ -196,19 +195,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 5484891709605359118, guid: f6b848070688c4a3dbd7eae099fa2b18, type: 3}
   speed: 9
---- !u!114 &594249579775320230
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 637370894801376161}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: af5b1c8a6881e0649a267639f1fb53ed, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  healthBar: {fileID: 0}
 --- !u!114 &6686784741801488576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -221,8 +207,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 140f831464c0b904e8ba7c82744ecaba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  healthBar: {fileID: 0}
   keyBar: {fileID: 0}
   magicBar: {fileID: 0}
+  playerCanvas: {fileID: 0}
+  canvasGeneral: {fileID: 0}
 --- !u!114 &8902924034415464152
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,6 +52,12 @@ MonoBehaviour:
   - SpawnEnemy
   - SpawnKey
   - DeathHandler
+  - DestroyBomb
+  - DestroyObject
+  - DestroyEnemy
+  - ChangeColor
+  - ReturnColor
+  - IncreaseKeyCount
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

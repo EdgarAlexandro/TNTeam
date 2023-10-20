@@ -48,5 +48,5 @@ MonoBehaviour:
   MaxHealth: 20
   MaxMagic: 100
   CurrentMagic: 0
-  MaxKeys: 2
+  MaxKeys: 1
   CurrentKeys: 0

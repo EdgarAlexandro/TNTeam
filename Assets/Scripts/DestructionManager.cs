@@ -7,21 +7,20 @@ public class DestructionManager : MonoBehaviour
 {
     private static DestructionManager instance;
     public static DestructionManager Instance { get { return instance; } }
-
-    public HashSet<string> destroyedElements = new HashSet<string>();
+    public HashSet<string> destroyedElements = new();
 
     // Singleton
     private void Awake()
     {
         if (instance != null && instance != this)
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
             return;
         }
         else
         {
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
+            DontDestroyOnLoad(gameObject);
         }
     }
 

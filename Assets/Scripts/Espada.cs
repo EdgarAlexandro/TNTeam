@@ -12,16 +12,6 @@ public class Espada : MonoBehaviourPunCallbacks
 {
     public int damage = 1;
     public float knockback = 5.0f;
-    float probabilidadFuncionA = 0.0f;
-    float randomValue = 0.0f;
-    private DestructionManager dm = null;
-    private JokerSpawn jk = null;
-
-    void Start()
-    {
-        dm = DestructionManager.Instance;
-        jk = JokerSpawn.Instance;
-    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -30,53 +20,15 @@ public class Espada : MonoBehaviourPunCallbacks
         // Check if the object the sword hit is a box
         if (other.CompareTag("Caja") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
-            List<string> availableScenes = jk.availableScenes;
-            string boxIdentifier = other.gameObject.name;
-
-            // Check if the current scene was selected as one of the scenes available for Joker spawning
-            if (availableScenes.Contains(currentSceneName))
-            {
-                probabilidadFuncionA = 0.8f;
-                randomValue = Mathf.Round(Random.Range(0f, 1f) * 10f) / 10f;
-
-                // If the random value is less than the defined probability value, it spawns an object
-                if (randomValue < probabilidadFuncionA)
-                {
-                    other.GetComponent<CajaRotaSpawn>().SpawnObject();
-                }
-                // If it is more than the defined probability value, it spawns the Joker
-                else
-                {
-                    other.GetComponent<CajaRotaSpawn>().SpawnJoker();
-                    jk.RemoveScene(currentSceneName);
-                }
-            }
-            // If it's not available, it spawns an object
-            else
-            {
-                other.GetComponent<CajaRotaSpawn>().SpawnObject();
-            }
-
-            // Marks the box as destroyed
-            dm.MarkAsDestroyed(boxIdentifier);
-            //PhotonNetwork.Destroy(other.gameObject);
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.Destroy(other.gameObject);
-            }
-            else
-            {
-                other.GetComponent<CajaRotaSpawn>().photonView.RPC("DestroyBox", RpcTarget.MasterClient);
-            }
-
+            other.GetComponent<CajaRotaSpawn>().boxDestructionAux(currentSceneName);
         }
 
         // Check if the object the sword hit is an enemy
-        if (other.gameObject.tag == "Enemy" && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
+        if (other.CompareTag("Enemy") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
             Vector2 knockbackDirection = (other.transform.position - transform.position).normalized;
-            other.gameObject.TryGetComponent<EnemyAi>(out EnemyAi enemyComponent);
-            if (transform.parent.TryGetComponent<ChargeAttack>(out ChargeAttack chargeA))
+            other.gameObject.TryGetComponent(out EnemyAi enemyComponent);
+            if (transform.parent.TryGetComponent(out ChargeAttack chargeA))
             {
                 if (chargeA.isChargeAttacking)
                 {
@@ -91,9 +43,9 @@ public class Espada : MonoBehaviourPunCallbacks
         }
 
         // Check if the object the sword hit is a spawner
-        if (other.gameObject.tag == "Spawner" && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
+        if (other.CompareTag("Spawner") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
-            other.gameObject.TryGetComponent<SpawnerScript>(out SpawnerScript spawnerComponent);
+            other.gameObject.TryGetComponent(out SpawnerScript spawnerComponent);
             // Deals damage to the spawner
             spawnerComponent.OnHit(damage);
         }

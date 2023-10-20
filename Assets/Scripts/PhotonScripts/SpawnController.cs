@@ -17,6 +17,8 @@ public class SpawnController : MonoBehaviourPunCallbacks
 
     [SerializeField] private int playerInGame = 0;
 
+    public GameObject canvasPrefab = null;
+
     private void Awake()
     {
         instance = this;
@@ -26,6 +28,8 @@ public class SpawnController : MonoBehaviourPunCallbacks
             if (PhotonNetwork.OfflineMode)
             {
                 PhotonNetwork.Instantiate(MenuUIController.instance.p1, spawnPositions[0].position, Quaternion.identity);
+                GameObject canvasp1 = Instantiate(canvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+                canvasp1.name = "Canvas Player 1";
             }
             else
             {
@@ -55,10 +59,14 @@ public class SpawnController : MonoBehaviourPunCallbacks
         if (PhotonNetwork.IsMasterClient)
         {
             playerobj = PhotonNetwork.Instantiate(MenuUIController.instance.p1, spawnPositions[0].position, Quaternion.identity);
+            GameObject canvasp1 = Instantiate(canvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            canvasp1.name = "Canvas Player 1";
         }
         else
         {
             playerobj = PhotonNetwork.Instantiate(MenuUIController.instance.p2, spawnPositions[0].position, Quaternion.identity);
+            GameObject canvasp2 = Instantiate(canvasPrefab, new Vector3(0, 0, 0), Quaternion.identity);
+            canvasp2.name = "Canvas Player 2";
         }
         PlayerControl playscript = playerobj.GetComponent<PlayerControl>();
         playscript.photonView.RPC("Init", RpcTarget.All, PhotonNetwork.LocalPlayer);

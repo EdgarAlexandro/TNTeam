@@ -29,7 +29,7 @@ public class BoxInstantiate : MonoBehaviourPunCallbacks
             if (!dm.IsDestroyed(boxIdentifier))
             {
                 //Instantiate object in Photon Network
-                caja = PhotonNetwork.InstantiateRoomObject(cajaGameObjString, spawnPoint.position, Quaternion.identity);
+                caja = PhotonNetwork.Instantiate(cajaGameObjString, spawnPoint.position, Quaternion.identity);
                 //Name the box after the spawn point gameobject (different names for each scene)
                 caja.name = boxIdentifier;
             }

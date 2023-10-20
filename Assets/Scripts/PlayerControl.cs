@@ -37,6 +37,9 @@ public class PlayerControl : MonoBehaviourPunCallbacks
 
     void Update()
     {
+        
+            
+        
         // If the player owns this character (multiplayer)
         if (photonView.IsMine)
         {

@@ -12,11 +12,11 @@ public class WaterGrid : MonoBehaviour
     }
 
    
-    private void OnCollisionEnter2D(Collider2D other)
+    /*private void OnCollisionEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
         {
             Vector3Int cellPosition = water.WorldToCell(other.transform.position);
         }
-    }
+    }*/
 }

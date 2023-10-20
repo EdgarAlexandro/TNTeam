@@ -15,6 +15,7 @@ TagManager:
   - Pocion Magia
   - Pocion Revivir
   - Joker
+  - SpawnPoint
   layers:
   - Default
   - TransparentFX

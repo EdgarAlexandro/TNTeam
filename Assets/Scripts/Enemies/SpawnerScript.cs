@@ -65,9 +65,7 @@ public class SpawnerScript : MonoBehaviourPun
             string spawnerIdentifier = gameObject.name;
             DestructionManager.Instance.MarkAsDestroyed(spawnerIdentifier);
             //PhotonNetwork.Destroy(gameObject);
-
             SpawnKey();
-
         }
         else
         {

@@ -1479,6 +1479,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (1)
@@ -1540,6 +1544,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 12
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (7)
@@ -1606,6 +1614,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (4)
@@ -1704,8 +1716,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad6aff60f8b1cb43b3a6cf96ea45356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  healthBarPrefab: {fileID: 829346527}
-  canvasPrefab: {fileID: 1822165667}
+  CurrentHealth: 0
+  MaxHealth: 0
+  MaxMagic: 0
+  CurrentMagic: 0
+  MaxKeys: 0
+  CurrentKeys: 0
 --- !u!1 &673681010
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,6 +1822,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (5)
@@ -5797,6 +5817,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (6)
@@ -5874,6 +5898,10 @@ PrefabInstance:
       propertyPath: maxHealth
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 6655708649705253883, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
+      propertyPath: sceneViewId
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 7552174801492835913, guid: 23abd78fe09cfbf44b6773a9b37ac744, type: 3}
       propertyPath: m_Name
       value: Nahual
@@ -5935,6 +5963,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -9054364080939982011, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
+      propertyPath: sceneViewId
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 4540491840027801034, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
       propertyPath: m_RootOrder
       value: 9
@@ -6256,6 +6288,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (2)
@@ -10808,6 +10844,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (8)
@@ -10948,6 +10988,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (3)
@@ -11064,11 +11108,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
   m_PrefabInstance: {fileID: 7949681471017050281}
   m_PrefabAsset: {fileID: 0}
---- !u!223 &1822165667 stripped
-Canvas:
-  m_CorrespondingSourceObject: {fileID: 7734449726279995158, guid: 9f9ce257036c6fd4d828ccdafa426946, type: 3}
-  m_PrefabInstance: {fileID: 7734449727870015168}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1959357110 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4603882707478070985, guid: 839caf3b7abfb4e3d92bffaa4457e931, type: 3}
@@ -11087,6 +11126,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja (9)
@@ -11354,6 +11397,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7648791120775532910, guid: 7e370ca82ad48a448a7659ffd934bae7, type: 3}
+      propertyPath: sceneViewId
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7e370ca82ad48a448a7659ffd934bae7, type: 3}
 --- !u!1001 &7734449727870015168
@@ -11484,6 +11531,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2282421377811446174, guid: df79febc616c24533b61cda9b4985d42, type: 3}
+      propertyPath: sceneViewId
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7949681470061901931, guid: df79febc616c24533b61cda9b4985d42, type: 3}
       propertyPath: m_Name
       value: Caja

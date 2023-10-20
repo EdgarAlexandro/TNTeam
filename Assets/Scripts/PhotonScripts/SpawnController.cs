@@ -38,7 +38,6 @@ public class SpawnController : MonoBehaviourPunCallbacks
             }
             GameController.instance.hasPlayersSpawned = true;
         }
-
     }
 
     //Remote procedure call to spawn all characters

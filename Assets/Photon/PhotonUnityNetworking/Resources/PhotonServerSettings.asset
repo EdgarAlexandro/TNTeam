@@ -51,6 +51,7 @@ MonoBehaviour:
   - DestroySpawner
   - SpawnEnemy
   - SpawnKey
+  - DeathHandler
   - DestroyBomb
   - DestroyObject
   - DestroyEnemy

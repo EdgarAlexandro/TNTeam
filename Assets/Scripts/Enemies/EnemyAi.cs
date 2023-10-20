@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using Photon.Pun;
 using Photon.Realtime;
 
@@ -17,6 +18,9 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     public int maxHealth;
     private Animator animatorController;
     private SpriteRenderer sprite;
+    private Rigidbody2D rigidBod;
+
+    NavMeshAgent agent;
     public GameObject orbePrefab = null;
 
 
@@ -31,36 +35,45 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     }
 
     void Start()
+
     {
+        rigidBod = GetComponent<Rigidbody2D>();
         animatorController = GetComponent<Animator>();
         health = maxHealth;
         sprite = GetComponent<SpriteRenderer>();
+        agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update()
+    void Update() 
     {
         targets = GameObject.FindGameObjectsWithTag("Player");
 
-        if ((targets.Length >= 1)&&(Vector2.Distance(transform.position, targets[0].transform.position) < minDistance)) currentTarget = targets[0];
-        else if ((!PhotonNetwork.OfflineMode) && (Vector2.Distance(transform.position, targets[1].transform.position) < minDistance)) currentTarget = targets[1];
+        if ((targets.Length >= 1) && (Vector2.Distance(transform.position, targets[0].transform.position) < minDistance)) currentTarget = targets[0];
+        else if (!PhotonNetwork.OfflineMode && targets.Length >= 2 && Vector2.Distance(transform.position, targets[1].transform.position) < minDistance) currentTarget = targets[1];
         else currentTarget = null;
 
 
         if (currentTarget == null)
         {
             UpdateAnimation(Vector3.zero);
+            agent.SetDestination(transform.position);
+            rigidBod.constraints = RigidbodyConstraints2D.FreezeAll;
         }
         else
         {
             if (!targetCollision)
             {
-                Vector3 moveDirection = (currentTarget.transform.position - transform.position).normalized;
+                rigidBod.constraints = RigidbodyConstraints2D.None;
+                Vector2 targetPosition = currentTarget.transform.position;
+              
+                agent.SetDestination(targetPosition);
+
+                Vector2 moveDirection = agent.desiredVelocity.normalized;
 
                 UpdateAnimation(moveDirection);
 
-                transform.LookAt(currentTarget.transform.position);
+                transform.LookAt(targetPosition);
                 transform.Rotate(new Vector3(0, -90, 0), Space.Self);
-                transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
             }
         }
         transform.rotation = Quaternion.identity;
@@ -70,7 +83,11 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     {
         if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine)
         {
-            Vector3 triggerPosition = transform.position;
+
+            agent.SetDestination(transform.position);
+
+            Vector2 triggerPosition = agent.desiredVelocity;
+            //Vector3 triggerPosition = transform.position;
             Vector3 contactPoint = triggerPosition;
             Vector3 center = other.gameObject.GetComponent<Collider2D>().bounds.center;
 
@@ -88,18 +105,20 @@ public class EnemyAi : MonoBehaviourPunCallbacks
             if (top) thrustDirection += Vector2.up;
             if (bottom) thrustDirection += Vector2.down;
 
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            //GetComponent<Rigidbody2D>().velocity = Vector2.zero;
             GetComponent<Rigidbody2D>().AddForce(thrustDirection.normalized * thrust, ForceMode2D.Impulse);
 
+            //rigidBod.constraints = RigidbodyConstraints2D.FreezeAll;
             Invoke("FalseCollision", 0.25f);
 
         }
     }
-
+   
     void FalseCollision()
     {
         targetCollision = false;
-        GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
+        //rigidBod.constraints = RigidbodyConstraints2D.None;
     }
 
     void UpdateAnimation(Vector3 moveDirection)
@@ -139,7 +158,6 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
         }
     }
-
 
     private IEnumerator StopMovementAfterKnockback()
     {

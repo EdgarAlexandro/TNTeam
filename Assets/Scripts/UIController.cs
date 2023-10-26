@@ -126,7 +126,9 @@ public class UIController : MonoBehaviourPunCallbacks
             if (PhotonNetwork.OfflineMode)
             {
                 Destroy(gameObject);
-            }else
+                NetworkManager.instance.LoadScene("LoseScene");
+            }
+            else
             {
                 PlayerDied();               
                 Debug.Log(GameController.AlivePlayers);

@@ -9,11 +9,13 @@ public class QueenDaggerThrow : MonoBehaviour
     public int neededMagic = 10;
     private Vector2 projDirection = Vector2.down;
     public UIController uiController;
+    private MusicSFXManager musicSFXManager;
 
     // Start is called before the first frame update
     void Start()
     {
         projDirection = Vector2.down;
+        musicSFXManager = MusicSFXManager.Instance;
     }
 
     // Update is called once per frame
@@ -54,6 +56,7 @@ public class QueenDaggerThrow : MonoBehaviour
             {
                 Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
                 daggerInstance.velocity = projDirection * speed;
+                musicSFXManager.PlaySFX(MusicSFXManager.Instance.Lanza_Daga);
                 uiController.loseMagicValue(neededMagic);
             }
         }

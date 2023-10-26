@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     Animator animatorController = null;
     public Player photonPlayer = null;
 
+
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
@@ -34,7 +35,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
         animatorController = GetComponent<Animator>();
         //transform.position = startingPosition.initialValue;
     }
-
+   
     void Update()
     {
         // If the player owns this character (multiplayer)
@@ -79,6 +80,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
                 }
             }
 
+
             // Use shield (hold)
             if (Input.GetKeyDown(KeyCode.Q))
             {
@@ -106,6 +108,8 @@ public class PlayerControl : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
             rig.isKinematic = true;
     }
+
+
 
     // Stop attack (used by animator)
     public void EndAttackAnimation()

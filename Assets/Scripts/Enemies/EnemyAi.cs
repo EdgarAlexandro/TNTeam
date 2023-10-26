@@ -17,12 +17,15 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     public int maxHealth;
     private Animator animatorController;
     private SpriteRenderer sprite;
+    private MusicSFXManager musicSFXManager;
 
     void Start()
     {
         animatorController = GetComponent<Animator>();
         health = maxHealth;
+        musicSFXManager = MusicSFXManager.Instance;
         sprite = GetComponent<SpriteRenderer>();
+
     }
 
     void Update()
@@ -58,6 +61,8 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Mordisco);
+
             Vector3 triggerPosition = transform.position;
             Vector3 contactPoint = triggerPosition;
             Vector3 center = other.gameObject.GetComponent<Collider2D>().bounds.center;
@@ -115,6 +120,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks
         if (health <= 0)
         {
             Destroy(gameObject);
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Muerte_Nahual);
         }
         else
         {

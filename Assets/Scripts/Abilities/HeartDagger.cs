@@ -7,6 +7,7 @@ public class HeartDagger : MonoBehaviour
 {
     float probabilidadFuncionA;
     float randomValue;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         string currentSceneName = SceneManager.GetActiveScene().name;

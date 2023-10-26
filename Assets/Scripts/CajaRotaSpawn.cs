@@ -23,16 +23,20 @@ public class CajaRotaSpawn : MonoBehaviourPunCallbacks
     public string joker = "";
     public Transform spawnPoint = null;
     private bool objectHasSpawned = false;
+    private MusicSFXManager musicSFXManager;
 
     void Start()
     {
         spawnPoint = gameObject.transform;
+        musicSFXManager = MusicSFXManager.Instance;
     }
 
     // Remote Procedure that destroys the box for all players
     [PunRPC]
     public void DestroyBox()
     {
+       
+        musicSFXManager.PlaySFX(MusicSFXManager.Instance.Caja_Rota);
         PhotonNetwork.Destroy(this.gameObject);
     }
 

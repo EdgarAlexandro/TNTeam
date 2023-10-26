@@ -7,12 +7,14 @@ public class DiamondSpecialArrow : MonoBehaviour
     public Rigidbody2D arrow;
     public float speed = 3;
     private Vector2 projDirection = Vector2.down;
+    private MusicSFXManager musicSFXManager;
 
 
     // Start is called before the first frame update
     void Start()
     {
         projDirection = Vector2.down;
+        musicSFXManager = MusicSFXManager.Instance;
     }
 
     // Update is called once per frame
@@ -51,6 +53,7 @@ public class DiamondSpecialArrow : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R)){
             Rigidbody2D arrowInstance = Instantiate(arrow, transform.position, Quaternion.identity);
             arrowInstance.velocity = projDirection * speed;
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Arco);
         }
     }
 }

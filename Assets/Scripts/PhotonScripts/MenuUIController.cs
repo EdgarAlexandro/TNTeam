@@ -68,7 +68,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks
     //Stops the host to start the game if one of the players hasnt picked a character or hasnt joined the room
     private void Update()
     {
-        if (!PhotonNetwork.OfflineMode)
+        if (!PhotonNetwork.OfflineMode && (characterSelectWindow.activeSelf || lobbyWindow.activeSelf ))
         {
             if(lobbyWindow.activeSelf && PhotonNetwork.CurrentRoom.PlayerCount < 2)
             {

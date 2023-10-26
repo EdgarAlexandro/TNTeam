@@ -11,7 +11,12 @@ public class ObjectController : MonoBehaviour
 {
     bool reduccion = false;
     public float cambio = 0.01f;
+    private PersistenceManager pm = null;
 
+    private void Start()
+    {
+        pm = PersistenceManager.Instance;
+    }
     void FixedUpdate()
     {
         // If the player has touched the object´s sprite
@@ -30,7 +35,7 @@ public class ObjectController : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         // Limited objects and unlimited orbs
-        if ((collision.CompareTag("Player") && this.CompareTag("Orbe")) || (collision.CompareTag("Player") && collision.GetComponent<InventoryController>().inventory.items.Count < collision.GetComponent<InventoryController>().inventory.maxItems))
+        if ((collision.CompareTag("Player") && this.CompareTag("Llave")) || (collision.CompareTag("Player") && this.CompareTag("Orbe") && pm.CurrentMagic < 100) || (collision.CompareTag("Player") && collision.GetComponent<InventoryController>().inventory.items.Count < collision.GetComponent<InventoryController>().inventory.maxItems))
         {
             reduccion = true;
             if (this.CompareTag("Orbe"))

@@ -14,12 +14,12 @@ public class GameController : MonoBehaviourPunCallbacks
     public static GameController Instance { get { return instance; } }
     //Have the players/characters spawned?
     public bool hasPlayersSpawned = false;
-    public static int AlivePlayers = 0;
+    public static int AlivePlayers;
 
     void Start()
     {
-        // Assuming all players are alive at the start
         AlivePlayers = PhotonNetwork.PlayerList.Length;
+        Debug.Log(AlivePlayers);
     }
 
     private void Awake()

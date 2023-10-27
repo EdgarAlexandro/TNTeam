@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   isAttacking: 0
   rig: {fileID: 3553230007553245762}
   startingPosition: {fileID: 0}
+  isActive: 1
 --- !u!114 &7489726087886223066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -193,7 +194,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe19dcfb603be49a2adc42e6d00baeec, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  field: {fileID: 6122055740493801695, guid: b023612cd2d1e4cfda9ae962bd93f7f2, type: 3}
+  fieldPrefab: {fileID: 1701603757712580964, guid: b023612cd2d1e4cfda9ae962bd93f7f2, type: 3}
 --- !u!114 &4426618252146710958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +212,9 @@ MonoBehaviour:
   magicBar: {fileID: 0}
   playerCanvas: {fileID: 0}
   canvasGeneral: {fileID: 0}
+  isDead: 0
+  playerGameObject: {fileID: 0}
+  cardInventory: {fileID: 0}
 --- !u!114 &8787965991508681965
 MonoBehaviour:
   m_ObjectHideFlags: 0

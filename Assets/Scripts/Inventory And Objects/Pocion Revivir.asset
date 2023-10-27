@@ -16,4 +16,5 @@ MonoBehaviour:
   itemName: Pocion Revivir
   prefabs:
   - Pocion Revivir
+  - Pocion Revivir Explosion
   itemImage: {fileID: 21300000, guid: 9301f9cf59e5a4290811d63e667d3dc5, type: 3}

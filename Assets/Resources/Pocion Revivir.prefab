@@ -13,6 +13,8 @@ GameObject:
   - component: {fileID: 3549237752626050811}
   - component: {fileID: 3549237752626050810}
   - component: {fileID: 8501021644602310127}
+  - component: {fileID: 21257079686408159}
+  - component: {fileID: -1568128227004482073}
   m_Layer: 0
   m_Name: Pocion Revivir
   m_TagString: Pocion Revivir
@@ -105,10 +107,39 @@ MonoBehaviour:
   Synchronization: 3
   OwnershipTransfer: 0
   observableSearch: 2
-  ObservedComponents: []
+  ObservedComponents:
+  - {fileID: 21257079686408159}
   sceneViewId: 0
   InstantiationId: 0
   isRuntimeInstantiated: 0
+--- !u!114 &21257079686408159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3549237752626050809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 0
+  m_SynchronizeScale: 0
+  m_UseLocal: 1
+--- !u!114 &-1568128227004482073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3549237752626050809}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba2cc5e9765a2e64dbf10057a6118014, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6935105617845921980
 GameObject:
   m_ObjectHideFlags: 0

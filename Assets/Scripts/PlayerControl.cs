@@ -24,6 +24,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     Animator animatorController = null;
     public Player photonPlayer = null;
 
+    public bool isActive = true;
 
     void Awake()
     {
@@ -38,63 +39,65 @@ public class PlayerControl : MonoBehaviourPunCallbacks
    
     void Update()
     {
-        // If the player owns this character (multiplayer)
-        if (photonView.IsMine)
+        if (isActive)
         {
-            float xInput = Input.GetAxis("Horizontal");
-            float yInput = Input.GetAxis("Vertical");
-            rig.velocity = new Vector2(xInput * moveSpeed, yInput * moveSpeed);
+            // If the player owns this character (multiplayer)
+            if (photonView.IsMine)
+            {
+                float xInput = Input.GetAxis("Horizontal");
+                float yInput = Input.GetAxis("Vertical");
+                rig.velocity = new Vector2(xInput * moveSpeed, yInput * moveSpeed);
 
-            // Stop movement if attacking
-            if (isAttacking)
-            {
-                rig.velocity = new Vector2(0, 0);
-            }
+                // Stop movement if attacking
+                if (isAttacking)
+                {
+                    rig.velocity = new Vector2(0, 0);
+                }
 
-            // Calculate the predominant direction (horizontal or vertical)
-            if (Mathf.Abs(xInput) > Mathf.Abs(yInput))
-            {
-                if (xInput > 0) UpdateAnimation(PlayerAnimation.walkRight);
-                else if (xInput < 0) UpdateAnimation(PlayerAnimation.walkLeft);
-            }
-            else
-            {
-                if (yInput > 0) UpdateAnimation(PlayerAnimation.walkUp);
-                else if (yInput < 0) UpdateAnimation(PlayerAnimation.walkDown);
+                // Calculate the predominant direction (horizontal or vertical)
+                if (Mathf.Abs(xInput) > Mathf.Abs(yInput))
+                {
+                    if (xInput > 0) UpdateAnimation(PlayerAnimation.walkRight);
+                    else if (xInput < 0) UpdateAnimation(PlayerAnimation.walkLeft);
+                }
                 else
                 {
-                    animatorController.SetBool("isWalkingDown", false);
-                    animatorController.SetBool("isWalkingUp", false);
-                    animatorController.SetBool("isWalkingRight", false);
-                    animatorController.SetBool("isWalkingLeft", false);
+                    if (yInput > 0) UpdateAnimation(PlayerAnimation.walkUp);
+                    else if (yInput < 0) UpdateAnimation(PlayerAnimation.walkDown);
+                    else
+                    {
+                        animatorController.SetBool("isWalkingDown", false);
+                        animatorController.SetBool("isWalkingUp", false);
+                        animatorController.SetBool("isWalkingRight", false);
+                        animatorController.SetBool("isWalkingLeft", false);
+                    }
                 }
-            }
 
-            //Attack
-            if (!isAttacking && !isDefending)
-            {
-                if (Input.GetKeyDown(KeyCode.Mouse0))
+                //Attack
+                if (!isAttacking && !isDefending)
                 {
-                    isAttacking = true;
-                    animatorController.SetBool("isAttacking", true);
+                    if (Input.GetKeyDown(KeyCode.Mouse0))
+                    {
+                        isAttacking = true;
+                        animatorController.SetBool("isAttacking", true);
+                    }
+                }
+
+                // Use shield (hold)
+                if (Input.GetKeyDown(KeyCode.Q))
+                {
+                    isDefending = true;
+                    animatorController.SetBool("isDefending", true);
+                }
+
+                // Stop using shield
+                if (Input.GetKeyUp(KeyCode.Q))
+                {
+                    isDefending = false;
+                    animatorController.SetBool("isDefending", false);
                 }
             }
-
-
-            // Use shield (hold)
-            if (Input.GetKeyDown(KeyCode.Q))
-            {
-                isDefending = true;
-                animatorController.SetBool("isDefending", true);
-            }
-
-            // Stop using shield
-            if (Input.GetKeyUp(KeyCode.Q))
-            {
-                isDefending = false;
-                animatorController.SetBool("isDefending", false);
-            }
-        }
+        } 
     }
 
     // Remote Procedure Call to initialize players

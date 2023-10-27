@@ -5,8 +5,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
+using UnityEngine.SceneManagement;
 
-public class Bomba : MonoBehaviour
+public class Bomba : MonoBehaviourPunCallbacks
 {
     private SpriteRenderer spriteRenderer = null;
 
@@ -14,6 +16,17 @@ public class Bomba : MonoBehaviour
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
         StartCoroutine(Explode());
+    }
+
+    //Remote procedure call to destroy the bomb after explosion
+    [PunRPC]
+    public void DestroyBomb(string bombGameObjectName)
+    {
+        GameObject bomb = GameObject.Find(bombGameObjectName);
+        if (bomb.GetPhotonView().IsMine)
+        {
+            PhotonNetwork.Destroy(bomb);
+        }
     }
 
     IEnumerator Explode()
@@ -28,12 +41,21 @@ public class Bomba : MonoBehaviour
         }
 
         // Gets all the colliders in a radius and deals damage to the enemies or destroys boxes ????
-        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GetComponent<CircleCollider2D>().radius/2);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GetComponent<CircleCollider2D>().radius / 2);
         foreach (Collider2D col in colliders)
         {
-            EnemyAi saludEnemigo = col.GetComponent<EnemyAi>();
-            if (saludEnemigo != null) saludEnemigo.OnHit(1, new Vector2(2.0f, 3.0f), 2.0f);
+            EnemyAi saludEnemigo;
+            if (col.TryGetComponent(out saludEnemigo))
+            {
+                saludEnemigo.OnHit(1, new Vector2(2.0f, 3.0f), 2.0f);
+            }
+            CajaRotaSpawn cajaDestroy;
+            if (col.TryGetComponent(out cajaDestroy))
+            {
+                cajaDestroy.boxDestructionAux(SceneManager.GetActiveScene().name);
+            }
         }
-        Destroy(gameObject);
+        // RPC for owner to destroy de gameobject
+        photonView.RPC("DestroyBomb", RpcTarget.All, gameObject.name);
     }
 }

@@ -20,12 +20,19 @@ public class SpawnerScript : MonoBehaviourPun
         //PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[spawnIndex % 3].transform.position, Quaternion.identity);
         PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[Random.Range(0, 1)].transform.position, Quaternion.identity);
     }
+
     [PunRPC]
     public void DestroySpawner()
     {
-        PhotonNetwork.Destroy(gameObject);
-
+        string spawnerIdentifier = gameObject.name;
+        DestructionManager.Instance.MarkAsDestroyed(spawnerIdentifier);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            PhotonNetwork.Destroy(gameObject);
+        }
+        
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,12 +69,7 @@ public class SpawnerScript : MonoBehaviourPun
 
         if (spawnHealth <= 0)
         {
-            string spawnerIdentifier = gameObject.name;
-            DestructionManager.Instance.MarkAsDestroyed(spawnerIdentifier);
-            //PhotonNetwork.Destroy(gameObject);
-
             SpawnKey();
-
         }
         else
         {
@@ -78,7 +80,6 @@ public class SpawnerScript : MonoBehaviourPun
 
     public void SpawnKey()
     {
-
         PhotonNetwork.Instantiate(keyPrefabString, spawnPoint.position, Quaternion.identity);
         photonView.RPC("DestroySpawner", RpcTarget.All);
     }

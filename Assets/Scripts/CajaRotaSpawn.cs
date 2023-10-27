@@ -23,6 +23,7 @@ public class CajaRotaSpawn : MonoBehaviourPunCallbacks
     public string joker = "";
     public Transform spawnPoint = null;
     private bool objectHasSpawned = false;
+    private MusicSFXManager musicSFXManager;
     float probabilidadFuncionA = 0.0f;
     float randomValue = 0.0f;
     private DestructionManager dm = null;
@@ -31,6 +32,7 @@ public class CajaRotaSpawn : MonoBehaviourPunCallbacks
     void Start()
     {
         spawnPoint = gameObject.transform;
+        musicSFXManager = MusicSFXManager.Instance;
         dm = DestructionManager.Instance;
         jk = JokerSpawn.Instance;
     }
@@ -41,6 +43,7 @@ public class CajaRotaSpawn : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Caja_Rota);
             string boxIdentifier = gameObject.name;
             // Marks the box as destroyed
             dm.MarkAsDestroyed(boxIdentifier);

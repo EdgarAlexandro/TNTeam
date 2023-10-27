@@ -51,6 +51,7 @@ MonoBehaviour:
   - DestroySpawner
   - SpawnEnemy
   - SpawnKey
+  - InitPlayerWithCharacter
   - DeathHandler
   - DestroyBomb
   - DestroyObject
@@ -60,6 +61,14 @@ MonoBehaviour:
   - IncreaseKeyCount
   - RoomClosed
   - ChangeCharacterString
+  - UpdateAlivePlayers
+  - DestroyPotion
+  - RevivalHandler
+  - GetColliders
+  - RevivePlayer
+  - throwDagger
+  - growField
+  - EnablePlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

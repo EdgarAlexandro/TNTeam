@@ -15,7 +15,6 @@ public class SpawnerScript : MonoBehaviourPun
     public int spawnMaxHealth;
     private SpriteRenderer sprite;
     public Transform spawnPoint;
-
     public void SpawnEnemy()
     {
         //PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[spawnIndex % 3].transform.position, Quaternion.identity);

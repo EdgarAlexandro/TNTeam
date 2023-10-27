@@ -108,7 +108,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
-  m_Mass: 1
+  m_Mass: 50
   m_LinearDrag: 0
   m_AngularDrag: 0.05
   m_GravityScale: 0
@@ -181,6 +181,7 @@ MonoBehaviour:
   isAttacking: 0
   rig: {fileID: 637370894801376164}
   startingPosition: {fileID: 0}
+  isActive: 1
 --- !u!114 &8763654029918847034
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -212,6 +213,8 @@ MonoBehaviour:
   magicBar: {fileID: 0}
   playerCanvas: {fileID: 0}
   canvasGeneral: {fileID: 0}
+  isDead: 0
+  playerGameObject: {fileID: 0}
 --- !u!114 &8902924034415464152
 MonoBehaviour:
   m_ObjectHideFlags: 0

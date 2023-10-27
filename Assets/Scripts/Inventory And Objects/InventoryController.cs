@@ -140,10 +140,17 @@ public class InventoryController : MonoBehaviourPunCallbacks
                     }
                     break;
 
-                case "Bomba":
+                case "Pocion Revivir":
                     Vector3 offset = new(1.5f, 1.5f, 1.5f);
                     offset += gameObject.transform.position;
                     PhotonNetwork.Instantiate(inventory.items[indexItemSeleccionado].prefabs[1], offset, Quaternion.identity);
+                    inventory.UseItem(indexItemSeleccionado);
+                    break;
+
+                case "Bomba":
+                    Vector3 offset2 = new(1.5f, 1.5f, 1.5f);
+                    offset2 += gameObject.transform.position;
+                    PhotonNetwork.Instantiate(inventory.items[indexItemSeleccionado].prefabs[1], offset2, Quaternion.identity);
                     inventory.UseItem(indexItemSeleccionado);
                     break;
 

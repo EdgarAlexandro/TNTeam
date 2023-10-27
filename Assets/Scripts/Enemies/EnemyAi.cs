@@ -1,3 +1,6 @@
+/* Function: Enemies AI for their movement
+   Author: Daniel Degollado Rodríguez
+   Modification date: 27/10/2023 */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,8 +8,7 @@ using UnityEngine.AI;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class EnemyAi : MonoBehaviourPunCallbacks
-{
+public class EnemyAi : MonoBehaviourPunCallbacks{
     private Rigidbody2D rb;
     public GameObject[] targets;
     public GameObject currentTarget;
@@ -26,17 +28,13 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
     // Remote Procedure that destroys the enemy for all players
     [PunRPC]
-    public void DestroyEnemy()
-    {
-        if (PhotonNetwork.IsMasterClient)
-        {
+    public void DestroyEnemy(){
+        if (PhotonNetwork.IsMasterClient){
             PhotonNetwork.Destroy(gameObject);
         }
     }
 
-    void Start()
-
-    {
+    void Start(){
         rigidBod = GetComponent<Rigidbody2D>();
         animatorController = GetComponent<Animator>();
         health = maxHealth;
@@ -44,36 +42,38 @@ public class EnemyAi : MonoBehaviourPunCallbacks
         agent = GetComponent<NavMeshAgent>();
     }
 
-    void Update() 
-    {
+    void Update() {
         targets = GameObject.FindGameObjectsWithTag("Player");
-
+        // Set enemy's target if a player enters a determined range
         if ((targets.Length >= 1) && (Vector2.Distance(transform.position, targets[0].transform.position) < minDistance)) currentTarget = targets[0];
         else if (!PhotonNetwork.OfflineMode && targets.Length >= 2 && Vector2.Distance(transform.position, targets[1].transform.position) < minDistance) currentTarget = targets[1];
         else currentTarget = null;
 
-
-        if (currentTarget == null)
-        {
+        // If the enemy doesnt have a target, they stay still
+        if (currentTarget == null){
             UpdateAnimation(Vector3.zero);
             agent.SetDestination(transform.position);
             rigidBod.constraints = RigidbodyConstraints2D.FreezeAll;
         }
-        else
-        {
-            if (!targetCollision)
-            {
-                rigidBod.constraints = RigidbodyConstraints2D.None;
-                Vector2 targetPosition = currentTarget.transform.position;
-              
-                agent.SetDestination(targetPosition);
+        else{
+            // Sets the enemy destination to the target (Navmesh).
+            if (!targetCollision){
+                if(currentTarget.gameObject.GetComponent<UIController>().isDead == false){
+                    rigidBod.constraints = RigidbodyConstraints2D.None;
+                    Vector2 targetPosition = currentTarget.transform.position;
 
-                Vector2 moveDirection = agent.desiredVelocity.normalized;
+                    agent.SetDestination(targetPosition);
 
-                UpdateAnimation(moveDirection);
+                    Vector2 moveDirection = agent.desiredVelocity.normalized;
 
-                transform.LookAt(targetPosition);
-                transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+                    UpdateAnimation(moveDirection);
+
+                    transform.LookAt(targetPosition);
+                    transform.Rotate(new Vector3(0, -90, 0), Space.Self);
+                }
+                else{
+                    currentTarget = null;
+                }
             }
         }
         transform.rotation = Quaternion.identity;
@@ -81,9 +81,8 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine)
-        {
-
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine){
+            // Set agents destination to its own to stop movement (Navmesh)
             agent.SetDestination(transform.position);
 
             Vector2 triggerPosition = agent.desiredVelocity;
@@ -92,7 +91,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks
             Vector3 center = other.gameObject.GetComponent<Collider2D>().bounds.center;
 
             targetCollision = true;
-
+            // Enemies go back a little after attacking a player
             bool right = contactPoint.x > center.x;
             bool left = contactPoint.x < center.x;
             bool top = contactPoint.y > center.y;
@@ -110,46 +109,38 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
             //rigidBod.constraints = RigidbodyConstraints2D.FreezeAll;
             Invoke("FalseCollision", 0.25f);
-
         }
     }
-   
-    void FalseCollision()
-    {
+   // Set enemy collistion state to false
+    void FalseCollision(){
         targetCollision = false;
         //GetComponent<Rigidbody2D>().velocity = Vector3.zero;
         //rigidBod.constraints = RigidbodyConstraints2D.None;
     }
-
-    void UpdateAnimation(Vector3 moveDirection)
-    {
+    // Updates enemy's animation
+    void UpdateAnimation(Vector3 moveDirection){
         animatorController.SetBool("isWalkingDown", false);
         animatorController.SetBool("isWalkingUp", false);
         animatorController.SetBool("isWalkingRight", false);
         animatorController.SetBool("isWalkingLeft", false);
-        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y))
-        {
+        if (Mathf.Abs(moveDirection.x) > Mathf.Abs(moveDirection.y)){
             if (moveDirection.x > 0) animatorController.SetBool("isWalkingRight", true);
             else if (moveDirection.x < 0) animatorController.SetBool("isWalkingLeft", true);
         }
-        else
-        {
+        else{
             if (moveDirection.y > 0) animatorController.SetBool("isWalkingUp", true);
             else if (moveDirection.y < 0) animatorController.SetBool("isWalkingDown", true);
         }
     }
-
-    public void OnHit(int damageAmount, Vector2 knockbackDirection, float knockbackAmount)
-    {
+    // Enemies take damage. Takes the damage amount, the direction of the knockack and it's amount as parameters.
+    public void OnHit(int damageAmount, Vector2 knockbackDirection, float knockbackAmount){
         health -= damageAmount;
 
-        if (health <= 0)
-        {
+        if (health <= 0){
             photonView.RPC("DestroyEnemy", RpcTarget.All);
             PhotonNetwork.Instantiate(orbePrefab.name, gameObject.transform.position, Quaternion.identity);
         }
-        else
-        {
+        else{
             rb = GetComponent<Rigidbody2D>();
             rb.velocity = Vector2.zero;
             rb.AddForce(knockbackDirection * knockbackAmount, ForceMode2D.Impulse);
@@ -158,16 +149,14 @@ public class EnemyAi : MonoBehaviourPunCallbacks
 
         }
     }
-
-    private IEnumerator StopMovementAfterKnockback()
-    {
+    // Enemy stops after getting a knockback from a player's attack.
+    private IEnumerator StopMovementAfterKnockback(){
         yield return new WaitForSeconds(0.2f);
         rb.velocity = Vector2.zero;
         sprite.color = new Color(255, 255, 255, 255);
     }
-
-    public IEnumerator Freeze()
-    {
+    // Freeze enemy. 
+    public IEnumerator Freeze(){
         speed = 0.0f;
         animatorController.enabled = false;
         Debug.Log("AI Frozen");
@@ -175,6 +164,5 @@ public class EnemyAi : MonoBehaviourPunCallbacks
         animatorController.enabled = true;
         speed = 2.0f;
         Debug.Log("AI Moving");
-
     }
 }

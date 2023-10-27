@@ -1,24 +1,29 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class QueenOfClubsFreezeField : MonoBehaviour
+public class QueenOfClubsFreezeField : MonoBehaviourPunCallbacks
 {
-    public CircleCollider2D field;
-    // Update is called once per frame
+    public GameObject fieldPrefab;
+    // Update is called once per frame field.name
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.R)){
+        if (photonView.IsMine && Input.GetKeyDown(KeyCode.R))
+        {
             StartCoroutine(ActivateFreezeField());
         }
+        
     }
 
-    IEnumerator ActivateFreezeField(){
+    IEnumerator ActivateFreezeField()
+    {
         GetComponent<PlayerControl>().isAttacking = true;
-        CircleCollider2D AtrInstance = Instantiate(field, transform.position, Quaternion.identity);
+        GameObject fieldInstance = PhotonNetwork.Instantiate(fieldPrefab.name, transform.position, Quaternion.identity);
+        CircleCollider2D fieldCollider = fieldInstance.GetComponent<CircleCollider2D>();
         yield return new WaitForSeconds(3);
         Debug.Log("End Attack;");
-        Destroy(AtrInstance.gameObject);
+        PhotonNetwork.Destroy(fieldInstance);
         GetComponent<PlayerControl>().isAttacking = false;
     }
 }

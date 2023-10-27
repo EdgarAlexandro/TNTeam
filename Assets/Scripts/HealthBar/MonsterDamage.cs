@@ -32,7 +32,7 @@ public class MonsterDamage : MonoBehaviourPunCallbacks
 
     private void OnCollisionEnter2D(Collision2D other)
     {
-        if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine)
+        if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine && !other.gameObject.GetComponent<UIController>().isDead)
         {
             //Invoke("applyDamage", 0.0f);
             coroutine = applyDamage(other.gameObject.name);

@@ -12630,7 +12630,11 @@ MonoBehaviour:
   joinRoomWindow: {fileID: 1459924314}
   lobbyWindow: {fileID: 1583335994}
   createRoomBtn: {fileID: 1552783429}
+  playerNameCreate: {fileID: 1304614195}
+  roomNameCreate: {fileID: 851684657}
   joinRoomBtn: {fileID: 1185008982}
+  playerNameJoin: {fileID: 1230680688}
+  roomNameJoin: {fileID: 1495608809}
   startGameBtn: {fileID: 43323175}
   playerTextList: {fileID: 1747390521}
   closeRoomBtn: {fileID: 196415212}
@@ -12639,6 +12643,11 @@ MonoBehaviour:
   characterSelectWindow: {fileID: 673393336}
   p1: 
   p2: 
+  ReinaCorazones: {fileID: 1609901886}
+  ReyDiamantes: {fileID: 2000549745}
+  ReinaTreboles: {fileID: 2121170290}
+  ReyPicas: {fileID: 206339197}
+  acceptCharacterSelection: {fileID: 815544220}
 --- !u!114 &2009687053
 MonoBehaviour:
   m_ObjectHideFlags: 0

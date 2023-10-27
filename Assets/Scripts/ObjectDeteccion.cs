@@ -16,6 +16,7 @@ public class ObjectDeteccion : MonoBehaviourPunCallbacks
     private Vector2 objectPosition = new();
     private string currentSceneName = null;
     private DropManager drm = null;
+    private PersistenceManager pm = null;
 
     // Remote Procedure that destroys the object for all players
     [PunRPC]
@@ -35,6 +36,7 @@ public class ObjectDeteccion : MonoBehaviourPunCallbacks
     void Start()
     {
         drm = DropManager.Instance;
+        pm = PersistenceManager.Instance;
         objectPosition = transform.position;
         currentSceneName = SceneManager.GetActiveScene().name;
         tag = gameObject.tag;
@@ -57,7 +59,7 @@ public class ObjectDeteccion : MonoBehaviourPunCallbacks
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.CompareTag("Player") && this.CompareTag("Orbe")) || (other.CompareTag("Player") && other.GetComponent<InventoryController>().inventory.items.Count < other.GetComponent<InventoryController>().inventory.maxItems))
+        if ((other.CompareTag("Player") && this.CompareTag("Llave")) || (other.CompareTag("Player") && this.CompareTag("Orbe") && pm.CurrentMagic < 100) || (other.CompareTag("Player") && other.GetComponent<InventoryController>().inventory.items.Count < other.GetComponent<InventoryController>().inventory.maxItems))
         {
             // Sets the variable as the object that entered the trigger's transform
             jugador = other.transform;

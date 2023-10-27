@@ -59,6 +59,8 @@ MonoBehaviour:
   - ChangeColor
   - ReturnColor
   - IncreaseKeyCount
+  - RoomClosed
+  - ChangeCharacterString
   - UpdateAlivePlayers
   - DestroyPotion
   - RevivalHandler

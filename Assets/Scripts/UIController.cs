@@ -1,5 +1,5 @@
 /* Function: Control the UI values for all players
-   Author: Daniel Degollado Rodríguez, Edgar Alexandro Castillo Palacios and Carlos Alejandro Morales
+   Author: Daniel Degollado Rodrï¿½guez, Edgar Alexandro Castillo Palacios and Carlos Alejandro Morales
    Modification date: 27/10/2023 */
 
 using System.Collections;
@@ -163,6 +163,7 @@ public class UIController : MonoBehaviourPunCallbacks
         if (pm.CurrentHealth == 0){
             if (PhotonNetwork.OfflineMode){
                 Destroy(gameObject);
+                NetworkManager.instance.LoadScene("LoseScene");
             }else{
                 PlayerDied();               
                 if (GameController.AlivePlayers == 0){

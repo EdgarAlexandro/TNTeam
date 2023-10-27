@@ -36,7 +36,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
         animatorController = GetComponent<Animator>();
         //transform.position = startingPosition.initialValue;
     }
-
+   
     void Update()
     {
         if (isActive)
@@ -111,6 +111,8 @@ public class PlayerControl : MonoBehaviourPunCallbacks
         if (!photonView.IsMine)
             rig.isKinematic = true;
     }
+
+
 
     // Stop attack (used by animator)
     public void EndAttackAnimation()

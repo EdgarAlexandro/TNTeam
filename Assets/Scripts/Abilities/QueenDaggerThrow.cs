@@ -10,11 +10,13 @@ public class QueenDaggerThrow : MonoBehaviourPunCallbacks
     public int neededMagic = 10;
     private Vector2 projDirection = Vector2.down;
     public UIController uiController;
+    private MusicSFXManager musicSFXManager;
 
     // Start is called before the first frame update
     void Start()
     {
         projDirection = Vector2.down;
+        musicSFXManager = MusicSFXManager.Instance;
     }
 
     // Update is called once per frame
@@ -54,6 +56,8 @@ public class QueenDaggerThrow : MonoBehaviourPunCallbacks
         {
             if (PersistenceManager.Instance.CurrentMagic >= neededMagic)
             {
+                musicSFXManager.PlaySFX(MusicSFXManager.Instance.Lanza_Daga);
+                uiController.loseMagicValue(neededMagic);
                 photonView.RPC("throwDagger", RpcTarget.All);
             }
         }

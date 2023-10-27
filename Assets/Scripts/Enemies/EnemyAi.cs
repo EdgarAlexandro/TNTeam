@@ -1,5 +1,5 @@
 /* Function: Enemies AI for their movement
-   Author: Daniel Degollado Rodríguez
+   Author: Daniel Degollado Rodrï¿½guez
    Modification date: 27/10/2023 */
 using System.Collections;
 using System.Collections.Generic;
@@ -20,6 +20,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
     public int maxHealth;
     private Animator animatorController;
     private SpriteRenderer sprite;
+    private MusicSFXManager musicSFXManager;
     private Rigidbody2D rigidBod;
 
     NavMeshAgent agent;
@@ -38,7 +39,9 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
         rigidBod = GetComponent<Rigidbody2D>();
         animatorController = GetComponent<Animator>();
         health = maxHealth;
+        musicSFXManager = MusicSFXManager.Instance;
         sprite = GetComponent<SpriteRenderer>();
+
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -84,7 +87,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
         if (other.gameObject.CompareTag("Player") && other.gameObject.GetPhotonView().IsMine){
             // Set agents destination to its own to stop movement (Navmesh)
             agent.SetDestination(transform.position);
-
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Mordisco);
             Vector2 triggerPosition = agent.desiredVelocity;
             //Vector3 triggerPosition = transform.position;
             Vector3 contactPoint = triggerPosition;
@@ -138,6 +141,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
 
         if (health <= 0){
             photonView.RPC("DestroyEnemy", RpcTarget.All);
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Muerte_Nahual);
             PhotonNetwork.Instantiate(orbePrefab.name, gameObject.transform.position, Quaternion.identity);
         }
         else{

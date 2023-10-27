@@ -1,5 +1,5 @@
 /* Function: Determine which scenes are available for the Joker to spawn
-   Author: Daniel Degollado Rodríguez
+   Author: Daniel Degollado Rodrï¿½guez
    Modification date: 29/09/2023 */
 using System.Collections;
 using System.Collections.Generic;
@@ -12,7 +12,8 @@ public class JokerSpawn : MonoBehaviour{
 
     public List<string> availableScenes = new List<string>();
     public List<string> allScenePaths = new List<string>();
-    
+    private MusicSFXManager musicSFXManager;
+
     // Start is called before the first frame update
     private void Awake(){
         if (instance != null && instance != this){
@@ -22,6 +23,7 @@ public class JokerSpawn : MonoBehaviour{
         else{
             instance = this;
             DontDestroyOnLoad(this.gameObject);
+            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Joker_Sound);
         }
     }
 
@@ -31,6 +33,8 @@ public class JokerSpawn : MonoBehaviour{
         int numberOfScenesToEnable = 3;
 
         int totalScenes = SceneManager.sceneCountInBuildSettings;
+        musicSFXManager = MusicSFXManager.Instance;
+
 
        
         for (int i = 0; i < totalScenes; i++){

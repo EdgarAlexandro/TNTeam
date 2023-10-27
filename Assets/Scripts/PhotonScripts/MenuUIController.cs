@@ -49,7 +49,8 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         {
             instance = this;
         }
-
+        createRoomBtn.interactable = false;
+        joinRoomBtn.interactable = false;
     }
     #endregion
 

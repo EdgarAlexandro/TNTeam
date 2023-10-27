@@ -5,6 +5,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class ObjectController : MonoBehaviour
 {
@@ -20,7 +21,7 @@ public class ObjectController : MonoBehaviour
             if (transform.localScale.x < 0.01)
             {
                 reduccion = false;
-                Destroy(transform.parent.gameObject);
+                GetComponentInParent<PhotonView>().RPC("DestroyObject", RpcTarget.All);
             }
         }
     }
@@ -38,7 +39,7 @@ public class ObjectController : MonoBehaviour
             }
             else if (this.CompareTag("Llave"))
             {
-                collision.gameObject.GetComponent<UIController>().increaseKeyCount(1);
+                if(collision.GetComponent<PhotonView>().IsMine) collision.gameObject.GetComponent<PhotonView>().RPC("IncreaseKeyCount", RpcTarget.All, 1);
             }
             else if (this.CompareTag("Bomba"))
             {

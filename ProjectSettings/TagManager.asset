@@ -16,6 +16,7 @@ TagManager:
   - Pocion Revivir
   - Joker
   - SpawnPoint
+  - DeadCharacter
   layers:
   - Default
   - TransparentFX

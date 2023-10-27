@@ -52,6 +52,20 @@ MonoBehaviour:
   - SpawnEnemy
   - SpawnKey
   - DeathHandler
+  - DestroyBomb
+  - DestroyObject
+  - DestroyEnemy
+  - ChangeColor
+  - ReturnColor
+  - IncreaseKeyCount
+  - UpdateAlivePlayers
+  - DestroyPotion
+  - RevivalHandler
+  - GetColliders
+  - RevivePlayer
+  - throwDagger
+  - growField
+  - EnablePlayer
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

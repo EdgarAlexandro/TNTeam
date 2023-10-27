@@ -33,7 +33,6 @@ public class SceneTransition : MonoBehaviourPunCallbacks
                 if (CanTransition())
                 {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
-                    //GameController.instance.hasPlayersSpawned = false;
                 }
             }
             //playerStorage.initialValue = playerPosition;

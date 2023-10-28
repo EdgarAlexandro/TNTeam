@@ -11,12 +11,14 @@ public class ChargeAttack : MonoBehaviour
     public int chargeDmg = 1;
 
     public bool isChargeAttacking = false;
+    private MusicSFXManager musicSFXManager;
     //bool isAttacking = false;
     // Update is called once per frame
 
     void Start()
     {
         animatorController = GetComponent<Animator>();
+        musicSFXManager = MusicSFXManager.Instance;
     }
     void Update()
     {
@@ -41,18 +43,21 @@ public class ChargeAttack : MonoBehaviour
             {
                 isChargeAttacking = true;
                 chargeDmg = 6;
+                musicSFXManager.PlaySFX(MusicSFXManager.Instance.Carga_Espada);
                 //hacer dano 100
             }
             else if (timeDifference > 4f)
             {
                 isChargeAttacking = true;
                 chargeDmg = 4;
+                musicSFXManager.PlaySFX(MusicSFXManager.Instance.Carga_Espada);
                 //hacer dano 150
             }
             else if (timeDifference > 2f)
             {
                 isChargeAttacking = true;
                 chargeDmg = 2;
+                musicSFXManager.PlaySFX(MusicSFXManager.Instance.Carga_Espada);
                 //hacer dano 200
             }
         }

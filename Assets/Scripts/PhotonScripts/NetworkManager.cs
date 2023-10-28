@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using Photon.Realtime;
 
 public class NetworkManager : MonoBehaviourPunCallbacks
 {
@@ -41,7 +42,7 @@ public class NetworkManager : MonoBehaviourPunCallbacks
     }
 
     //Allows the player to switch between solo and multiplayer using photon offline mode
-    IEnumerator Reconnect(bool modeOffline)
+    public IEnumerator Reconnect(bool modeOffline)
     {
         PhotonNetwork.Disconnect();
         yield return new WaitForSeconds(0.05f);
@@ -49,14 +50,19 @@ public class NetworkManager : MonoBehaviourPunCallbacks
         yield return new WaitForSeconds(0.05f);
         PhotonNetwork.OfflineMode = modeOffline;
         yield return new WaitForSeconds(0.05f);
-        if (modeOffline) CreateRoom("testRoom");
+        if (modeOffline) CreateRoom("SoloPlayerRoom");
     }
     #endregion
 
     #region RoomLogic
     public void CreateRoom(string _name)
     {
-        PhotonNetwork.CreateRoom(_name);
+        // Max players per room set to 2
+        RoomOptions roomOptions = new()
+        {
+            MaxPlayers = 2,
+        };
+        PhotonNetwork.CreateRoom(_name, roomOptions);
     }
 
     //DELETE (purely informational)

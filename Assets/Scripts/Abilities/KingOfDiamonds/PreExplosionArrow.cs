@@ -5,6 +5,7 @@ using UnityEngine;
 public class PreExplosionArrow : MonoBehaviour
 {
     public CircleCollider2D explosion;
+
     // Start is called before the first frame update
     private void OnTriggerEnter2D(Collider2D other)
     {

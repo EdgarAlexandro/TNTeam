@@ -5,19 +5,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-public class CardInventoryController : MonoBehaviour
+using Photon.Pun;
+
+public class CardInventoryController : MonoBehaviourPunCallbacks
 {
     public Inventory inventory;
     public GameObject inventoryView;
     public List<Button> cardDisplayButtons;
     private List<CardData> inventoryCards;
     private bool isCardInventoryActive;
+    private UIController uiController;
+
+    private static CardInventoryController instance;
+    public static CardInventoryController Instance { get { return instance; } }
+
+    private void Awake()
+    {
+        if (instance != null && instance != this)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+
+    }
 
     // Start is called before the first frame update
     void Start(){
         isCardInventoryActive = false;
         inventoryCards = new List<CardData>();
-        CardDisplay();
+        //inventoryView = uiController.playerCanvas.transform.Find("CardInventory").gameObject;
+        //CardDisplay();
     }
 
     // Update is called once per frame
@@ -59,7 +80,7 @@ public class CardInventoryController : MonoBehaviour
         }
     }
 
-    // Add the selected card to the inventory
+    // Add the selected card to the inventory. Takes an object of  CardData type as a parameter.
     public void AddCardToInventory(CardData selectedCardData){
         // Check if the inventory hasn't reached it's limit
         if (inventory.cards.Count < inventory.maxCards){

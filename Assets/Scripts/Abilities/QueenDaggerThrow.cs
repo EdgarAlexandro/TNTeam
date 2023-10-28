@@ -1,19 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
-public class QueenDaggerThrow : MonoBehaviour
+public class QueenDaggerThrow : MonoBehaviourPunCallbacks
 {
-    public Rigidbody2D dagger;
+    public GameObject dagger;
     public float speed = 3;
     public int neededMagic = 10;
     private Vector2 projDirection = Vector2.down;
     public UIController uiController;
+    private MusicSFXManager musicSFXManager;
 
     // Start is called before the first frame update
     void Start()
     {
         projDirection = Vector2.down;
+        musicSFXManager = MusicSFXManager.Instance;
     }
 
     // Update is called once per frame
@@ -49,13 +52,22 @@ public class QueenDaggerThrow : MonoBehaviour
             }
         }
 
-        if (Input.GetKeyDown(KeyCode.R)){
+        if (photonView.IsMine && Input.GetKeyDown(KeyCode.R)) 
+        {
             if (PersistenceManager.Instance.CurrentMagic >= neededMagic)
             {
-                Rigidbody2D daggerInstance = Instantiate(dagger, transform.position, Quaternion.identity);
-                daggerInstance.velocity = projDirection * speed;
+                musicSFXManager.PlaySFX(MusicSFXManager.Instance.Lanza_Daga);
                 uiController.loseMagicValue(neededMagic);
+                photonView.RPC("throwDagger", RpcTarget.All);
             }
         }
+    }
+
+    [PunRPC]
+    public void throwDagger()
+    {
+        GameObject daggerInstanceObject = PhotonNetwork.Instantiate(dagger.name, transform.position, Quaternion.identity);
+        Rigidbody2D daggerInstance = daggerInstanceObject.GetComponent<Rigidbody2D>();
+        daggerInstance.velocity = projDirection * speed;
     }
 }

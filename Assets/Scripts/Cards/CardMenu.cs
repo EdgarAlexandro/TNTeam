@@ -66,6 +66,7 @@ public class CardMenu : MonoBehaviour
         }
         CardDisplay(randomCards);
     }
+
     // Shuffle the lists of available cards. Takes a list of card info objects as a parameter.
     public static List<CardInfo> Shuffle<CardInfo>(List<CardInfo> list){
         System.Random rng = new System.Random();

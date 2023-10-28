@@ -19,9 +19,13 @@ public class MenuUIController : MonoBehaviourPunCallbacks
 
     [Header("Create Room Menu")]
     public Button createRoomBtn = null;
+    public TMP_InputField playerNameCreate = null;
+    public TMP_InputField roomNameCreate = null;
 
     [Header("Join Room Menu")]
     public Button joinRoomBtn = null;
+    public TMP_InputField playerNameJoin = null;
+    public TMP_InputField roomNameJoin = null;
 
     [Header("Lobby")]
     public Button startGameBtn = null;
@@ -29,12 +33,19 @@ public class MenuUIController : MonoBehaviourPunCallbacks
     public Button closeRoomBtn = null;
     public Button leaveRoomBtn = null;
     public TextMeshProUGUI lobbyTitle = null;
+    private bool roomWasClosed = false;
+    private bool wasHost = false;
 
     [Header("Character Selection")]
     public GameObject characterSelectWindow = null;
     // Strings of characters prefabs for Photon.Instantiate
     public string p1 = "";
     public string p2 = "";
+    public Button ReinaCorazones = null;
+    public Button ReyDiamantes = null;
+    public Button ReinaTreboles = null;
+    public Button ReyPicas = null;
+    public Button acceptCharacterSelection = null;
 
     #region SingletonPattern
     public static MenuUIController instance = null;
@@ -49,9 +60,34 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         {
             instance = this;
         }
-
+        createRoomBtn.interactable = false;
+        joinRoomBtn.interactable = false;
     }
     #endregion
+
+    //Stops the host to start the game if one of the players hasnt picked a character or hasnt joined the room
+    private void Update()
+    {
+        if (!PhotonNetwork.OfflineMode && (characterSelectWindow.activeSelf || lobbyWindow.activeSelf ))
+        {
+            if(lobbyWindow.activeSelf && PhotonNetwork.CurrentRoom.PlayerCount < 2)
+            {
+                startGameBtn.interactable = false;
+            }
+            else
+            {
+                startGameBtn.interactable = true;
+            }
+            if(p1 == "" || p2 == "")
+            {
+                acceptCharacterSelection.interactable = false;
+            }
+            else
+            {
+                acceptCharacterSelection.interactable = true;
+            }
+        }
+    }
 
     //The player is connected to the Photon app
     public override void OnConnectedToMaster()
@@ -63,35 +99,39 @@ public class MenuUIController : MonoBehaviourPunCallbacks
     }
 
     //The client has clicked the button to join a room
+    //Gets the player name (nickname) and room name
     public void JoinRoom(TMP_InputField _roomName)
     {
         if (PhotonNetwork.IsConnected)
         {
             NetworkManager.instance.JoinRoom(_roomName.text);
-            photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
         }
     }
 
     //The host has clicked the button to create a room
+    //Gets the player name (nickname) and room name
     public void CreateRoom(TMP_InputField _roomName)
     {
         if (PhotonNetwork.IsConnected)
         {
-            lobbyWindow.SetActive(true);
-            createRoomWindow.SetActive(false);
             NetworkManager.instance.CreateRoom(_roomName.text);
-            photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
         }
     }
 
-    //The player (host or client) has joined a room
+    //The player host/client has created/joined a room
     public override void OnJoinedRoom()
     {
         //Only in multiplayer mode
         if (!PhotonNetwork.OfflineMode)
         {
-            photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+            createRoomWindow.SetActive(false);
             joinRoomWindow.SetActive(false);
+            PhotonNetwork.EnableCloseConnection = true;
+            photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+            playerNameCreate.text = "";
+            roomNameCreate.text = "";
+            playerNameJoin.text = "";
+            roomNameJoin.text = "";
             lobbyWindow.SetActive(true);
             if (PhotonNetwork.IsMasterClient)
             {
@@ -131,12 +171,23 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         }
     }
 
-    //Allows the host to close the room using OnMasterClientSwitched
+    //Allows the host to close the room using CloseConnection and OnLeftRoom
     public void CloseLobby()
     {
-        PhotonNetwork.LeaveRoom();
-        lobbyWindow.SetActive(false);
-        createRoomWindow.SetActive(true);
+        photonView.RPC("RoomClosed", RpcTarget.All);
+        foreach (Player player in PhotonNetwork.PlayerList)
+        {
+            if(!player.IsMasterClient) PhotonNetwork.CloseConnection(player);
+        }
+        PhotonNetwork.LeaveRoom();        
+    }
+
+    // Remote Procedure Call to update roomWasClosed to true to all players and keeps track of who the host was
+    [PunRPC]
+    public void RoomClosed()
+    {
+        roomWasClosed = true;
+        if (PhotonNetwork.IsMasterClient) wasHost = true;
     }
 
     //Allows the client to leave the room
@@ -145,30 +196,33 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         PhotonNetwork.LeaveRoom();
         lobbyWindow.SetActive(false);
         joinRoomWindow.SetActive(true);
-        photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
     }
 
-    //Called when the master client is switched and is in lobby (to also be eliminated from room)
-    public override void OnMasterClientSwitched(Player newMasterClient)
+    // Only used when players left the room because it was closed
+    // Takes players to a specific screen (depending on whether it was the host or client) and reconnects them to photon
+    public override void OnLeftRoom()
     {
-        if (PhotonNetwork.IsMasterClient && lobbyWindow.activeSelf)
+        if (roomWasClosed)
         {
-            PhotonNetwork.CurrentRoom.IsOpen = false;
-            PhotonNetwork.CurrentRoom.IsVisible = false;
-            PhotonNetwork.CurrentRoom.RemovedFromList = true;
-            foreach (Player player in PhotonNetwork.PlayerList)
-            {
-                PhotonNetwork.CloseConnection(player);
-            }
             lobbyWindow.SetActive(false);
-            joinRoomWindow.SetActive(true);
+            if (wasHost)
+            {
+                createRoomWindow.SetActive(true);
+            }
+            else
+            {
+                joinRoomWindow.SetActive(true);
+            }
+            StartCoroutine(NetworkManager.instance.Reconnect(false));
+            roomWasClosed = false;
+            wasHost = false;
         }
     }
 
     //Updates the info in lobby when player leaves
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        if (PhotonNetwork.InRoom) photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
     }
 
     // Remote Procedure Call to show the character selection window to all players
@@ -200,16 +254,60 @@ public class MenuUIController : MonoBehaviourPunCallbacks
 
     }
 
+    //Activates all the buttons of character select window when a new character is picked by player
+    private void ActivateButtons()
+    {
+        ReinaCorazones.interactable = true;
+        ReyDiamantes.interactable = true;
+        ReinaTreboles.interactable = true;
+        ReyPicas.interactable = true;
+    }
+
+    //Changes the character strings (p1 and p2) in photon network and prevents the player to pick the same character as their friend
+    [PunRPC]
+    public void ChangeCharacterString(int player, string character)
+    {
+        if (player == 1) p1 = character;
+        else p2 = character;
+
+        string otherPlayer;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            otherPlayer = p2;
+            
+        }
+        else
+        {
+            otherPlayer = p1;
+        }
+        ActivateButtons();
+        switch (otherPlayer)
+        {
+            case "Reina Corazones":
+                ReinaCorazones.interactable = false;
+                break;
+            case "Rey Diamantes":
+                ReyDiamantes.interactable = false;
+                break;
+            case "Reina Treboles":
+                ReinaTreboles.interactable = false;
+                break;
+            case "Rey Picas":
+                ReyPicas.interactable = false;
+                break;
+        }
+    }
+
     //Used by character images in character selection window to save the strings of character prefabs
     public void characterSelect(string character)
     {
         if (PhotonNetwork.IsMasterClient)
         {
-            p1 = character;
+            photonView.RPC("ChangeCharacterString", RpcTarget.All, 1, character);
         }
         else
         {
-            p2 = character;
+            photonView.RPC("ChangeCharacterString", RpcTarget.All, 2, character);
         }
     }
 

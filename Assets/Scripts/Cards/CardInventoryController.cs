@@ -38,7 +38,7 @@ public class CardInventoryController : MonoBehaviourPunCallbacks
         isCardInventoryActive = false;
         inventoryCards = new List<CardData>();
         //inventoryView = uiController.playerCanvas.transform.Find("CardInventory").gameObject;
-        CardDisplay();
+        //CardDisplay();
     }
 
     // Update is called once per frame

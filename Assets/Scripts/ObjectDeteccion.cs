@@ -59,11 +59,16 @@ public class ObjectDeteccion : MonoBehaviourPunCallbacks
 
     void OnTriggerEnter2D(Collider2D other)
     {
-        if ((other.CompareTag("Player") && this.CompareTag("Llave")) || (other.CompareTag("Player") && this.CompareTag("Orbe") && pm.CurrentMagic < 100) || (other.CompareTag("Player") && other.GetComponent<InventoryController>().inventory.items.Count < other.GetComponent<InventoryController>().inventory.maxItems))
+        if (other.CompareTag("Player") && other.GetComponent<PhotonView>().IsMine)
         {
-            // Sets the variable as the object that entered the trigger's transform
-            jugador = other.transform;
-            Invoke("stopFollowing", 0.4f);
+            UIController playerUIController = other.GetComponent<UIController>();
+            Inventory playerInventory = other.GetComponent<InventoryController>().inventory;
+            if (CompareTag("Llave") || (CompareTag("Orbe") && playerUIController.pm.CurrentMagic < 100) || (playerInventory.items.Count < playerInventory.maxItems))
+            {
+                // Sets the variable as the object that entered the trigger's transform
+                jugador = other.transform;
+                Invoke("stopFollowing", 0.4f);
+            }
         }
     }
 

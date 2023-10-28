@@ -19,7 +19,6 @@ public class Bridge : MonoBehaviour
     // Update is called once per frame 
     void Update()
     {
-        Debug.Log (pm.LeverCounter >= 1);
         if (pm.LeverCounter == 1)
         {
             

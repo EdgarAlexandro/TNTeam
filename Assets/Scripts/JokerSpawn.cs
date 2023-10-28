@@ -23,7 +23,8 @@ public class JokerSpawn : MonoBehaviour{
         else{
             instance = this;
             DontDestroyOnLoad(this.gameObject);
-            musicSFXManager.PlaySFX(MusicSFXManager.Instance.Joker_Sound);
+            musicSFXManager = MusicSFXManager.Instance;
+            
         }
     }
 
@@ -33,10 +34,10 @@ public class JokerSpawn : MonoBehaviour{
         int numberOfScenesToEnable = 3;
 
         int totalScenes = SceneManager.sceneCountInBuildSettings;
-        musicSFXManager = MusicSFXManager.Instance;
+        musicSFXManager.PlaySFX(MusicSFXManager.Instance.Joker_Sound);
 
 
-       
+
         for (int i = 0; i < totalScenes; i++){
             allScenePaths.Add(SceneUtility.GetScenePathByBuildIndex(i));
         }

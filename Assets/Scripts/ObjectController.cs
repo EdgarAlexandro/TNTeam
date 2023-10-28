@@ -34,33 +34,38 @@ public class ObjectController : MonoBehaviour
     // Checks if the player has touched the object´s sprite and acts according to the object/item
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Limited objects and unlimited orbs
-        if ((collision.CompareTag("Player") && this.CompareTag("Llave")) || (collision.CompareTag("Player") && this.CompareTag("Orbe") && pm.CurrentMagic < 100) || (collision.CompareTag("Player") && collision.GetComponent<InventoryController>().inventory.items.Count < collision.GetComponent<InventoryController>().inventory.maxItems))
+        if (collision.CompareTag("Player") && collision.GetComponent<PhotonView>().IsMine)
         {
-            reduccion = true;
-            if (this.CompareTag("Orbe"))
+            UIController playerUIController = collision.GetComponent<UIController>();
+            Inventory playerInventory = collision.GetComponent<InventoryController>().inventory;
+            // Limited objects/orbs and unlimited keys
+            if (CompareTag("Llave") || (CompareTag("Orbe") && playerUIController.pm.CurrentMagic < 100) || (playerInventory.items.Count < playerInventory.maxItems))
             {
-                collision.gameObject.GetComponent<UIController>().chargeMagicValue(25);
-            }
-            else if (this.CompareTag("Llave"))
-            {
-                if(collision.GetComponent<PhotonView>().IsMine) collision.gameObject.GetComponent<PhotonView>().RPC("IncreaseKeyCount", RpcTarget.All, 1);
-            }
-            else if (this.CompareTag("Bomba"))
-            {
-                collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().bomba);
-            }
-            else if (this.CompareTag("Pocion Curacion"))
-            {
-                collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PC);
-            }
-            else if (this.CompareTag("Pocion Magia"))
-            {
-                collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PM);
-            }
-            else if (this.CompareTag("Pocion Revivir"))
-            {
-                collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PR);
+                reduccion = true;
+                if (this.CompareTag("Orbe"))
+                {
+                    collision.gameObject.GetComponent<UIController>().chargeMagicValue(25);
+                }
+                else if (this.CompareTag("Llave"))
+                {
+                    if (collision.GetComponent<PhotonView>().IsMine) collision.gameObject.GetComponent<PhotonView>().RPC("IncreaseKeyCount", RpcTarget.All, 1);
+                }
+                else if (this.CompareTag("Bomba"))
+                {
+                    collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().bomba);
+                }
+                else if (this.CompareTag("Pocion Curacion"))
+                {
+                    collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PC);
+                }
+                else if (this.CompareTag("Pocion Magia"))
+                {
+                    collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PM);
+                }
+                else if (this.CompareTag("Pocion Revivir"))
+                {
+                    collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PR);
+                }
             }
         }
     }

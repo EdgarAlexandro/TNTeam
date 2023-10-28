@@ -74,7 +74,7 @@ public class InventoryController : MonoBehaviourPunCallbacks
         }
 
         // Change selected item
-        if (Input.GetKeyDown(KeyCode.Plus) && photonView.IsMine)
+        if (Input.GetKeyDown(KeyCode.P) && photonView.IsMine)
         {
             indexItemSeleccionado++;
         }

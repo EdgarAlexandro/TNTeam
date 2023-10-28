@@ -15,7 +15,7 @@ public class UIController : MonoBehaviourPunCallbacks
     //private SpriteRenderer sprite;
     public Barradellave keyBar;
     public MagicBar magicBar;
-    private PersistenceManager pm;
+    public PersistenceManager pm;
     public GameObject playerCanvas = null;
     public GameObject canvasGeneral = null;
     private DeathManager dm;

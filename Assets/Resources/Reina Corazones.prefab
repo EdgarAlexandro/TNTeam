@@ -284,6 +284,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   keyBar: {fileID: 0}
   magicBar: {fileID: 0}
+  pm: {fileID: 0}
   playerCanvas: {fileID: 0}
   canvasGeneral: {fileID: 0}
   isDead: 0

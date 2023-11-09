@@ -68,6 +68,7 @@ public class MusicSFXManager : MonoBehaviour
         }
 
         Load();
+
     }
 
     private void Update()
@@ -128,6 +129,7 @@ public class MusicSFXManager : MonoBehaviour
         menuMusic.Stop();
         levelMusic.Play();
     }
+
 
     public void ChangeVolume()
     {

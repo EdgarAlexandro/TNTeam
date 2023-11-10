@@ -103,9 +103,9 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0.6
-    functionName: PlaySFX
+    functionName: SoundEffect
     data: 
-    objectReferenceParameter: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
+    objectReferenceParameter: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
     floatParameter: 0
     intParameter: 0
     messageOptions: 0

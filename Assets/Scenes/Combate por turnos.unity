@@ -347,27 +347,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 237187636}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
+  m_Script: {fileID: 11500000, guid: 17f0c4fe192da3a41a1ef787d406b661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  menuMusic: {fileID: 0}
-  levelMusic: {fileID: 0}
-  Click_Button: {fileID: 0}
-  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
-  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
-  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
-  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
-  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
-  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
-  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
-  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
-  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
-  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
-  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
-  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
-  Shield: {fileID: 8300000, guid: 148df893ccc8e94468939f9af780261d, type: 3}
+  soundEffect: {fileID: 0}
 --- !u!1 &395488057
 GameObject:
   m_ObjectHideFlags: 0
@@ -387,7 +370,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &395488058
 RectTransform:
   m_ObjectHideFlags: 0
@@ -502,6 +485,139 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841579680d0976046abf3789a841ca20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &398772143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 398772145}
+  - component: {fileID: 398772144}
+  m_Layer: 5
+  m_Name: BGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &398772144
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398772143}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 3ed9acbd85c7f514590ec09a3a682cfd, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!224 &398772145
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 398772143}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00007499485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1831110779}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 960.0035, y: 540.0026}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &406916475
 GameObject:
   m_ObjectHideFlags: 0
@@ -586,6 +702,139 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &434300169
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 434300171}
+  - component: {fileID: 434300170}
+  m_Layer: 5
+  m_Name: ClickSound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &434300170
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434300169}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 97ff9ec88f7ec724fb4376c205fda838, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!224 &434300171
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 434300169}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.00007499485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1831110779}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 960.0035, y: 540.0026}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &554330400
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +914,6 @@ GameObject:
   - component: {fileID: 1191517181}
   - component: {fileID: 1191517183}
   - component: {fileID: 1191517182}
-  - component: {fileID: 1191517184}
   m_Layer: 0
   m_Name: Plantilla Rey de Diamantes 1
   m_TagString: Untagged
@@ -761,36 +1009,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1191517184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1191517180}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  menuMusic: {fileID: 0}
-  levelMusic: {fileID: 0}
-  Click_Button: {fileID: 0}
-  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
-  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
-  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
-  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
-  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
-  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
-  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
-  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
-  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
-  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
-  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
-  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
-  Shield: {fileID: 8300000, guid: 148df893ccc8e94468939f9af780261d, type: 3}
 --- !u!1 &1199183574
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,7 +1028,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1199183575
 RectTransform:
   m_ObjectHideFlags: 0
@@ -936,7 +1154,6 @@ GameObject:
   - component: {fileID: 1306779522}
   - component: {fileID: 1306779524}
   - component: {fileID: 1306779523}
-  - component: {fileID: 1306779525}
   m_Layer: 0
   m_Name: Plantilla La Llorona 1
   m_TagString: Untagged
@@ -1032,36 +1249,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1306779525
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1306779521}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  menuMusic: {fileID: 0}
-  levelMusic: {fileID: 0}
-  Click_Button: {fileID: 0}
-  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
-  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
-  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
-  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
-  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
-  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
-  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
-  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
-  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
-  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
-  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
-  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
-  Shield: {fileID: 8300000, guid: 148df893ccc8e94468939f9af780261d, type: 3}
 --- !u!1 &1621307743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1073,7 +1260,6 @@ GameObject:
   - component: {fileID: 1621307744}
   - component: {fileID: 1621307746}
   - component: {fileID: 1621307745}
-  - component: {fileID: 1621307747}
   m_Layer: 0
   m_Name: Plantilla Reina Treboles 1
   m_TagString: Untagged
@@ -1169,36 +1355,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &1621307747
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1621307743}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  menuMusic: {fileID: 0}
-  levelMusic: {fileID: 0}
-  Click_Button: {fileID: 0}
-  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
-  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
-  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
-  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
-  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
-  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
-  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
-  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
-  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
-  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
-  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
-  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
-  Shield: {fileID: 8300000, guid: 148df893ccc8e94468939f9af780261d, type: 3}
 --- !u!1 &1687127464
 GameObject:
   m_ObjectHideFlags: 0
@@ -1283,6 +1439,134 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1776893226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1776893228}
+  - component: {fileID: 1776893227}
+  m_Layer: 0
+  m_Name: Level
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &1776893227
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776893226}
+  m_Enabled: 0
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 764ed8ccbcbc97f4699da58bb47ead46, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1776893228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1776893226}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.55587626, y: 118.676125, z: 0.007952588}
+  m_LocalScale: {x: 2.180827, y: 2.180827, z: 2.180827}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1831110779}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1798402940
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,7 +1586,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1798402941
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1417,6 +1701,71 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 841579680d0976046abf3789a841ca20, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1831110777
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1831110779}
+  - component: {fileID: 1831110778}
+  m_Layer: 0
+  m_Name: SFXManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1831110778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831110777}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  menuMusic: {fileID: 398772144}
+  levelMusic: {fileID: 1776893227}
+  Click_Button: {fileID: 434300170}
+  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
+  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
+  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
+  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
+  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
+  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
+  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
+  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
+  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
+  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
+  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
+  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
+  Shield: {fileID: 0}
+--- !u!4 &1831110779
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1831110777}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.0035080612, y: -0.0026349444, z: -0.00007499485}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 398772145}
+  - {fileID: 1776893228}
+  - {fileID: 434300171}
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2137446693
 GameObject:
   m_ObjectHideFlags: 0
@@ -1533,24 +1882,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 2137446693}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
+  m_Script: {fileID: 11500000, guid: 17f0c4fe192da3a41a1ef787d406b661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  musicSlider: {fileID: 0}
-  sfxSlider: {fileID: 0}
-  menuMusic: {fileID: 0}
-  levelMusic: {fileID: 0}
-  Click_Button: {fileID: 0}
-  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
-  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
-  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
-  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
-  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
-  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
-  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
-  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
-  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
-  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
-  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
-  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
-  Shield: {fileID: 8300000, guid: 148df893ccc8e94468939f9af780261d, type: 3}
+  soundEffect: {fileID: 0}

@@ -118,7 +118,7 @@ public class UIController : MonoBehaviourPunCallbacks
     // Remote procedure call to modify a player's character when they die
     [PunRPC]
     public void DeathHandler(){
-        // Disabe player control
+        // Disable player control
         PlayerControl playerControl = GetComponent<PlayerControl>();
         playerControl.isActive = false;
         // Disable sprite renderer
@@ -175,6 +175,7 @@ public class UIController : MonoBehaviourPunCallbacks
             StartCoroutine(AlternateColors(player));
         }
     }
+
     /* Call death handler remote procedure call, spawn a thombstone when player dies
     and also callupdate alive players number remote procedure call */
     public void PlayerDied() {

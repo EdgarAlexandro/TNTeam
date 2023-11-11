@@ -8971,6 +8971,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1958304567}
     m_Modifications:
     - target: {fileID: 1421746298750123292, guid: ec8de7f1c7792ba4887d44cc25c90e7c, type: 3}
+      propertyPath: sceneToLoad
+      value: TurnBasedCombatTestScene
+      objectReference: {fileID: 0}
+    - target: {fileID: 1421746298750123292, guid: ec8de7f1c7792ba4887d44cc25c90e7c, type: 3}
       propertyPath: playerStorage
       value: 
       objectReference: {fileID: 11400000, guid: bbf06df8e5c89774daf1ea1c403cf0a0, type: 2}

@@ -220,6 +220,7 @@ public class UIController : MonoBehaviourPunCallbacks
             StartCoroutine(AlternateColors(player));
         }
     }
+
     /* Call death handler remote procedure call, spawn a thombstone when player dies
     and also callupdate alive players number remote procedure call */
     public void PlayerDied()

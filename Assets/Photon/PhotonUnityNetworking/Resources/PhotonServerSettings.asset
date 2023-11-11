@@ -69,6 +69,28 @@ MonoBehaviour:
   - throwDagger
   - growField
   - EnablePlayer
+  - SpawnPlayer
+  - getPlayers
+  - GetPlayers
+  - SetPlayerList
+  - UpdateCurrentPlayer
+  - StartTurn
+  - EndTurn
+  - InitializePlayers
+  - TakeDamage
+  - SetHealthBarValues
+  - SyncronizeP1HealthBarValue
+  - SyncronizeP2HealthBarValue
+  - SyncronizeP1HealthBarCurrentValue
+  - SyncronizeP2HealthBarCurrentValue
+  - TakeDamageTBC
+  - SelectTarget
+  - SyncronizeRandomIndex
+  - SetHealthBarCurrentValue
+  - SyncronizeRotation
+  - MoveTowardsPlayer
+  - SyncronizePosition
+  - DestroyObjectInNetwork
   - LoadClientData
   - OpenPauseMenu
   - LoadHealthAndMagic

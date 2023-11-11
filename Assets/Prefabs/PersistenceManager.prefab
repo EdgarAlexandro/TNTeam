@@ -44,9 +44,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ad6aff60f8b1cb43b3a6cf96ea45356, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CurrentScene: 
   CurrentHealth: 20
   MaxHealth: 20
   MaxMagic: 100
   CurrentMagic: 0
   MaxKeys: 1
   CurrentKeys: 0
+  LeverCounter: 0
+  ReinaCorazones: {fileID: 11400000, guid: 3e79f0f982e5442feb5686dbe15fa108, type: 2}
+  ReyPicas: {fileID: 11400000, guid: 23a62523e275d46199d52132d50d581d, type: 2}
+  ReinaTreboles: {fileID: 11400000, guid: 95ff111216cec404585f2703de842ad4, type: 2}
+  ReyDiamantes: {fileID: 11400000, guid: d3c205544cebd465b9fbda4cc1af51bb, type: 2}
+  items:
+  - {fileID: 11400000, guid: d35c2321cc3434a1e99198a71eb6d4b8, type: 2}
+  - {fileID: 11400000, guid: 5d3570fc6bf1a4e6d9be86d1176b04a0, type: 2}
+  - {fileID: 11400000, guid: 4e359a7c18a1343b8a0706f69001e2a4, type: 2}
+  - {fileID: 11400000, guid: 711c477d0cce34ef5a3dcda589193a4f, type: 2}

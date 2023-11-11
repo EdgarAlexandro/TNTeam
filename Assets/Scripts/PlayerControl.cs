@@ -24,6 +24,8 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     Animator animatorController = null;
     public Player photonPlayer = null;
 
+
+
     public bool isActive = true;
 
     void Awake()
@@ -34,6 +36,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     void Start()
     {
         animatorController = GetComponent<Animator>();
+       
         //transform.position = startingPosition.initialValue;
     }
    

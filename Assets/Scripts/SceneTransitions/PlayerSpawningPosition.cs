@@ -7,6 +7,11 @@ using UnityEngine;
 using Photon.Pun;
 
 public class PlayerSpawningPosition : MonoBehaviourPunCallbacks{
+    /*TODO la manera en la que se esta trabajando esto debe cambiar ya que afecta al guardado de partidas
+     * 
+     * 
+     * 
+     * 
     public GameObject[] spawnPoints;
     public GameObject[] players;
  
@@ -36,5 +41,5 @@ public class PlayerSpawningPosition : MonoBehaviourPunCallbacks{
                 } 
             }
         }
-    }
+    }*/
 }

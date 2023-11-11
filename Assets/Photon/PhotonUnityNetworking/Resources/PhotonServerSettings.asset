@@ -91,6 +91,10 @@ MonoBehaviour:
   - MoveTowardsPlayer
   - SyncronizePosition
   - DestroyObjectInNetwork
+  - LoadClientData
+  - OpenPauseMenu
+  - LoadHealthAndMagic
+  - SetDataInventoryClient
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

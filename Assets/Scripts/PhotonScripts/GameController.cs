@@ -7,19 +7,21 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class GameController : MonoBehaviourPunCallbacks
+public class GameController : MonoBehaviourPunCallbacks, IDataPersistence
 {
     // Singleton
     public static GameController instance = null;
     public static GameController Instance { get { return instance; } }
     //Have the players/characters spawned?
     public bool hasPlayersSpawned = false;
-    public static int AlivePlayers;
+    public bool isPaused = false;
+    public static int AlivePlayers = 0;
+    public List<Vector3> savedSpawnPositions = new();
 
     void Start()
     {
-        AlivePlayers = PhotonNetwork.PlayerList.Length;
-        Debug.Log(AlivePlayers);
+        //AlivePlayers = PhotonNetwork.PlayerList.Length;
+        AlivePlayers = 2;
     }
 
     private void Awake()
@@ -34,5 +36,16 @@ public class GameController : MonoBehaviourPunCallbacks
             instance = this;
             DontDestroyOnLoad(this.gameObject);
         }
+    }
+
+    //Save and load system
+    public void LoadData(GameData data)
+    {
+        this.savedSpawnPositions = data.playerPosition;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+
     }
 }

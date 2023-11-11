@@ -20,6 +20,7 @@ GameObject:
   - component: {fileID: 3566386310602570150}
   - component: {fileID: 2229290052322690591}
   - component: {fileID: 3206047229068731127}
+  - component: {fileID: 8216948367752621619}
   m_Layer: 0
   m_Name: Rey Diamantes
   m_TagString: Player
@@ -211,10 +212,12 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   keyBar: {fileID: 0}
   magicBar: {fileID: 0}
+  pm: {fileID: 0}
   playerCanvas: {fileID: 0}
   canvasGeneral: {fileID: 0}
   isDead: 0
   playerGameObject: {fileID: 0}
+  cardInventory: {fileID: 0}
 --- !u!114 &8902924034415464152
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -310,6 +313,36 @@ MonoBehaviour:
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
+--- !u!114 &8216948367752621619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 637370894801376161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a6a1ed3825febcd41a74c8561476c11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  musicSlider: {fileID: 0}
+  sfxSlider: {fileID: 0}
+  menuMusic: {fileID: 0}
+  levelMusic: {fileID: 0}
+  Click_Button: {fileID: 0}
+  Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
+  Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
+  Explosion: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}
+  Baston: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
+  Mordisco: {fileID: 8300000, guid: 7634055619c0293419bd31de36fdea7b, type: 3}
+  Muerte_Nahual: {fileID: 8300000, guid: df6d1c5464863c348a29836fd855af03, type: 3}
+  Caja_Rota: {fileID: 8300000, guid: e43d6dd73a4d87c4f8ecc0597a319b37, type: 3}
+  Campo_Fuerza: {fileID: 8300000, guid: 0d73c12eb6650cc438abe15e8a6297de, type: 3}
+  Daga: {fileID: 8300000, guid: 0ecc33255cc6d7b4aad7865b5f2908fb, type: 3}
+  Lanza_Daga: {fileID: 8300000, guid: dfdf6c0b6e50b8540956329d12e34be0, type: 3}
+  Joker_Sound: {fileID: 8300000, guid: c2db582513f5afb40b7c211bbddfd4f0, type: 3}
+  Carga_Espada: {fileID: 8300000, guid: a37f783e4768f884cbd2e94db43cbe13, type: 3}
+  Shield: {fileID: 8300000, guid: 148df893ccc8e94468939f9af780261d, type: 3}
 --- !u!1 &4429461078099097678
 GameObject:
   m_ObjectHideFlags: 0

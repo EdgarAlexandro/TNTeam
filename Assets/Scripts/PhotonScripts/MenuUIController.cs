@@ -291,7 +291,8 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     public void endCharacterSelection()
     {
         characterSelectWindow.SetActive(false);
-        if (PhotonNetwork.IsMasterClient) CloseLobby();
+        if (PhotonNetwork.IsMasterClient && !PhotonNetwork.OfflineMode) CloseLobby();
+        if (PhotonNetwork.OfflineMode) soloWindow.SetActive(true);
     }
 
     //Used by character selection window buttons to call the remote procedures

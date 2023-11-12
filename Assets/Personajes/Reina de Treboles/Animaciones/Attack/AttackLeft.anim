@@ -505,7 +505,7 @@ AnimationClip:
   m_HasMotionFloatCurves: 0
   m_Events:
   - time: 0
-    functionName: PlaySFX
+    functionName: CallSoundEffect
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: d9573ef02bb45484cb1e434d3d7d0913, type: 3}
     floatParameter: 0

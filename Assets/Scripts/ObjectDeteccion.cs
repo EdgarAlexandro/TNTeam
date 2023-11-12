@@ -63,7 +63,7 @@ public class ObjectDeteccion : MonoBehaviourPunCallbacks
         {
             UIController playerUIController = other.GetComponent<UIController>();
             Inventory playerInventory = other.GetComponent<InventoryController>().inventory;
-            if (CompareTag("Llave") || (CompareTag("Orbe") && playerUIController.pm.CurrentMagic < 100) || (playerInventory.items.Count < playerInventory.maxItems))
+            if (CompareTag("Palanca") || CompareTag("Llave") || (CompareTag("Orbe") && playerUIController.pm.CurrentMagic < 100) || (playerInventory.items.Count < playerInventory.maxItems))
             {
                 // Sets the variable as the object that entered the trigger's transform
                 jugador = other.transform;

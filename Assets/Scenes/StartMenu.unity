@@ -14383,6 +14383,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0a2844629e04747158aa466a56fc68df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  soloWindow: {fileID: 1820623400}
+  coOpWindow: {fileID: 307868104}
   createRoomWindow: {fileID: 1102363502}
   joinRoomWindow: {fileID: 243951976}
   lobbyWindow: {fileID: 1910632849}

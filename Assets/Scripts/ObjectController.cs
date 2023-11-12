@@ -12,10 +12,12 @@ public class ObjectController : MonoBehaviour
     bool reduccion = false;
     public float cambio = 0.01f;
     private PersistenceManager pm = null;
+    private DestructionManager dm = null;
 
     private void Start()
     {
         pm = PersistenceManager.Instance;
+        dm = DestructionManager.Instance;
     }
     void FixedUpdate()
     {
@@ -39,7 +41,7 @@ public class ObjectController : MonoBehaviour
             UIController playerUIController = collision.GetComponent<UIController>();
             Inventory playerInventory = collision.GetComponent<InventoryController>().inventory;
             // Limited objects/orbs and unlimited keys
-            if (CompareTag("Llave") || (CompareTag("Orbe") && playerUIController.pm.CurrentMagic < 100) || (playerInventory.items.Count < playerInventory.maxItems))
+            if (CompareTag("Palanca") || CompareTag("Llave") || (CompareTag("Orbe") && playerUIController.pm.CurrentMagic < 100) || (playerInventory.items.Count < playerInventory.maxItems))
             {
                 reduccion = true;
                 if (this.CompareTag("Orbe"))
@@ -65,6 +67,11 @@ public class ObjectController : MonoBehaviour
                 else if (this.CompareTag("Pocion Revivir"))
                 {
                     collision.gameObject.GetComponent<InventoryController>().inventory.AddItem(collision.GetComponent<InventoryController>().PR);
+                }
+                else if (this.CompareTag("Palanca"))
+                {
+                    PersistenceManager.Instance.LeverCounter++;
+                    dm.MarkAsDestroyed(gameObject.transform.parent.name);
                 }
             }
         }

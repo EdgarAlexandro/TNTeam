@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class SceneTransition : MonoBehaviourPunCallbacks
 {
     public string sceneToLoad;
-    public Vector2 playerPosition;
-    public VectorValue playerStorage;
+    public Vector2 nextPlayerPosition;
     public int playersNearby = 0;
+    public bool isNextSpawnVertical = false;
+
 
     public bool CanTransition()
     {
@@ -23,21 +23,25 @@ public class SceneTransition : MonoBehaviourPunCallbacks
         {
             if (PhotonNetwork.OfflineMode)
             {
-                playerStorage.initialValue = playerPosition;
                 SceneManager.LoadScene(sceneToLoad);
             }
             else
             {
                 playersNearby++;
-                Debug.Log(playersNearby);
                 if (CanTransition())
                 {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
                 }
             }
-            //playerStorage.initialValue = playerPosition;
-            //NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
-            //SceneManager.LoadScene(sceneToLoad);
+            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+            Vector2 lastPlayerPosition = nextPlayerPosition;
+
+            foreach (GameObject player in players)
+            {
+                player.transform.position = lastPlayerPosition;
+                if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1, 0);
+                else lastPlayerPosition += new Vector2(0, 1);
+            }
         }
     }
 
@@ -48,7 +52,6 @@ public class SceneTransition : MonoBehaviourPunCallbacks
             if (!PhotonNetwork.OfflineMode)
             {
                 playersNearby--;
-                Debug.Log(playersNearby);
             }
         }
     }

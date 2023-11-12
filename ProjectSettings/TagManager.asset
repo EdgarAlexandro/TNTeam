@@ -18,6 +18,7 @@ TagManager:
   - SpawnPoint
   - DeadCharacter
   - Canvas general
+  - Palanca
   layers:
   - Default
   - TransparentFX

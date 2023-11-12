@@ -13,6 +13,8 @@ using Photon.Realtime;
 public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
 {
     [Header("Canvas Windows")]
+    public GameObject soloWindow = null;
+    public GameObject coOpWindow = null;
     public GameObject createRoomWindow = null;
     public GameObject joinRoomWindow = null;
     public GameObject lobbyWindow = null;
@@ -97,6 +99,17 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
                 startGameBtn.interactable = true;
             }
             if (p1 == "" || p2 == "")
+            {
+                acceptCharacterSelection.interactable = false;
+            }
+            else
+            {
+                acceptCharacterSelection.interactable = true;
+            }
+        }
+        else
+        {
+            if (p1 == "")
             {
                 acceptCharacterSelection.interactable = false;
             }
@@ -278,6 +291,12 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     public void endCharacterSelection()
     {
         characterSelectWindow.SetActive(false);
+        if (PhotonNetwork.OfflineMode) soloWindow.SetActive(true);
+        else
+        {
+            coOpWindow.SetActive(true);
+            if (PhotonNetwork.IsMasterClient) CloseLobby();
+        }
     }
 
     //Used by character selection window buttons to call the remote procedures

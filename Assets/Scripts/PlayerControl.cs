@@ -17,13 +17,13 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     public float moveSpeed = 0.0f;
     public bool isAttacking = false;
     private bool isDefending = false;
+    public bool shieldSoundPlayed = false;
 
     [Header("Components")]
     public Rigidbody2D rig = null;
-    public VectorValue startingPosition = null;
     Animator animatorController = null;
     public Player photonPlayer = null;
-
+    private MusicSFXManager sfxManager;
 
 
     public bool isActive = true;
@@ -36,10 +36,9 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     void Start()
     {
         animatorController = GetComponent<Animator>();
-       
-        //transform.position = startingPosition.initialValue;
+        sfxManager = MusicSFXManager.Instance;
     }
-   
+
     void Update()
     {
         if (isActive)
@@ -97,6 +96,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
                 if (Input.GetKeyUp(KeyCode.Q))
                 {
                     isDefending = false;
+                    shieldSoundPlayed = false;
                     animatorController.SetBool("isDefending", false);
                 }
             }
@@ -115,7 +115,19 @@ public class PlayerControl : MonoBehaviourPunCallbacks
             rig.isKinematic = true;
     }
 
-
+    // Allows the animator to play sound effects using the SFXManager
+    public void CallSoundEffect(AudioClip clip)
+    {
+        if(clip.name == "Escudo Magico" || clip.name == "Escudo")
+        {
+            if(!shieldSoundPlayed) sfxManager.PlaySFX(clip);
+            shieldSoundPlayed = true;
+        }
+        else
+        {
+            sfxManager.PlaySFX(clip);
+        }
+    }
 
     // Stop attack (used by animator)
     public void EndAttackAnimation()

@@ -19,11 +19,14 @@ public class SceneTransition : MonoBehaviourPunCallbacks
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
+            Vector2 lastPlayerPosition = nextPlayerPosition;
             if (PhotonNetwork.OfflineMode)
             {
                 SceneManager.LoadScene(sceneToLoad);
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.transform.position = lastPlayerPosition;
             }
             else
             {
@@ -31,17 +34,16 @@ public class SceneTransition : MonoBehaviourPunCallbacks
                 if (CanTransition())
                 {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject player in players)
+                    {
+                        player.transform.position = lastPlayerPosition;
+                        if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1.2f, 0);
+                        else lastPlayerPosition += new Vector2(0, 1.3f);
+                    }
                 }
             }
-            GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-            Vector2 lastPlayerPosition = nextPlayerPosition;
 
-            foreach (GameObject player in players)
-            {
-                player.transform.position = lastPlayerPosition;
-                if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1, 0);
-                else lastPlayerPosition += new Vector2(0, 1);
-            }
         }
     }
 

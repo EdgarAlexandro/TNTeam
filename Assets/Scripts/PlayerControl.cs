@@ -44,7 +44,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
         if (isActive)
         {
             // If the player owns this character (multiplayer)
-            if (photonView.IsMine)
+            if (photonView.IsMine && !GameController.instance.isPaused)
             {
                 float xInput = Input.GetAxis("Horizontal");
                 float yInput = Input.GetAxis("Vertical");

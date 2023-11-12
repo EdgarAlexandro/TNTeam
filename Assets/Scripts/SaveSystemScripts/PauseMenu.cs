@@ -52,10 +52,23 @@ public class PauseMenu : MonoBehaviourPunCallbacks
 
     private void Update()
     {
+        if(Application.platform == RuntimePlatform.WebGLPlayer)
+        {
+            saveGameMenuButton.SetActive(false);
+        }
+        else
+        {
+            saveGameMenuButton.SetActive(true);
+        }
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            photonView.RPC("OpenPauseMenu", RpcTarget.All);
+            TogglePauseMenu();
         }
+    }
+
+    public void TogglePauseMenu()
+    {
+        photonView.RPC("OpenPauseMenu", RpcTarget.All);
     }
 
     public void SaveGame()

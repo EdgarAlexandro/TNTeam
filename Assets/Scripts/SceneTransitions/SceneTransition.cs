@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Photon.Pun;
-using Photon.Realtime;
 
 public class SceneTransition : MonoBehaviourPunCallbacks
 {
     public string sceneToLoad;
-    public Vector2 playerPosition;
-    public VectorValue playerStorage;
+    public Vector2 nextPlayerPosition;
     public int playersNearby = 0;
+    public bool isNextSpawnVertical = false;
+
 
     public bool CanTransition()
     {
@@ -19,25 +19,31 @@ public class SceneTransition : MonoBehaviourPunCallbacks
 
     public void OnTriggerEnter2D(Collider2D other)
     {
-        if(other.gameObject.CompareTag("Player"))
+        if (other.gameObject.CompareTag("Player"))
         {
+            Vector2 lastPlayerPosition = nextPlayerPosition;
             if (PhotonNetwork.OfflineMode)
             {
-                playerStorage.initialValue = playerPosition;
                 SceneManager.LoadScene(sceneToLoad);
+                GameObject player = GameObject.FindGameObjectWithTag("Player");
+                player.transform.position = lastPlayerPosition;
             }
             else
             {
                 playersNearby++;
-                Debug.Log(playersNearby);
                 if (CanTransition())
                 {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
+                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    foreach (GameObject player in players)
+                    {
+                        player.transform.position = lastPlayerPosition;
+                        if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1.2f, 0);
+                        else lastPlayerPosition += new Vector2(0, 1.3f);
+                    }
                 }
             }
-            //playerStorage.initialValue = playerPosition;
-            //NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
-            //SceneManager.LoadScene(sceneToLoad);
+
         }
     }
 
@@ -48,7 +54,6 @@ public class SceneTransition : MonoBehaviourPunCallbacks
             if (!PhotonNetwork.OfflineMode)
             {
                 playersNearby--;
-                Debug.Log(playersNearby);
             }
         }
     }

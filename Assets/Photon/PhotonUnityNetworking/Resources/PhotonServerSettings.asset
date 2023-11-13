@@ -34,41 +34,51 @@ MonoBehaviour:
   RunInBackground: 1
   StartInOfflineMode: 0
   RpcList:
+  - ChangeCharacterString
+  - ChangeColor
   - ClickRpc
-  - DestroyRpc
-  - DestroySpaceship
-  - Fire
-  - RespawnSpaceship
-  - LoadScene
-  - UpdatePlayerInfo
-  - InGame
-  - Init
-  - endCharacterSelection
-  - startCharacterSelection
-  - spawnObjectPhoton
-  - destroyBox
-  - DestroyBox
-  - DestroySpawner
-  - SpawnEnemy
-  - SpawnKey
-  - InitPlayerWithCharacter
   - DeathHandler
   - DestroyBomb
-  - DestroyObject
+  - DestroyBox
   - DestroyEnemy
-  - ChangeColor
-  - ReturnColor
-  - IncreaseKeyCount
-  - RoomClosed
-  - ChangeCharacterString
-  - UpdateAlivePlayers
+  - DestroyObject
   - DestroyPotion
-  - RevivalHandler
-  - GetColliders
-  - RevivePlayer
-  - throwDagger
+  - DestroyRpc
+  - DestroySpawner
+  - endCharacterSelection
   - growField
-  - EnablePlayer
+  - IncreaseKeyCount
+  - InGame
+  - Init
+  - InitializePlayers
+  - LoadClientData
+  - LoadHealthAndMagic
+  - LoadScene
+  - MoveTowardsPlayer
+  - OpenPauseMenu
+  - ReturnColor
+  - RevivalHandler
+  - RevivePlayer
+  - RoomClosed
+  - SelectTarget
+  - SetDataInventoryClient
+  - SetHealthBarCurrentValue
+  - SetHealthBarValues
+  - startCharacterSelection
+  - StartTurn
+  - SyncronizeP1HealthBarCurrentValue
+  - SyncronizeP1HealthBarValue
+  - SyncronizeP2HealthBarCurrentValue
+  - SyncronizeP2HealthBarValue
+  - SyncronizePosition
+  - SyncronizeRandomIndex
+  - SyncronizeRotation
+  - TakeDamage
+  - TakeDamageTBC
+  - throwDagger
+  - UpdateAlivePlayers
+  - UpdateCurrentPlayer
+  - UpdatePlayerInfo
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

@@ -23,23 +23,31 @@ public class UIController : MonoBehaviourPunCallbacks
     public GameObject playerGameObject;
     public GameObject cardInventory;
 
-    void Start(){
+    void Start()
+    {
         playerGameObject = gameObject;
         isDead = false;
         pm = PersistenceManager.Instance;
         dm = DeathManager.Instance;
 
-        if (photonView.IsMine){
+        //initialize player properties ("Magic and Health")
+        SetProps();
+
+        if (photonView.IsMine)
+        {
+
             // Assign player canvas depending on player status
-            if (PhotonNetwork.IsMasterClient){
+            if (PhotonNetwork.IsMasterClient)
+            {
                 playerCanvas = GameObject.Find("Canvas Player 1");
             }
-            else{
+            else
+            {
                 playerCanvas = GameObject.Find("Canvas Player 2");
             }
             playerCanvas.SetActive(true);
             // Define general canvas for data both players can see
-            canvasGeneral = GameObject.Find("Canvas general");
+            canvasGeneral = GameObject.FindGameObjectWithTag("Canvas general");
             //Llaves
             //keyBar = GameObject.Find("Contador de Llave").GetComponent<Barradellave>();
             // Set key values on general canvas
@@ -68,41 +76,65 @@ public class UIController : MonoBehaviourPunCallbacks
             CardInventoryController cardInventoryController = cardInventory.GetComponent<CardInventoryController>();
             cardInventoryController.inventoryView = playerCanvas.transform.Find("CardInventory").gameObject;
             GameObject carsDisplay = cardInventoryController.inventoryView.transform.Find("CardsDisplay").gameObject;
-            foreach (Transform child in carsDisplay.transform){
+            foreach (Transform child in carsDisplay.transform)
+            {
                 Button button = child.GetComponent<Button>();
                 cardInventoryController.cardDisplayButtons.Add(button);
             }
         }
     }
+
+    //Saves current health and magic in player custom properties for client to read and save data
+    public void SetProps()
+    {
+        ExitGames.Client.Photon.Hashtable properties = new ExitGames.Client.Photon.Hashtable
+        {
+            { "Health", pm.CurrentHealth },
+            { "Magic", pm.CurrentMagic }
+        };
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+    }
+
     // Charge magic 
-    public void chargeMagicValue(int value){
-        if (photonView.IsMine){
-            if (pm.CurrentMagic < pm.MaxMagic && pm.CurrentMagic + value < pm.MaxMagic){
+    public void chargeMagicValue(int value)
+    {
+        if (photonView.IsMine)
+        {
+            if (pm.CurrentMagic < pm.MaxMagic && pm.CurrentMagic + value < pm.MaxMagic)
+            {
                 pm.CurrentMagic += value;
             }
-            else{
+            else
+            {
                 pm.CurrentMagic = pm.MaxMagic;
             }
+            SetProps();
             magicBar.SetMagic(pm.CurrentMagic);
             magicBar.UpdateText(pm.CurrentMagic);
         }
     }
     // Lose magic
-    public void loseMagicValue(int value){
-        if (pm.CurrentMagic > 0){
+    public void loseMagicValue(int value)
+    {
+        if (pm.CurrentMagic > 0)
+        {
             pm.CurrentMagic -= value;
         }
+        SetProps();
         magicBar.SetMagic(pm.CurrentMagic);
         magicBar.UpdateText(pm.CurrentMagic);
 
     }
     // Remote procedure call to increase key value for all players
     [PunRPC]
-    public void IncreaseKeyCount(int value){
+    public void IncreaseKeyCount(int value)
+    {
         GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-        foreach (GameObject p in players){
+        foreach (GameObject p in players)
+        {
             UIController uiPlayer = p.GetComponent<UIController>();
-            if (p.GetComponent<PhotonView>().IsMine && uiPlayer.pm.CurrentKeys < uiPlayer.pm.MaxKeys){
+            if (p.GetComponent<PhotonView>().IsMine && uiPlayer.pm.CurrentKeys < uiPlayer.pm.MaxKeys)
+            {
                 uiPlayer.pm.CurrentKeys += value;
                 uiPlayer.keyBar.SetKeys(uiPlayer.pm.CurrentKeys);
                 uiPlayer.keyBar.UpdateText(uiPlayer.pm.CurrentKeys);
@@ -111,13 +143,15 @@ public class UIController : MonoBehaviourPunCallbacks
     }
     // Remote procedure call to update the amount of player alive
     [PunRPC]
-    public void UpdateAlivePlayers(int count){
+    public void UpdateAlivePlayers(int count)
+    {
         GameController.AlivePlayers = count;
         Debug.Log(GameController.AlivePlayers);
     }
     // Remote procedure call to modify a player's character when they die
     [PunRPC]
-    public void DeathHandler(){
+    public void DeathHandler()
+    {
         // Disabe player control
         PlayerControl playerControl = GetComponent<PlayerControl>();
         playerControl.isActive = false;
@@ -137,7 +171,8 @@ public class UIController : MonoBehaviourPunCallbacks
     }
     // Remote procedure call to modify a player's character when they revive
     [PunRPC]
-    public void RevivalHandler(){
+    public void RevivalHandler()
+    {
         // Enable player control
         PlayerControl playerControl = GetComponent<PlayerControl>();
         playerControl.isActive = true;
@@ -154,39 +189,53 @@ public class UIController : MonoBehaviourPunCallbacks
         // Update player's life status
         isDead = false;
     }
+
     // Function to deal damage to the player
-    public void TakeDamage(int damage, string player){
-        if(pm.CurrentHealth > 0){
+    public void TakeDamage(int damage, string player)
+    {
+        if (pm.CurrentHealth > 0)
+        {
             pm.CurrentHealth -= damage;
         }
         healthBar.SetHealth(pm.CurrentHealth);
-        if (pm.CurrentHealth == 0){
-            if (PhotonNetwork.OfflineMode){
+        SetProps();
+        if (pm.CurrentHealth == 0)
+        {
+            if (PhotonNetwork.OfflineMode)
+            {
                 Destroy(gameObject);
                 NetworkManager.instance.LoadScene("LoseScene");
-            }else{
-                PlayerDied();               
-                if (GameController.AlivePlayers == 0){
+            }
+            else
+            {
+                PlayerDied();
+                if (GameController.AlivePlayers == 0)
+                {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "LoseScene");
                 }
             }
         }
-        else{
+        else
+        {
             StartCoroutine(AlternateColors(player));
         }
     }
+
     /* Call death handler remote procedure call, spawn a thombstone when player dies
     and also callupdate alive players number remote procedure call */
-    public void PlayerDied() {
+    public void PlayerDied()
+    {
         photonView.RPC("DeathHandler", RpcTarget.All);
         dm.SpawnDeadPlayerPrefab(gameObject.transform.position);
-        if (GameController.AlivePlayers > 0) {
+        if (GameController.AlivePlayers > 0)
+        {
             photonView.RPC("UpdateAlivePlayers", RpcTarget.All, GameController.AlivePlayers - 1);
         }
     }
     /* Call revival handler remote procedure call, call update alive players remote procedure call
      and give 30% of health to the revived player*/
-    public void RevivePlayer() {
+    public void RevivePlayer()
+    {
         photonView.RPC("RevivalHandler", RpcTarget.All);
         photonView.RPC("UpdateAlivePlayers", RpcTarget.All, GameController.AlivePlayers + 1);
         pm.CurrentHealth += (int)(pm.MaxHealth * .30f);
@@ -194,18 +243,21 @@ public class UIController : MonoBehaviourPunCallbacks
     }
     // Remote procedure call to change player's color
     [PunRPC]
-    public void ChangeColor(string player){
+    public void ChangeColor(string player)
+    {
         GameObject playerGO = GameObject.Find(player);
         playerGO.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
     }
     // Remote procedure call to restore player's color
     [PunRPC]
-    public void ReturnColor(string player){
+    public void ReturnColor(string player)
+    {
         GameObject playerGO = GameObject.Find(player);
         playerGO.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
     }
     // Coroutine to alternate colors when players take damage
-    public IEnumerator AlternateColors(string player){
+    public IEnumerator AlternateColors(string player)
+    {
         photonView.RPC("ChangeColor", RpcTarget.All, player);
         yield return new WaitForSeconds(0.2f);
         photonView.RPC("ReturnColor", RpcTarget.All, player);

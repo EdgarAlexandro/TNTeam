@@ -323,6 +323,7 @@ MonoBehaviour:
   id: 0
   moveSpeed: 3
   isAttacking: 0
+  shieldSoundPlayed: 0
   rig: {fileID: 8371471303355500778}
   startingPosition: {fileID: 0}
   isActive: 1
@@ -356,10 +357,12 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   keyBar: {fileID: 0}
   magicBar: {fileID: 0}
+  pm: {fileID: 0}
   playerCanvas: {fileID: 0}
   canvasGeneral: {fileID: 0}
   isDead: 0
   playerGameObject: {fileID: 0}
+  cardInventory: {fileID: 0}
 --- !u!114 &3940773474371013059
 MonoBehaviour:
   m_ObjectHideFlags: 0

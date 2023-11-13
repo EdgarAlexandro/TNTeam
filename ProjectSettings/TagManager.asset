@@ -17,6 +17,8 @@ TagManager:
   - Joker
   - SpawnPoint
   - DeadCharacter
+  - Canvas general
+  - Palanca
   layers:
   - Default
   - TransparentFX

@@ -250,6 +250,7 @@ MonoBehaviour:
   id: 0
   moveSpeed: 3
   isAttacking: 0
+  shieldSoundPlayed: 0
   rig: {fileID: 4540491840027801035}
   startingPosition: {fileID: 11400000, guid: bbf06df8e5c89774daf1ea1c403cf0a0, type: 2}
   isActive: 1
@@ -284,6 +285,7 @@ MonoBehaviour:
   healthBar: {fileID: 0}
   keyBar: {fileID: 0}
   magicBar: {fileID: 0}
+  pm: {fileID: 0}
   playerCanvas: {fileID: 0}
   canvasGeneral: {fileID: 0}
   isDead: 0

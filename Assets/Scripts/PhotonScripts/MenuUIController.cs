@@ -10,12 +10,18 @@ using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class MenuUIController : MonoBehaviourPunCallbacks
+public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
 {
-    //Canvas sections
+    [Header("Canvas Windows")]
+    public GameObject soloWindow = null;
+    public GameObject coOpWindow = null;
     public GameObject createRoomWindow = null;
     public GameObject joinRoomWindow = null;
     public GameObject lobbyWindow = null;
+
+    [Header("Save and Load System")]
+    public Button continueSoloGame = null;
+    public Button continueCoOpGame = null;
 
     [Header("Create Room Menu")]
     public Button createRoomBtn = null;
@@ -62,8 +68,22 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         }
         createRoomBtn.interactable = false;
         joinRoomBtn.interactable = false;
+        continueSoloGame.interactable = false;
+        continueCoOpGame.interactable = false;
     }
     #endregion
+
+    //loads the selected characters from json
+    public void LoadData(GameData data)
+    {
+        this.p1 = data.charactersSelected[0];
+        this.p2 = data.charactersSelected[1];
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        
+    }
 
     //Stops the host to start the game if one of the players hasnt picked a character or hasnt joined the room
     private void Update()
@@ -78,7 +98,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks
             {
                 startGameBtn.interactable = true;
             }
-            if(p1 == "" || p2 == "")
+            if (p1 == "" || p2 == "")
             {
                 acceptCharacterSelection.interactable = false;
             }
@@ -86,6 +106,33 @@ public class MenuUIController : MonoBehaviourPunCallbacks
             {
                 acceptCharacterSelection.interactable = true;
             }
+        }
+        else
+        {
+            if (p1 == "")
+            {
+                acceptCharacterSelection.interactable = false;
+            }
+            else
+            {
+                acceptCharacterSelection.interactable = true;
+            }
+        }
+    }
+
+    //Checks if data file exists, if it doesnt you need to start a new game
+    //Function used by "Solo" and "Co-Op" buttons
+    public void ContinueGameButtons()
+    {
+        if (!DataPersistenceManager.instance.CheckFile())
+        {
+            continueSoloGame.interactable = false;
+            continueCoOpGame.interactable = false;
+        }
+        else
+        {
+            continueSoloGame.interactable = true;
+            continueCoOpGame.interactable = true;
         }
     }
 
@@ -225,6 +272,12 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         if (PhotonNetwork.InRoom) photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
     }
 
+    //Updates the saved data for the client when they join the room
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        if (PhotonNetwork.IsMasterClient) DataPersistenceManager.instance.PlayerJoined();
+    }
+
     // Remote Procedure Call to show the character selection window to all players
     [PunRPC]
     public void startCharacterSelection()
@@ -238,6 +291,8 @@ public class MenuUIController : MonoBehaviourPunCallbacks
     public void endCharacterSelection()
     {
         characterSelectWindow.SetActive(false);
+        if (PhotonNetwork.IsMasterClient && !PhotonNetwork.OfflineMode) CloseLobby();
+        if (PhotonNetwork.OfflineMode) soloWindow.SetActive(true);
     }
 
     //Used by character selection window buttons to call the remote procedures
@@ -245,7 +300,15 @@ public class MenuUIController : MonoBehaviourPunCallbacks
     {
         if (activeStatus)
         {
-            photonView.RPC("startCharacterSelection", RpcTarget.AllBuffered);
+            if (DataPersistenceManager.instance.isNewGame)
+            {
+                photonView.RPC("startCharacterSelection", RpcTarget.AllBuffered);
+            }
+            else
+            {
+                StartGame();
+            }
+            
         }
         else
         {
@@ -311,9 +374,9 @@ public class MenuUIController : MonoBehaviourPunCallbacks
         }
     }
 
-    //Changes the scene to "Main 1" to all connected players in room
+    //Changes the scene to the saved scene to all connected players in room (start scene: Main 1)
     public void StartGame()
     {
-        NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "Main 1");
+        NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, PersistenceManager.Instance.CurrentScene);
     }
 }

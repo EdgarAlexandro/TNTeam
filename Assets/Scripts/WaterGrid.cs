@@ -6,7 +6,7 @@ using UnityEngine.Tilemaps;
 public class WaterGrid : MonoBehaviour
 {
     public Tilemap waterTilemap;
-    public int damagePerSecond = 5; // Cantidad de daño por segundo
+    public int damagePerSecond = 5; // Cantidad de daï¿½o por segundo
     UIController uc;
     PlayerControl playc;
     public bool isPlayerOnBridge = false;
@@ -29,7 +29,7 @@ public class WaterGrid : MonoBehaviour
             playc = other.GetComponent<PlayerControl>();
             isPlayerInWater = true;
             StartCoroutine(DealDamage(other.name));
-            
+
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -44,34 +44,19 @@ public class WaterGrid : MonoBehaviour
     {
         float time = 0;
         float rate = 1 / 0.5f;
-       
-
-
+        float trueVelocity = playc.moveSpeed;
         while (time < 1 && isPlayerInWater)
         {
-            playc.moveSpeed = isPlayerOnBridge ? 3.0f : 1.5f; //Ajuste de velocidad 
+            playc.moveSpeed = isPlayerOnBridge ? trueVelocity : 1.5f; //Ajuste de velocidad 
             if (!isPlayerOnBridge) //Verifica si el jugador toca el agua
             {
                 uc.TakeDamage(damagePerSecond, player);
             }
-            
+
             time += Time.deltaTime * rate;
             yield return new WaitForSeconds(1.0f);
         }
-        playc.moveSpeed = 3.0f;
+        playc.moveSpeed = trueVelocity;
 
     }
-
-
-  
 }
-
-
-
-
-
-
-
-
-
-

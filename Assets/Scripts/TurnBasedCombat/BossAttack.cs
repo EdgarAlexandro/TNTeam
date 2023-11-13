@@ -12,6 +12,8 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
 {
     public float speed = 100f;
     public float damage = 5f;
+    public float damageMultiplier;
+    public float playerDefense;
     bool hasBeenDestroyed = false;
     private Vector3 playerPosition;
     private PersistenceManager pm;
@@ -21,6 +23,8 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
     public GameObject turnBasedCombatCanvas;
 
     void Start(){
+        damageMultiplier = GameObject.Find("TurnBasedCombatManager").GetComponent<TurnBasedCombatManager>().BossAttackMultiplier;
+        playerDefense = GameObject.Find("TurnBasedCombatManager").GetComponent<TurnBasedCombatManager>().playerDefenseMultiplier;
         pm = PersistenceManager.Instance;
         healthBars = GameObject.Find("HealthBars");
         dodgeMessage = GameObject.Find("DodgeMsg");
@@ -68,7 +72,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
             PhotonView photonView = other.gameObject.GetComponent<PhotonView>();
             if (photonView.IsMine) {  // If the player is local only them take damage.
                 if (pm.CurrentHealth > 0){
-                    pm.CurrentHealth -= 5;
+                    pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense);
                 }                
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.
                 if (PhotonNetwork.IsMasterClient) { // If attacked player is the master client, update the player 1's health bar with current health.

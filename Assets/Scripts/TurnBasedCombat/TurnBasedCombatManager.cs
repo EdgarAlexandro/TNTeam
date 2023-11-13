@@ -23,6 +23,11 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
 
     public GameObject canvas = null;
 
+    public float playerAttackMultiplier;
+    public float playerDefenseMultiplier;
+    public float BossAttackMultiplier;
+    public float BossDefenseMultiplier;
+
     public static TurnBasedCombatManager Instance { get; private set; }
 
     private void Awake()
@@ -48,7 +53,12 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         {
             photonView.RPC("StartTurn", RpcTarget.All);
         }
-    }
+
+    playerAttackMultiplier = 1;
+    playerDefenseMultiplier = 1;
+    BossAttackMultiplier = 1;
+    BossDefenseMultiplier = 1;
+}
     // Get the players in the photon network.
     [PunRPC]
     void InitializePlayers()

@@ -33,7 +33,7 @@ public class TurnBasedCardActions : MonoBehaviour
     
     public void JokersPrank()
     {
-
+        tbcm.photonView.RPC("UpdateBossMultipliers", RpcTarget.All);
     }
 
     [PunRPC]

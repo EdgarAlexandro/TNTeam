@@ -13,16 +13,20 @@ public class TurnBasedCombatActions : MonoBehaviour
 
     GameObject boss;
 
+    float playerDamageMult, bossDefenseMult;
+
     void Start()
     {
         tbc = TurnBasedCombatManager.Instance;
         boss = tbc.boss;
+        playerDamageMult = tbc.playerAttackMultiplier;
+        bossDefenseMult = tbc.BossDefenseMultiplier;
     }
     // Attack function. It takes the target and damage as parameters.
     public void Attack(GameObject target, int damage){
         if (target == boss){ // If target is boss, use a PunRPC to syncronize boss current health for all clients.
             PhotonView photonView = boss.GetComponent<PhotonView>();
-            photonView.RPC("TakeDamage", RpcTarget.All, damage);
+            photonView.RPC("TakeDamage", RpcTarget.All, (int)((damage*playerDamageMult)/bossDefenseMult));
         }
         else{
             PhotonView photonView = target.GetComponent<PhotonView>();       

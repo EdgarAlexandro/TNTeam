@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Photon.Pun;
+using KaimiraGames;
 
 public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
 {
@@ -27,6 +28,10 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     public float playerDefenseMultiplier;
     public float BossAttackMultiplier;
     public float BossDefenseMultiplier;
+
+    public WeightedList<int> weightedPlayers;
+    public int p1Health, p2Health;
+    private PersistenceManager pm;
 
     public static TurnBasedCombatManager Instance { get; private set; }
 
@@ -54,11 +59,13 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             photonView.RPC("StartTurn", RpcTarget.All);
         }
 
-    playerAttackMultiplier = 1;
-    playerDefenseMultiplier = 1;
-    BossAttackMultiplier = 1;
-    BossDefenseMultiplier = 1;
-}
+        pm = PersistenceManager.Instance;
+        playerAttackMultiplier = 1;
+        playerDefenseMultiplier = 1;
+        BossAttackMultiplier = 1;
+        BossDefenseMultiplier = 1;
+    }
+
     // Get the players in the photon network.
     [PunRPC]
     void InitializePlayers()
@@ -104,10 +111,33 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SelectTarget()
     {
+        // actualiza los valores de las vidas actuales de los jugadores
         if (PhotonNetwork.IsMasterClient)
         {
-            random = new System.Random();
-            randomIndex = random.Next(players.Count);
+            p1Health = pm.CurrentHealth;
+        }
+        else
+        {
+            p2Health = pm.CurrentHealth;
+        }
+
+        if (PhotonNetwork.IsMasterClient)
+        {
+            /*random = new System.Random();
+            randomIndex = random.Next(players.Count);*/
+            // maybe code
+            // crea una lista de los items con su indice y de peso pone la vida de los jugadores
+            List<WeightedListItem<int>> playerWeights = new();
+            {
+                new WeightedListItem<int>(0,p1Health);
+                new WeightedListItem<int>(1,p2Health);
+            };
+
+            // crea la lista con pesos y genera el valor del randomIndex
+            weightedPlayers = new WeightedList<int>(playerWeights);
+            randomIndex = weightedPlayers.Next();
+
+            // end maybe code
             photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
             tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
         }

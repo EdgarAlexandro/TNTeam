@@ -72,7 +72,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
             PhotonView photonView = other.gameObject.GetComponent<PhotonView>();
             if (photonView.IsMine) {  // If the player is local only them take damage.
                 if (pm.CurrentHealth > 0){
-                    pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense);
+                    pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense); // toma el ataque, lo multiplica por el multiplicador de ataque del jefe, y lo divide entre el multiplicador de defensa del jugador
                 }                
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.
                 if (PhotonNetwork.IsMasterClient) { // If attacked player is the master client, update the player 1's health bar with current health.

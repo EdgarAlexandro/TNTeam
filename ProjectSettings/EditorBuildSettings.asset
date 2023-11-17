@@ -50,4 +50,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TurnBasedCombatTestScene.unity
     guid: e17252b601bb9bd47971299536f55c18
+  - enabled: 1
+    path: Assets/Scenes/LoadingScreen.unity
+    guid: 1e4ef12d1edb946cab78a16d1fa87602
   m_configObjects: {}

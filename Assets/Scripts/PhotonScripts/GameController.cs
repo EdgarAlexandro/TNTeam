@@ -17,6 +17,9 @@ public class GameController : MonoBehaviourPunCallbacks, IDataPersistence
     public bool isPaused = false;
     public static int AlivePlayers = 0;
     public List<Vector3> savedSpawnPositions = new();
+    //Name of the saved file and password in API (WEBGL) used to load and save data used by MenuUIController and FileDataHandler
+    public string fileSaveName = "";
+    public string password = "";
 
     void Start()
     {

@@ -9,6 +9,7 @@ using UnityEngine;
 [System.Serializable]
 public class GameData
 {
+    public string password;
     public string scene;
     public List<int> playersHealth;
     public List<int> playersMagic;

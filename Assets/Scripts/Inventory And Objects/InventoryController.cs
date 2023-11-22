@@ -2,8 +2,6 @@
    Author: Edgar Alexandro Castillo Palacios
    Modification date: 14/10/2023 */
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using Photon.Pun;
@@ -28,44 +26,55 @@ public class InventoryController : MonoBehaviourPunCallbacks, IDataPersistence
 
     }
 
-    //TODO saves the inventory in game data json
     public void SaveData(ref GameData data)
     {
-        photonView.RPC("SetDataInventoryClient", RpcTarget.Others);
-        foreach(ItemData item in inventory.items)
+        if (PhotonNetwork.IsMasterClient && photonView.IsMine)
         {
-            if (PhotonNetwork.IsMasterClient) {
-                data.playerOneInventory.Add(item.name);
-            }
-        }
-        foreach (var player in PhotonNetwork.PlayerList)
-        {
-            if (!player.IsMasterClient && player.CustomProperties != null && player.CustomProperties.ContainsKey("Inventory"))
-            {
-                Debug.Log("Client has inventory " + player.CustomProperties["Inventory"]);
-                string input = (string)player.CustomProperties["Inventory"];
-                string[] splitWords = input.Split(new char[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
-                foreach (string word in splitWords)
-                {
-                    data.playerOneInventory.Add(word.Trim());
-                }
-            }
-        }
-    }
-
-    //TODO the client sends their inventory to master client to save it
-    [PunRPC]
-    public void SetDataInventoryClient()
-    {
-        if (!PhotonNetwork.IsMasterClient) {
-            string data = "";
+            data.playerOneInventory.Clear();
+            data.playerTwoInventory.Clear();
             foreach (ItemData item in inventory.items)
             {
-                data += item.name + " ";
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    data.playerOneInventory.Add(item.name);
+                }
             }
-            ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
-            properties["Inventory"] = data;
-            PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                if (!player.IsMasterClient && player.CustomProperties != null && player.CustomProperties.ContainsKey("Inventory"))
+                {
+                    string input = (string)player.CustomProperties["Inventory"];
+                    string[] splitWords = input.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string word in splitWords)
+                    {
+                        data.playerTwoInventory.Add(word.Trim());
+                    }
+                }
+            }
+
+            data.playerOneCardInventory.Clear();
+            data.playerTwoCardInventory.Clear();
+            CardInventoryController cardInvController = GameObject.Find("CardInventoryController").GetComponent<CardInventoryController>();
+
+            foreach (CardData card in cardInvController.inventory.cards)
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    data.playerOneCardInventory.Add(card.name);
+                }
+            }
+            foreach (var player in PhotonNetwork.PlayerList)
+            {
+                if (!player.IsMasterClient && player.CustomProperties != null && player.CustomProperties.ContainsKey("Cards"))
+                {
+                    string input = (string)player.CustomProperties["Cards"];
+                    string[] splitWords = input.Split(new char[] { '/' }, StringSplitOptions.RemoveEmptyEntries);
+                    foreach (string word in splitWords)
+                    {
+                        data.playerTwoCardInventory.Add(word.Trim());
+                    }
+                }
+            }
         }
     }
 
@@ -81,6 +90,7 @@ public class InventoryController : MonoBehaviourPunCallbacks, IDataPersistence
         imagenCanvasDetras = GameObject.Find("ItemImageSpaceBack");
         imagenCanvasCentro = GameObject.Find("ItemImageSpaceCenter");
         imagenCanvasDelante = GameObject.Find("ItemImageSpaceFront");
+        UpdateInventory();
     }
 
     private void Update()
@@ -170,6 +180,7 @@ public class InventoryController : MonoBehaviourPunCallbacks, IDataPersistence
                 Vector3 offset = new(1.5f, 1.5f, 1.5f);
                 offset += gameObject.transform.position;
                 inventory.DropItem(indexItemSeleccionado, offset);
+                UpdateInventory();
             }
 
             // Use item
@@ -213,7 +224,22 @@ public class InventoryController : MonoBehaviourPunCallbacks, IDataPersistence
                     default:
                         break;
                 }
+                UpdateInventory();
             }
         }
+    }
+
+    //Used by both players but important for client (not master)
+    //This function saves the names of each object (currently in inventory) in the custom properties (Photon) of the player 
+    public void UpdateInventory()
+    {
+        string data = "";
+        foreach (ItemData item in inventory.items)
+        {
+            data += item.name + "/";
+        }
+        ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
+        properties["Inventory"] = data;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
     }
 }

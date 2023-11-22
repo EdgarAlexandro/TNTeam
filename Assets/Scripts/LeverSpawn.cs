@@ -1,3 +1,7 @@
+/* Function: spawn levers upon entering a scene if they have'nt been collected
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 13/11/2023 */
+
 using System.Collections;
 using System.Collections.Generic;
 using Photon.Pun;

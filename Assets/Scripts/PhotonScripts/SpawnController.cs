@@ -15,7 +15,7 @@ public class SpawnController : MonoBehaviourPunCallbacks, IDataPersistence
 
     //public Transform[] spawnPositions = null;
     public List<Vector3> spawnPositions = new List<Vector3>();
-    public PlayerControl[] players = null;
+    //public PlayerControl[] players = null;
 
     [SerializeField] private int playerInGame = 0;
 
@@ -72,7 +72,7 @@ public class SpawnController : MonoBehaviourPunCallbacks, IDataPersistence
             }
             else
             {
-                players = new PlayerControl[PhotonNetwork.PlayerList.Length];
+                //players = new PlayerControl[PhotonNetwork.PlayerList.Length];
                 photonView.RPC("InGame", RpcTarget.AllBuffered);
             }
             GameController.instance.hasPlayersSpawned = true;

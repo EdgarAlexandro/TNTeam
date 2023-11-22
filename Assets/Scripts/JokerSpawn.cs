@@ -12,7 +12,6 @@ public class JokerSpawn : MonoBehaviour{
 
     public List<string> availableScenes = new List<string>();
     public List<string> allScenePaths = new List<string>();
-    private MusicSFXManager musicSFXManager;
 
     // Start is called before the first frame update
     private void Awake(){
@@ -22,22 +21,14 @@ public class JokerSpawn : MonoBehaviour{
         }
         else{
             instance = this;
-            DontDestroyOnLoad(this.gameObject);
-            musicSFXManager = MusicSFXManager.Instance;
-            
+            DontDestroyOnLoad(this.gameObject);            
         }
     }
 
     void Start(){
         // Randomly select available scenes
-
         int numberOfScenesToEnable = 3;
-
         int totalScenes = SceneManager.sceneCountInBuildSettings;
-        musicSFXManager.PlaySFX(MusicSFXManager.Instance.Joker_Sound);
-
-
-
         for (int i = 0; i < totalScenes; i++){
             allScenePaths.Add(SceneUtility.GetScenePathByBuildIndex(i));
         }

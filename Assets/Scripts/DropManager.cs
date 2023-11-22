@@ -47,6 +47,7 @@ public class DropManager : MonoBehaviourPunCallbacks, IDataPersistence
     //Save and load system
     public void LoadData(GameData data)
     {
+        //------------------------------------------------Dropped elements------------------------------------------------
         this.dropPositions = data.dropDatas;
     }
 

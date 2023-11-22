@@ -8,7 +8,7 @@ public class BridgeController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            WaterGrid waterGrid = FindObjectOfType<WaterGrid>();
+            WaterandLavaGrid waterGrid = FindObjectOfType<WaterandLavaGrid>();
             waterGrid.SetPlayerOnBridge(true);
         }
     }
@@ -17,7 +17,7 @@ public class BridgeController : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            WaterGrid waterGrid = FindObjectOfType<WaterGrid>();
+            WaterandLavaGrid waterGrid = FindObjectOfType<WaterandLavaGrid>();
             waterGrid.SetPlayerOnBridge(false);
         }
     }

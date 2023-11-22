@@ -13,6 +13,7 @@ public class Espada : MonoBehaviourPunCallbacks
     public int damage = 1;
     public float knockback = 5.0f;
 
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         string currentSceneName = SceneManager.GetActiveScene().name;
@@ -20,7 +21,7 @@ public class Espada : MonoBehaviourPunCallbacks
         // Check if the object the sword hit is a box
         if (other.CompareTag("Caja") && this.GetComponentInParent<Animator>().GetBool("isAttacking") && gameObject.GetComponentInParent<PhotonView>().IsMine)
         {
-            other.GetComponent<CajaRotaSpawn>().boxDestructionAux(currentSceneName);
+            StartCoroutine(CajaDestruida(other.gameObject,currentSceneName));
         }
 
         // Check if the object the sword hit is an enemy
@@ -49,5 +50,11 @@ public class Espada : MonoBehaviourPunCallbacks
             // Deals damage to the spawner
             spawnerComponent.OnHit(damage);
         }
+    }
+
+    IEnumerator CajaDestruida(GameObject Caja, string escena)
+    {
+        Caja.GetComponent<Animator>().Play("Caja destruida");
+        yield return new WaitForSeconds(0.40f);
     }
 }

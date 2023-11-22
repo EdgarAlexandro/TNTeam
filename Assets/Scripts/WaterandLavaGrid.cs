@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class WaterGrid : MonoBehaviour
+public class WaterandLavaGrid : MonoBehaviour
 {
     public Tilemap waterTilemap;
     public int damagePerSecond = 5; // Cantidad de da�o por segundo

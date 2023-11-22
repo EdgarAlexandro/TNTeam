@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
+using UnityEngine.SceneManagement;
 
 // Class that stores the info of the spawnable object (defined in unity editor)
 [System.Serializable]
@@ -83,9 +84,10 @@ public class CajaRotaSpawn : MonoBehaviourPunCallbacks
     }
 
     //Chooses to spawn a box or the joker
-    public void boxDestructionAux(string currentSceneName)
+    public void boxDestructionAux()
     {
         List<string> availableScenes = jk.availableScenes;
+        string currentSceneName = SceneManager.GetActiveScene().name;
         
 
         // Check if the current scene was selected as one of the scenes available for Joker spawning

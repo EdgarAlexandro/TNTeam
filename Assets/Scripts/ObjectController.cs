@@ -73,6 +73,7 @@ public class ObjectController : MonoBehaviour
                     PersistenceManager.Instance.LeverCounter++;
                     dm.MarkAsDestroyed(gameObject.transform.parent.name);
                 }
+                collision.gameObject.GetComponent<InventoryController>().UpdateInventory();
             }
         }
     }

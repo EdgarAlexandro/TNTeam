@@ -10,6 +10,7 @@ using UnityEngine.SceneManagement;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine.Networking;
+using Photon.Realtime;
 
 public class PauseMenu : MonoBehaviourPunCallbacks
 {
@@ -23,6 +24,7 @@ public class PauseMenu : MonoBehaviourPunCallbacks
     public GameObject alertWindow = null;
     public GameObject loadingAlert = null;
     private bool callingAPI = false;
+    private bool gameIsReseting = false;
     private readonly string API_URL = "https://apitnteam.edgar2208.repl.co";
 
     [Header("Player Canvas")]
@@ -38,6 +40,13 @@ public class PauseMenu : MonoBehaviourPunCallbacks
     [PunRPC]
     public void OpenPauseMenu()
     {
+        GameController.instance.isPaused = !GameController.instance.isPaused;
+        playerCanvas.SetActive(!playerCanvas.activeSelf);
+        pauseMenuWindow.SetActive(!pauseMenuWindow.activeSelf);
+    }
+
+    private void Update()
+    {
         if (playerCanvas == null)
         {
             if (PhotonNetwork.IsMasterClient)
@@ -49,13 +58,7 @@ public class PauseMenu : MonoBehaviourPunCallbacks
                 playerCanvas = GameObject.Find("Canvas Player 2");
             }
         }
-        GameController.instance.isPaused = !GameController.instance.isPaused;
-        playerCanvas.SetActive(!playerCanvas.activeSelf);
-        pauseMenuWindow.SetActive(!pauseMenuWindow.activeSelf);
-    }
 
-    private void Update()
-    {
         //The save system is only available to Masterclient
         if (!PhotonNetwork.IsMasterClient)
         {
@@ -63,8 +66,8 @@ public class PauseMenu : MonoBehaviourPunCallbacks
             codeSpace.SetActive(false);
         }
         //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        if (((saveGameCode.text.Length < 5 && GameController.instance.fileSaveName == "") || (passwordGameCode.text.Length < 5 && GameController.instance.password == "")) && Application.platform != RuntimePlatform.WebGLPlayer)
-        //if (((saveGameCode.text.Length < 5 && GameController.instance.fileSaveName == "") || (passwordGameCode.text.Length < 5 && GameController.instance.password == "")) && Application.platform == RuntimePlatform.WebGLPlayer)
+        if (((saveGameCode.text.Length < 5 && GameController.instance.fileSaveName == "") || (passwordGameCode.text.Length < 5 && GameController.instance.password == "")) && Application.platform == RuntimePlatform.WebGLPlayer)
+        //if (((saveGameCode.text.Length < 5 && GameController.instance.fileSaveName == "") || (passwordGameCode.text.Length < 5 && GameController.instance.password == "")) && Application.platform != RuntimePlatform.WebGLPlayer)
         {
             saveGameMenuButton.GetComponent<Button>().interactable = false;
         }
@@ -73,8 +76,8 @@ public class PauseMenu : MonoBehaviourPunCallbacks
             if (!callingAPI) saveGameMenuButton.GetComponent<Button>().interactable = true;
         }
         //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        //if (Application.platform != RuntimePlatform.WebGLPlayer || GameController.instance.fileSaveName != "")
-        if (Application.platform == RuntimePlatform.WebGLPlayer || GameController.instance.fileSaveName != "")
+        if (Application.platform != RuntimePlatform.WebGLPlayer || GameController.instance.fileSaveName != "")
+        //if (Application.platform == RuntimePlatform.WebGLPlayer || GameController.instance.fileSaveName != "")
         {
             codeSpace.SetActive(false);
         }
@@ -128,8 +131,8 @@ public class PauseMenu : MonoBehaviourPunCallbacks
     public void SaveGame()
     {
         //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        //if (Application.platform == RuntimePlatform.WebGLPlayer)
-        if (Application.platform != RuntimePlatform.WebGLPlayer)
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        //if (Application.platform != RuntimePlatform.WebGLPlayer)
         {
             callingAPI = true;
             saveGameMenuButton.GetComponent<Button>().interactable = false;
@@ -204,10 +207,15 @@ public class PauseMenu : MonoBehaviourPunCallbacks
         callingAPI = false;
     }
 
-    //Coroutine use to generate a delay to prevent destruction of photon before all players get the rpc
-    private IEnumerator DestructionDelay()
+    //destroys all elements in game and shows a loading screen to reload the start menu
+    [PunRPC]
+    public void ResetGameAndLoadMainScene()
     {
-        yield return new WaitForSeconds(0.5f);
+        PersistenceManager.Instance.CleanAllInventories();
+        gameIsReseting = true;
+        pauseMenuWindow.SetActive(false);
+        Destroy(GameObject.Find("EventSystem"));
+        SceneManager.LoadScene("LoadingScreen");
         Destroy(PersistenceManager.Instance.gameObject);
         Destroy(DestructionManager.Instance.gameObject);
         Destroy(DropManager.Instance.gameObject);
@@ -219,19 +227,20 @@ public class PauseMenu : MonoBehaviourPunCallbacks
         Destroy(CardInventoryController.Instance.gameObject);
         Destroy(SpawnController.instance.gameObject);
         Destroy(GameObject.Find("PrefabsController"));
-        Destroy(GameObject.Find("EventSystem"));
-        foreach (var player in GameObject.FindGameObjectsWithTag("Player")) Destroy(player);
+        foreach (var player in GameObject.FindGameObjectsWithTag("Player"))
+        {
+            player.GetComponent<InventoryController>().inventory.items.Clear();
+            Destroy(player);
+        }
         Destroy(GameObject.Find("Canvas general(Clone)"));
         PhotonNetwork.Disconnect();
         Destroy(NetworkManager.instance.gameObject);
-        SceneManager.LoadScene("LoadingScreen");
     }
 
-    //destroys all elements in game and shows a loading screen to reload the start menu
-    [PunRPC]
-    public void ResetGameAndLoadMainScene()
+    //In multiplayer, if a player leaves the room, sends the other one to the main menu
+    public override void OnPlayerLeftRoom(Player otherPlayer)
     {
-        StartCoroutine(DestructionDelay());
+        if (!gameIsReseting) ResetGame();
     }
 
     //Calls the rpc that resets the game

@@ -27,6 +27,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     [Header("Save and Load System")]
     public Button continueSoloGame = null;
     public Button continueCoOpGame = null;
+    public bool clientHasLoadedSelfData = false;
 
     [Header("WEBGL Save System")]
     public TMP_InputField saveGameCode = null;
@@ -90,6 +91,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     //loads the selected characters from json
     public void LoadData(GameData data)
     {
+        //------------------------------------------------Selected characters------------------------------------------------
         this.p1 = data.charactersSelected[0];
         this.p2 = data.charactersSelected[1];
     }
@@ -109,7 +111,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
 
         if (!PhotonNetwork.OfflineMode && (characterSelectWindow.activeSelf || lobbyWindow.activeSelf))
         {
-            if (lobbyWindow.activeSelf && PhotonNetwork.CurrentRoom.PlayerCount < 2)
+            if (lobbyWindow.activeSelf && PhotonNetwork.CurrentRoom.PlayerCount < 2 && !clientHasLoadedSelfData)
             {
                 startGameBtn.interactable = false;
             }
@@ -145,8 +147,8 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     public void ContinueGameButtonsVerification()
     {
         //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        if (!DataPersistenceManager.instance.CheckFile() && (Application.platform == RuntimePlatform.WebGLPlayer))
-        //if (!DataPersistenceManager.instance.CheckFile() && !(Application.platform == RuntimePlatform.WebGLPlayer))
+        if (!DataPersistenceManager.instance.CheckFile() && !(Application.platform == RuntimePlatform.WebGLPlayer))
+        //if (!DataPersistenceManager.instance.CheckFile() && (Application.platform == RuntimePlatform.WebGLPlayer))
         {
             continueSoloGame.interactable = false;
             continueCoOpGame.interactable = false;
@@ -165,8 +167,8 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
         {
             DataPersistenceManager.instance.LoadGame();
             //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-            //if (Application.platform != RuntimePlatform.WebGLPlayer) StartGame();
-            if (Application.platform == RuntimePlatform.WebGLPlayer) StartGame();
+            if (Application.platform != RuntimePlatform.WebGLPlayer) StartGame();
+            //if (Application.platform == RuntimePlatform.WebGLPlayer) StartGame();
         }
         else
         {
@@ -180,8 +182,8 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     public void ContinueGameButtonsActions()
     {
         //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        //if (Application.platform == RuntimePlatform.WebGLPlayer)
-        if (Application.platform != RuntimePlatform.WebGLPlayer)
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        //if (Application.platform != RuntimePlatform.WebGLPlayer)
         {
             webGLCodeWindow.SetActive(true);
             soloWindow.SetActive(false);
@@ -428,6 +430,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         if (PhotonNetwork.InRoom) photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        clientHasLoadedSelfData = false;
     }
 
     //Updates the saved data for the client when they join the room

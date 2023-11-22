@@ -11,7 +11,6 @@ public class SceneTransition : MonoBehaviourPunCallbacks
     public int playersNearby = 0;
     public bool isNextSpawnVertical = false;
 
-
     public bool CanTransition()
     {
         return playersNearby == GameController.AlivePlayers;
@@ -28,6 +27,7 @@ public class SceneTransition : MonoBehaviourPunCallbacks
                 GameObject player = GameObject.FindGameObjectWithTag("Player");
                 player.transform.position = lastPlayerPosition;
             }
+            //TODO En multiplayer no funciona correctamente el cambio de pos al entrar a escena (se ve como el otro player se transporta)
             else
             {
                 playersNearby++;
@@ -35,9 +35,17 @@ public class SceneTransition : MonoBehaviourPunCallbacks
                 {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
                     GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                    //TODO En multiplayer no debe de mover al jugador si esta muerto
                     foreach (GameObject player in players)
                     {
-                        player.transform.position = lastPlayerPosition;
+                        if (player.GetPhotonView().IsMine)
+                        {
+                            player.transform.position = lastPlayerPosition;
+                        }
+                        else
+                        {
+                            player.GetPhotonView().RPC("MoveClient", RpcTarget.Others, lastPlayerPosition);
+                        }
                         if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1.2f, 0);
                         else lastPlayerPosition += new Vector2(0, 1.3f);
                     }

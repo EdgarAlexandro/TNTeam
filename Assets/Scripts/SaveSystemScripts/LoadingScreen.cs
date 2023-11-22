@@ -1,5 +1,8 @@
+/* Function: waits for scene gameobjects to be destroyed, then loads main scene
+   Author: Edgar Alexandro Castillo Palacios
+   Modification date: 17/11/2023 */
+
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,7 +15,7 @@ public class LoadingScreen : MonoBehaviour
 
     private IEnumerator Loading()
     {
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSeconds(2);
         
         SceneManager.LoadScene("StartMenu");
     }

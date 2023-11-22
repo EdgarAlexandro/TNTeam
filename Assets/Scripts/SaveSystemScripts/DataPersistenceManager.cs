@@ -80,8 +80,8 @@ public class DataPersistenceManager : MonoBehaviourPunCallbacks
         this.isNewGame = false;
 
         //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-        //if (Application.platform == RuntimePlatform.WebGLPlayer)
-        if (Application.platform != RuntimePlatform.WebGLPlayer)
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        //if (Application.platform != RuntimePlatform.WebGLPlayer)
         {
             StartCoroutine(GetAPIFileData(GameController.instance.fileSaveName));
         }
@@ -129,11 +129,12 @@ public class DataPersistenceManager : MonoBehaviourPunCallbacks
             this.gameData = loadedData;
             foreach (IDataPersistence dataPersistenceObj in dataPersistenceObjects)
             {
-                dataPersistenceObj.LoadData(loadedData);
+                dataPersistenceObj.LoadData(gameData);
             }
             Debug.Log("Loaded API data");
-            //Called when data has loaded because of corutine use
-            if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient) MenuUIController.instance.StartGame();
+            if (!PhotonNetwork.IsMasterClient && PhotonNetwork.InRoom) photonView.RPC("UpdateClientStatusToMaster", RpcTarget.MasterClient);
+            //Called when data has loaded because of corutine use (only in solo player because players dont go to a lobby in there)
+            if (PhotonNetwork.InRoom && PhotonNetwork.IsMasterClient && PhotonNetwork.OfflineMode) MenuUIController.instance.StartGame();
         }
     }
 
@@ -148,10 +149,11 @@ public class DataPersistenceManager : MonoBehaviourPunCallbacks
         else
         {
             //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
-            //if (Application.platform == RuntimePlatform.WebGLPlayer)
-            if (Application.platform != RuntimePlatform.WebGLPlayer)
+            if (Application.platform == RuntimePlatform.WebGLPlayer)
+            //if (Application.platform != RuntimePlatform.WebGLPlayer)
             {
                 photonView.RPC("LoadClientData", RpcTarget.Others, GameController.instance.fileSaveName, "webgl");
+                StartCoroutine(GetAPIFileData(GameController.instance.fileSaveName));
             }
             else
             {
@@ -168,6 +170,7 @@ public class DataPersistenceManager : MonoBehaviourPunCallbacks
         if(modo == "vacio")
         {
             NewGame();
+            photonView.RPC("UpdateClientStatusToMaster", RpcTarget.MasterClient);
         }
         else if (modo == "webgl")
         {
@@ -180,7 +183,14 @@ public class DataPersistenceManager : MonoBehaviourPunCallbacks
             {
                 dataPersistenceObj.LoadData(gameData);
             }
+            photonView.RPC("UpdateClientStatusToMaster", RpcTarget.MasterClient);
         }
+    }
+
+    [PunRPC]
+    public void UpdateClientStatusToMaster()
+    {
+        MenuUIController.instance.clientHasLoadedSelfData = true;
     }
 
     //Calls all the SaveData functions in all scripts that implement it

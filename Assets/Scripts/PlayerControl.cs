@@ -1,4 +1,4 @@
-/* Function: controls the animations, shield, attack and movement of the player/character
+/* Function: controls the animations, shield, attack, sounds and movement of the player/character
    Author: Edgar Alexandro Castillo Palacios
    Modification date: 14/10/2023 */
 
@@ -31,6 +31,13 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     void Awake()
     {
         DontDestroyOnLoad(this.gameObject);
+    }
+
+    //RPC used by SceneTransition to move a player on scene change
+    [PunRPC]
+    public void MoveClient(Vector2 pos)
+    {
+        gameObject.transform.position = pos;
     }
 
     void Start()
@@ -109,7 +116,7 @@ public class PlayerControl : MonoBehaviourPunCallbacks
     {
         photonPlayer = player;
         id = player.ActorNumber;
-        SpawnController.instance.players[id - 1] = this;
+        //SpawnController.instance.players[id - 1] = this;
 
         if (!photonView.IsMine)
             rig.isKinematic = true;

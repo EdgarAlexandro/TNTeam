@@ -15,6 +15,7 @@ public class DestructionManager : MonoBehaviour, IDataPersistence
     //Save and load system
     public void LoadData(GameData data)
     {
+        //------------------------------------------------Destroyed elements------------------------------------------------
         this.destroyedElements = data.destroyedElements;
     }
 

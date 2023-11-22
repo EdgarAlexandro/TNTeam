@@ -44,6 +44,7 @@ public class GameController : MonoBehaviourPunCallbacks, IDataPersistence
     //Save and load system
     public void LoadData(GameData data)
     {
+        //------------------------------------------------Position------------------------------------------------
         this.savedSpawnPositions = data.playerPosition;
     }
 

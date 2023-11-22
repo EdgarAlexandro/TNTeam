@@ -11,6 +11,7 @@ public class InstantiatePrefabs : MonoBehaviourPunCallbacks
 {
     private static InstantiatePrefabs instance = null;
     public GameObject[] listOfPrefabs;
+    public GameObject loadingScreen = null;
 
     private void Awake()
     {
@@ -21,6 +22,8 @@ public class InstantiatePrefabs : MonoBehaviourPunCallbacks
         }
         else
         {
+            loadingScreen.SetActive(true);
+            loadingScreen.GetComponent<Canvas>().sortingOrder = 100;
             DontDestroyOnLoad(gameObject);
             instance = this;
         }
@@ -37,5 +40,12 @@ public class InstantiatePrefabs : MonoBehaviourPunCallbacks
                 PhotonNetwork.Instantiate(prefab.name, new Vector3(0, 0, 0), Quaternion.identity);
             }
         }
+        StartCoroutine(LoadingScreen());
+    }
+
+    IEnumerator LoadingScreen()
+    {
+        yield return new WaitForSeconds(2);
+        loadingScreen.SetActive(false);
     }
 }

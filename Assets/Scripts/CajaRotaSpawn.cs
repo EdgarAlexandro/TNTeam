@@ -80,6 +80,7 @@ public class CajaRotaSpawn : MonoBehaviourPunCallbacks
     public void SpawnJoker()
     {
         PhotonNetwork.Instantiate(joker, spawnPoint.position, Quaternion.identity);
+        musicSFXManager.PlaySFX(MusicSFXManager.Instance.Joker_Sound);
     }
 
     //Chooses to spawn a box or the joker

@@ -21,6 +21,8 @@ public class GameData
     public List<string> destroyedElements;
     public List<string> playerOneInventory;
     public List<string> playerTwoInventory;
+    public List<string> playerOneCardInventory;
+    public List<string> playerTwoCardInventory;
 
     //Constructor where we define the default values (when there's no data to load)
     public GameData()
@@ -36,5 +38,7 @@ public class GameData
         this.destroyedElements = new();
         this.playerOneInventory = new List<string> { };
         this.playerTwoInventory = new List<string> { };
+        this.playerOneCardInventory = new List<string> { };
+        this.playerTwoCardInventory = new List<string> { };
     }
 }

@@ -72,6 +72,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneToLoad: TestingScene
-  playerPosition: {x: 0, y: 0}
-  playerStorage: {fileID: 0}
+  nextPlayerPosition: {x: 0, y: 0}
   playersNearby: 0
+  isNextSpawnVertical: 0

@@ -18,11 +18,17 @@ public class BossHealth : MonoBehaviourPunCallbacks
         photonView.RPC("SetHealthBarValues", RpcTarget.All);
     }
 
-    [PunRPC]
     public void TakeDamage(int damage)
     {
         bossHealth -= damage;
+        photonView.RPC("SyncronizeBossHealth", RpcTarget.All, bossHealth);
         photonView.RPC("SetHealthBarCurrentValue", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void SyncronizeBossHealth(int currentBossHealth)
+    {
+        bossHealth = currentBossHealth; 
     }
 
     [PunRPC]

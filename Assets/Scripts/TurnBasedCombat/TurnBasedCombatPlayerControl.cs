@@ -10,7 +10,7 @@ using Photon.Pun;
 public class TurnBasedCombatPlayerControl : MonoBehaviourPunCallbacks
 {
     Animator animatorController;
-    public bool isActive = true;
+    public bool canBlock = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,22 +19,18 @@ public class TurnBasedCombatPlayerControl : MonoBehaviourPunCallbacks
     }
 
     void Update(){
-        if (isActive){
-            // If the player owns this character
-            if (photonView.IsMine){
-                // Use shield to avoid taking damage from boss attack
-                if (Input.GetKeyDown(KeyCode.Q)){
-                    animatorController.SetBool("isDefending", true);
-                }
-                if (Input.GetKeyUp(KeyCode.Q)){
-                    animatorController.SetBool("isDefending", false);
-                }
-            }
+        if (canBlock && photonView.IsMine && Input.GetKeyDown(KeyCode.Q))
+        {
+            // Use shield to avoid taking damage from boss attack
+            StartCoroutine("ShieldAction");
         }
     }
 
-    /*IEnumerator ActiveShield()
+    IEnumerator ShieldAction()
     {
-        yield return 
-    }*/
+        animatorController.SetBool("Defensa", true);
+        yield return new WaitForSeconds(0.5f);                  
+        animatorController.SetBool("Defensa", false);
+        canBlock = false;
+    }
 }

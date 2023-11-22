@@ -21,7 +21,14 @@ public class GameController : MonoBehaviourPunCallbacks, IDataPersistence
     void Start()
     {
         //AlivePlayers = PhotonNetwork.PlayerList.Length;
-        AlivePlayers = 2;
+        if (!PhotonNetwork.OfflineMode)
+        {
+            AlivePlayers = 2;
+        }
+        else
+        {
+            AlivePlayers = 1;
+        }
     }
 
     private void Awake()

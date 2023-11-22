@@ -79,6 +79,13 @@ MonoBehaviour:
   - UpdateAlivePlayers
   - UpdateCurrentPlayer
   - UpdatePlayerInfo
+  - SyncronizeP1HealthBarSprite
+  - SyncronizeP2HealthBarSprite
+  - SyncronizeTargetsGameObject
+  - SyncronizeAttackStatus
+  - AttackInitializing
+  - SetCorrespondingActionsMenu
+  - SyncronizeBossHealth
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

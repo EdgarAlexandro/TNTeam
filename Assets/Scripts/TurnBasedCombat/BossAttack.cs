@@ -10,40 +10,46 @@ using Photon.Pun;
 
 public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
-    public float speed = 100f;
-    public float damage = 5f;
-    bool hasBeenDestroyed = false;
+    public float force = 1.0f;
+    public int damage = 5;
     private Vector3 playerPosition;
     private PersistenceManager pm;
-    public TurnBasedCombatPlayersHealth tbcPH;
+    private TurnBasedCombatManager tbc;
+    private TurnBasedCombatPlayersHealth tbcPH;
+    private TurnBasedCombatPlayerDeath tbcPD;
     private GameObject healthBars;
-    public GameObject dodgeMessage;
-    public GameObject turnBasedCombatCanvas;
+    //public GameObject dodgeMessage;
+    //public GameObject turnBasedCombatCanvas;
+    public bool isHittingShield = false;
+    private GameObject playerObject;
+    private Rigidbody2D rigidBody;
+    public bool isMoving = false;    
 
-    void Start(){
+    void Start() {
+        rigidBody = GetComponent<Rigidbody2D>();
         pm = PersistenceManager.Instance;
+        tbc = TurnBasedCombatManager.Instance;
+        //tbcPD = GameObject.Find("TurnBasedCombatManager").GetComponent<TurnBasedCombatPlayerDeath>();
         healthBars = GameObject.Find("HealthBars");
-        dodgeMessage = GameObject.Find("DodgeMsg");
+        //dodgeMessage = GameObject.Find("DodgeMsg");
         tbcPH = healthBars.GetComponent<TurnBasedCombatPlayersHealth>();
     }
     // When the object is instantiated on the network, get the sender's info and point the attack towards them.
     public void OnPhotonInstantiate(PhotonMessageInfo info){
         if (info.Sender.IsLocal){
-            Debug.Log(info.Sender.NickName + " Created me");
-            GameObject playerObject = info.Sender.TagObject as GameObject; // Get the sender's tagObject that was set in CharacterAssignation as a gameobject.
-            Vector3 offset = playerObject.transform.position - transform.position; // Define offset.
-            transform.rotation = Quaternion.LookRotation(Vector3.forward, offset); // Rotate attack so its facing the targeted player.
-            Quaternion attackRotation = transform.rotation; // Store the rotation in a variable.
-            photonView.RPC("SyncronizeRotation", RpcTarget.All, attackRotation); // Call PunRPC so the attack's rotation is the same for all clients.
+            playerObject = info.Sender.TagObject as GameObject; // Get the sender's tagObject that was set in CharacterAssignation as a gameobject.
             playerPosition = playerObject.transform.position; // Get targeted player's position.
             photonView.RPC("SyncronizePosition", RpcTarget.All, playerPosition); // Call PunRPC so the targeted player's position is the same for all clients.
+            photonView.RPC("SyncronizeAttackStatus", RpcTarget.All, true); // Call PunRPC so the targeted player's position is the same for all clients.
         }
     }
-    //PunRPC to set the attack's rotation for all clients.
+
     [PunRPC]
-    public void SyncronizeRotation(Quaternion attackRotation){ 
-        transform.rotation = attackRotation;
+    public void SyncronizeAttackStatus(bool status)
+    {
+        isMoving = status;
     }
+
     //PunRPC to set the targeted player's position for all clients.
     [PunRPC]
     public void SyncronizePosition(Vector3 attackNewPosition){
@@ -51,39 +57,79 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
     }
 
     void Update(){
-        if (!hasBeenDestroyed){// If attack hasn't been destroyed call PunRPC so attack moves towards the targeted player for all clients.
-
-            photonView.RPC("MoveTowardsPlayer", RpcTarget.All);
+        if (isMoving){// If attack hasn't been destroyed call PunRPC so attack moves towards the targeted player for all clients.
+            MoveTowardsPlayer();
         }
     }
-    // PunRPC so attack moves towards the targeted player for all clients.
-    [PunRPC]
+    // Attack moves towards the targeted player for all clients.
     public void MoveTowardsPlayer() {
-        transform.position = Vector3.Lerp(transform.position, playerPosition, speed * Time.deltaTime);
+        gameObject.GetComponent<Rigidbody2D>().gravityScale = 0.0f;
+        rigidBody.AddForce((playerPosition - transform.position).normalized * force);
     }
     // Detect when the attack enters a player's trigger.
-    private void OnTriggerEnter2D(Collider2D other){
-        if (other.gameObject.CompareTag("Player")){
-            Debug.Log("Triggered");
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+        {
             PhotonView photonView = other.gameObject.GetComponent<PhotonView>();
-            if (photonView.IsMine) {  // If the player is local only them take damage.
-                if (pm.CurrentHealth > 0){
-                    pm.CurrentHealth -= 5;
-                }                
+            Debug.Log("Triggered");
+            if (photonView.IsMine)
+            {  // If the player is local only them take damage.
+                if (pm.CurrentHealth - damage > 0)
+                {
+                    pm.CurrentHealth -= damage;
+                }
+                else
+                {
+                    pm.CurrentHealth -= damage;
+                    other.gameObject.GetComponent<TurnBasedCombatPlayerDeath>().OnPlayerDeath();
+                }
+
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.
-                if (PhotonNetwork.IsMasterClient) { // If attacked player is the master client, update the player 1's health bar with current health.
-                    //PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
+
+                if (PhotonNetwork.IsMasterClient)
+                { // If attacked player is the master client, update the player 1's health bar with current health.
+                  //PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
                     tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
                 }
-                else{// If attacked player is not the master client, update the player 2's health bar with current health.
-                
+                else
+                {// If attacked player is not the master client, update the player 2's health bar with current health.
+
                     PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
                     tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
                 }
-                StartCoroutine("DestroyObject"); // Coroutine to destroy the attack's gameObject, it waits until alternate colors finishes its execution
+                //gameObject.layer = LayerMask.NameToLayer("NoCollision");
+                //StartCoroutine("DestroyObject"); // Coroutine to destroy the attack's gameObject, it waits until alternate colors finishes its execution
             }
+            gameObject.layer = LayerMask.NameToLayer("NoCollision");
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        if (other.gameObject.CompareTag("Shield"))
+        {
+            if (photonView.IsMine)
+            {
+                PhotonNetwork.Destroy(gameObject);
+            }
+            /*PhotonView photonView = other.transform.parent.gameObject.GetComponent<PhotonView>();
+            if (photonView.IsMine)
+            {
+                Debug.Log("Other player is local");
+                playerObject.GetComponent<TurnBasedCombatPlayerControl>().canBlock = false;
+                tbc.EndTurn();
+                PhotonNetwork.Destroy(gameObject);
+            }*/
+        }
+    }
+
+    private void OnBecameInvisible()
+    {
+        // The object became invisible, destroy it.
+        DestroyObject();
+    }
+
     // Remote procedure call to change player's color
     [PunRPC]
     public void ChangeColor(string player){
@@ -99,29 +145,17 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
     // Coroutine to alternate colors when players take damage
     public IEnumerator AlternateColors(string player){
         photonView.RPC("ChangeColor", RpcTarget.All, player);
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         photonView.RPC("ReturnColor", RpcTarget.All, player);
+        yield return new WaitForSeconds(0.1f);
     }
     // Coroutine to destroy the attack's gameObject,
-    public IEnumerator DestroyObject(){
-        yield return new WaitForSeconds(0.2f);
-        PhotonNetwork.Destroy(gameObject);
-        hasBeenDestroyed = true;
-        //dodgeMessage.enabled = false;
-    }
-
-    /*[PunRPC]
-    public void DestroyObjectInNetwork()
-    {
-        if (PhotonNetwork.IsMasterClient)
+    public void DestroyObject(){
+        if (photonView.IsMine)
         {
-            StartCoroutine("DestroyObject");
-        }
-    }*/
-
-    /*private void OnBecameInvisible()
-    {
-        PhotonNetwork.Destroy(gameObject);
-        //dodgeMessage.enabled = false;
-    }*/
+            PhotonNetwork.Destroy(gameObject);
+            playerObject.GetComponent<TurnBasedCombatPlayerControl>().canBlock = false;
+            tbc.EndTurn();
+        }  
+    }
 }

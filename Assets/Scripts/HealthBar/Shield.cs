@@ -8,20 +8,46 @@ using UnityEngine;
 
 public class Shield : MonoBehaviour
 {
-    // Tells the enemy it is hitting a shield (makes no damage)
+    // Tells the enemy it is hitting a shield (does no damage)
     private void OnCollisionEnter2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<MonsterDamage>().isHittingShield = true;
+            MonsterDamage monsterDamage = other.gameObject.GetComponent<MonsterDamage>();
+            if(monsterDamage != null)
+            {
+                monsterDamage.isHittingShield = true;
+            }
+            /*else
+            {
+                BossAttack bossAttack = other.gameObject.GetComponent<BossAttack>();
+                if(bossAttack != null)
+                {
+                    Debug.Log("HitSHield");
+                    bossAttack.isHittingShield = true;
+                }
+            }*/
+
         }
     }
-    // Tells the enemy it is not hitting a shield (makes damage)
+    // Tells the enemy it is not hitting a shield (does damage)
     private void OnCollisionExit2D(Collision2D other)
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            other.gameObject.GetComponent<MonsterDamage>().isHittingShield = false;
+            MonsterDamage monsterDamage = other.gameObject.GetComponent<MonsterDamage>();
+            if (monsterDamage != null)
+            {
+                monsterDamage.isHittingShield = false;
+            }
+            /*else
+            {
+                BossAttack bossAttack = other.gameObject.GetComponent<BossAttack>();
+                if (bossAttack != null)
+                {
+                    bossAttack.isHittingShield = false;
+                }
+            }*/
         }
     }
 }

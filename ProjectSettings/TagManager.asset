@@ -19,6 +19,8 @@ TagManager:
   - DeadCharacter
   - Canvas general
   - Palanca
+  - Shield
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -26,7 +28,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - NoCollision
   - 
   - 
   - 

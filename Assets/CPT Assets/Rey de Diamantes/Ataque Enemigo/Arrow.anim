@@ -21,25 +21,25 @@ AnimationClip:
   - curve:
     - time: 0
       value: {fileID: 21300000, guid: 4517e0a6b9b5774419928b6abeefd044, type: 3}
-    - time: 0.16666667
+    - time: 0.125
       value: {fileID: 21300000, guid: e77bd8f30e7c19346a400e6297f43c93, type: 3}
-    - time: 0.33333334
+    - time: 0.25
       value: {fileID: 21300000, guid: b8c5329c17383494d95413017813edb7, type: 3}
-    - time: 0.5
+    - time: 0.375
       value: {fileID: 21300000, guid: 746bc32bfd688f4488d7e37729d2411b, type: 3}
-    - time: 0.6666667
+    - time: 0.5
       value: {fileID: 21300000, guid: 3f99ef87780ac9b44a4772d4993b9b6e, type: 3}
-    - time: 0.8333333
+    - time: 0.625
       value: {fileID: 21300000, guid: f88bf383672d6ba42adb1c37bf0bc809, type: 3}
-    - time: 1
+    - time: 0.75
       value: {fileID: 21300000, guid: ff28c1a15f1c89c48ae67a01fbd35915, type: 3}
-    - time: 1.1666666
+    - time: 0.875
       value: {fileID: 21300000, guid: 916f916a793bf3443865d1f2bb1a61a1, type: 3}
     attribute: m_Sprite
     path: 
     classID: 212
     script: {fileID: 0}
-  m_SampleRate: 60
+  m_SampleRate: 80
   m_WrapMode: 0
   m_Bounds:
     m_Center: {x: 0, y: 0, z: 0}
@@ -67,7 +67,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 1.1833333
+    m_StopTime: 0.8875
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -94,7 +94,7 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
-  - time: 0.6666667
+  - time: 0.5
     functionName: SoundEffect
     data: 
     objectReferenceParameter: {fileID: 8300000, guid: b51f4f766f6e65941a881f07becef7fd, type: 3}

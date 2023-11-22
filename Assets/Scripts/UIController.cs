@@ -146,7 +146,6 @@ public class UIController : MonoBehaviourPunCallbacks
     public void UpdateAlivePlayers(int count)
     {
         GameController.AlivePlayers = count;
-        Debug.Log(GameController.AlivePlayers);
     }
     // Remote procedure call to modify a player's character when they die
     [PunRPC]

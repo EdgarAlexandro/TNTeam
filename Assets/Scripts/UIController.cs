@@ -31,7 +31,7 @@ public class UIController : MonoBehaviourPunCallbacks
         dm = DeathManager.Instance;
 
         //initialize player properties ("Magic and Health")
-        SetProps();
+        if (photonView.IsMine) SetProps();
 
         if (photonView.IsMine)
         {
@@ -120,7 +120,7 @@ public class UIController : MonoBehaviourPunCallbacks
         {
             pm.CurrentMagic -= value;
         }
-        SetProps();
+        if (photonView.IsMine) SetProps();
         magicBar.SetMagic(pm.CurrentMagic);
         magicBar.UpdateText(pm.CurrentMagic);
 
@@ -146,7 +146,6 @@ public class UIController : MonoBehaviourPunCallbacks
     public void UpdateAlivePlayers(int count)
     {
         GameController.AlivePlayers = count;
-        Debug.Log(GameController.AlivePlayers);
     }
     // Remote procedure call to modify a player's character when they die
     [PunRPC]
@@ -198,7 +197,7 @@ public class UIController : MonoBehaviourPunCallbacks
             pm.CurrentHealth -= damage;
         }
         healthBar.SetHealth(pm.CurrentHealth);
-        SetProps();
+        if (photonView.IsMine) SetProps();
         if (pm.CurrentHealth == 0)
         {
             if (PhotonNetwork.OfflineMode)

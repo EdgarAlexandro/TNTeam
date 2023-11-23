@@ -68,6 +68,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnPositions: []
-  players: []
   playerInGame: 0
   canvasPrefab: {fileID: 7734449726279995155, guid: 9f9ce257036c6fd4d828ccdafa426946, type: 3}

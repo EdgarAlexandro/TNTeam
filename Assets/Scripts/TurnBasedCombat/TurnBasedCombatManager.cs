@@ -18,7 +18,13 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     public List<GameObject> prefabList = new List<GameObject>();
     public List<Transform> spawnPositions = new List<Transform>();
     public List<Transform> bossSpawnPositions = new List<Transform>();
+
     TurnBasedCombatTargetHandler tbcTH;
+    TurnBasedCombatPlayerDeath tbcPD;
+    PersistenceManager pm;
+
+    public TurnBasedCombatActions tbcPA;
+
     int randomIndex;
     System.Random random;
 
@@ -48,16 +54,20 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update.
     void Start()
     {
+        pm = PersistenceManager.Instance;
         tbcTH = TurnBasedCombatTargetHandler.Instance;
+
         playersGameObject = GameObject.FindGameObjectsWithTag("Player").ToList();
         SpawnPlayer();
+
         photonView.RPC("InitializePlayers", RpcTarget.All);
+        canvas = tbcPA.SetCorrespondingActionsMenu(players);
+
         if (PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("StartTurn", RpcTarget.All);
@@ -82,6 +92,7 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             players.Add(newPlayer);
         }
     }
+
     // Starts turn for a player or boss. It activates the actions menu for the player that has the current turn.
     [PunRPC]
     void StartTurn()
@@ -93,20 +104,36 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
 
             if (currentPlayer.IsLocal)
             {
-                canvas.SetActive(true);
+                if(pm.CurrentHealth > 0)
+                {
+                    if (canvas != null)
+                    {
+                        canvas.SetActive(true);
+                    }
+                    else
+                    {
+                        Debug.Log("Canvas is null");
+                    }
+                }
+                else
+                {
+                    EndTurn();
+                }
             }
         }
         else
         {
+
             if (skipBossTurn)
             {
                 if (PhotonNetwork.OfflineMode)
                 {
-                    photonView.RPC("ReturnBossTurn", RpcTarget.All);
+                    skipBossTurn = false;
                 }
                 else
                 {
-                    skipBossTurn = false;
+                    photonView.RPC("ReturnBossTurn", RpcTarget.All);
+              
                 }
             }
             else
@@ -175,8 +202,23 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
                 tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
             }
         }
-        
+
+        /*if (players[randomIndex].IsLocal)
+        {
+            GameObject playerGameObject = players[randomIndex].tagObject as GameObject;
+            if (playerGameObject.GetComponent<TurnBasedCombatPlayerDeath>().isDead == false)
+            {
+                tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
+            }
+            else
+            {
+                Debug.Log("Dead");
+                BossTurn();
+            }
+        }*/
+
     }
+
     // PunRPC that makes all players have the same random index, so the same player is attacked. Takes the index as a parameter.
     [PunRPC]
     private void SyncronizeRandomIndex(int index)
@@ -189,7 +231,6 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         canvas.SetActive(false);
         // Move to next player
         currentPlayerIndex = (currentPlayerIndex + 1) % (players.Count + 1); 
-        Debug.Log(currentPlayerIndex);
 
         // Notify all clients of the new turn
         photonView.RPC("UpdateCurrentPlayer", RpcTarget.All, currentPlayerIndex);  

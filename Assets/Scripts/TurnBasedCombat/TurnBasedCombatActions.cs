@@ -69,10 +69,6 @@ public class TurnBasedCombatActions : MonoBehaviour
     // Attack function. It takes the target and damage as parameters.
     public void CharacterAttack(GameObject character)
     {
-        /*GameObject reinaCorazones = GameObject.Find(character.name + "(Clone)");
-        Animator animator = reinaCorazones.GetComponent<Animator>();
-        animator.SetBool("Atacando", true);*/
-        //StartCoroutine(EndAnimation(animator));
         GameObject characterGameObject = GameObject.Find(character.name + "(Clone)");
         characterGameObject.GetComponent<AttackInitializer>().StartAttackAnimation();
     }

@@ -5,11 +5,17 @@ using Photon.Pun;
 
 public class TurnBasedCombatPlayerDeath : MonoBehaviourPunCallbacks
 {
+    private Animator animator;
+
+    void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
+
     public void OnPlayerDeath()
     {
         Debug.Log("PlayerDeath");
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        sprite.color = Color.black;
+        animator.SetBool("Muerte", true);
         photonView.RPC("UpdateAlivePlayers", RpcTarget.All);
     }
 

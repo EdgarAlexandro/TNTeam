@@ -9,12 +9,14 @@ public class BossHealth : MonoBehaviourPunCallbacks
     public Slider bossHealthBar;
     int randomIndex;
     System.Random random;
+    Animator animator;
 
     public int bossHealth = 10;
     private int bossHealthMaxValue = 10;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         photonView.RPC("SetHealthBarValues", RpcTarget.All);
     }
 
@@ -66,7 +68,8 @@ public class BossHealth : MonoBehaviourPunCallbacks
     {
        if( bossHealth <= 0)
         {
-            Destroy(gameObject);
+            animator.SetBool("Muerte", true);
+            //Destroy(gameObject);
         }
     }
 }

@@ -318,11 +318,11 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 156642223}
         m_TargetAssemblyTypeName: TurnBasedCombatActions, Assembly-CSharp
-        m_MethodName: AttackBtn
-        m_Mode: 1
+        m_MethodName: CharacterAttack
+        m_Mode: 2
         m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgument: {fileID: 7149901290714268603, guid: 4c45c0b659d02a64dbfdb7e8c3717e05, type: 3}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.GameObject, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -1311,6 +1311,7 @@ MonoBehaviour:
   playerHealthBars:
   - {fileID: 21300000, guid: 45704829bb41d734882530b14cc501ce, type: 3}
   - {fileID: 21300000, guid: 7ba831b94d6a44d4491f2a3b67f8bc41, type: 3}
+  - {fileID: 21300000, guid: 0f76d3a6a72849e439d7de70def8ffdd, type: 3}
 --- !u!114 &823456917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2199,7 +2200,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1565117543}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6.9, y: 3.99, z: -9.964815}
+  m_LocalPosition: {x: 5.93, y: 3.2, z: -9.964815}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2681,11 +2682,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -7970389649873854522, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: sceneViewId
-      value: 569
+      value: 564
       objectReference: {fileID: 0}
     - target: {fileID: -716860493088051094, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: bossHealth
-      value: 100
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -716860493088051094, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: bossHealthBar
@@ -2694,18 +2695,6 @@ PrefabInstance:
     - target: {fileID: 857314372249832192, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: m_RootOrder
       value: 6
-      objectReference: {fileID: 0}
-    - target: {fileID: 857314372249832192, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.26604253
-      objectReference: {fileID: 0}
-    - target: {fileID: 857314372249832192, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.3147939
-      objectReference: {fileID: 0}
-    - target: {fileID: 857314372249832192, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 2.4519
       objectReference: {fileID: 0}
     - target: {fileID: 857314372249832192, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: m_LocalPosition.x
@@ -2747,89 +2736,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 857314372249832192, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
-      propertyPath: m_ConstrainProportionsScale
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 857314372249832195, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: m_Name
       value: La Llorona
       objectReference: {fileID: 0}
-    - target: {fileID: 857314372249832195, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
-      propertyPath: m_TagString
-      value: Boss
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2070460812, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
 --- !u!1 &2070460807 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 857314372249832195, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
   m_PrefabInstance: {fileID: 2070460806}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2070460808
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070460807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6816faf81dd91a40a3419905dd23ace, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &2070460809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070460807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9b8c4a61274f60b4ea5fb4299cfdbf14, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  ShowLayerWeightsInspector: 1
-  ShowParameterInspector: 1
-  m_SynchronizeParameters:
-  - Type: 4
-    SynchronizeType: 0
-    Name: Atacando
-  m_SynchronizeLayers:
-  - SynchronizeType: 0
-    LayerIndex: 0
 --- !u!1 &2070460810 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 7594249326915929473, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
   m_PrefabInstance: {fileID: 2070460806}
   m_PrefabAsset: {fileID: 0}
---- !u!61 &2070460811
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2070460807}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0.49691725, y: 0.08814025}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 19.2, y: 10.8}
-    newSize: {x: 19.2, y: 10.8}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 6.1564627, y: 7.920941}
-  m_EdgeRadius: 0
 --- !u!1 &2110643961
 GameObject:
   m_ObjectHideFlags: 0
@@ -2882,6 +2805,7 @@ MonoBehaviour:
   prefabList:
   - {fileID: 7830635727711125535, guid: 679834814648afc448e6b6ffc7b940c8, type: 3}
   - {fileID: 7168172630525130551, guid: 40c26c9a0a48ae04c9cb4ad5328d558a, type: 3}
+  - {fileID: 7149901290714268603, guid: 4c45c0b659d02a64dbfdb7e8c3717e05, type: 3}
   spawnPositions:
   - {fileID: 1059085561}
   - {fileID: 1862730937}

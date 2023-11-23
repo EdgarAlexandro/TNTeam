@@ -28,12 +28,63 @@ public class TurnBasedCardActions : MonoBehaviour
     {
         
     }*/
+    public void Confusion()
+    {
+        if(PhotonNetwork.OfflineMode)
+        {
+            tbcm.skipP1Turn = true;
+        }
+        else
+        {
+            tbcm.photonView.RPC("ConfusionHandler", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    public void ConfusionHandler()
+    {
+        if (PhotonNetwork.IsMasterClient)
+        {
+            tbcm.skipP1Turn = true;
+        }
+        else
+        {
+            tbcm.skipP2Turn = true;
+        }
+    }
+
+    // Activa la variable skipBossTurn, que niega el turno del jefe
+    public void NotYet()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            tbcm.skipBossTurn = true;
+        }
+        else
+        {
+            tbcm.photonView.RPC("SkipBossTurn", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    public void SkipBossTurn()
+    {
+        tbcm.skipBossTurn = true;
+    }
 
 
-    
     public void JokersPrank()
     {
-        tbcm.photonView.RPC("UpdateBossMultipliers", RpcTarget.All);
+        if (PhotonNetwork.OfflineMode)
+        {
+            tbcm.BossAttackMultiplier += 0.25f;
+            tbcm.BossDefenseMultiplier += 0.3f;
+        }
+        else
+        {
+            tbcm.photonView.RPC("UpdateBossMultipliers", RpcTarget.All);
+        }
+        
     }
 
     [PunRPC]
@@ -46,31 +97,53 @@ public class TurnBasedCardActions : MonoBehaviour
 
     public void SanaSana() // esta funcion le agrega un 25% de salud a ambos jugadores, por lo que no es necesario revisar quien la uso
     {
-        // revisa si agregar la vida sobrepasa la vida maxima y agrega la vida acorde
-        if (pm.CurrentHealth + (pm.MaxHealth/4) <= pm.MaxHealth)
+        if (PhotonNetwork.OfflineMode)
         {
-            pm.CurrentHealth += pm.MaxHealth / 4;
+            if (pm.CurrentHealth + (pm.MaxHealth / 4) <= pm.MaxHealth)
+            {
+                pm.CurrentHealth += pm.MaxHealth / 4;
+            }
+            else
+            {
+                pm.CurrentHealth = pm.MaxHealth;
+            }
         }
         else
         {
-            pm.CurrentHealth = pm.MaxHealth;
-        }
+            if (pm.CurrentHealth + (pm.MaxHealth/4) <= pm.MaxHealth)
+            {
+                pm.CurrentHealth += pm.MaxHealth / 4;
+            }
+            else
+            {
+                pm.CurrentHealth = pm.MaxHealth;
+            }
 
-        // actualiza las health bars
-        if (PhotonNetwork.IsMasterClient)
-        { 
-            tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
+            // actualiza las health bars
+            if (PhotonNetwork.IsMasterClient)
+            { 
+                tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
+            }
+            else
+            {
+                tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
+            }
         }
-        else
-        {
-            tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-        }
+        // revisa si agregar la vida sobrepasa la vida maxima y agrega la vida acorde
+        
     }
 
     
     public void Sentinel()
     {
-        tbcm.photonView.RPC("updateplayerdefensemultiplier", RpcTarget.All);
+        if (PhotonNetwork.OfflineMode)
+        {
+            tbcm.playerDefenseMultiplier += 0.2f;
+        }
+        else
+        {
+            tbcm.photonView.RPC("updateplayerdefensemultiplier", RpcTarget.All);
+        }
     }
 
     [PunRPC]

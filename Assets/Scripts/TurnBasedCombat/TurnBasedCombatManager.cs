@@ -1,5 +1,5 @@
 /* Function: Manage the player and boss turns
-   Author: Daniel Degollado Rodríguez 
+   Author: Daniel Degollado Rodrï¿½guez 
    Modification date: 10/11/2023 */
 
 using System.Collections;
@@ -28,6 +28,10 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     public float playerDefenseMultiplier;
     public float BossAttackMultiplier;
     public float BossDefenseMultiplier;
+
+    public bool skipP1Turn;
+    public bool skipP2Turn;
+    public bool skipBossTurn;
 
     public WeightedList<int> weightedPlayers;
     public int p1Health, p2Health;
@@ -94,11 +98,33 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("Boss turn");
-            BossTurn();
+            if (skipBossTurn)
+            {
+                if (PhotonNetwork.OfflineMode)
+                {
+                    photonView.RPC("ReturnBossTurn", RpcTarget.All);
+                }
+                else
+                {
+                    skipBossTurn = false;
+                }
+            }
+            else
+            {
+                Debug.Log("Boss turn");
+                BossTurn();
+                
+            }
             EndTurn();
         }  
     }
+
+    [PunRPC]
+    void ReturnBossTurn()
+    {
+        skipBossTurn = false;
+    }
+
     // Starts the punRPC SelectTarget.
     void BossTurn()
     {
@@ -111,36 +137,45 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SelectTarget()
     {
-        // actualiza los valores de las vidas actuales de los jugadores
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.OfflineMode)
         {
-            p1Health = pm.CurrentHealth;
+            randomIndex = 0;
+            tbcTH.TakeDamageTBC(randomIndex);
         }
         else
         {
-            p2Health = pm.CurrentHealth;
-        }
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            /*random = new System.Random();
-            randomIndex = random.Next(players.Count);*/
-            // maybe code
-            // crea una lista de los items con su indice y de peso pone la vida de los jugadores
-            List<WeightedListItem<int>> playerWeights = new();
+            // actualiza los valores de las vidas actuales de los jugadores
+            if (PhotonNetwork.IsMasterClient)
             {
-                new WeightedListItem<int>(0,p1Health);
-                new WeightedListItem<int>(1,p2Health);
-            };
+                p1Health = pm.CurrentHealth;
+            }
+            else
+            {
+                p2Health = pm.CurrentHealth;
+            }
 
-            // crea la lista con pesos y genera el valor del randomIndex
-            weightedPlayers = new WeightedList<int>(playerWeights);
-            randomIndex = weightedPlayers.Next();
+            if (PhotonNetwork.IsMasterClient)
+            {
+                /*random = new System.Random();
+                randomIndex = random.Next(players.Count);*/
+                // maybe code
+                // crea una lista de los items con su indice y de peso pone la vida de los jugadores
+                List<WeightedListItem<int>> playerWeights = new();
+                {
+                    new WeightedListItem<int>(0,p2Health);
+                    new WeightedListItem<int>(1,p1Health);
+                };
 
-            // end maybe code
-            photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
-            tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
+                // crea la lista con pesos y genera el valor del randomIndex
+                weightedPlayers = new WeightedList<int>(playerWeights);
+                randomIndex = weightedPlayers.Next();
+
+                // end maybe code
+                photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
+                tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
+            }
         }
+        
     }
     // PunRPC that makes all players have the same random index, so the same player is attacked. Takes the index as a parameter.
     [PunRPC]

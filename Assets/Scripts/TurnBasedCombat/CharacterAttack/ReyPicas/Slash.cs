@@ -3,14 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 
-public class Arrow : MonoBehaviourPunCallbacks
+public class Slash : MonoBehaviourPunCallbacks
 {
-    private Rigidbody2D rigidBody;
     private Animator animator;
     private GameObject bossObject;
     private Vector3 bossPosition;
-    private float force = 15.0f;
-    private bool hasCollided = false;
 
     private TurnBasedCombatManager tbc;
 
@@ -18,39 +15,19 @@ public class Arrow : MonoBehaviourPunCallbacks
     void Start()
     {
         tbc = TurnBasedCombatManager.Instance;
-        rigidBody = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
         bossObject = GameObject.Find("La Llorona");
         bossPosition = bossObject.transform.position;
+        TeleportToBoss();
     }
 
-    void FixedUpdate()
+    public void AttackBoss()
     {
-        if (!hasCollided)
+        if (photonView.IsMine)
         {
-            MoveTowardsBoss();
+            bossObject.GetComponent<BossHealth>().TakeDamage(5);
         }
-    }
-
-    public void MoveTowardsBoss()
-    {
-        rigidBody.gravityScale = 0.0f;
-        rigidBody.AddForce((bossPosition - transform.position).normalized * force);
-    }
-
-    private void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.gameObject.CompareTag("Boss"))
-        {
-            if (photonView.IsMine)
-            {
-                other.GetComponent<BossHealth>().TakeDamage(5);
-            }
-            hasCollided = true;
-            rigidBody.velocity = Vector2.zero;
-            animator.SetBool("Explosion", true);
-            StartCoroutine(AlternateColors(bossObject));
-        }
+        StartCoroutine(AlternateColors(bossObject));
     }
 
     public void DestroyObject()
@@ -62,18 +39,20 @@ public class Arrow : MonoBehaviourPunCallbacks
         }
     }
 
+    public void TeleportToBoss()
+    {
+        transform.position = bossPosition;
+        animator.SetBool("Slash", true);
+    }
+
     // Coroutine to alternate colors when players take damage
     public IEnumerator AlternateColors(GameObject boss)
     {
         boss.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
+        //photonView.RPC("ChangeColor", RpcTarget.All, player);
         yield return new WaitForSeconds(0.1f);
         boss.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
+        //photonView.RPC("ReturnColor", RpcTarget.All, player);
         yield return new WaitForSeconds(0.1f);
-    }
-
-    public void ChangeTransparency()
-    {
-        SpriteRenderer sprite = GetComponent<SpriteRenderer>();
-        sprite.color = new Color(1f, 1f, 1f, 0.4f);
     }
 }

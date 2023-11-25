@@ -12,11 +12,19 @@ public class TurnBasedCombatPlayerDeath : MonoBehaviourPunCallbacks
         animator = GetComponent<Animator>();
     }
 
-    public void OnPlayerDeath()
+    public void OnPlayerDeath(GameObject player)
     {
         Debug.Log("PlayerDeath");
         animator.SetBool("Muerte", true);
+        photonView.RPC("OtherPlayerDeathAnimation", RpcTarget.All, player.name);
         photonView.RPC("UpdateAlivePlayers", RpcTarget.All);
+    }
+
+    [PunRPC]
+    public void OtherPlayerDeathAnimation(string playerName)
+    {
+        GameObject player = GameObject.Find(playerName);
+        player.GetComponent<Animator>().SetBool("Muerte", true);
     }
 
     [PunRPC]

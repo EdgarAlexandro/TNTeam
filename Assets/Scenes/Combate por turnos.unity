@@ -237,6 +237,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -2870347666003073685, guid: 04f0a21a297fc66488711a43231688e6, type: 3}
+      propertyPath: sceneViewId
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4271215121539774812, guid: 04f0a21a297fc66488711a43231688e6, type: 3}
       propertyPath: m_Name
       value: Rey Picas TBC
@@ -1115,6 +1119,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8318743859115099595, guid: 4c45c0b659d02a64dbfdb7e8c3717e05, type: 3}
+      propertyPath: sceneViewId
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 7149901290714268602, guid: 4c45c0b659d02a64dbfdb7e8c3717e05, type: 3}
       propertyPath: m_RootOrder
       value: 5
@@ -1571,6 +1579,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 190269520}
     m_Modifications:
+    - target: {fileID: -8318743859115099595, guid: 4c45c0b659d02a64dbfdb7e8c3717e05, type: 3}
+      propertyPath: sceneViewId
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 7149901290714268602, guid: 4c45c0b659d02a64dbfdb7e8c3717e05, type: 3}
       propertyPath: m_RootOrder
       value: 3

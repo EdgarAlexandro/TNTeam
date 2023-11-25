@@ -41,7 +41,6 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
 
     public WeightedList<int> weightedPlayers;
     public int p1Health, p2Health;
-    private PersistenceManager pm;
 
     public static TurnBasedCombatManager Instance { get; private set; }
 
@@ -66,12 +65,9 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         SpawnPlayer();
 
         photonView.RPC("InitializePlayers", RpcTarget.All);
-        canvas = tbcPA.SetCorrespondingActionsMenu(players);
-
-        if (PhotonNetwork.IsMasterClient)
-        {
-            photonView.RPC("StartTurn", RpcTarget.All);
-        }
+        StartCoroutine("AssignActionsMenu");
+        StartCoroutine("WaitToStartTurn");
+        //canvas = tbcPA.SetCorrespondingActionsMenu(players);
 
         pm = PersistenceManager.Instance;
         playerAttackMultiplier = 1;
@@ -80,8 +76,23 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         BossDefenseMultiplier = 1;
     }
 
-    // Get the players in the photon network.
-    [PunRPC]
+    IEnumerator AssignActionsMenu()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canvas = tbcPA.SetCorrespondingActionsMenu(players);
+    }
+
+    IEnumerator WaitToStartTurn()
+    {
+        yield return new WaitForSeconds(0.6f);
+        if (PhotonNetwork.IsMasterClient)
+        {
+            photonView.RPC("StartTurn", RpcTarget.All);
+        }
+    }
+
+// Get the players in the photon network.
+[PunRPC]
     void InitializePlayers()
     {
         players = new List<PlayerInNetwork>();
@@ -133,16 +144,16 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
                 else
                 {
                     photonView.RPC("ReturnBossTurn", RpcTarget.All);
-              
+                    EndTurn();
+
                 }
             }
             else
             {
                 Debug.Log("Boss turn");
                 BossTurn();
-                
             }
-            EndTurn();
+          
         }  
     }
 
@@ -179,6 +190,7 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             else
             {
                 p2Health = pm.CurrentHealth;
+                photonView.RPC("SyncronizeP2Health", RpcTarget.All, p2Health);
             }
 
             if (PhotonNetwork.IsMasterClient)
@@ -217,6 +229,12 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             }
         }*/
 
+    }
+
+    [PunRPC]
+    private void SyncronizeP2Health(int player2Health)
+    {
+        p2Health = player2Health;
     }
 
     // PunRPC that makes all players have the same random index, so the same player is attacked. Takes the index as a parameter.

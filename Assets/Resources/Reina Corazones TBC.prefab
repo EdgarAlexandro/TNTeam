@@ -77,6 +77,7 @@ GameObject:
   - component: {fileID: -3640663291395666382}
   - component: {fileID: 7405531762395196646}
   - component: {fileID: 8532911845523369614}
+  - component: {fileID: -5486930005761792608}
   m_Layer: 0
   m_Name: Reina Corazones TBC
   m_TagString: Player
@@ -256,6 +257,9 @@ MonoBehaviour:
   - Type: 4
     SynchronizeType: 0
     Name: Defensa
+  - Type: 4
+    SynchronizeType: 0
+    Name: Muerte
   m_SynchronizeLayers:
   - SynchronizeType: 0
     LayerIndex: 0
@@ -311,6 +315,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: deaf00adca759a3489e463351512b945, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-5486930005761792608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7830635727711125535}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17f0c4fe192da3a41a1ef787d406b661, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  botonAtaque: {fileID: 0}
+  botonJoker: {fileID: 0}
+  botonObjeto: {fileID: 0}
 --- !u!1 &8368834316454636427
 GameObject:
   m_ObjectHideFlags: 0

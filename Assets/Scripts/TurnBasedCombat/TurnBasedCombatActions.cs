@@ -13,13 +13,8 @@ public class TurnBasedCombatActions : MonoBehaviour
     public CharacterData charactersData;
     public List<GameObject> attackMenuList;
 
-    public GameObject reinaCorazonesAttack;
-    public GameObject reinaTrebolesAttack;
-    public GameObject reyDiamantesAttack;
-    public GameObject reyPicasAttack;
-
-    public GameObject character;
-    GameObject boss;
+    private GameObject boss;
+    private GameObject currentPlayerGameObject;
 
     float playerDamageMult, bossDefenseMult;
 
@@ -37,7 +32,7 @@ public class TurnBasedCombatActions : MonoBehaviour
         {
             if (player.IsLocal)
             {
-                GameObject currentPlayerGameObject = player.tagObject as GameObject;
+                currentPlayerGameObject = player.tagObject as GameObject;
                 return GetCorrespondingActionsMenu(currentPlayerGameObject.name);
             }
         }
@@ -53,6 +48,7 @@ public class TurnBasedCombatActions : MonoBehaviour
             bool charactersAttackMenu = charactersData.characters.Exists(data => data.Name == charactersOriginalName && data.AttackMenu == attackMenu.name);
             if (charactersAttackMenu)
             {
+                currentPlayerGameObject.GetComponent<MenuControllerCBT>().GetButtons(attackMenu.transform.GetChild(0).gameObject, attackMenu.transform.GetChild(1).gameObject, attackMenu.transform.GetChild(2).gameObject);
                 return attackMenu;
             }
         }
@@ -73,16 +69,7 @@ public class TurnBasedCombatActions : MonoBehaviour
     // Attack function. It takes the target and damage as parameters.
     public void CharacterAttack(GameObject character)
     {
-        /*GameObject reinaCorazones = GameObject.Find(character.name + "(Clone)");
-        Animator animator = reinaCorazones.GetComponent<Animator>();
-        animator.SetBool("Atacando", true);*/
-        //StartCoroutine(EndAnimation(animator));
         GameObject characterGameObject = GameObject.Find(character.name + "(Clone)");
         characterGameObject.GetComponent<AttackInitializer>().StartAttackAnimation();
-    }
-
-    public void AttackBtn(GameObject character){
-        //Attack();
-        tbc.EndTurn();
     }
 }

@@ -81,14 +81,14 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
             Debug.Log("Triggered");
             if (photonView.IsMine)
             {  // If the player is local only them take damage.
-                if (pm.CurrentHealth - damage > 0)
+                if (pm.CurrentHealth - (int)damage > 0)
                 {
                     pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense); // toma el ataque, lo multiplica por el multiplicador de ataque del jefe, y lo divide entre el multiplicador de defensa del jugador
                 }
                 else
                 {
-                    pm.CurrentHealth -= damage;
-                    other.gameObject.GetComponent<TurnBasedCombatPlayerDeath>().OnPlayerDeath();
+                    pm.CurrentHealth -= (int)damage;
+                    other.gameObject.GetComponent<TurnBasedCombatPlayerDeath>().OnPlayerDeath(other.gameObject);
                 }
 
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.

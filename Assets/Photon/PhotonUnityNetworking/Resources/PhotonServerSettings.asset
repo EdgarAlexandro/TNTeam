@@ -90,6 +90,13 @@ MonoBehaviour:
   - UpdateClientStatusToMaster
   - MoveClient
   - ToggleRender
+  - ConfusionHandler
+  - ReturnBossTurn
+  - SkipBossTurn
+  - UpdateBossMultipliers
+  - UpdatePlayerDefenseMultiplier
+  - OtherPlayerDeathAnimation
+  - SyncronizeP2Health
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

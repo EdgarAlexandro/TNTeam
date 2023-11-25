@@ -181,7 +181,6 @@ MonoBehaviour:
   isAttacking: 0
   shieldSoundPlayed: 0
   rig: {fileID: 637370894801376164}
-  startingPosition: {fileID: 0}
   isActive: 1
 --- !u!114 &8763654029918847034
 MonoBehaviour:

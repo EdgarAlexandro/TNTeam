@@ -13380,6 +13380,10 @@ PrefabInstance:
       value: PersistenceManager
       objectReference: {fileID: 0}
     - target: {fileID: 576202845750320855, guid: 128174b4319b74e439bcbee67442eae9, type: 3}
+      propertyPath: MaxKeys
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 576202845750320855, guid: 128174b4319b74e439bcbee67442eae9, type: 3}
       propertyPath: cardInventory
       value: 
       objectReference: {fileID: 11400000, guid: 266df7f6e4b621a489f4609ae6516292, type: 2}

@@ -9,7 +9,7 @@ using Photon.Pun;
 using Photon.Realtime;
 
 public class EnemyAi : MonoBehaviourPunCallbacks{
-    private Rigidbody2D rb;
+    public List<GameObject> Neighbors;
     public GameObject[] targets;
     public GameObject currentTarget;
     private bool targetCollision = false;
@@ -43,6 +43,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
         sprite = GetComponent<SpriteRenderer>();
 
         agent = GetComponent<NavMeshAgent>();
+        Neighbors = new List<GameObject>();
     }
 
     void Update() {
@@ -51,6 +52,10 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
         if ((targets.Length >= 1) && (Vector2.Distance(transform.position, targets[0].transform.position) < minDistance)) currentTarget = targets[0];
         else if (!PhotonNetwork.OfflineMode && targets.Length >= 2 && Vector2.Distance(transform.position, targets[1].transform.position) < minDistance) currentTarget = targets[1];
         else currentTarget = null;
+
+        UpdateNeighbors();
+        var cohesion = Cohesion(100, 1);
+        rigidBod.velocity += new Vector2(cohesion.x, cohesion.y);
 
         // If the enemy doesnt have a target, they stay still
         if (currentTarget == null){
@@ -80,6 +85,50 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
             }
         }
         transform.rotation = Quaternion.identity;
+    }
+
+    public Vector3 Cohesion(float steps, float weight)
+    {
+        var pc = Vector3.zero; // Centro percibido de los vecinos
+        if (Neighbors.Count == 0) return pc;
+
+        // Sumar las posiciones de los vecinos
+        for (var i = 0; i < Neighbors.Count; ++i)
+        {
+            var neighbor = Neighbors[i];
+            if (pc == Vector3.zero)
+            {
+                pc = neighbor.transform.position;
+            }
+            else
+            {
+                pc = pc + neighbor.transform.position;
+            }
+        }
+
+        // Promediar las posiciones de los vecinos
+        pc = pc / Neighbors.Count;
+
+        // Devolver el vector de desplazamiento, dividir por pasos (100 significaría 1% hacia el centro) y multiplicar por peso
+        return (pc - transform.position) / steps * weight;
+    }
+
+    void UpdateNeighbors()
+    {
+        float neighborDistance = 5.0f; // Ajusta esto a la distancia que quieras
+        Neighbors.Clear();
+
+        // Encuentra todos los enemigos en la escena
+        GameObject[] allEnemies = GameObject.FindGameObjectsWithTag("Enemy");
+
+        // Añade a los enemigos que están dentro de la distancia especificada a la lista de vecinos
+        foreach (GameObject enemy in allEnemies)
+        {
+            if (Vector2.Distance(transform.position, enemy.transform.position) < neighborDistance)
+            {
+                Neighbors.Add(enemy);
+            }
+        }
     }
 
     private void OnCollisionEnter2D(Collision2D other)
@@ -145,9 +194,9 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
             PhotonNetwork.Instantiate(orbePrefab.name, gameObject.transform.position, Quaternion.identity);
         }
         else{
-            rb = GetComponent<Rigidbody2D>();
-            rb.velocity = Vector2.zero;
-            rb.AddForce(knockbackDirection * knockbackAmount, ForceMode2D.Impulse);
+            rigidBod = GetComponent<Rigidbody2D>();
+            rigidBod.velocity = Vector2.zero;
+            rigidBod.AddForce(knockbackDirection * knockbackAmount, ForceMode2D.Impulse);
             sprite.color = new Color(255, 0, 0, 255);
             StartCoroutine(StopMovementAfterKnockback());
 
@@ -156,7 +205,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks{
     // Enemy stops after getting a knockback from a player's attack.
     private IEnumerator StopMovementAfterKnockback(){
         yield return new WaitForSeconds(0.2f);
-        rb.velocity = Vector2.zero;
+        rigidBod.velocity = Vector2.zero;
         sprite.color = new Color(255, 255, 255, 255);
     }
     // Freeze enemy. 

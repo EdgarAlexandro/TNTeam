@@ -12,6 +12,7 @@ public class InstantiatePrefabs : MonoBehaviourPunCallbacks
     private static InstantiatePrefabs instance = null;
     public GameObject[] listOfPrefabs;
     public GameObject loadingScreen = null;
+    public int seconds;
 
     private void Awake()
     {
@@ -45,7 +46,7 @@ public class InstantiatePrefabs : MonoBehaviourPunCallbacks
 
     IEnumerator LoadingScreen()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(seconds);
         loadingScreen.SetActive(false);
     }
 }

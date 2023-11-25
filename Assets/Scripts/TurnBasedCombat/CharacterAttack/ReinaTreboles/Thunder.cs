@@ -9,6 +9,7 @@ public class Thunder : MonoBehaviourPunCallbacks
     private Animator animator;
     private GameObject bossObject;
     private GameObject attackSpawnPosition;
+    private float speed = 25.0f;
 
     private TurnBasedCombatManager tbc;
     // Start is called before the first frame update
@@ -21,36 +22,18 @@ public class Thunder : MonoBehaviourPunCallbacks
         bossObject = GameObject.Find("La Llorona");
     }
 
-    // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         MoveTowardsBoss();
     }
 
     public void MoveTowardsBoss()
     {
-        rigidBody.gravityScale = 0.0f;
-
-        float currentX = transform.position.x;
-        float currentY = transform.position.x;
-        float bossX = bossObject.transform.position.x;
-        //float attackSpawnPointY = attackSpawnPosition.position.y;
-        float speed = 5.0f;
-
-        /*if (currentY < attackSpawnPointY)
+        Vector3 newPosition = Vector3.MoveTowards(transform.position, attackSpawnPosition.transform.position, speed * Time.deltaTime);
+        rigidBody.MovePosition(newPosition);
+        float distance = Vector3.Distance(transform.position, attackSpawnPosition.transform.position);
+        if (distance < 11.06)
         {
-            // Move towards the boss
-            rigidBody.velocity = new Vector2(0.0f, speed);
-        }*/
-        if (currentX < bossX)
-        {
-            // Move towards the boss
-            rigidBody.velocity = new Vector2(speed, 0.0f);
-        }
-        else
-        {
-            // Stop moving once you reach or surpass the boss's x-coordinate
-            rigidBody.velocity = Vector2.zero;
             animator.SetBool("Atacando", true);
         }
     }
@@ -63,7 +46,7 @@ public class Thunder : MonoBehaviourPunCallbacks
             {
                 other.GetComponent<BossHealth>().TakeDamage(5);
             }
-            StartCoroutine(AlternateColors(other.gameObject.name));
+            StartCoroutine(AlternateColors(bossObject));
         }
     }
 
@@ -76,25 +59,12 @@ public class Thunder : MonoBehaviourPunCallbacks
         }
     }
 
-    [PunRPC]
-    public void ChangeColor(string player)
-    {
-        GameObject playerGO = GameObject.Find(player);
-        playerGO.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
-    }
-    // Remote procedure call to restore player's color
-    [PunRPC]
-    public void ReturnColor(string player)
-    {
-        GameObject playerGO = GameObject.Find(player);
-        playerGO.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
-    }
     // Coroutine to alternate colors when players take damage
-    public IEnumerator AlternateColors(string player)
+    public IEnumerator AlternateColors(GameObject boss)
     {
-        photonView.RPC("ChangeColor", RpcTarget.All, player);
+        boss.GetComponent<SpriteRenderer>().color = new Color(255, 0, 0, 255);
         yield return new WaitForSeconds(0.1f);
-        photonView.RPC("ReturnColor", RpcTarget.All, player);
+        boss.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, 255);
         yield return new WaitForSeconds(0.1f);
     }
 }

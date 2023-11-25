@@ -1,5 +1,5 @@
 /* Function: Manage the player and boss turns
-   Author: Daniel Degollado Rodríguez 
+   Author: Daniel Degollado Rodrï¿½guez 
    Modification date: 10/11/2023 */
 
 using System.Collections;
@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using Photon.Pun;
+using KaimiraGames;
 
 public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
 {
@@ -28,6 +29,18 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     System.Random random;
 
     public GameObject canvas = null;
+
+    public float playerAttackMultiplier;
+    public float playerDefenseMultiplier;
+    public float BossAttackMultiplier;
+    public float BossDefenseMultiplier;
+
+    public bool skipP1Turn;
+    public bool skipP2Turn;
+    public bool skipBossTurn;
+
+    public WeightedList<int> weightedPlayers;
+    public int p1Health, p2Health;
 
     public static TurnBasedCombatManager Instance { get; private set; }
 
@@ -52,16 +65,34 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         SpawnPlayer();
 
         photonView.RPC("InitializePlayers", RpcTarget.All);
-        canvas = tbcPA.SetCorrespondingActionsMenu(players);
+        StartCoroutine("AssignActionsMenu");
+        StartCoroutine("WaitToStartTurn");
+        //canvas = tbcPA.SetCorrespondingActionsMenu(players);
 
+        pm = PersistenceManager.Instance;
+        playerAttackMultiplier = 1;
+        playerDefenseMultiplier = 1;
+        BossAttackMultiplier = 1;
+        BossDefenseMultiplier = 1;
+    }
+
+    IEnumerator AssignActionsMenu()
+    {
+        yield return new WaitForSeconds(0.5f);
+        canvas = tbcPA.SetCorrespondingActionsMenu(players);
+    }
+
+    IEnumerator WaitToStartTurn()
+    {
+        yield return new WaitForSeconds(0.6f);
         if (PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("StartTurn", RpcTarget.All);
         }
     }
 
-    // Get the players in the photon network.
-    [PunRPC]
+// Get the players in the photon network.
+[PunRPC]
     void InitializePlayers()
     {
         players = new List<PlayerInNetwork>();
@@ -103,9 +134,33 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            Debug.Log("Boss turn");
-            BossTurn();
+
+            if (skipBossTurn)
+            {
+                if (PhotonNetwork.OfflineMode)
+                {
+                    skipBossTurn = false;
+                }
+                else
+                {
+                    photonView.RPC("ReturnBossTurn", RpcTarget.All);
+                    EndTurn();
+
+                }
+            }
+            else
+            {
+                Debug.Log("Boss turn");
+                BossTurn();
+            }
+          
         }  
+    }
+
+    [PunRPC]
+    void ReturnBossTurn()
+    {
+        skipBossTurn = false;
     }
 
     // Starts the punRPC SelectTarget.
@@ -120,13 +175,46 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     [PunRPC]
     public void SelectTarget()
     {
-        if (PhotonNetwork.IsMasterClient)
+        if (PhotonNetwork.OfflineMode)
         {
-            random = new System.Random();
-            randomIndex = random.Next(players.Count);
-            photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
-            tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
+            randomIndex = 0;
+            tbcTH.TakeDamageTBC(randomIndex);
         }
+        else
+        {
+            // actualiza los valores de las vidas actuales de los jugadores
+            if (PhotonNetwork.IsMasterClient)
+            {
+                p1Health = pm.CurrentHealth;
+            }
+            else
+            {
+                p2Health = pm.CurrentHealth;
+                photonView.RPC("SyncronizeP2Health", RpcTarget.All, p2Health);
+            }
+
+            if (PhotonNetwork.IsMasterClient)
+            {
+                /*random = new System.Random();
+                randomIndex = random.Next(players.Count);*/
+                // maybe code
+                // crea una lista de los items con su indice y de peso pone la vida de los jugadores
+                List<WeightedListItem<int>> playerWeights = new();
+                {
+                    new WeightedListItem<int>(0,p2Health);
+                    new WeightedListItem<int>(1,p1Health);
+                };
+
+                // crea la lista con pesos y genera el valor del randomIndex
+                weightedPlayers = new WeightedList<int>(playerWeights);
+                randomIndex = weightedPlayers.Next();
+
+                // end maybe code
+                photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
+                tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
+            }
+        }
+
         /*if (players[randomIndex].IsLocal)
         {
             GameObject playerGameObject = players[randomIndex].tagObject as GameObject;
@@ -140,6 +228,13 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
                 BossTurn();
             }
         }*/
+
+    }
+
+    [PunRPC]
+    private void SyncronizeP2Health(int player2Health)
+    {
+        p2Health = player2Health;
     }
 
     // PunRPC that makes all players have the same random index, so the same player is attacked. Takes the index as a parameter.

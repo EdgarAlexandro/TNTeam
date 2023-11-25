@@ -13,18 +13,17 @@ public class TurnBasedCombatActions : MonoBehaviour
     public CharacterData charactersData;
     public List<GameObject> attackMenuList;
 
-    public GameObject reinaCorazonesAttack;
-    public GameObject reinaTrebolesAttack;
-    public GameObject reyDiamantesAttack;
-    public GameObject reyPicasAttack;
+    private GameObject boss;
+    private GameObject currentPlayerGameObject;
 
-    public GameObject character;
-    GameObject boss;
+    float playerDamageMult, bossDefenseMult;
 
     void Start()
     {
         tbc = TurnBasedCombatManager.Instance;
         boss = tbc.boss;
+        playerDamageMult = tbc.playerAttackMultiplier;
+        bossDefenseMult = tbc.BossDefenseMultiplier;
     }
 
     public GameObject SetCorrespondingActionsMenu(List<PlayerInNetwork> players)
@@ -33,7 +32,7 @@ public class TurnBasedCombatActions : MonoBehaviour
         {
             if (player.IsLocal)
             {
-                GameObject currentPlayerGameObject = player.tagObject as GameObject;
+                currentPlayerGameObject = player.tagObject as GameObject;
                 return GetCorrespondingActionsMenu(currentPlayerGameObject.name);
             }
         }
@@ -49,6 +48,7 @@ public class TurnBasedCombatActions : MonoBehaviour
             bool charactersAttackMenu = charactersData.characters.Exists(data => data.Name == charactersOriginalName && data.AttackMenu == attackMenu.name);
             if (charactersAttackMenu)
             {
+                currentPlayerGameObject.GetComponent<MenuControllerCBT>().GetButtons(attackMenu.transform.GetChild(0).gameObject, attackMenu.transform.GetChild(1).gameObject, attackMenu.transform.GetChild(2).gameObject);
                 return attackMenu;
             }
         }
@@ -59,7 +59,7 @@ public class TurnBasedCombatActions : MonoBehaviour
     public void Attack(GameObject target, int damage){
         if (target == boss){ // If target is boss, use a PunRPC to syncronize boss current health for all clients.
             PhotonView photonView = boss.GetComponent<PhotonView>();
-            photonView.RPC("TakeDamage", RpcTarget.All, damage);
+            photonView.RPC("TakeDamage", RpcTarget.All, (int)((damage*playerDamageMult)/bossDefenseMult));
         }
         else{
             PhotonView photonView = target.GetComponent<PhotonView>();       
@@ -69,16 +69,7 @@ public class TurnBasedCombatActions : MonoBehaviour
     // Attack function. It takes the target and damage as parameters.
     public void CharacterAttack(GameObject character)
     {
-        /*GameObject reinaCorazones = GameObject.Find(character.name + "(Clone)");
-        Animator animator = reinaCorazones.GetComponent<Animator>();
-        animator.SetBool("Atacando", true);*/
-        //StartCoroutine(EndAnimation(animator));
         GameObject characterGameObject = GameObject.Find(character.name + "(Clone)");
         characterGameObject.GetComponent<AttackInitializer>().StartAttackAnimation();
-    }
-
-    public void AttackBtn(GameObject character){
-        //Attack();
-        tbc.EndTurn();
     }
 }

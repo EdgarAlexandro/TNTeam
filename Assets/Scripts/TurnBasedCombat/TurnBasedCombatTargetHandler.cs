@@ -59,7 +59,6 @@ public class TurnBasedCombatTargetHandler : MonoBehaviourPunCallbacks
         currentTarget = players[playerIndex];
         if (currentTarget.IsLocal)
         {
-            Debug.Log(players[playerIndex].Name + " is local");
             if (pm.CurrentHealth > 0)
             {
                 GameObject targetedPlayerGameObject = players[playerIndex].tagObject as GameObject;

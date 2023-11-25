@@ -1,5 +1,5 @@
 /* Function: Boss attack's behaviour
-   Author: Daniel Degollado Rodríguez 
+   Author: Daniel Degollado RodrÃ­guez 
    Modification date: 10/11/2023 */
 
 using System.Collections;
@@ -10,8 +10,10 @@ using Photon.Pun;
 
 public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallback
 {
+    public float damageMultiplier;
+    public float playerDefense;
     public float force = 1.0f;
-    public int damage = 5;
+    public float damage = 5.0f;
     private Vector3 playerPosition;
     private PersistenceManager pm;
     private TurnBasedCombatManager tbc;
@@ -25,7 +27,10 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
     private Rigidbody2D rigidBody;
     public bool isMoving = false;    
 
+
     void Start() {
+        damageMultiplier = GameObject.Find("TurnBasedCombatManager").GetComponent<TurnBasedCombatManager>().BossAttackMultiplier;
+        playerDefense = GameObject.Find("TurnBasedCombatManager").GetComponent<TurnBasedCombatManager>().playerDefenseMultiplier;
         rigidBody = GetComponent<Rigidbody2D>();
         pm = PersistenceManager.Instance;
         tbc = TurnBasedCombatManager.Instance;
@@ -72,17 +77,18 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
         if (other.gameObject.CompareTag("Player"))
         {
             PhotonView photonView = other.gameObject.GetComponent<PhotonView>();
+             
             Debug.Log("Triggered");
             if (photonView.IsMine)
             {  // If the player is local only them take damage.
-                if (pm.CurrentHealth - damage > 0)
+                if (pm.CurrentHealth - (int)damage > 0)
                 {
-                    pm.CurrentHealth -= damage;
+                    pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense); // toma el ataque, lo multiplica por el multiplicador de ataque del jefe, y lo divide entre el multiplicador de defensa del jugador
                 }
                 else
                 {
-                    pm.CurrentHealth -= damage;
-                    other.gameObject.GetComponent<TurnBasedCombatPlayerDeath>().OnPlayerDeath();
+                    pm.CurrentHealth -= (int)damage;
+                    other.gameObject.GetComponent<TurnBasedCombatPlayerDeath>().OnPlayerDeath(other.gameObject);
                 }
 
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.

@@ -87,6 +87,7 @@ public class MusicSFXManager : MonoBehaviour
 
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        Debug.Log(scene.name);
         // Detecta cuando se carga una nueva escena
         currentSceneName = scene.name;
         if (currentSceneName == "StartMenu")
@@ -94,11 +95,12 @@ public class MusicSFXManager : MonoBehaviour
             // Reproduce la música del menú
             PlayMenuMusic();
         }
-        else if (currentSceneName == "Main1")
+        else if (currentSceneName == "Main 1")
         {
+            Debug.Log("PlayLevelMsc");
             PlayLevelMusic();
         }
-        else if (currentSceneName == "Combate por turnos")
+        else if (currentSceneName == "TurnBasedCombatTestScene")
         {
             // Reproduce la música del nivel
             PlayLevel2Music();
@@ -133,6 +135,7 @@ public class MusicSFXManager : MonoBehaviour
     {
         menuMusic.Stop();
         levelMusic.Play();
+        levelTwoMusic.Stop();
     }
 
     public void PlayLevel2Music()

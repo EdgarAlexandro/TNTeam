@@ -3335,6 +3335,7 @@ MonoBehaviour:
   sfxSlider: {fileID: 791974281}
   menuMusic: {fileID: 2006197082}
   levelMusic: {fileID: 820269438}
+  levelTwoMusic: {fileID: 0}
   Click_Button: {fileID: 377570617}
   Espada: {fileID: 8300000, guid: 0e1e00d17ef76824caffd1c998396e64, type: 3}
   Arco: {fileID: 8300000, guid: 3e752a3b5dd01b14995bf58f83902fa1, type: 3}
@@ -13376,6 +13377,10 @@ PrefabInstance:
     - target: {fileID: 576202845750320854, guid: 128174b4319b74e439bcbee67442eae9, type: 3}
       propertyPath: m_Name
       value: PersistenceManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 576202845750320855, guid: 128174b4319b74e439bcbee67442eae9, type: 3}
+      propertyPath: MaxKeys
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 576202845750320855, guid: 128174b4319b74e439bcbee67442eae9, type: 3}
       propertyPath: cardInventory

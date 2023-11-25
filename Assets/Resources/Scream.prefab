@@ -124,6 +124,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4b681b5a23145a489859920e320bd4d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damageMultiplier: 0
+  playerDefense: 0
   force: 10
   damage: 5
   isHittingShield: 0

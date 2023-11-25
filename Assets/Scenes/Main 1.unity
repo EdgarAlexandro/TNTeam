@@ -1321,6 +1321,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PrefabsController
       objectReference: {fileID: 0}
+    - target: {fileID: 4483951456637795014, guid: 909c6c546621f40019ffa1f372076c4a, type: 3}
+      propertyPath: seconds
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4483951456637795015, guid: 909c6c546621f40019ffa1f372076c4a, type: 3}
       propertyPath: m_RootOrder
       value: 11

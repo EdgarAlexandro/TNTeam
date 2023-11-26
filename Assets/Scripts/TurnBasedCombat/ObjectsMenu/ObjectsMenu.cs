@@ -28,7 +28,7 @@ public class ObjectsMenu : MonoBehaviourPunCallbacks
             MatchCollection matches = Regex.Matches(inventoryData, button.name);
             int itemCount = matches.Count;
             button.gameObject.GetComponent<ObjectsMenuButton>().GetNumberOfUses(itemCount);
-            Debug.Log($"{button.name} count: {itemCount}");
+            //Debug.Log($"{button.name} count: {itemCount}");
         }
         Debug.Log(inventoryData);
     }

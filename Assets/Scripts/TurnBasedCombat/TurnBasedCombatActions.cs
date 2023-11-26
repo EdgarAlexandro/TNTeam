@@ -12,9 +12,11 @@ public class TurnBasedCombatActions : MonoBehaviour
     TurnBasedCombatManager tbc;
     public CharacterData charactersData;
     public List<GameObject> attackMenuList;
+    public GameObject objectsMenu;
 
     private GameObject boss;
     private GameObject currentPlayerGameObject;
+
 
     float playerDamageMult, bossDefenseMult;
 
@@ -72,4 +74,9 @@ public class TurnBasedCombatActions : MonoBehaviour
         GameObject characterGameObject = GameObject.Find(character.name + "(Clone)");
         characterGameObject.GetComponent<AttackInitializer>().StartAttackAnimation();
     }
+
+    public void SelectObjects()
+    {
+        objectsMenu.SetActive(true);
+    } 
 }

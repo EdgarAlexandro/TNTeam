@@ -7,6 +7,7 @@ using Photon.Pun;
 
 public class ObjectsMenuButton : MonoBehaviourPunCallbacks
 {
+    public Inventory inventory = null;
     private int uses;
     public Button button;
     public TextMeshProUGUI itemCountText;
@@ -74,6 +75,19 @@ public class ObjectsMenuButton : MonoBehaviourPunCallbacks
         }
         UpdateButtonStatus();
     }
+
+    public void UpdateInventory()
+    {
+        string data = "";
+        foreach (ItemData item in inventory.items)
+        {
+            data += item.name + "/";
+        }
+        ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
+        properties["Inventory"] = data;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+    }
+
     // Update is called once per frame
     void Update()
     {

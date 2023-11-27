@@ -1,6 +1,6 @@
 /* Function: controls the behaviour of the item: bomba (used)
    Author: Edgar Alexandro Castillo Palacios
-   Modification date: 14/10/2023 */
+   Modification date: 21/11/2023 by Carlos Morales*/
 
 using System.Collections;
 using System.Collections.Generic;
@@ -11,10 +11,12 @@ using UnityEngine.SceneManagement;
 public class Bomba : MonoBehaviourPunCallbacks
 {
     private SpriteRenderer spriteRenderer = null;
+    private Animator animator = null;
 
     void Start()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>(); 
         StartCoroutine(Explode());
     }
 
@@ -39,6 +41,9 @@ public class Bomba : MonoBehaviourPunCallbacks
             spriteRenderer.color = Color.white;
             yield return new WaitForSeconds(0.25f);
         }
+        //Animation of bomb exploding
+        animator.Play("Explosion");
+        yield return new WaitForSeconds(1.0f);
 
         // Gets all the colliders in a radius and deals damage to the enemies or destroys boxes ????
         Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, GetComponent<CircleCollider2D>().radius / 2);
@@ -52,10 +57,18 @@ public class Bomba : MonoBehaviourPunCallbacks
             CajaRotaSpawn cajaDestroy;
             if (col.TryGetComponent(out cajaDestroy))
             {
-                cajaDestroy.boxDestructionAux(SceneManager.GetActiveScene().name);
+                StartCoroutine(CajaDestruida(col.gameObject, SceneManager.GetActiveScene().name));
             }
         }
         // RPC for owner to destroy de gameobject
         photonView.RPC("DestroyBomb", RpcTarget.All, gameObject.name);
+    }
+
+    IEnumerator CajaDestruida(GameObject Caja, string escena)
+    {
+        Caja.GetComponent<Animator>().Play("Caja destruida");
+        yield return new WaitForSeconds(0.20f);
+
+        
     }
 }

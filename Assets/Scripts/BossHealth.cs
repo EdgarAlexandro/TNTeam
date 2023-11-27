@@ -9,20 +9,28 @@ public class BossHealth : MonoBehaviourPunCallbacks
     public Slider bossHealthBar;
     int randomIndex;
     System.Random random;
+    Animator animator;
 
     public int bossHealth = 10;
     private int bossHealthMaxValue = 10;
 
     void Start()
     {
+        animator = GetComponent<Animator>();
         photonView.RPC("SetHealthBarValues", RpcTarget.All);
     }
 
-    [PunRPC]
     public void TakeDamage(int damage)
     {
         bossHealth -= damage;
+        photonView.RPC("SyncronizeBossHealth", RpcTarget.All, bossHealth);
         photonView.RPC("SetHealthBarCurrentValue", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void SyncronizeBossHealth(int currentBossHealth)
+    {
+        bossHealth = currentBossHealth; 
     }
 
     [PunRPC]
@@ -60,7 +68,8 @@ public class BossHealth : MonoBehaviourPunCallbacks
     {
        if( bossHealth <= 0)
         {
-            Destroy(gameObject);
+            animator.SetBool("Muerte", true);
+            //Destroy(gameObject);
         }
     }
 }

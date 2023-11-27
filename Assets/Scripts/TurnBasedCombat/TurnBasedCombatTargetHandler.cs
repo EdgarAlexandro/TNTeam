@@ -14,10 +14,11 @@ public class TurnBasedCombatTargetHandler : MonoBehaviourPunCallbacks
     public TurnBasedCombatManager tbc;
     private PersistenceManager pm;
     public List<PlayerInNetwork> players;
-    Photon.Realtime.Player player;
+    PlayerInNetwork currentTarget;
     public GameObject bossAttack;
     public GameObject boss;
-    public GameObject dodgeMessage;
+    public GameObject bossAttackSpawn;
+    //public GameObject dodgeMessage;
     //public GameObject chracterPrefabs;
 
     // Start is called before the first frame update
@@ -50,64 +51,47 @@ public class TurnBasedCombatTargetHandler : MonoBehaviourPunCallbacks
         }
 
         Instance = this;
-        DontDestroyOnLoad(gameObject);
     }
     // PunRPC that checks if the targeted player is local and instantiate the attack. Takes player's index as a parameter.
     [PunRPC]
-    public void TakeDamageTBC(int playerIndex){
+    public void TakeDamageTBC(int playerIndex) {
         Debug.Log("Im taking damage: " + players[playerIndex].Name);
-        if (players[playerIndex].IsLocal)
+        currentTarget = players[playerIndex];
+        if (currentTarget.IsLocal)
         {
-            //GameObject localPlayerObject = players[playerIndex].tagObject as GameObject;
-            PhotonNetwork.Instantiate(bossAttack.name, boss.transform.position, Quaternion.identity);
-            //StartCoroutine("DodgeMessage");
-
-            /*if (pm.CurrentHealth > 0)
+            if (pm.CurrentHealth > 0)
             {
-                pm.CurrentHealth -= damage;
-                GameObject localPlayerObject = players[playerIndex].tagObject as GameObject;
-                StartCoroutine(AlternateColors(localPlayerObject.name));
-            }
-            if (PhotonNetwork.IsMasterClient)
-            {
-                PhotonView photonView = tbcPH.GetComponent<PhotonView>();
-                photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-            }
-            else{
-                PhotonView photonView = tbcPH.GetComponent<PhotonView>();
-                photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-            }*/
-        }
-        /*if (pm.CurrentHealth > 0)
-        {
-            pm.CurrentHealth -= damage;
-        }*/
-        /*healthBar.SetHealth(pm.CurrentHealth);
-        if (pm.CurrentHealth == 0)
-        {
-            if (PhotonNetwork.OfflineMode)
-            {
-                Destroy(gameObject);
-                NetworkManager.instance.LoadScene("LoseScene");
+                GameObject targetedPlayerGameObject = players[playerIndex].tagObject as GameObject;
+                targetedPlayerGameObject.GetComponent<TurnBasedCombatPlayerControl>().canBlock = true;
+                photonView.RPC("AttackInitializing", RpcTarget.All);
             }
             else
             {
-                PlayerDied();
-                if (GameController.AlivePlayers == 0)
+                if (!PhotonNetwork.OfflineMode)
                 {
-                    NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "LoseScene");
+                    tbc.photonView.RPC("SelectTarget", RpcTarget.All);
                 }
             }
         }
-        else
-        {
-            StartCoroutine(AlternateColors(player));
-        }*/
     }
 
-    public IEnumerator DodgeMessage(){
+    [PunRPC]
+    public void AttackInitializing()
+    {
+        boss.GetComponent<BossAnimations>().Attack();
+    }
+
+    public void SpawnAttack()
+    {
+        if (currentTarget.IsLocal)
+        {
+            PhotonNetwork.Instantiate(bossAttack.name, bossAttackSpawn.transform.position, Quaternion.identity);
+        }
+    }
+
+    /*public IEnumerator DodgeMessage(){
         dodgeMessage.SetActive(true);
         yield return new WaitForSeconds(4.0f);
         dodgeMessage.SetActive(false);
-    }
+    }*/
 }

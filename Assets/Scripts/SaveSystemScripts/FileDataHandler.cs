@@ -52,7 +52,7 @@ public class FileDataHandler
                 }
                 //deserialize data from json into C# object
                 loadedData = JsonUtility.FromJson<GameData>(dataToLoad);
-                if (PhotonNetwork.InRoom) DataPersistenceManager.instance.GetComponent<PhotonView>().RPC("LoadClientData", RpcTarget.Others, dataToLoad);
+                if (PhotonNetwork.InRoom) DataPersistenceManager.instance.GetComponent<PhotonView>().RPC("LoadClientData", RpcTarget.Others, dataToLoad, "local");
             }
             catch (Exception e)
             {

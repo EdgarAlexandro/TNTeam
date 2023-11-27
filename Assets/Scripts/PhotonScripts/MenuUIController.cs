@@ -9,19 +9,34 @@ using UnityEngine.UI;
 using TMPro;
 using Photon.Pun;
 using Photon.Realtime;
+using UnityEngine.Networking;
 
 public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
 {
     [Header("Canvas Windows")]
     public GameObject soloWindow = null;
     public GameObject coOpWindow = null;
+    public GameObject webGLCodeWindow = null;
     public GameObject createRoomWindow = null;
     public GameObject joinRoomWindow = null;
     public GameObject lobbyWindow = null;
 
+    [Header("Main Window")]
+    public GameObject exitGameButton = null;
+
     [Header("Save and Load System")]
     public Button continueSoloGame = null;
     public Button continueCoOpGame = null;
+    public bool clientHasLoadedSelfData = false;
+
+    [Header("WEBGL Save System")]
+    public TMP_InputField saveGameCode = null;
+    public TMP_InputField saveFilePassword = null;
+    public Button acceptCodeButton = null;
+    public GameObject alertWindow = null;
+    public GameObject loadingAlert = null;
+    private bool callingAPI = false;
+    private readonly string API_URL = "https://apitnteam.edgar2208.repl.co";
 
     [Header("Create Room Menu")]
     public Button createRoomBtn = null;
@@ -76,21 +91,27 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     //loads the selected characters from json
     public void LoadData(GameData data)
     {
+        //------------------------------------------------Selected characters------------------------------------------------
         this.p1 = data.charactersSelected[0];
         this.p2 = data.charactersSelected[1];
     }
 
     public void SaveData(ref GameData data)
     {
-        
+
     }
 
     //Stops the host to start the game if one of the players hasnt picked a character or hasnt joined the room
     private void Update()
     {
-        if (!PhotonNetwork.OfflineMode && (characterSelectWindow.activeSelf || lobbyWindow.activeSelf ))
+        if(Application.platform == RuntimePlatform.WebGLPlayer)
         {
-            if(lobbyWindow.activeSelf && PhotonNetwork.CurrentRoom.PlayerCount < 2)
+            exitGameButton.SetActive(false);
+        }
+
+        if (!PhotonNetwork.OfflineMode && (characterSelectWindow.activeSelf || lobbyWindow.activeSelf))
+        {
+            if (lobbyWindow.activeSelf && PhotonNetwork.CurrentRoom.PlayerCount < 2 && !clientHasLoadedSelfData)
             {
                 startGameBtn.interactable = false;
             }
@@ -121,10 +142,13 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     }
 
     //Checks if data file exists, if it doesnt you need to start a new game
+    //In WEBGL this is ignored
     //Function used by "Solo" and "Co-Op" buttons
-    public void ContinueGameButtons()
+    public void ContinueGameButtonsVerification()
     {
-        if (!DataPersistenceManager.instance.CheckFile())
+        //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        if (!DataPersistenceManager.instance.CheckFile() && !(Application.platform == RuntimePlatform.WebGLPlayer))
+        //if (!DataPersistenceManager.instance.CheckFile() && (Application.platform == RuntimePlatform.WebGLPlayer))
         {
             continueSoloGame.interactable = false;
             continueCoOpGame.interactable = false;
@@ -134,6 +158,142 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
             continueSoloGame.interactable = true;
             continueCoOpGame.interactable = true;
         }
+    }
+
+    //Used by canvas buttons on Windows or MacOS or by API response on webgl
+    public void LoadGameWithData()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            DataPersistenceManager.instance.LoadGame();
+            //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+            if (Application.platform != RuntimePlatform.WebGLPlayer) StartGame();
+            //if (Application.platform == RuntimePlatform.WebGLPlayer) StartGame();
+        }
+        else
+        {
+            coOpWindow.SetActive(false);
+            createRoomWindow.SetActive(true);
+            DataPersistenceManager.instance.LoadGame();
+        }
+    }
+
+    //Checks player is playing in WEBGL (using a different save system)
+    public void ContinueGameButtonsActions()
+    {
+        //TODO TODO TODO TODO TODO TODO TODO TODO TODO TODO
+        if (Application.platform == RuntimePlatform.WebGLPlayer)
+        //if (Application.platform != RuntimePlatform.WebGLPlayer)
+        {
+            webGLCodeWindow.SetActive(true);
+            soloWindow.SetActive(false);
+            coOpWindow.SetActive(false);
+        }
+        else
+        {
+            LoadGameWithData();
+        }
+    }
+
+    //Starts an "Animation" in loading text
+    private IEnumerator LoadingAnimation()
+    {
+        int dots = 0;
+        loadingAlert.GetComponentInChildren<TextMeshProUGUI>().text = "Loading";
+        loadingAlert.SetActive(true);
+        yield return new WaitForSeconds(0.5f);
+        while (callingAPI)
+        {
+            if(dots < 3)
+            {
+                loadingAlert.GetComponentInChildren<TextMeshProUGUI>().text += ".";
+                dots++;
+            }
+            else
+            {
+                loadingAlert.GetComponentInChildren<TextMeshProUGUI>().text = "Loading";
+                dots = 0;
+            }
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
+
+    //Method used when playing in webGL to check if file exits in API
+    //Used by accept button in WEBGL panel
+    public void LoadGameWEBGL()
+    {
+        acceptCodeButton.interactable = false;
+        callingAPI = true;
+        string code = saveGameCode.text;
+        string password = saveFilePassword.text;
+        StartCoroutine(APIFileVerification(code + ".json", password));
+    }
+
+    //Used by "Accept" button in load game (WEBGL) window to call the API
+    //The request checks if a file with the code provided exists and if its password is the same as the one provided
+    IEnumerator APIFileVerification(string fileName, string password)
+    {
+        bool saveFileExists = false;
+        bool apiCallWorks = false;
+        string url;
+        if (PhotonNetwork.OfflineMode)
+        {
+            url = API_URL + $"/read_file_data?fileName={fileName}&mode=Solo&password={password}";
+        }
+        else
+        {
+            url = API_URL + $"/read_file_data?fileName={fileName}&mode=Multiplayer&password={password}";
+        }
+        StartCoroutine(LoadingAnimation());
+        while (!apiCallWorks)
+        {
+            using UnityWebRequest www = UnityWebRequest.Get(url);
+            yield return www.SendWebRequest();
+            if (www.result != UnityWebRequest.Result.Success)
+            {
+                Debug.Log($"Error info: {www.error}");
+                Debug.Log("La API probablemente esta apagada... starting API");
+                yield return new WaitForSeconds(3);
+            }
+            else
+            {
+                Debug.Log($"Respuesta: {www.downloadHandler.text}");
+
+                if (www.downloadHandler.text == "true")
+                {
+                    saveFileExists = true;
+                }
+                apiCallWorks = true;
+            }
+        }
+        StopCoroutine(LoadingAnimation());
+        loadingAlert.SetActive(false);
+        if (saveFileExists)
+        {
+            saveGameCode.text = "";
+            saveFilePassword.text = "";
+            GameController.instance.fileSaveName = fileName;
+            GameController.instance.password = password;
+            LoadGameWithData();
+            acceptCodeButton.interactable = true;
+        }
+        else
+        {
+            alertWindow.SetActive(true);
+            yield return new WaitForSeconds(4);
+            alertWindow.SetActive(false);
+            acceptCodeButton.interactable = true;
+        }
+        callingAPI = false;
+}
+
+    //Method used when playing in webGL to exit its load system window
+    //Used by exit button in WEBGL panel
+    public void ExitLoadGameWEBGL()
+    {
+        webGLCodeWindow.SetActive(false);
+        if (PhotonNetwork.OfflineMode) soloWindow.SetActive(true);
+        else coOpWindow.SetActive(true);
     }
 
     //The player is connected to the Photon app
@@ -224,9 +384,9 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
         photonView.RPC("RoomClosed", RpcTarget.All);
         foreach (Player player in PhotonNetwork.PlayerList)
         {
-            if(!player.IsMasterClient) PhotonNetwork.CloseConnection(player);
+            if (!player.IsMasterClient) PhotonNetwork.CloseConnection(player);
         }
-        PhotonNetwork.LeaveRoom();        
+        PhotonNetwork.LeaveRoom();
     }
 
     // Remote Procedure Call to update roomWasClosed to true to all players and keeps track of who the host was
@@ -270,6 +430,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
     public override void OnPlayerLeftRoom(Player otherPlayer)
     {
         if (PhotonNetwork.InRoom) photonView.RPC("UpdatePlayerInfo", RpcTarget.All);
+        clientHasLoadedSelfData = false;
     }
 
     //Updates the saved data for the client when they join the room
@@ -308,7 +469,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
             {
                 StartGame();
             }
-            
+
         }
         else
         {
@@ -337,7 +498,7 @@ public class MenuUIController : MonoBehaviourPunCallbacks, IDataPersistence
         if (PhotonNetwork.IsMasterClient)
         {
             otherPlayer = p2;
-            
+
         }
         else
         {

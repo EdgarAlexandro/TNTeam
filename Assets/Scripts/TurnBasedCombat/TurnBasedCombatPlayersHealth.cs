@@ -17,15 +17,76 @@ public class TurnBasedCombatPlayersHealth : MonoBehaviourPunCallbacks
     private TurnBasedCombatManager tbc;
     private PersistenceManager pm;
     public List<GameObject> playersGameObject = new List<GameObject>();
+    public List<Sprite> playerHealthBars = new List<Sprite>();
     public List<PlayerInNetwork> players;
 
     // Start is called before the first frame update
     void Start(){
+        playersGameObject = GameObject.FindGameObjectsWithTag("Player").ToList();
         tbc = TurnBasedCombatManager.Instance;
         pm = PersistenceManager.Instance;
         players = tbc.players;
         photonView.RPC("SetHealthBarValues", RpcTarget.All);
+        CheckCurrentCharacter();    
     }
+
+    private void CheckCurrentCharacter()
+    {
+        foreach (GameObject player in playersGameObject)
+        {
+            PhotonView photonView = player.GetComponent<PhotonView>();
+            if (photonView.IsMine)
+            {
+                GetSelectedCharacterHealthBarSprite(player);
+            }
+        }
+    }
+
+    private void GetSelectedCharacterHealthBarSprite(GameObject player)
+    {
+        string playerName = player.name.Replace("(Clone)", "");
+        foreach (Sprite healthBar in playerHealthBars)
+        {
+            if (healthBar.name.StartsWith(playerName))
+            {
+                if (PhotonNetwork.IsMasterClient)
+                {
+                    p1HealthBar.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = healthBar;
+                    photonView.RPC("SyncronizeP1HealthBarSprite", RpcTarget.All, healthBar.name);
+                }
+                else
+                {
+                    p2HealthBar.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = healthBar;
+                    photonView.RPC("SyncronizeP2HealthBarSprite", RpcTarget.All, healthBar.name);
+                }
+            }
+        }
+    }
+
+    [PunRPC]
+    public void SyncronizeP1HealthBarSprite(string healthBarName)
+    {
+        foreach (Sprite healthBar in playerHealthBars)
+        {
+            if(healthBar.name == healthBarName)
+            {
+                p1HealthBar.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = healthBar;
+            }
+        }
+    }
+
+    [PunRPC]
+    public void SyncronizeP2HealthBarSprite(string healthBarName)
+    {
+        foreach (Sprite healthBar in playerHealthBars)
+        {
+            if (healthBar.name == healthBarName)
+            {
+                p2HealthBar.transform.GetChild(0).gameObject.GetComponent<Image>().sprite = healthBar;
+            }
+        }
+    }
+
     // Sets health values at the start of the turn based combat.
     [PunRPC]
     public void SetHealthBarValues(){

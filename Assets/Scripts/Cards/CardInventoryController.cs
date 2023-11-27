@@ -14,7 +14,7 @@ public class CardInventoryController : MonoBehaviourPunCallbacks
     public List<Button> cardDisplayButtons;
     private List<CardData> inventoryCards;
     private bool isCardInventoryActive;
-    private UIController uiController;
+    //private UIController uiController;
 
     private static CardInventoryController instance;
     public static CardInventoryController Instance { get { return instance; } }
@@ -39,6 +39,7 @@ public class CardInventoryController : MonoBehaviourPunCallbacks
         inventoryCards = new List<CardData>();
         //inventoryView = uiController.playerCanvas.transform.Find("CardInventory").gameObject;
         //CardDisplay();
+        UpdateCardInventory();
     }
 
     // Update is called once per frame
@@ -51,7 +52,8 @@ public class CardInventoryController : MonoBehaviourPunCallbacks
             else{
                 inventoryView.SetActive(false);
                 isCardInventoryActive = false;
-            } 
+            }
+            CardDisplay();
         }
     }
 
@@ -85,6 +87,21 @@ public class CardInventoryController : MonoBehaviourPunCallbacks
         // Check if the inventory hasn't reached it's limit
         if (inventory.cards.Count < inventory.maxCards){
             inventory.AddCard(selectedCardData);
+            UpdateCardInventory();
         }
+    }
+
+    //Used by both players but important for client (not master)
+    //This function saves the names of each card (currently in inventory) in the custom properties (Photon) of the player 
+    public void UpdateCardInventory()
+    {
+        string data = "";
+        foreach (CardData card in inventory.cards)
+        {
+            data += card.name + "/";
+        }
+        ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
+        properties["Cards"] = data;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
     }
 }

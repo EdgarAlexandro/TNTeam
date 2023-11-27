@@ -7,7 +7,7 @@ public class CBTButton : MonoBehaviour
 {
     private Button boton;
     private Image imagen;
-
+    public int indexItemSeleccionado = 0;
     void Start()
     {
         boton = GetComponent<Button>();
@@ -15,6 +15,11 @@ public class CBTButton : MonoBehaviour
 
         // Agrega un listener al evento onClick para cada botón
         boton.onClick.AddListener(PresionarBoton);
+    }
+
+    private void Update()
+    {
+        
     }
 
     void PresionarBoton()

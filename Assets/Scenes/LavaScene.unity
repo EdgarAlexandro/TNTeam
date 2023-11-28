@@ -4331,6 +4331,7 @@ MonoBehaviour:
   waterTilemap: {fileID: 1074648509}
   damagePerSecond: 5
   isPlayerOnBridge: 0
+  particulas: {fileID: 4637011184048282477, guid: 6847a07795cb743a8a8d484474ead084, type: 3}
 --- !u!114 &1074648512
 MonoBehaviour:
   m_ObjectHideFlags: 0

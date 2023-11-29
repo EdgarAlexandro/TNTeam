@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: SanaSanaColitaDeRana
   prefabs:
   - {fileID: 6676253586520108912, guid: b8b78385b03c42f4a9a02bd28d34e04a, type: 3}
+  - {fileID: 8660158928746801251, guid: 82037b91fa2a34edbaacca271f22fa37, type: 3}

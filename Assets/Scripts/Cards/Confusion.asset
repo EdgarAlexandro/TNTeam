@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: Confusion
   prefabs:
   - {fileID: 7976292599160379543, guid: 0e9c431bbe13d4641b50f6dc468eb83c, type: 3}
+  - {fileID: 6592743525103056158, guid: 4db44eaf47d2844f7896729b4979a3ba, type: 3}

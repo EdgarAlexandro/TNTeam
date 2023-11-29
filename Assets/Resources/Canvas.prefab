@@ -1928,17 +1928,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardInfoList:
   - cardData: {fileID: 11400000, guid: 7e8d3ad31ab305f49ad32ea6aeb284f3, type: 2}
-    probability: 0.3
+    probability: 10
   - cardData: {fileID: 11400000, guid: fdce98f6dd68c264bb870428ec0e2b63, type: 2}
-    probability: 0.3
+    probability: 15
   - cardData: {fileID: 11400000, guid: c98dc5bd3e60e394fa806687f15217ca, type: 2}
-    probability: 0.2
+    probability: 5
   - cardData: {fileID: 11400000, guid: 69f440e44ade13a4ca92394ec47ade19, type: 2}
-    probability: 0.2
+    probability: 25
   - cardData: {fileID: 11400000, guid: 23bd2b70cafcfcb4e95b2fd525b59e2e, type: 2}
-    probability: 0.6
+    probability: 20
   - cardData: {fileID: 11400000, guid: f22cfc5ee29363f42be97c9cd4fe44b3, type: 2}
-    probability: 0.6
+    probability: 25
   cardDisplay:
   - {fileID: 328298007}
   - {fileID: 47385283}

@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ad79daacc0286418f621835cd2c5c1, type: 3}
   m_Name: Joker'sPrank
   m_EditorClassIdentifier: 
-  cardName: Joker'sPrank
+  cardName: JokersPrank
   prefabs:
   - {fileID: 947006614024375456, guid: 441cff6ddd939794899f0429fa0b4583, type: 3}
+  - {fileID: 1003564661113487456, guid: 3fb077a22597844b693bae53bdd1fadb, type: 3}

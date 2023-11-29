@@ -56,7 +56,7 @@ public class Daga : MonoBehaviourPunCallbacks
         {
             if (photonView.IsMine)
             {
-                other.GetComponent<BossHealth>().TakeDamage(5);
+                other.GetComponent<BossHealth>().TakeDamage((int)(5.0f * tbc.playerAttackMultiplier));
             }
             StartCoroutine(AlternateColors(other.gameObject.name));
             gameObject.layer = LayerMask.NameToLayer("NoCollision");

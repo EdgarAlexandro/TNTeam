@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: HeyNotYet
   prefabs:
   - {fileID: 5437917972545614207, guid: ff77e3f1203a0844f8363f37f6116c7f, type: 3}
+  - {fileID: 5165707830323004262, guid: 7b9e7084ba77c4f64adb68deb2a24cf3, type: 3}

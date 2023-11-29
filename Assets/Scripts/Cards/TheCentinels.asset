@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: TheCentinels
   prefabs:
   - {fileID: 5525930431597367051, guid: c97b5c4692706d048ad895d33ec5da6b, type: 3}
+  - {fileID: 4944263586947829262, guid: f0693439e6e7743a6acfa5090df35296, type: 3}

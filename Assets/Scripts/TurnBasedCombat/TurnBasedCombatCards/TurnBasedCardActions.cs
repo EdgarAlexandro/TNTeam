@@ -23,16 +23,13 @@ public class TurnBasedCardActions : MonoBehaviour
         tbcPH = healthBars.GetComponent<TurnBasedCombatPlayersHealth>();
     }
 
-    // Update is called once per frame
-    /*void Update()
-    {
-        
-    }*/
+    // se salta el turno del jugador que usó la carta
     public void Confusion()
     {
         if(PhotonNetwork.OfflineMode)
         {
             tbcm.skipP1Turn = true;
+            Debug.Log("Confused player 1");
         }
         else
         {
@@ -46,10 +43,12 @@ public class TurnBasedCardActions : MonoBehaviour
         if (PhotonNetwork.IsMasterClient)
         {
             tbcm.skipP1Turn = true;
+            Debug.Log("Confused player 1");
         }
         else
         {
             tbcm.skipP2Turn = true;
+            Debug.Log("Confused player 2");
         }
     }
 
@@ -59,6 +58,7 @@ public class TurnBasedCardActions : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             tbcm.skipBossTurn = true;
+            Debug.Log("Skipped boss turn");
         }
         else
         {
@@ -70,15 +70,17 @@ public class TurnBasedCardActions : MonoBehaviour
     public void SkipBossTurn()
     {
         tbcm.skipBossTurn = true;
+        Debug.Log("Skipped boss turn");
     }
 
-
+    // aumenta la defensa y el ataque del jefe
     public void JokersPrank()
     {
         if (PhotonNetwork.OfflineMode)
         {
             tbcm.BossAttackMultiplier += 0.25f;
             tbcm.BossDefenseMultiplier += 0.3f;
+            Debug.Log("New boss attack/def = " + tbcm.BossAttackMultiplier + "/" + tbcm.BossDefenseMultiplier);
         }
         else
         {
@@ -92,7 +94,7 @@ public class TurnBasedCardActions : MonoBehaviour
     {
         tbcm.BossAttackMultiplier += 0.25f;
         tbcm.BossDefenseMultiplier += 0.3f;
-
+        Debug.Log("New boss attack/def = " + tbcm.BossAttackMultiplier + "/" + tbcm.BossDefenseMultiplier);
     }
 
     public void SanaSana() // esta funcion le agrega un 25% de salud a ambos jugadores, por lo que no es necesario revisar quien la uso
@@ -107,6 +109,7 @@ public class TurnBasedCardActions : MonoBehaviour
             {
                 pm.CurrentHealth = pm.MaxHealth;
             }
+            Debug.Log("healed player");
         }
         else
         {
@@ -128,8 +131,8 @@ public class TurnBasedCardActions : MonoBehaviour
             {
                 tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
             }
+            Debug.Log("healed player");
         }
-        // revisa si agregar la vida sobrepasa la vida maxima y agrega la vida acorde
         
     }
 
@@ -139,10 +142,11 @@ public class TurnBasedCardActions : MonoBehaviour
         if (PhotonNetwork.OfflineMode)
         {
             tbcm.playerDefenseMultiplier += 0.2f;
+            Debug.Log("increased player def");
         }
         else
         {
-            tbcm.photonView.RPC("updateplayerdefensemultiplier", RpcTarget.All);
+            tbcm.photonView.RPC("UpdatePlayerDefenseMultiplier", RpcTarget.All);
         }
     }
 
@@ -150,6 +154,28 @@ public class TurnBasedCardActions : MonoBehaviour
     public void UpdatePlayerDefenseMultiplier()
     {
         tbcm.playerDefenseMultiplier += 0.2f;
+        Debug.Log("increased player def");
     }
 
+    public void MayTheForceBeWithYou()
+    {
+        if (PhotonNetwork.OfflineMode)
+        {
+            tbcm.playerAttackMultiplier += 0.3f;
+            Debug.Log("increased player attack");
+        }
+        else
+        {
+            tbcm.photonView.RPC("UpdatePlayerAttackMultiplier", RpcTarget.All);
+        }
+    }
+
+    [PunRPC]
+    public void UpdatePlayerAttackMultiplier()
+    {
+        tbcm.playerAttackMultiplier += 0.3f;
+        Debug.Log("increased players attack");
+    }
 }
+
+    

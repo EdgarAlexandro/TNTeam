@@ -15,3 +15,4 @@ MonoBehaviour:
   cardName: MayTheForceBeWithYou
   prefabs:
   - {fileID: 6177119091947359804, guid: 79345923b617eae47a886bd887d8c308, type: 3}
+  - {fileID: 4540953209463313587, guid: 8b50601e6763748b99becf248bb4684a, type: 3}

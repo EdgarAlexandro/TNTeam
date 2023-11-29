@@ -1,5 +1,5 @@
 /* Function: Display random cards inx the card menu and let the player select one
-   Author: Daniel Degollado Rodríguez A008325555
+   Author: Daniel Degollado Rodrï¿½guez A008325555
    Modification date: 14/10/2023 */
 using System.Collections;
 using System.Collections.Generic;
@@ -19,6 +19,7 @@ public class CardMenu : MonoBehaviour
     public List<Button> cardDisplay;
     public Button selectedCardDisplay;
     private GameObject selectedCard;
+    private GameObject selectedCard2;
     public GameObject cardSelectMenu;
     public GameObject selectedCardView;
     public List<Button> selectedButton;
@@ -29,16 +30,16 @@ public class CardMenu : MonoBehaviour
 
     // Start is called before the first frame update
     void Start(){
+        cardSelectMenu.SetActive(true);
         randomCards = new List<CardData>();
-        float totalProbability = 1f;
+        float totalProbability = 0f;
         //cardInventoryController = CardInventoryController.Instance;
 
-        /*
         foreach (CardInfo cardInfo in cardInfoList)
         {
             totalProbability += cardInfo.probability;
         }
-        */
+        
         cardInventoryController = GameObject.Find("CardInventoryController").GetComponent<CardInventoryController>();
         for (int i = 0; i < 3; i++){
             // Get a random value
@@ -135,6 +136,7 @@ public class CardMenu : MonoBehaviour
             cardSelectMenu.SetActive(false);
             selectedCardView.SetActive(true);
             // Changes position of selected card
+            selectedCard2 = selectedCard;
             selectedCard.transform.SetParent(selectedCardDisplay.transform);
             selectedCard.transform.localPosition = Vector3.zero;
             // Reset selected card variable

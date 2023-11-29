@@ -41,7 +41,6 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
 
     public WeightedList<int> weightedPlayers;
     public int p1Health, p2Health;
-    private PersistenceManager pm;
 
     public static TurnBasedCombatManager Instance { get; private set; }
 
@@ -73,11 +72,10 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             photonView.RPC("StartTurn", RpcTarget.All);
         }
 
-        pm = PersistenceManager.Instance;
-        playerAttackMultiplier = 1;
-        playerDefenseMultiplier = 1;
-        BossAttackMultiplier = 1;
-        BossDefenseMultiplier = 1;
+        playerAttackMultiplier = 1.0f;
+        playerDefenseMultiplier = 1.0f;
+        BossAttackMultiplier = 1.0f;
+        BossDefenseMultiplier = 1.0f;
     }
 
     // Get the players in the photon network.
@@ -106,14 +104,43 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             {
                 if(pm.CurrentHealth > 0)
                 {
-                    if (canvas != null)
+                    if (PhotonNetwork.OfflineMode)
                     {
-                        canvas.SetActive(true);
+                        if (!skipP1Turn)
+                        {
+                            ActivateCanvas();
+                        }
+                        else
+                        {
+                            skipP1Turn = false;
+                        }
                     }
                     else
                     {
-                        Debug.Log("Canvas is null");
+                        if (PhotonNetwork.IsMasterClient)
+                        {
+                            if (!skipP1Turn)
+                            {
+                                ActivateCanvas();
+                            }
+                            else
+                            {
+                                photonView.RPC("ReturnP1Turn", RpcTarget.All);//skipP1Turn = false;
+                            }
+                        }
+                        else
+                        {
+                            if (!skipP2Turn)
+                            {
+                                ActivateCanvas();
+                            }
+                            else
+                            {
+                                photonView.RPC("ReturnP2Turn", RpcTarget.All);//kipP2Turn = false;
+                            }
+                        }
                     }
+                    
                 }
                 else
                 {
@@ -144,6 +171,30 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             }
             EndTurn();
         }  
+    }
+
+    private void ActivateCanvas()
+    {
+        if (canvas != null)
+        {
+            canvas.SetActive(true);
+        }
+        else
+        {
+            Debug.Log("Canvas is null");
+        }
+    }
+
+    [PunRPC]
+    void ReturnP1Turn()
+    {
+        skipP1Turn = false;
+    }
+
+    [PunRPC]
+    void ReturnP2Turn()
+    {
+        skipP2Turn = false;
     }
 
     [PunRPC]

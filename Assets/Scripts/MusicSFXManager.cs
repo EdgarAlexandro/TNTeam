@@ -129,6 +129,7 @@ public class MusicSFXManager : MonoBehaviour
     {
         menuMusic.Play();
         levelMusic.Stop();
+        levelTwoMusic.Stop();
     }
 
     public void PlayLevelMusic()

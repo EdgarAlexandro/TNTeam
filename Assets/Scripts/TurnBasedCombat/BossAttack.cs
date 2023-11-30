@@ -84,6 +84,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
                 if (pm.CurrentHealth - (int)damage > 0)
                 {
                     pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense); // toma el ataque, lo multiplica por el multiplicador de ataque del jefe, y lo divide entre el multiplicador de defensa del jugador
+
                 }
                 else
                 {
@@ -94,14 +95,13 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.
 
                 if (PhotonNetwork.IsMasterClient)
-                { // If attacked player is the master client, update the player 1's health bar with current health.
-                  //PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
+                { // If attacked player is the master client, update the player 1's health bar with current health.                 
+                    tbc.photonView.RPC("SyncronizeP1Health", RpcTarget.All, pm.CurrentHealth);
                     tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
                 }
                 else
                 {// If attacked player is not the master client, update the player 2's health bar with current health.
-
-                    PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
+                    tbc.photonView.RPC("SyncronizeP2Health", RpcTarget.All, pm.CurrentHealth);
                     tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
                 }
                 //gameObject.layer = LayerMask.NameToLayer("NoCollision");

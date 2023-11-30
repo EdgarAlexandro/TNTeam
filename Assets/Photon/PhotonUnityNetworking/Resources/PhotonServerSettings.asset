@@ -98,6 +98,20 @@ MonoBehaviour:
   - OtherPlayerDeathAnimation
   - SyncronizeP2Health
   - MagicArrow
+  - PocionCuracion
+  - PocionRevivir
+  - ReviveAnimation
+  - DecreaseAlivePlayers
+  - IncreaseAlivePlayers
+  - SetMagicBarValues
+  - SyncronizeP1MagicBarCurrentValue
+  - SyncronizeP1MagichBarValue
+  - SyncronizeP2MagicBarCurrentValue
+  - SyncronizeP2MagicBarValue
+  - PocionMagia
+  - SyncronizeP1MagicBarValue
+  - SyncronizeP1Health
+  - MoveDagger
   DisableAutoOpenWizard: 1
   ShowSettings: 1
   DevRegionSetOnce: 1

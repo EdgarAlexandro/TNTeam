@@ -89,6 +89,14 @@ public class TurnBasedCombatTargetHandler : MonoBehaviourPunCallbacks
         }
     }
 
+    public void BlockAttackMessage()
+    {
+        if (currentTarget.IsLocal)
+        {
+            PhotonNetwork.Instantiate(bossAttack.name, bossAttackSpawn.transform.position, Quaternion.identity);
+        }
+    }
+
     /*public IEnumerator DodgeMessage(){
         dodgeMessage.SetActive(true);
         yield return new WaitForSeconds(4.0f);

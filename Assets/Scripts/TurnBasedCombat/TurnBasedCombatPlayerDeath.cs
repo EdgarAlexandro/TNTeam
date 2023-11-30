@@ -17,7 +17,7 @@ public class TurnBasedCombatPlayerDeath : MonoBehaviourPunCallbacks
         Debug.Log("PlayerDeath");
         animator.SetBool("Muerte", true);
         photonView.RPC("OtherPlayerDeathAnimation", RpcTarget.All, player.name);
-        photonView.RPC("UpdateAlivePlayers", RpcTarget.All);
+        photonView.RPC("DecreaseAlivePlayers", RpcTarget.All);
     }
 
     [PunRPC]
@@ -28,7 +28,7 @@ public class TurnBasedCombatPlayerDeath : MonoBehaviourPunCallbacks
     }
 
     [PunRPC]
-    public void UpdateAlivePlayers()
+    public void DecreaseAlivePlayers()
     {
         GameController.AlivePlayers--;
         Debug.Log(GameController.AlivePlayers);
@@ -36,5 +36,15 @@ public class TurnBasedCombatPlayerDeath : MonoBehaviourPunCallbacks
         {
             NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, "LoseScene");
         }   
+    }
+
+    [PunRPC]
+    public void IncreaseAlivePlayers()
+    {
+        if(GameController.AlivePlayers < 2)
+        {
+            GameController.AlivePlayers++;
+            Debug.Log(GameController.AlivePlayers);
+        }
     }
 }

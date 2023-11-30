@@ -13,8 +13,11 @@ public class Bomba : MonoBehaviourPunCallbacks
     private SpriteRenderer spriteRenderer = null;
     private Animator animator = null;
 
+    private TurnBasedCombatManager tbc;
+
     void Start()
     {
+        tbc = TurnBasedCombatManager.Instance;
         spriteRenderer = GetComponent<SpriteRenderer>();
         animator = GetComponent<Animator>(); 
         StartCoroutine(Explode());
@@ -58,6 +61,12 @@ public class Bomba : MonoBehaviourPunCallbacks
             if (col.TryGetComponent(out cajaDestroy))
             {
                 StartCoroutine(CajaDestruida(col.gameObject, SceneManager.GetActiveScene().name));
+            }
+            BossHealth bossHealth;
+            if (col.TryGetComponent(out bossHealth))
+            {
+                bossHealth.TakeDamage(20);
+                tbc.EndTurn();
             }
         }
         // RPC for owner to destroy de gameobject

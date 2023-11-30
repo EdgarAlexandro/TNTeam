@@ -16,6 +16,11 @@ public class SceneTransition : MonoBehaviourPunCallbacks
         return playersNearby == GameController.AlivePlayers;
     }
 
+    bool TurnBasedCombatScene()
+    {
+        return sceneToLoad == "TurnBasedCombatTestScene";
+    }
+
     public void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
@@ -34,20 +39,24 @@ public class SceneTransition : MonoBehaviourPunCallbacks
                 if (CanTransition())
                 {
                     NetworkManager.instance.photonView.RPC("LoadScene", RpcTarget.All, sceneToLoad);
-                    GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
-                    //TODO En multiplayer no debe de mover al jugador si esta muerto
-                    foreach (GameObject player in players)
+
+                    if (!TurnBasedCombatScene())
                     {
-                        if (player.GetPhotonView().IsMine)
+                        GameObject[] players = GameObject.FindGameObjectsWithTag("Player");
+                        //TODO En multiplayer no debe de mover al jugador si esta muerto
+                        foreach (GameObject player in players)
                         {
-                            player.transform.position = lastPlayerPosition;
+                            if (player.GetPhotonView().IsMine)
+                            {
+                                player.transform.position = lastPlayerPosition;
+                            }
+                            else
+                            {
+                                player.GetPhotonView().RPC("MoveClient", RpcTarget.Others, lastPlayerPosition);
+                            }
+                            if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1.2f, 0);
+                            else lastPlayerPosition += new Vector2(0, 1.3f);
                         }
-                        else
-                        {
-                            player.GetPhotonView().RPC("MoveClient", RpcTarget.Others, lastPlayerPosition);
-                        }
-                        if (isNextSpawnVertical) lastPlayerPosition += new Vector2(1.2f, 0);
-                        else lastPlayerPosition += new Vector2(0, 1.3f);
                     }
                 }
             }

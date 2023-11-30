@@ -39,8 +39,10 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     public bool skipP2Turn;
     public bool skipBossTurn;
 
-    public WeightedList<int> weightedPlayers;
+    public WeightedList<int> weightedPlayers = new();
     public int p1Health, p2Health;
+
+    //WeightedList<int> weightedPlayers;
 
     public static TurnBasedCombatManager Instance { get; private set; }
 
@@ -53,6 +55,7 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         }
 
         Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     // Start is called before the first frame update.
@@ -65,8 +68,8 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         SpawnPlayer();
 
         photonView.RPC("InitializePlayers", RpcTarget.All);
-        StartCoroutine("AssignActionsMenu");
-        StartCoroutine("WaitToStartTurn");
+        //StartCoroutine("AssignActionsMenu");
+        //StartCoroutine("WaitToStartTurn");
         //canvas = tbcPA.SetCorrespondingActionsMenu(players);
 
         pm = PersistenceManager.Instance;
@@ -74,17 +77,24 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         playerDefenseMultiplier = 1;
         BossAttackMultiplier = 1;
         BossDefenseMultiplier = 1;
+
+        weightedPlayers.Add(0, 1);
+        weightedPlayers.Add(1, 1);
     }
 
-    IEnumerator AssignActionsMenu()
+    /*IEnumerator AssignActionsMenu()
     {
         yield return new WaitForSeconds(0.5f);
         canvas = tbcPA.SetCorrespondingActionsMenu(players);
-    }
+    }*/
 
     IEnumerator WaitToStartTurn()
     {
-        yield return new WaitForSeconds(0.6f);
+        while (canvas == null)
+        {
+            yield return null; // This will make the coroutine wait for one frame
+        }
+
         if (PhotonNetwork.IsMasterClient)
         {
             photonView.RPC("StartTurn", RpcTarget.All);
@@ -101,6 +111,24 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         {
             PlayerInNetwork newPlayer = new PlayerInNetwork(player);
             players.Add(newPlayer);
+            if (player.IsLocal)
+            {
+                GameObject character = player.TagObject as GameObject;
+                Debug.Log(character.name);
+                canvas = tbcPA.GetCorrespondingActionsMenu(character.name, character);
+                StartCoroutine("WaitToStartTurn");
+            }
+        }
+        // actualiza los valores de las vidas actuales de los jugadores
+        if (PhotonNetwork.IsMasterClient)
+        {
+            p1Health = pm.CurrentHealth;
+            photonView.RPC("SyncronizeP1Health", RpcTarget.All, p1Health);
+        }
+        else
+        {
+            p2Health = pm.CurrentHealth;
+            photonView.RPC("SyncronizeP2Health", RpcTarget.All, p2Health);
         }
     }
 
@@ -120,6 +148,8 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
                     if (canvas != null)
                     {
                         canvas.SetActive(true);
+                        GameObject character = currentPlayer.tagObject as GameObject;
+                        character.GetComponent<MenuControllerCBT>().canControl = true;
                     }
                     else
                     {
@@ -140,6 +170,7 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
                 if (PhotonNetwork.OfflineMode)
                 {
                     skipBossTurn = false;
+                    EndTurn();
                 }
                 else
                 {
@@ -168,6 +199,8 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
     {
         if (PhotonNetwork.IsMasterClient)
         {
+            weightedPlayers.SetWeight(0, p2Health);
+            weightedPlayers.SetWeight(1, p1Health);
             photonView.RPC("SelectTarget", RpcTarget.All);
         }
     }
@@ -182,33 +215,22 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
         }
         else
         {
-            // actualiza los valores de las vidas actuales de los jugadores
-            if (PhotonNetwork.IsMasterClient)
-            {
-                p1Health = pm.CurrentHealth;
-            }
-            else
-            {
-                p2Health = pm.CurrentHealth;
-                photonView.RPC("SyncronizeP2Health", RpcTarget.All, p2Health);
-            }
-
             if (PhotonNetwork.IsMasterClient)
             {
                 /*random = new System.Random();
                 randomIndex = random.Next(players.Count);*/
                 // maybe code
                 // crea una lista de los items con su indice y de peso pone la vida de los jugadores
-                List<WeightedListItem<int>> playerWeights = new();
+                /*List<WeightedListItem<int>> playerWeights = new();
                 {
-                    new WeightedListItem<int>(0,p2Health);
-                    new WeightedListItem<int>(1,p1Health);
-                };
+                    new WeightedListItem<int>(1, p1Health);
+                    new WeightedListItem<int>(0, p2Health);
+                };*/
 
                 // crea la lista con pesos y genera el valor del randomIndex
-                weightedPlayers = new WeightedList<int>(playerWeights);
+                //weightedPlayers = new WeightedList<int>(playerWeights);
                 randomIndex = weightedPlayers.Next();
-
+                Debug.Log(randomIndex);
                 // end maybe code
                 photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
                 tbcTH.photonView.RPC("TakeDamageTBC", RpcTarget.All, randomIndex);
@@ -229,6 +251,12 @@ public class TurnBasedCombatManager : MonoBehaviourPunCallbacks
             }
         }*/
 
+    }
+
+    [PunRPC]
+    private void SyncronizeP1Health(int player1Health)
+    {
+        p1Health = player1Health;
     }
 
     [PunRPC]

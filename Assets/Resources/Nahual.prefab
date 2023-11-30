@@ -194,7 +194,7 @@ MonoBehaviour:
   currentTarget: {fileID: 0}
   speed: 1
   health: 0
-  maxHealth: 1
+  maxHealth: 3
   orbePrefab: {fileID: 3497544176364357381, guid: d321309feaec54c71a2e7c22a95f9c58, type: 3}
 --- !u!114 &6655708649705253883
 MonoBehaviour:

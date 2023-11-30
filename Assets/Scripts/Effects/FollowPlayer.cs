@@ -28,7 +28,7 @@ public class FollowPlayer : MonoBehaviour
         if (target != null)
         {
             transform.position = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-            if(target.GetComponent<PlayerControl>().moveSpeed >= 5) Destroy(gameObject);
+            if(target.GetComponent<PlayerControl>().moveSpeed >= 3) Destroy(gameObject);
         }
     }
 }

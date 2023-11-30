@@ -8,6 +8,8 @@ public class QueenOfClubsFreezeField : MonoBehaviourPunCallbacks
     private MusicSFXManager musicSFXManager;
     public CircleCollider2D field;
     public GameObject fieldPrefab;
+    public UIController uiController;
+    public int neededMagic = 10;
 
     void Start()
     {
@@ -18,7 +20,13 @@ public class QueenOfClubsFreezeField : MonoBehaviourPunCallbacks
     {
         if (photonView.IsMine && Input.GetKeyDown(KeyCode.R))
         {
-            StartCoroutine(ActivateFreezeField());
+            if (PersistenceManager.Instance.CurrentMagic >= neededMagic)
+            {
+              
+                uiController.loseMagicValue(neededMagic);
+                StartCoroutine(ActivateFreezeField());
+            }
+
         }
         
     }

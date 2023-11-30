@@ -33,6 +33,7 @@ public class WaterandLavaGrid : MonoBehaviour
             isPlayerInWater = true;
             StartCoroutine(DealDamage(other.name));
             if (PhotonNetwork.OfflineMode) Instantiate(particulas, other.transform.position, Quaternion.identity);
+            particulas.Play();
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -40,6 +41,7 @@ public class WaterandLavaGrid : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInWater = false; // Marca que el jugador ha salido del agua
+            particulas.Stop();
         }
     }
 

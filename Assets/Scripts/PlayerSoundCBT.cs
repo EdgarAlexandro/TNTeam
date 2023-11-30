@@ -21,7 +21,7 @@ public class PlayerSoundCBT : MonoBehaviour
     public void SoundEffect(AudioClip clip)
     {
         soundEffect.PlaySFX(clip);
-        Debug.Log("Hola");
+        
     }
 
 }

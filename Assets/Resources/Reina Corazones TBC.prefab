@@ -327,9 +327,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 17f0c4fe192da3a41a1ef787d406b661, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  botonAtaque: {fileID: 0}
-  botonJoker: {fileID: 0}
-  botonObjeto: {fileID: 0}
+  canControl: 0
+  objectsMenuActive: 0
 --- !u!1 &8368834316454636427
 GameObject:
   m_ObjectHideFlags: 0

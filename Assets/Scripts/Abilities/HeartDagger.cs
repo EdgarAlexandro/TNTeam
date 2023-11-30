@@ -2,11 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Photon.Pun;
 
-public class HeartDagger : MonoBehaviour
+public class HeartDagger : MonoBehaviourPunCallbacks
 {
     float probabilidadFuncionA;
     float randomValue;
+
+    [PunRPC]
+    public void MoveDagger(Vector2 projDirection, float speed )
+    {
+        GetComponent<Rigidbody2D>().velocity = projDirection * speed;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {

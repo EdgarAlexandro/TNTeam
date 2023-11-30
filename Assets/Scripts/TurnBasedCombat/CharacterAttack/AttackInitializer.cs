@@ -23,6 +23,7 @@ public class AttackInitializer : MonoBehaviourPunCallbacks
     public void StartAttackAnimation()
     {
         tbc.canvas.SetActive(false);
+        gameObject.GetComponent<MenuControllerCBT>().canControl = false;
         animator.SetBool("Atacando", true);
     }
 

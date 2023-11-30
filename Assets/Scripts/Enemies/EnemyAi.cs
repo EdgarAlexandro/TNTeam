@@ -18,6 +18,7 @@ public class EnemyAi : MonoBehaviourPunCallbacks
     private float thrust = 2.0f;
     public int health;
     public int maxHealth;
+    public bool freezed = false;
     private Animator animatorController;
     private SpriteRenderer sprite;
     private MusicSFXManager musicSFXManager;
@@ -57,10 +58,8 @@ public class EnemyAi : MonoBehaviourPunCallbacks
         {
 
             // Sets the enemy destination to the target (Navmesh).
-            if (!targetCollision)
-            {
-                if (currentTarget.gameObject.GetComponent<UIController>().isDead == false)
-                {
+            if (!targetCollision && !freezed){
+                if(currentTarget.gameObject.GetComponent<UIController>().isDead == false){
                     rigidBod.constraints = RigidbodyConstraints2D.None;
                     Vector2 targetPosition = currentTarget.transform.position;
 
@@ -171,14 +170,16 @@ public class EnemyAi : MonoBehaviourPunCallbacks
         sprite.color = new Color(255, 255, 255, 255);
     }
     // Freeze enemy. 
-    public IEnumerator Freeze()
-    {
-        speed = 0.0f;
+    public IEnumerator Freeze(){
+        freezed = true; 
+        //UpdateAnimation(Vector3.zero);
+        agent.SetDestination(transform.position);
+        rigidBod.constraints = RigidbodyConstraints2D.FreezeAll;
+        //speed = 0.0f;
         animatorController.enabled = false;
         Debug.Log("AI Frozen");
         yield return new WaitForSeconds(6);
+        freezed = false;
         animatorController.enabled = true;
-        speed = 2.0f;
-        Debug.Log("AI Moving");
     }
 }

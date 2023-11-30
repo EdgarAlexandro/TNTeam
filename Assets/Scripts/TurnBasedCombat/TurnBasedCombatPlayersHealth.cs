@@ -22,12 +22,22 @@ public class TurnBasedCombatPlayersHealth : MonoBehaviourPunCallbacks
 
     // Start is called before the first frame update
     void Start(){
+        if (PhotonNetwork.OfflineMode)
+        {
+            SinglePlayerHealthBar();
+        }
         playersGameObject = GameObject.FindGameObjectsWithTag("Player").ToList();
         tbc = TurnBasedCombatManager.Instance;
         pm = PersistenceManager.Instance;
         players = tbc.players;
-        photonView.RPC("SetHealthBarValues", RpcTarget.All);
+        SetHealthBarValues();
         CheckCurrentCharacter();    
+    }
+
+    void SinglePlayerHealthBar()
+    {
+        p2HealthBar.gameObject.SetActive(false);
+        p1HealthBar.gameObject.transform.position = new Vector3(-6.3f, 1.5f, 0f);
     }
 
     private void CheckCurrentCharacter()
@@ -88,7 +98,6 @@ public class TurnBasedCombatPlayersHealth : MonoBehaviourPunCallbacks
     }
 
     // Sets health values at the start of the turn based combat.
-    [PunRPC]
     public void SetHealthBarValues(){
         if (PhotonNetwork.IsMasterClient) // If player is master, with a PunRPC syncronize player 1's health bar values for all clients.
         {

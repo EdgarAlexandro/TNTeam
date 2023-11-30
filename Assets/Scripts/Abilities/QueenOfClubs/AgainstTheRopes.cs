@@ -5,7 +5,7 @@ using Photon.Pun;
 
 public class AgainstTheRopes : MonoBehaviourPunCallbacks
 {
-    private float maxSize = 6.0f;
+    private float maxSize = 1.0f;
     private float growthRate = 3f;
     private float rotationSpeed = 30.0f;
     // Start is called before the first frame update

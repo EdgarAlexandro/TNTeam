@@ -196,6 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   arrow: {fileID: 5484891709605359118, guid: f6b848070688c4a3dbd7eae099fa2b18, type: 3}
   speed: 9
+  uiController: {fileID: 6686784741801488576}
+  neededMagic: 10
 --- !u!114 &6686784741801488576
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -97,6 +97,7 @@ MonoBehaviour:
   - UpdatePlayerDefenseMultiplier
   - OtherPlayerDeathAnimation
   - SyncronizeP2Health
+  - MagicArrow
   - PocionCuracion
   - PocionRevivir
   - ReviveAnimation

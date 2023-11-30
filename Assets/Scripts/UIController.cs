@@ -198,7 +198,7 @@ public class UIController : MonoBehaviourPunCallbacks
         }
         healthBar.SetHealth(pm.CurrentHealth);
         if (photonView.IsMine) SetProps();
-        if (pm.CurrentHealth == 0)
+        if (pm.CurrentHealth <= 0)
         {
             if (PhotonNetwork.OfflineMode)
             {

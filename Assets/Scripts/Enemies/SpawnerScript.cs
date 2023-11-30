@@ -10,15 +10,18 @@ public class SpawnerScript : MonoBehaviourPun
     public string keyPrefabString;
     public GameObject[] spawnPoints;
     private float timer;
-    //private int spawnIndex = 0;
+    private int spawnIndex = 0;
     public int spawnHealth;
     public int spawnMaxHealth;
     private SpriteRenderer sprite;
     public Transform spawnPoint;
+
     public void SpawnEnemy()
     {
         //PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[spawnIndex % 3].transform.position, Quaternion.identity);
-        PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[Random.Range(0, 1)].transform.position, Quaternion.identity);
+        PhotonNetwork.Instantiate(enemyPrefabString, spawnPoints[spawnIndex].transform.position, Quaternion.identity);
+        if (spawnIndex == 0) spawnIndex++;
+        else spawnIndex--;
     }
 
     [PunRPC]

@@ -929,7 +929,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2281494936559869486, guid: bdd7cd2d4f2d2254a9983c8b3d6e1c29, type: 3}
       propertyPath: neededKeys
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2281494936559869487, guid: bdd7cd2d4f2d2254a9983c8b3d6e1c29, type: 3}
       propertyPath: m_RootOrder

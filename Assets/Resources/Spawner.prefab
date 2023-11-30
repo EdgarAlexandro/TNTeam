@@ -4999,7 +4999,7 @@ MonoBehaviour:
   - {fileID: 6059449336314981621}
   - {fileID: 6059449337551551732}
   spawnHealth: 0
-  spawnMaxHealth: 10
+  spawnMaxHealth: 2
   spawnPoint: {fileID: 0}
 --- !u!114 &7648791120775532910
 MonoBehaviour:

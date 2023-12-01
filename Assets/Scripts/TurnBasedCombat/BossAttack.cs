@@ -12,7 +12,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
 {
     public float damageMultiplier;
     public float playerDefense;
-    public float force = 1.0f;
+    public float force = 1f;
     public float damage = 5.0f;
     private Vector3 playerPosition;
     private PersistenceManager pm;
@@ -61,7 +61,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
         playerPosition = attackNewPosition;
     }
 
-    void Update(){
+    void FixedUpdate(){
         if (isMoving){// If attack hasn't been destroyed call PunRPC so attack moves towards the targeted player for all clients.
             MoveTowardsPlayer();
         }
@@ -84,6 +84,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
                 if (pm.CurrentHealth - (int)damage > 0)
                 {
                     pm.CurrentHealth -= (int)((damage*damageMultiplier)/playerDefense); // toma el ataque, lo multiplica por el multiplicador de ataque del jefe, y lo divide entre el multiplicador de defensa del jugador
+
                 }
                 else
                 {
@@ -94,14 +95,13 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
                 StartCoroutine(AlternateColors(other.gameObject.name)); // Coroutine to display that the player took damage by changing its colors.
 
                 if (PhotonNetwork.IsMasterClient)
-                { // If attacked player is the master client, update the player 1's health bar with current health.
-                  //PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
+                { // If attacked player is the master client, update the player 1's health bar with current health.                 
+                    tbc.photonView.RPC("SyncronizeP1Health", RpcTarget.All, pm.CurrentHealth);
                     tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
                 }
                 else
                 {// If attacked player is not the master client, update the player 2's health bar with current health.
-
-                    PhotonView photonViewTbcPH = tbcPH.GetComponent<PhotonView>();
+                    tbc.photonView.RPC("SyncronizeP2Health", RpcTarget.All, pm.CurrentHealth);
                     tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
                 }
                 //gameObject.layer = LayerMask.NameToLayer("NoCollision");

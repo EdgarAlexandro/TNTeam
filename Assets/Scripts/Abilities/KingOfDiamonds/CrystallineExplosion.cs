@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
+using Photon.Pun;
 public class CrystallineExplosion : MonoBehaviour
 {
     private MusicSFXManager musicSFXManager;
@@ -13,7 +13,15 @@ public class CrystallineExplosion : MonoBehaviour
     {
         if (other.CompareTag("Enemy") || other.CompareTag("Caja"))
         {
-            Destroy(other.gameObject);
+            //Destroy(other.gameObject);
+            if (other.CompareTag("Enemy"))
+            {
+                other.GetComponent<PhotonView>().RPC("DestroyEnemy", RpcTarget.MasterClient);
+            }
+            else
+            {
+                other.GetComponent<PhotonView>().RPC("DestroyBox", RpcTarget.MasterClient);
+            }
             musicSFXManager.PlaySFX(MusicSFXManager.Instance.Explosion);
             //this.velocity = projDirection * speed;
         }

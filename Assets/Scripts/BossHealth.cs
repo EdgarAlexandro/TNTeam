@@ -12,7 +12,7 @@ public class BossHealth : MonoBehaviourPunCallbacks
     Animator animator;
 
     public int bossHealth = 10;
-    private int bossHealthMaxValue = 10;
+    private int bossHealthMaxValue = 30;
 
     void Start()
     {
@@ -46,23 +46,6 @@ public class BossHealth : MonoBehaviourPunCallbacks
         bossHealthBar.value = bossHealth;
     }
 
-    /*[PunRPC]
-    public void SelectTarget(List<PlayerInNetwork> players)
-    {
-        if (PhotonNetwork.IsMasterClient){
-            random = new System.Random();
-            randomIndex = random.Next(players.Count);
-            photonView.RPC("SyncronizeRandomIndex", RpcTarget.All, randomIndex);
-        }
-        tbcUI.photonView.RPC("TakeDamageTBC", RpcTarget.All, 5, players[randomIndex]);
-    }
-
-    [PunRPC]
-    private void SyncronizeRandomIndex(int index)
-    {
-        randomIndex = index;
-    }*/
-
     // Update is called once per frame
     void Update()
     {
@@ -71,5 +54,10 @@ public class BossHealth : MonoBehaviourPunCallbacks
             animator.SetBool("Muerte", true);
             //Destroy(gameObject);
         }
+    }
+
+    public void LoadScene()
+    {
+        PhotonNetwork.LoadLevel("WinScene");
     }
 }

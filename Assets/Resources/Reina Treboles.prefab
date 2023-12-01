@@ -196,6 +196,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   field: {fileID: 0}
   fieldPrefab: {fileID: 1701603757712580964, guid: b023612cd2d1e4cfda9ae962bd93f7f2, type: 3}
+  uiController: {fileID: 4426618252146710958}
+  neededMagic: 25
 --- !u!114 &4426618252146710958
 MonoBehaviour:
   m_ObjectHideFlags: 0

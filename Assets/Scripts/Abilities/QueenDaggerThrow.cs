@@ -58,16 +58,18 @@ public class QueenDaggerThrow : MonoBehaviourPunCallbacks
             {
                 musicSFXManager.PlaySFX(MusicSFXManager.Instance.Lanza_Daga);
                 uiController.loseMagicValue(neededMagic);
-                photonView.RPC("throwDagger", RpcTarget.All);
+                photonView.RPC("throwDagger", RpcTarget.All, projDirection, speed);
             }
         }
     }
 
     [PunRPC]
-    public void throwDagger()
+    public void throwDagger(Vector2 projDirection, float speed)
     {
-        GameObject daggerInstanceObject = PhotonNetwork.Instantiate(dagger.name, transform.position, Quaternion.identity);
-        Rigidbody2D daggerInstance = daggerInstanceObject.GetComponent<Rigidbody2D>();
-        daggerInstance.velocity = projDirection * speed;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject daggerInstanceObject = PhotonNetwork.Instantiate(dagger.name, transform.position, Quaternion.identity);
+            daggerInstanceObject.GetComponent<HeartDagger>().photonView.RPC("MoveDagger", RpcTarget.All, projDirection, speed); 
+        }
     }
 }

@@ -3,23 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using System.Linq;
 using Photon.Pun;
 
 public class ObjectsMenuButton : MonoBehaviourPunCallbacks
 {
-    private int uses;
     public Button button;
+    public GameObject objectsMenu;
+    public GameObject objectsMenuContainer;
     public TextMeshProUGUI itemCountText;
-    PersistenceManager pm;
-    TurnBasedCombatPlayersHealth tbcPH;
-    private GameObject healthBars;
-    // Start is called before the first frame update
+    public int uses;
+
+    private TurnBasedCombatManager tbc;
+
     void Start()
     {
-        pm = PersistenceManager.Instance;
-        healthBars = GameObject.Find("HealthBars");
-        tbcPH = healthBars.GetComponent<TurnBasedCombatPlayersHealth>();
-        //button = gameObject.GetComponent<Button>();
+        tbc = TurnBasedCombatManager.Instance;
     }
 
     public void GetNumberOfUses(int numberOfUses)
@@ -41,39 +40,78 @@ public class ObjectsMenuButton : MonoBehaviourPunCallbacks
         }
     }
 
-
-    public void PocionCuracion()
+    public void PocionCuracionButton()
     {
-        uses--;
-        itemCountText.text = uses.ToString();
-        if (PhotonNetwork.IsMasterClient)
+        if(uses > 0)
         {
-            if(pm.CurrentHealth + 10 < tbcPH.p1HealthBar.maxValue)
-            {
-                pm.CurrentHealth += 10;
-                tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-            }
-            else
-            {
-                pm.CurrentHealth += (int)tbcPH.p1HealthBar.maxValue - pm.CurrentHealth;
-                tbcPH.photonView.RPC("SyncronizeP1HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-            }
+            uses--;
+            itemCountText.text = uses.ToString();
+            objectsMenu.GetComponent<ObjectsMenu>().photonView.RPC("PocionCuracion", RpcTarget.All);
+            UpdateButtonStatus();
+            objectsMenuContainer.SetActive(false);
+            tbc.EndTurn();
         }
-        else
-        {
-            if (pm.CurrentHealth + 10 < tbcPH.p2HealthBar.maxValue)
-            {
-                pm.CurrentHealth += 10;
-                tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-            }
-            else
-            {
-                pm.CurrentHealth += (int)tbcPH.p1HealthBar.maxValue - pm.CurrentHealth;
-                tbcPH.photonView.RPC("SyncronizeP2HealthBarCurrentValue", RpcTarget.All, pm.CurrentHealth);
-            }
-        }
-        UpdateButtonStatus();
     }
+
+    public void PocionMagiaButton()
+    {
+        if(uses > 0)
+        {
+            uses--;
+            itemCountText.text = uses.ToString();
+            objectsMenu.GetComponent<ObjectsMenu>().photonView.RPC("PocionMagia", RpcTarget.All);
+            UpdateButtonStatus();
+            objectsMenuContainer.SetActive(false);
+            tbc.EndTurn();
+        }
+    }
+
+    public void PocionRevivirButton()
+    {
+        if(uses > 0)
+        {
+            uses--;
+            itemCountText.text = uses.ToString();
+            objectsMenu.GetComponent<ObjectsMenu>().photonView.RPC("PocionRevivir", RpcTarget.All);
+            UpdateButtonStatus();
+            objectsMenuContainer.SetActive(false);
+            tbc.EndTurn();
+        }
+    }
+
+    public void BombaButton()
+    {
+        if(uses > 0)
+        {
+            uses--;
+            itemCountText.text = uses.ToString();
+            objectsMenu.GetComponent<ObjectsMenu>().Bomba();
+            UpdateButtonStatus();
+            objectsMenuContainer.SetActive(false);
+            tbc.canvas.SetActive(false);
+        }
+    }
+
+    public void ExitButton()
+    {
+        GameObject currentCharacter = objectsMenu.GetComponent<ObjectsMenu>().currentCharacter;
+        currentCharacter.GetComponent<MenuControllerCBT>().canControl = true;
+        currentCharacter.GetComponent<MenuControllerCBT>().objectsMenuActive = false;
+        objectsMenuContainer.SetActive(false);
+    }
+
+    /*public void UpdateInventory()
+    {
+        string data = "";
+        foreach (ItemData item in inventory.items)
+        {
+            data += item.name + "/";
+        }
+        ExitGames.Client.Photon.Hashtable properties = PhotonNetwork.LocalPlayer.CustomProperties;
+        properties["Inventory"] = data;
+        PhotonNetwork.LocalPlayer.SetCustomProperties(properties);
+    }*/
+
     // Update is called once per frame
     void Update()
     {

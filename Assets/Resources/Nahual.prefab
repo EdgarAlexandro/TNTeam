@@ -19,6 +19,7 @@ GameObject:
   - component: {fileID: -1177138517532978008}
   - component: {fileID: 6659393800874947398}
   - component: {fileID: 331488458}
+  - component: {fileID: 8644901529494625438}
   m_Layer: 0
   m_Name: Nahual
   m_TagString: Enemy
@@ -189,12 +190,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9e6825fb81f50945a2750fbd7369298, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Neighbors: []
   targets: []
   currentTarget: {fileID: 0}
   speed: 1
   health: 0
   maxHealth: 1
+  freezed: 0
   orbePrefab: {fileID: 3497544176364357381, guid: d321309feaec54c71a2e7c22a95f9c58, type: 3}
 --- !u!114 &6655708649705253883
 MonoBehaviour:
@@ -288,3 +289,16 @@ NavMeshAgent:
   m_BaseOffset: 2.3550003
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &8644901529494625438
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7552174801492835913}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8bb0618ffd9964bbe827c98114ad0e08, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocity: {x: 0, y: 0, z: 0}

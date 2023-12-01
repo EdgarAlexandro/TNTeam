@@ -12,9 +12,11 @@ public class TurnBasedCombatActions : MonoBehaviour
     TurnBasedCombatManager tbc;
     public CharacterData charactersData;
     public List<GameObject> attackMenuList;
+    public GameObject objectsMenu;
 
     private GameObject boss;
     private GameObject currentPlayerGameObject;
+
 
     float playerDamageMult, bossDefenseMult;
 
@@ -26,7 +28,7 @@ public class TurnBasedCombatActions : MonoBehaviour
         bossDefenseMult = tbc.BossDefenseMultiplier;
     }
 
-    public GameObject SetCorrespondingActionsMenu(List<PlayerInNetwork> players)
+    /*public GameObject SetCorrespondingActionsMenu(List<PlayerInNetwork> players)
     {
         foreach (PlayerInNetwork player in players)
         {
@@ -37,10 +39,11 @@ public class TurnBasedCombatActions : MonoBehaviour
             }
         }
         return null;
-    }
+    }*/
 
-    public GameObject GetCorrespondingActionsMenu(string charactersName)
+    public GameObject GetCorrespondingActionsMenu(string charactersName, GameObject character)
     {
+        currentPlayerGameObject = character;
         string charactersOriginalName = charactersName.Replace("(Clone)", "");
 
         foreach (GameObject attackMenu in attackMenuList)
@@ -69,7 +72,14 @@ public class TurnBasedCombatActions : MonoBehaviour
     // Attack function. It takes the target and damage as parameters.
     public void CharacterAttack(GameObject character)
     {
-        GameObject characterGameObject = GameObject.Find(character.name + "(Clone)");
-        characterGameObject.GetComponent<AttackInitializer>().StartAttackAnimation();
+        //GameObject characterGameObject = GameObject.Find(character.name + "(Clone)");
+        currentPlayerGameObject.GetComponent<AttackInitializer>().StartAttackAnimation();
     }
+
+    public void SelectObjects()
+    {
+        currentPlayerGameObject.GetComponent<MenuControllerCBT>().objectsMenuActive = true;
+        currentPlayerGameObject.GetComponent<MenuControllerCBT>().canControl = false;
+        objectsMenu.SetActive(true);
+    } 
 }

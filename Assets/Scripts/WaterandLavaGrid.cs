@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using Photon.Pun;
 
 public class WaterandLavaGrid : MonoBehaviour
 {
@@ -11,6 +12,8 @@ public class WaterandLavaGrid : MonoBehaviour
     PlayerControl playc;
     public bool isPlayerOnBridge = false;
     private bool isPlayerInWater = false;
+    public ParticleSystem particulas = null;
+
     void Start()
     {
         waterTilemap = GetComponent<Tilemap>();
@@ -29,7 +32,8 @@ public class WaterandLavaGrid : MonoBehaviour
             playc = other.GetComponent<PlayerControl>();
             isPlayerInWater = true;
             StartCoroutine(DealDamage(other.name));
-
+            if (PhotonNetwork.OfflineMode) Instantiate(particulas, other.transform.position, Quaternion.identity);
+            particulas.Play();
         }
     }
     private void OnTriggerExit2D(Collider2D other)
@@ -37,6 +41,7 @@ public class WaterandLavaGrid : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             isPlayerInWater = false; // Marca que el jugador ha salido del agua
+            particulas.Stop();
         }
     }
 

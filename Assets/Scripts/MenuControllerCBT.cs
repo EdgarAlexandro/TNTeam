@@ -6,13 +6,22 @@ using System;
 
 public class MenuControllerCBT : MonoBehaviour
 {
-    public GameObject botonAtaque;
-    public GameObject botonJoker;
-    public GameObject botonObjeto;
+    private GameObject botonAtaque;
+    private GameObject botonJoker;
+    private GameObject botonObjeto;
+    private GameObject botonPocionCuracion;
+    private GameObject botonPocionMagia;
+    private GameObject botonPocionRevivir;
+    private GameObject botonBomba;
+    private GameObject botonExit;
+    public bool canControl = false;
+    public bool objectsMenuActive = false;
 
     private Animator animator;
     private GameObject[] botonesRPG;
+    private GameObject[] botonesObjetos;
     private int indexBotonSeleccionado = 0;
+    private int indexBotonSeleccionadoObjetos = 0;
     private bool buttonsSet = false;
 
     // Start is called before the first frame update
@@ -20,7 +29,7 @@ public class MenuControllerCBT : MonoBehaviour
     {
         //StartCoroutine("GetButtons");
         animator = GetComponent<Animator>();
-
+        GetObjectButtons();
 
         // Añade los botones a la matriz en el orden que prefieras
     }
@@ -36,12 +45,44 @@ public class MenuControllerCBT : MonoBehaviour
         buttonsSet = true;
     }
 
+    public void GetObjectButtons()
+    {
+        GameObject objectsMenu = GameObject.Find("ObjectsMenu").transform.GetChild(0).gameObject;
+        botonPocionCuracion = objectsMenu.transform.GetChild(0).gameObject; 
+        botonPocionMagia = objectsMenu.transform.GetChild(1).gameObject;
+        botonPocionRevivir = objectsMenu.transform.GetChild(2).gameObject;
+        botonBomba = objectsMenu.transform.GetChild(3).gameObject;
+        botonExit = objectsMenu.transform.GetChild(4).gameObject;
+
+        botonesObjetos = new GameObject[] { botonPocionCuracion, botonPocionMagia, botonPocionRevivir, botonBomba, botonExit };
+    }
+
+    void ButtonNavigationUp()
+    {
+        if (botonesObjetos[indexBotonSeleccionadoObjetos].name != "Exit" && botonesObjetos[indexBotonSeleccionadoObjetos].GetComponent<ObjectsMenuButton>().uses == 0)
+        {
+            indexBotonSeleccionadoObjetos--;
+            if (indexBotonSeleccionadoObjetos < 0) indexBotonSeleccionadoObjetos = botonesObjetos.Length - 1;
+            ButtonNavigationUp();
+        }
+    }
+
+    void ButtonNavigationDown()
+    {
+        if (botonesObjetos[indexBotonSeleccionadoObjetos].name != "Exit" && botonesObjetos[indexBotonSeleccionadoObjetos].GetComponent<ObjectsMenuButton>().uses == 0)
+        {
+            indexBotonSeleccionadoObjetos++;
+            if (indexBotonSeleccionadoObjetos >= botonesObjetos.Length) indexBotonSeleccionadoObjetos = 0;
+            ButtonNavigationDown();
+        }
+    }
+
     private void Update()
     {
-        if (buttonsSet)
+        if (buttonsSet && canControl)
         {
             // Cambia el botón seleccionado
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+            if (Input.GetKeyDown(KeyCode.RightArrow))
             {
                 indexBotonSeleccionado++;
                 if (indexBotonSeleccionado >= botonesRPG.Length) indexBotonSeleccionado = 0;
@@ -70,84 +111,44 @@ public class MenuControllerCBT : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.Space))
             {
                 botonesRPG[indexBotonSeleccionado].GetComponent<Button>().onClick.Invoke();
-                // Realiza una acción basada en el botón seleccionado
-                /*switch (indexBotonSeleccionado)
-                {
-                    case 0: // Ataque
-                        Ataque();
-                        break;
-                    case 1: // Joker
-                            // Aquí puedes llamar a la función que realiza la animación de joker
-                        break;
-                    case 2: // Objetos
-                            // Aquí puedes llamar a la función que realiza la animación de objetos
-                        break;
-                }*/
             }
-        }
-        /*// Cambia el botón seleccionado
-        if (Input.GetKeyDown(KeyCode.RightArrow))
+        }else if (objectsMenuActive)
         {
-            indexBotonSeleccionado++;
-            if (indexBotonSeleccionado >= botonesRPG.Length) indexBotonSeleccionado = 0;
-        }
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            indexBotonSeleccionado--;
-            if (indexBotonSeleccionado < 0) indexBotonSeleccionado = botonesRPG.Length - 1;
-        }
+            if (Input.GetKeyDown(KeyCode.UpArrow))
+            {
+                indexBotonSeleccionadoObjetos--;
+                if (indexBotonSeleccionadoObjetos < 0) indexBotonSeleccionadoObjetos = botonesObjetos.Length - 1;
+                ButtonNavigationUp();
+                //if (botonesObjetos[indexBotonSeleccionadoObjetos].name != "Exit" && botonesObjetos[indexBotonSeleccionadoObjetos].GetComponent<ObjectsMenuButton>().uses == 0) indexBotonSeleccionadoObjetos--;
+            }
+            if (Input.GetKeyDown(KeyCode.DownArrow))
+            {
+                indexBotonSeleccionadoObjetos++;
+                if (indexBotonSeleccionadoObjetos >= botonesObjetos.Length) indexBotonSeleccionadoObjetos = 0;
+                if (botonesObjetos[indexBotonSeleccionadoObjetos].name != "Exit" && botonesObjetos[indexBotonSeleccionadoObjetos].GetComponent<ObjectsMenuButton>().uses == 0) indexBotonSeleccionadoObjetos++;
+                ButtonNavigationDown();
+            }
 
-        // Resalta el botón seleccionado y desactiva los otros
-        for (int i = 0; i < botonesRPG.Length; i++)
-        {
-            if (i == indexBotonSeleccionado)
+            // Resalta el botón seleccionado y desactiva los otros
+            for (int i = 0; i < botonesObjetos.Length; i++)
             {
-                // Resalta el botón seleccionado
-                botonesRPG[i].GetComponent<Button>().interactable = true;
+                if (i == indexBotonSeleccionadoObjetos)
+                {
+                    // Resalta el botón seleccionado
+                    //botonesObjetos[i].GetComponent<Button>().interactable = true;
+                    botonesObjetos[i].GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    // Desactiva los otros botones
+                    botonesObjetos[i].GetComponent<Button>().interactable = false;
+                }
             }
-            else
+            // Cambia el botón seleccionado y realiza una acción cuando se presiona la barra espaciadora
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                // Desactiva los otros botones
-                botonesRPG[i].GetComponent<Button>().interactable = false;
-            }
-        }
-        // Cambia el botón seleccionado y realiza una acción cuando se presiona la barra espaciadora
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            botonesRPG[indexBotonSeleccionado].GetComponent<Button>().onClick.Invoke();
-            // Realiza una acción basada en el botón seleccionado
-            /*switch (indexBotonSeleccionado)
-            {
-                case 0: // Ataque
-                    Ataque();
-                    break;
-                case 1: // Joker
-                        // Aquí puedes llamar a la función que realiza la animación de joker
-                    break;
-                case 2: // Objetos
-                        // Aquí puedes llamar a la función que realiza la animación de objetos
-                    break;
+                botonesObjetos[indexBotonSeleccionadoObjetos].GetComponent<Button>().onClick.Invoke();
             }
         }
-        /*void Ataque()
-        {
-            // Usa la variable reyActual para determinar qué animación reproducir
-            switch (reyActual)
-            {
-                case "Reina de Corazones":
-                    animator.Play("Reina de corazones Ataque");
-                    break;
-                case "Reina de Treboles":
-                    animator.Play("Reina de treboles Ataque");
-                    break;
-                case "Rey de Diamantes":
-                    animator.Play("Rey de diamantes Ataque");
-                    break;
-                case "Rey de Picas":
-                    animator.Play("Rey de picas Ataque");
-                    break;
-                    
-            }
-        }*/
     }
 }

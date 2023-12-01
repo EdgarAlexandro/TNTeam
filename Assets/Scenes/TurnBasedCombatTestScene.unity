@@ -4927,7 +4927,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -716860493088051094, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: bossHealth
-      value: 100
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: -716860493088051094, guid: e915f93bff8423b4ab46308249ab1c83, type: 3}
       propertyPath: bossHealthBar

@@ -59,7 +59,7 @@ public class SpawnerScript : MonoBehaviourPun
         {
             if (timer < Time.time)
             {
-                timer = Time.time + 10.0f;
+                timer = Time.time + 3.0f;
                 GameObject[] objectsWithTag = GameObject.FindGameObjectsWithTag("Enemy");
                 if (objectsWithTag.Length < 6)
                 {

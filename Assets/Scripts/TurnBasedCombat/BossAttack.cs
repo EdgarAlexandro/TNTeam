@@ -12,7 +12,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
 {
     public float damageMultiplier;
     public float playerDefense;
-    public float force = 1.0f;
+    public float force = 1f;
     public float damage = 5.0f;
     private Vector3 playerPosition;
     private PersistenceManager pm;
@@ -61,7 +61,7 @@ public class BossAttack : MonoBehaviourPunCallbacks, IPunInstantiateMagicCallbac
         playerPosition = attackNewPosition;
     }
 
-    void Update(){
+    void FixedUpdate(){
         if (isMoving){// If attack hasn't been destroyed call PunRPC so attack moves towards the targeted player for all clients.
             MoveTowardsPlayer();
         }

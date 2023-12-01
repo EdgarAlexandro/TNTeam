@@ -12,7 +12,7 @@ public class BossHealth : MonoBehaviourPunCallbacks
     Animator animator;
 
     public int bossHealth = 10;
-    private int bossHealthMaxValue = 100;
+    private int bossHealthMaxValue = 30;
 
     void Start()
     {
@@ -54,5 +54,10 @@ public class BossHealth : MonoBehaviourPunCallbacks
             animator.SetBool("Muerte", true);
             //Destroy(gameObject);
         }
+    }
+
+    public void LoadScene()
+    {
+        PhotonNetwork.LoadLevel("WinScene");
     }
 }

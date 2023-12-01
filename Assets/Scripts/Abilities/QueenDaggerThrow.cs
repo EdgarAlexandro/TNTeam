@@ -58,13 +58,13 @@ public class QueenDaggerThrow : MonoBehaviourPunCallbacks
             {
                 musicSFXManager.PlaySFX(MusicSFXManager.Instance.Lanza_Daga);
                 uiController.loseMagicValue(neededMagic);
-                photonView.RPC("throwDagger", RpcTarget.All);
+                photonView.RPC("throwDagger", RpcTarget.All, projDirection, speed);
             }
         }
     }
 
     [PunRPC]
-    public void throwDagger()
+    public void throwDagger(Vector2 projDirection, float speed)
     {
         if (PhotonNetwork.IsMasterClient)
         {

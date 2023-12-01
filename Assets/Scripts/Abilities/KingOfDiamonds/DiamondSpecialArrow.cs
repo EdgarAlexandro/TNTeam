@@ -58,15 +58,16 @@ public class DiamondSpecialArrow : MonoBehaviourPunCallbacks
             if (PersistenceManager.Instance.CurrentMagic >= neededMagic)
             {
                 //musicSFXManager.PlaySFX(MusicSFXManager.Instance.TemporaryArrow);
-                Rigidbody2D arrowInstance = Instantiate(arrow, transform.position, Quaternion.identity);
-                arrowInstance.velocity = projDirection * speed;
+                //Rigidbody2D arrowInstance = Instantiate(arrow, transform.position, Quaternion.identity);
+                //GameObject arrowInstance = PhotonNetwork.Instantiate(arrow.name, transform.position, Quaternion.identity);
+                //arrowInstance.GetComponent<Rigidbody2D>().velocity = projDirection * speed;
 
-                // Rotar la flecha para que apunte en la dirección correcta
-                float angle = Mathf.Atan2(projDirection.y, projDirection.x) * Mathf.Rad2Deg;
-                arrowInstance.rotation = angle;
+                // Rotar la flecha para que apunte en la direcciï¿½n correcta
+                //float angle = Mathf.Atan2(projDirection.y, projDirection.x) * Mathf.Rad2Deg;
+                //arrowInstance.GetComponent<Rigidbody2D>().rotation = angle;
 
                 uiController.loseMagicValue(neededMagic);
-                photonView.RPC("MagicArrow", RpcTarget.All);
+                photonView.RPC("MagicArrow", RpcTarget.All, projDirection, speed);
 
             }
         }
@@ -83,11 +84,16 @@ public class DiamondSpecialArrow : MonoBehaviourPunCallbacks
         }*/
     }
     [PunRPC]
-    public void MagicArrow()
+    public void MagicArrow(Vector2 pd, float s)
     {
-        GameObject arrowInstanceObject = PhotonNetwork.Instantiate(arrow.name, transform.position, Quaternion.identity);
-        Rigidbody2D daggerInstance = arrowInstanceObject.GetComponent<Rigidbody2D>();
-        daggerInstance.velocity = projDirection * speed;
+        if (PhotonNetwork.IsMasterClient)
+        {
+            GameObject arrowInstanceObject = PhotonNetwork.Instantiate(arrow.name, transform.position, Quaternion.identity);
+            arrowInstanceObject.GetComponent<PhotonView>().RPC("MoveArrow", RpcTarget.All, pd, s);
+
+            
+        }
+        
     }
 }
 

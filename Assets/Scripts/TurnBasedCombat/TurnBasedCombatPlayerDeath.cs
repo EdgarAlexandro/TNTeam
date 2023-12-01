@@ -15,6 +15,7 @@ public class TurnBasedCombatPlayerDeath : MonoBehaviourPunCallbacks
     public void OnPlayerDeath(GameObject player)
     {
         Debug.Log("PlayerDeath");
+        if(PhotonNetwork.OfflineMode) PhotonNetwork.LoadLevel("LoseScene");
         animator.SetBool("Muerte", true);
         photonView.RPC("OtherPlayerDeathAnimation", RpcTarget.All, player.name);
         photonView.RPC("DecreaseAlivePlayers", RpcTarget.All);

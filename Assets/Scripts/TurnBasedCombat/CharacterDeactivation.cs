@@ -37,7 +37,8 @@ public class CharacterDeactivation : MonoBehaviourPunCallbacks
         GameObject canvasGeneral = GameObject.Find("Canvas general(Clone)");
         if (canvasGeneral != null)
         {
-            canvasGeneral.SetActive(false);
+            //canvasGeneral.SetActive(false);
+            Destroy(canvasGeneral);
         }
 
         if (PhotonNetwork.IsMasterClient)
@@ -45,7 +46,8 @@ public class CharacterDeactivation : MonoBehaviourPunCallbacks
             GameObject canvasp1 = GameObject.Find("Canvas Player 1");
             if (canvasp1 != null)
             {
-                canvasp1.SetActive(false);
+                //canvasp1.SetActive(false);
+                Destroy(canvasp1);
             }
         }
         else
@@ -54,6 +56,7 @@ public class CharacterDeactivation : MonoBehaviourPunCallbacks
             if (canvasp2 != null)
             {
                 canvasp2.SetActive(false);
+                Destroy(canvasp2);
             }
         }
     }
